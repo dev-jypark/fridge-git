@@ -1,1 +1,1 @@
-# eclipse-git2
+# fridge-git
