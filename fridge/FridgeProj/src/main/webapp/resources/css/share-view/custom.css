@@ -1,0 +1,186 @@
+@charset "UTF-8";
+
+body {
+	background-color : #FFFFFF !important;
+}
+#content {
+    margin-top: 100px;
+    padding-bottom: 0;
+}
+/*프로필 관련 */
+#article-profile {
+    width: 677px;
+    margin: 0 auto;
+}
+
+#article-profile #article-profile-link {
+    text-decoration: none;
+    display: block;
+    margin-top: 25px;
+    padding-bottom: 23px;
+    position: relative;
+    border-bottom: 1px solid #e9ecef;
+}
+
+#article-profile .space-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#article-profile #article-profile-image {
+    display: inline-block;
+}
+
+#article-profile #article-profile-image img {
+    width: 40px;
+    height: 40px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+#article-profile #article-profile-left {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+#article-profile #article-profile-left #nickname {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.6px;
+    color: #212529;
+}
+
+#article-profile #article-profile-left #region-name {
+    font-size: 13px;
+    line-height: 1.46;
+    letter-spacing: -0.6px;
+    color: #212529;
+}
+
+#article-profile #article-profile-right {
+    position: absolute;
+    right: 0;
+    padding-right: 36px;
+}
+
+#article-profile #article-profile-right dl {
+    display: block;
+    width: 100px;
+}
+
+#article-profile #article-profile-right dl dt {
+    position: absolute;
+    top: 36px;
+    right: 0px;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: -0.6px;
+    color: #868e96;
+}
+
+#article-profile #article-profile-right .text-color-04 {
+    color: #319e45;
+}
+
+#article-profile #article-profile-right dl dd {
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    color: #212529;
+    margin-top: 1px;
+    width: 100px;
+    text-align: right;
+}
+
+#article-profile #article-profile-right .meters {
+    clear: both;
+    display: block;
+    width: 100px;
+    background-color: #e9ecef;
+    height: 4px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    position: relative;
+    vertical-align: middle;
+    margin-top: 24px;
+}
+
+.meters .bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #495057;
+    height: 4px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+}
+
+.face-04 {
+    background-position: 0px -99px;
+    width: 24px;
+    height: 24px;
+}
+
+.face-01, .face-02, .face-03, .face-04, .face-05, .face-06 {
+    display: inline-block;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/face-icon-set-0cffc52….png) no-repeat;
+    background-size: 29px 147px;
+}
+/*프로필 관련 끝*/
+
+/*상품설명*/
+#article-description {
+    padding: 32px 0;
+    width: 677px;
+    margin: 0 auto;
+    border-bottom: 1px solid #e9ecef;
+}
+#article-description #article-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.6px;
+}
+#article-description #article-category {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.46;
+    letter-spacing: -0.6px;
+    color: #868e96;
+}
+#article-description #article-price {
+    margin-top: 4px;
+    line-height: 1.76;
+    letter-spacing: -0.6px;
+}
+#article-description #article-detail {
+    margin-bottom: 16px;
+    margin-top: 8px;
+}
+#article-description #article-detail p {
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: -0.6px;
+    margin: 16px 0;
+    word-break: break-all;
+}
+#article-description #article-counts {
+    font-size: 13px;
+    line-height: 1.46;
+    letter-spacing: -0.6px;
+    color: #868e96;
+}

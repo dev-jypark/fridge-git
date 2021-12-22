@@ -7,12 +7,14 @@ import javax.annotation.Resource;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kosmo.fridge.service.ExampleDTO;
 import com.kosmo.fridge.service.impl.ExampleServiceImpl;
 
 @RestController
+@RequestMapping("/fridge/share")
 public class ExampleController {
 	
 	@Resource(name="exampleService")
