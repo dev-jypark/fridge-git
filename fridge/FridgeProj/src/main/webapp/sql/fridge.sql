@@ -61,6 +61,7 @@ CREATE TABLE member
 	nick nvarchar2(10) NOT NULL UNIQUE,
 	addr nvarchar2(10) NOT NULL,
 	imgsrc nvarchar2(100),
+	self nvarchar2(200),
 	regdate date DEFAULT sysdate,
 	PRIMARY KEY (id)
 );
