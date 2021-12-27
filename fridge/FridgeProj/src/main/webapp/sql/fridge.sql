@@ -59,7 +59,7 @@ CREATE TABLE member
 	id varchar2(40) NOT NULL,
 	pwd varchar2(15) NOT NULL,
 	nick nvarchar2(10) NOT NULL UNIQUE,
-	addr nvarchar2(30) NOT NULL,
+	addr nvarchar2(10) NOT NULL,
 	imgsrc nvarchar2(100),
 	regdate date DEFAULT sysdate,
 	PRIMARY KEY (id)
@@ -109,7 +109,6 @@ CREATE TABLE f_bbs
 (
 	fb_no number NOT NULL,
 	id varchar2(40) NOT NULL,
-	fb_title nvarchar2(100) DEFAULT '제목없음' NOT NULL,
 	fb_content nvarchar2(2000) NOT NULL,
 	fb_postdate date DEFAULT sysdate,
 	PRIMARY KEY (fb_no)
@@ -150,7 +149,8 @@ CREATE TABLE t_bbs
 	tb_no number NOT NULL,
 	id varchar2(40) NOT NULL,
 	tb_title nvarchar2(100) NOT NULL,
-	tb_content nvarchar2(2000) NOT NULL,
+	tb_content nvarchar2(2000) NOT NULL,	
+	tb_visitcount number DEFAULT 0 NOT NULL,
 	tb_postdate date DEFAULT sysdate,
 	PRIMARY KEY (tb_no)
 );
@@ -197,6 +197,12 @@ CREATE TABLE trade
 	PRIMARY KEY (t_no)
 );
 
+
+CREATE TABLE manager
+(
+	id varchar2(40) NOT NULL,
+	PRIMARY KEY (id)
+);
 
 /* Create Foreign Keys */
 
@@ -319,3 +325,17 @@ ALTER TABLE trade
 	REFERENCES t_bbs (tb_no)
 ;
 
+
+ALTER TABLE manager
+	ADD FOREIGN KEY (id)
+	REFERENCES member (id)
+;
+
+/*
+ * 2021-12-22 테이블 수정내용
+ * 1. Member 테이블 에서 관리자 권한
+ * 2. 지도게시판 수정 addr 타입 수정  addr nvarchar2(10)
+ * 3. 거래게시판 조회수 컬럼 추가
+ * 4. 인스타 게시판 제목 컬럼 삭제
+ */
+*/
