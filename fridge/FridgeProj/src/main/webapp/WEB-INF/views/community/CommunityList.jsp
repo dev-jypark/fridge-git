@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 폰트어썸에서 아이콘 사용을 위한 css CDN 추가 -->
-    <script src="https://kit.fontawesome.com/979888c264.js" crossorigin="anonymous"></script>
+    <script src="https://kit.font6awesome.com/979888c264.js" crossorigin="anonymous"></script>
     <!-- 부트스트랩 CDN 추가 -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     

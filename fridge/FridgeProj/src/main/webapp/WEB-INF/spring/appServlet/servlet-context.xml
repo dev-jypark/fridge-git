@@ -17,12 +17,39 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="order" value="3" />
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
 	<!-- webapp의 어느 디렉토리에 스태틱 리소스(이미지,.css,.js등)를 두더라도 읽어 올수 있도록 설정하는 부분-->
 	<default-servlet-handler/> 
+	
+	<!-- 스프링 프레임 워크에서 파일 업로드를 위한 API id는 반드시 multipartResolver로 지정 왜냐하면 파일업로드와 
+		관련된 스프링의 다른 클래스들이 multipartResolver란 이름으로 참조하여 사용함으로...... -->
+	<!-- 최대 업로드 용량 사이즈 설정:maxUploadSize속성(바이트) -1:무제한 -->
+	<!-- 용량 초과시 org.springframework.web.multipart.MaxUploadSizeExceededException 
+		예외 발생 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="209715200" />
+		<!-- 20M로 설정 -->
+	</beans:bean>
+	
+	<!-- tiles사용을 위한 bean등록 -->
+	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/views/template/layouts.xml</beans:value>				
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	<!-- tiles를 처리하도록 또 다른 뷰리졸버 등록 -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="order" value="2" /><!-- .jsp도 view로 사용하기 위해 우선순위를 가장먼저-->		
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+	</beans:bean>
 	
 	<context:component-scan base-package="com.kosmo.fridge" />
 	
