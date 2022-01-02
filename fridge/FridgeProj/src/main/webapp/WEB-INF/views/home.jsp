@@ -22,5 +22,11 @@ INSERT INTO example VALUES ('song2', '나비야 나비야 이리 날아오너라
 <form method="GET" action="<c:url value="/songs"/>">
 	<button>json으로 example 테이블 리스트 받아오기</button>
 </form>
+<form method="GET" action="<c:url value="/sharelist"/>">
+	<button>ShareList</button>
+</form>
+<form method="GET" action="<c:url value="/shareview"/>">
+	<button>ShareView</button>
+</form>
 </body>
 </html>

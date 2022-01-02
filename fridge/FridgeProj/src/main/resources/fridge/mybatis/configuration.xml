@@ -7,11 +7,11 @@
 <configuration>
 	<!-- 클래스 별칭 설정 -->
 	<typeAliases>
-		<typeAlias type="com.kosmo.fridge.service.ExampleDTO" alias="exampleDTO"/>		
+		<!-- <typeAlias type="com.kosmo.fridge.service.ExampleDTO" alias="exampleDTO"/>	 -->	
 	</typeAliases>	
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
 	<mappers>		
-		<mapper resource="fridge/mybatis/mapper/example.xml" />		
+		<!-- <mapper resource="fridge/mybatis/mapper/example.xml" />	 -->	
 	</mappers>
 </configuration>
