@@ -6,7 +6,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="XUA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 폰트어썸에서 아이콘 사용을 위한 css CDN 추가 -->
     <script src="https://kit.font6awesome.com/979888c264.js" crossorigin="anonymous"></script>

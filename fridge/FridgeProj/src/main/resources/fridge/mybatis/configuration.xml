@@ -7,11 +7,14 @@
 <configuration>
 	<!-- 클래스 별칭 설정 -->
 	<typeAliases>
+		<typeAlias type="com.kosmo.fridge.service.ShareDTO" alias="shareDTO"/>
 		<typeAlias type="com.kosmo.fridge.service.MemberDTO" alias="memberDTO"/>		
 	</typeAliases>	
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
 	<mappers>	
 		<mapper resource="fridge/mybatis/mapper/memberMapping.xml" />				
+	<mappers>		
+		<mapper resource="fridge/mybatis/mapper/share.xml" />	
 	</mappers>
 </configuration>

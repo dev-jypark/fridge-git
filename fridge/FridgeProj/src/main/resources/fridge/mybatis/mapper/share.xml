@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. --> 
+<mapper namespace="fridge.mybatis.mapper.share">
+	<resultMap type="shareDTO" id="shareDTOResult">
+		<!-- 
+		property:자바빈(OneMemoDTO)의 속성명
+		column:테이블의 컬럼(조회(SELECT)결과의 컬럼명들 의미)
+		 -->
+		<result column="tbNo" property="tb_no"/>
+		<result column="id" property="id"/>
+		<result column="tbTitle" property="tb_title"/>
+		<result column="tbContent" property="tb_content"/>
+		<result column="tbVisitCount" property="tb_visitcount"/>
+		<result column="tbPostDate" property="tb_postdate"/>
+		<result column="likeCount" property="likeCount"/>
+		<result column="addr" property="addr"/>	
+		<!-- 
+		1:N관계 매핑용
+		column: 조인조건의 컬럼명 (ON onememo.no = linecomments.no)
+		select: select태그의 id 속성값(쿼리문은 조인문)
+		javaType : OneMemoDTO의 자식레코드를 담을 컬렉션 타입
+		ofType : 자식의 DTO타입
+		 -->
+		<!-- <collection property="photo" column="no" select="onememo.mybatis.mapper.linecomment.commentListsUsingCollection" javaType="List" ofType="lineCommentDTO"/> -->
+	</resultMap>
+	
+	<select id="shareTotalRowCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM t_bbs t JOIN member m ON m.id=t.id
+		<if test="searchWord !=null">
+			WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+		</if>
+	</select>
+	<!-- 
+	<select id="shareSelectList" parameterType="Map" resultType="shareDTO">
+		SELECT * FROM
+		(SELECT D.*,ROWNUM R FROM
+			(SELECT t.*,m.nick,m.addr,(SELECT COUNT(*) FROM t_like WHERE tb_no=t.tb_no) as likeCount FROM 
+				t_bbs t JOIN member m ON m.id=t.id 
+				<if test="searchWord !=null">
+					WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+				</if>				
+				ORDER BY tb_no DESC) D)
+		WHERE R BETWEEN #{start} AND #{end}
+	</select>
+	 -->
+	<select id="shareSelectList" parameterType="Map" resultType="shareDTO">
+		SELECT t.*,m.id as id,m.addr as addr,(SELECT COUNT(*) FROM t_like WHERE tb_no=t.tb_no) as likeCount FROM 
+			t_bbs t JOIN member m ON m.id=t.id 
+		<if test="searchWord !=null">
+			WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+		</if>				
+		ORDER BY tb_no DESC
+	</select>
+</mapper>
