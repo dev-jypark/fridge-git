@@ -1,4 +1,3 @@
-
 //유효성 검사
 const forms = document.getElementsByClassName('validation-form'); 
 
@@ -30,6 +29,8 @@ function idDuplCheck(){
     
     //중복검사 후 중복된 아이디가 없는 경우 $('#idCheck').hide();로 버튼 숨기기.
     
+    //아이디 중복 체크
+
   }
 
 //이메일 인증
@@ -69,3 +70,4 @@ $(document).ready(function(){
 	});
 });
 
+	
