@@ -9,10 +9,7 @@ public interface CommunityRestAPIService {
 
 	List<FeedDTO> selectListFeedInProfile(String nick);	
 	List<FeedDTO> selectListFeedInCommunityMain(String nick);
-		
-	FeedDTO selectOneFeed();
-	
-	List<CommentDTO> selectListComment();
+
 	void insertComment(Map map);
 	void updateLike(Map map);
 }

@@ -1,156 +1,28 @@
-
-var nick = $("input[name=nick]").val();
-nick = nick.length == 0 ? "Kil_dong" : nick;
+var nick = $("input[name=nick]").val(); // 히든박스에 닉네임저장 
+nick = nick.length == 0 ? "Kil_dong" : nick;  // 임시로 아이디가 없으면 김길동으로 테스트 하기위한 코드
 console.log(nick);
+
+var feeds = Array(); // 에이작스로 가져온 모든 데이터(피드글)를 관리할 전역변수
 
 $.ajax({
 	url: "/community/feeds/" + nick,
-	dataType: 'json'
+	//dataType: 'json'
 }).done(function(data) {
 	printFeed(data);
+	console.log(feeds);
+	initListenerOnDocument();	
 }).fail(function(req, error) {
 	console.log('응답코드:%s,에러 메시지:%s,error:%s', req.status, req.responseText, error);
 });
 
-$('.comment').on('input', function() {
-	console.log(this)
-});
-
-function insertComment(flag) {
-
-	var e = $(event.target);
-	$.ajax({
-		url: "/community/comment/",
-		data: { fb_no: e.next().val(), fc_content: e.prev().val(), "nick": nick },
-		dataType: 'json',
-		type: 'post',
-	}).done(function(data) {
-		console.log($('ul'));
-		console.log(data);
-	}).fail(function(req, error) {
-
-		console.log();
-		console.log('응답코드:%s,에러 메시지:%s,error:%s', req.status, req.responseText, error);
-	});
-
-	feeds[e.data('index')][list_f_comment]
-	if (flag == 0) {
-		$('ul.comments:eq(' + e.data('index') + ') li:eq(2)').remove();
-		var commentString = "";
-		commentString += '<li><h4 class="pull-left"><a href="#">' + nick + '</a></h4><p>';
-		commentString += e.prev().val();
-		commentString += '</li>';
-		$('ul.comments:eq(' + e.data('index') + ')').prepend(commentString);
-		e.prev().val("");
-		e.prev().focus();
-	}
-	else {
-		var commentString = "";
-
-		commentString += "<div class='content'><img alt='' src='/upload/profile/" + nick + ".jpg' class='img-circle pull-left'>";
-		commentString += "<p><a href='" + "" + "'>" + nick + "</a>" + e.prev().val() + "</p>";
-		commentString += "</div>";
-
-		$('div.comments').prepend(commentString);
-		e.prev().val("");
-		e.prev().focus();
-	}
-}
-
-function likeProcess() {
-	//<i class="fas fa-heart"></i>
-	var e = $(event.target);
-	
-	var flag;
-	var index = e.data('index');
-	var likeCount = parseInt($('.likeCount:eq(' + index + ')').html());
-
-	console.log(feeds[e.data('index')]);
-	
-	if (e.hasClass('far')) {
-		e.removeClass('far');
-		e.addClass('fas');
-		$('.likeCount:eq(' +index + ')').html(likeCount + 1);
-		feeds[index]['list_f_likeMember'].push(nick);
-		flag = 0;
-	}
-	else {
-		e.removeClass('fas');
-		e.addClass('far');
-		$('.likeCount:eq(' + index + ')').html(likeCount - 1);
-		feeds[e.data('index')]['list_f_likeMember'].splice($.inArray(nick, feeds[e.data('index')]['list_f_likeMember']), 1);
-		flag = 1;
-	}
-	console.log(feeds[index]['fb_no']);
-	console.log(nick);
-	console.log(flag);
-	$.ajax({
-		url: "/community/like/",
-		data: { fb_no: feeds[index]['fb_no'], "nick": nick, "flag":flag },
-		dataType: 'json',
-		type: 'post',
-	}).done(function(data) {
-		console.log(data);
-	}).fail(function(req, error) {
-		console.log();
-		console.log('응답코드:%s,에러 메시지:%s,error:%s', req.status, req.responseText, error);
-	});
-	console.log(feeds[e.data('index')]);
-
-}
-
-function likeProcessInModal(){
-	console.log(modalData);
-	var e = $(event.target);
-	var index = e.data('index');
-	var mainHeart = $('li i.fa-heart:eq('+index+')');
-	console.log(mainHeart);
-	var flag;
-	var likeCount = parseInt($('.carouselGallery-modal-text .likeCount').html());
-	
-	console.log(e.data('index'));
-	
-	if (e.hasClass('far')) {
-		e.removeClass('far');
-		e.addClass('fas');
-		mainHeart.removeClass('far');
-		mainHeart.addClass('fas');
-		$('.carouselGallery-modal-text .likeCount').html(likeCount + 1);
-		$('.likeCount:eq(' + e.data('index') + ')').html(likeCount + 1);
-		modalData['list_f_likeMember'].push(nick);
-		flag = 0;
-	}
-	else {
-		e.removeClass('fas');
-		e.addClass('far');
-		mainHeart.removeClass('fas');
-		mainHeart.addClass('far');
-		$('.carouselGallery-modal-text .likeCount').html(likeCount - 1);
-		$('.likeCount:eq(' + e.data('index') + ')').html(likeCount - 1);
-		modalData['list_f_likeMember'].splice($.inArray(nick, modalData['list_f_likeMember']), 1);
-		flag = 1;
-	}
-	$.ajax({
-		url: "/community/like/",
-		data: { fb_no: feeds[index]['fb_no'], "nick": nick, "flag":flag },
-		dataType: 'json',
-		type: 'post',
-	}).done(function(data) {
-		console.log(data);
-	}).fail(function(req, error) {
-		console.log();
-		console.log('응답코드:%s,에러 메시지:%s,error:%s', req.status, req.responseText, error);
-	});
-}
-
-
-var feeds = Array();
 
 function printFeed(data) {
-	console.log("printFeed함수 호출");
+	
 	$.each(data, function(i, feed) {
+		
 		feeds.push(feed);
-		console.log("feed 인덱스: ", feeds.length);
+		
+		var index = (feeds.length - 1);
 
 		feedString = "";
 		feedString += '<section class="feedify-item">';
@@ -164,11 +36,11 @@ function printFeed(data) {
 		feedString += '<img alt="' + feed["list_fi_src"][0] + '" src="/upload/feed/' + feed["fb_no"] + '/' + feed["list_fi_src"][0] + '" class="img-responsive"></div>';
 		feedString += '<footer>';
 		feedString += '<div class="actions"><ul class="list-inline">';
-		//<i class="fas fa-heart"></i>
 		
+		
+		// 메인 좋아요 기능 구현
 		var temp = 'far';
 		
-		console.log('이게 무슨값이니',feed['list_f_likeMember']);
 		for(var i = 0; i < feed['list_f_likeMember'].length; i++){
 			if(feed['list_f_likeMember'][i]['nick'] === nick){
 				temp = 'fas';
@@ -176,64 +48,156 @@ function printFeed(data) {
 			}
 		}
 		
-		console.log(temp);
-		
-		feedString += '<li><a href="javascript:void(0);" onclick="likeProcess()"><i class="'+temp+' fa-heart" data-index="' + (feeds.length - 1) + '"></i></a></li>';
-		feedString += '<li><a href="javascript:void(0);" onclick="callModal()"><i class="far fa-clone" data-index="' + (feeds.length - 1) + '"></i></a></li>';
+		feedString += '<li><a href="javascript:void(0);" onclick="likeProcess(0)"><i class="'+temp+' fa-heart" data-index="' + index + '"></i></a></li>';
+		feedString += '<li><a href="javascript:void(0);" onclick="showModal('+ index +')"><i class="far fa-clone"></i></a></li>';
 		feedString += '<li class="pull-right"><a href="' + '' + '"><i class="fas fa-bars"></i></a></li></ul></div>';
 
 		feedString += '<div class="legend">';
 		feedString += '<h3><a href="' + '' + '"><i class="far fa-heart"></i> 좋아요 <span class="likeCount">' + feed["list_f_likeMember"].length + '</span>개</a></h3>';
-		feedString += '<h4 class="pull-left"><a href="' + '' + '">' + '' + '</a></h4>';
+		//feedString += '<h4 class="pull-left"><a href="' + '' + '">' + '' + '</a></h4>';
 		feedString += '<p>' + feed["fb_content"] + '</p></div>';
 
+		
+		// 메인 댓글 출력 파트
 		feedString += '<ul class="comments list-unstyled">';
 		$.each(feed["list_f_comment"], function(i, comment) {
 			if (i > 2)
 				return;
-			console.log("댓글인덱스:", i);
 
-			feedString += '<li><h4 class="pull-left"><a href="#">' + comment["nick"] + '</a></h4><p>';
-			feedString += comment["fc_content"];
+			feedString += '<li><h4 class="pull-left"><a href="/memberProfile/' + comment["nick"] + '">' + comment["nick"] + '</a></h4>';
+			feedString += '<p>'+comment["fc_content"]+'</p>';
 			feedString += '</li>';
 
 		});
 
 		feedString += '</ul>';
 
+		// 메인 댓글 입력 파트
 		feedString += '<div class="add-comment">';
 		feedString += '<i class="far fa-comments"></i>';
-		feedString += '<input type="text" name="comment" class="comment" placeholder="댓글 달기.."></input>';
-		feedString += '<p class="pull-right" data-index="' + (feeds.length - 1) + '" onclick="insertComment(0);">게시</p>';
+		feedString += '<input type="text" name="comment" data-flag="0" class="comment" placeholder="댓글 달기.."></input>';
+		feedString += '<p class="pull-right" data-index="' + index + '">게시</p>';
 		feedString += '<input type="hidden" name="fb_no" value="' + feed["fb_no"] + '"></input></div>';
 
 		feedString += '</footer></section>';
 
 		$('.feedify').append(feedString);
 	});
-	console.log(feeds);
 }
+
+function insertComment(flag) {
+
+	var e = $(event.target);
+	var index = e.data('index');
+	var fb_content = e.prev().val().trim();
+	console.log(flag);
+	
+	$.ajax({
+		url: "/community/comment/",
+		data: { fb_no: e.next().val(), fc_content: e.prev().val(), "nick": nick },
+		type: 'post',
+	}).done(function(data) {
+		console.log("댓글 입력 성공");
+	}).fail(function(req, error) {
+		console.log('응답코드:%s,에러 메시지:%s,error:%s', req.status, req.responseText, error);
+	});
+
+	var commentString = "";
+	
+	commentString += '<li><h4 class="pull-left"><a href="/memberProfile/' + nick + '">' + nick + '</a></h4><p>';
+	commentString += fb_content;
+	commentString += '</li>';
+	
+	$('ul.comments:eq(' + index + ') li:eq(2)').remove();
+	$('ul.comments:eq(' + index + ')').prepend(commentString);
+	
+	feeds[index]['list_f_comment'].unshift({"nick":nick, "fc_content":fb_content});
+	console.log(feeds[index]['list_f_comment']);
+	
+	if (flag != 0) {
+		
+		commentString = "";
+		commentString += "<div class='content'><img alt='"+nick+"' src='/upload/profile/" + nick + ".jpg' class='img-circle pull-left'>";
+		commentString += "<p><a href='/memberProfile/" + nick + "'>" + nick + "</a>" + fb_content + "</p>";
+		commentString += "</div>";
+
+		$('div.comments').prepend(commentString);		
+	}	
+	
+	e.prev().val("");
+	e.prev().focus();
+	e.css('cursor', 'default').css('font-weight','normal');
+	e.attr('onclick', '');
+}
+
+function likeProcess(flag) {
+	
+	var e = $(event.target);	
+	var index = e.data('index');
+	//var likeCount = parseInt($('.likeCount:eq(' + index + ')').html());
+	var list_likeMember = feeds[index]['list_f_likeMember'];
+	var param;
+
+	console.log(feeds[e.data('index')]);
+	
+	if (e.hasClass('far')) {
+		e.removeClass('far');
+		e.addClass('fas');
+		list_likeMember.push({"nick":nick});
+		$('.likeCount:eq(' +index + ')').html(list_likeMember.length);
+		
+		if(flag == 1){
+			var mainHeart = $('li i.fa-heart:eq('+index+')');
+			mainHeart.removeClass('far');
+			mainHeart.addClass('fas');
+			$('.carouselGallery-modal-text .likeCount').html(list_likeMember.length);
+		}
+		
+		param = 0;
+	}
+	else {
+		e.removeClass('fas');
+		e.addClass('far');
+		console.log($.inArray(nick, feeds[e.data('index')]['list_f_likeMember']));
+		list_likeMember.splice($.inArray(nick, feeds[e.data('index')]['list_f_likeMember']), 1);
+		$('.likeCount:eq(' + index + ')').html(list_likeMember.length);
+		
+		if(flag == 1){
+			var mainHeart = $('li i.fa-heart:eq('+index+')');
+			mainHeart.removeClass('fas');
+			mainHeart.addClass('far');
+			$('.carouselGallery-modal-text .likeCount').html(list_likeMember.length);
+		}
+		param = 1;
+	}
+	
+	console.log(list_likeMember);
+	
+	$.ajax({
+		url: "/community/like/",
+		data: { fb_no: feeds[index]['fb_no'], "nick": nick, "flag":param },
+		type: 'post',
+	}).done(function(data) {
+		console.log("좋아요 요청 성공");
+	}).fail(function(req, error) {
+		console.log('응답코드:%s,에러 메시지:%s,error:%s', req.status, req.responseText, error);
+	});
+}
+
 
 /*모달관련 js*/
 
-function callModal(what) {
-	showModal(feeds[$(event.target).data('index')], $(event.target).data('index'));
-}
-
-var modalData;
-
-showModal = function(feed, index) {
-	modalData = feed;
+function showModal(index) {
 	
-	console.log("showModal함수");
-	console.log(feed);
-	console.log(index);
+	feed = feeds[index];
+	console.log('data-index: ', index)
+	
 	imagepath = feed["list_fi_src"][0];
 
 	maxHeight = $(window).height() - 100;
 
 	if ($('.carouselGallery-wrapper').length === 0) {
-		if (typeof imagepath !== 'undefined') {
+		if (typeof imagepath !== undefined) {
 			var modalHtml = '';
 			modalHtml = "<div class='carouselGallery-wrapper'>";
 
@@ -256,6 +220,7 @@ showModal = function(feed, index) {
 			modalHtml += "<div class='content'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["nick"] + ".jpg' class='img-circle pull-left'>";
 			modalHtml += "<p><a href='" + '' + "'>" + feed["nick"] + "</a>" + feed["fb_content"] + "</p></div>";
 
+			// 모달 댓글 출력 파트
 			modalHtml += "<div class='comments'>";
 			$.each(feed["list_f_comment"], function(i, comment) {
 				modalHtml += "<div class='content'><img alt='' src='/upload/profile/" + comment["nick"] + ".jpg' class='img-circle pull-left'>";
@@ -266,11 +231,13 @@ showModal = function(feed, index) {
 
 			modalHtml += "<div class='footer'>";
 			modalHtml += "<ul class='list-inline'>"
+			
+			
+			// 모달 좋아요 파트
 			console.log(feed['list_f_likeMember']);
 			
 			var temp = 'far';
 		
-			console.log('이게 무슨값이니',feed['list_f_likeMember']);
 			for(var i = 0; i < feed['list_f_likeMember'].length; i++){
 				if(feed['list_f_likeMember'][i]['nick'] === nick){
 					temp = 'fas';
@@ -278,16 +245,18 @@ showModal = function(feed, index) {
 				}
 			}
 			
-			modalHtml += "<li><a href='javascript:void(0);' onclick='likeProcessInModal()'><i class='"+temp+" fa-heart' data-index='"+index+"'></i></a></li>";
+			modalHtml += "<li><a href='javascript:void(0);' onclick='likeProcess(1)'><i class='"+temp+" fa-heart' data-index='"+index+"'></i></a></li>";
 			modalHtml += "<li><a href='#'><i class='far fa-envelope'></i></a></li>";
-			modalHtml += "<li class='pull-right'><a href='#'><i class='fas fa-bars'></i></a></li></ul>";
+			modalHtml += "<li class='pull-right'><a href='javascript:void(0);'><i class='fas fa-bars'></i></a></li></ul>";
 
-			modalHtml += "<div class='show-like'><a href='#'><i class='far fa-heart'></i> 좋아요 <span class='likeCount'>" + feed["list_f_likeMember"].length + "</span>개</a></div>";
+			modalHtml += "<div class='show-like'><a href='javascript:void(0);'><i class='far fa-heart'></i> 좋아요 <span class='likeCount'>" + feed["list_f_likeMember"].length + "</span>개</a></div>";
 
+			
+			// 모달 댓글 입력 파트
 			modalHtml += "<div class='add-comment'>";
 			modalHtml += "<i class='far fa-comments'></i>";
-			modalHtml += "<input type='text' name='comment' class='comment' placeholder='댓글 달기..'/>";
-			modalHtml += "<p class='pull-right' onclick='insertComment();'>게시</p>";
+			modalHtml += "<input type='text' name='comment' class='comment' data-flag='1' placeholder='댓글 달기..'/>";
+			modalHtml += "<p class='pull-right' data-index='" + index + "'>게시</p>";
 			modalHtml += '<input type="hidden" name="fb_no" value="' + feed["fb_no"] + '"></input></div>';
 
 			modalHtml += "</div></div></div></div></div></div>";
@@ -295,34 +264,60 @@ showModal = function(feed, index) {
 			$('body').append(modalHtml).fadeIn(2500);
 		}
 	}
-};
-
-$('body').on('click', '.carouselGallery-wrapper', function(e) {
-	if ($(e.target).hasClass('.carouselGallery-wrapper')) {
-		removeModal();
+	else{
+		// TODO : 데이터가 없을때 뿌려줄 이미지를 정해야함.
 	}
-});
+	
+	$('body').addClass('noscroll');
+}
 
-$('body').on('click', '.carouselGallery-modal .fa-times-circle',
-	function(e) {
+function initListenerOnDocument() {
+	
+	$(document).on('input','.comment', function() {
+		if($(this).val().trim()=='') {
+			$(this).next().css('cursor', 'default').css('font-weight','normal');
+			$(this).next().attr('onclick', '');
+		}
+		else {
+			$(this).next().css('cursor', 'pointer').css('font-weight','bold');
+			$(this).next().attr('onclick', 'insertComment('+$(this).data('flag')+')');
+		}
+	});
+
+	$(document).on('click', '.carouselGallery-modal .fa-times-circle', function(e) {
 		removeModal();
 	});
+	
+	document.onkeydown = function(evt) {
+		evt = evt || window.event;
+		if (evt.keyCode == 27) {
+			removeModal();
+		}
+	};
+	
+	/*
+	컨텐츠를 제외한 다른곳 누르면 꺼지는 기능같은데 안먹음
+	$(document).on('click', '.carouselGallery-wrapper', function(e) {
+		if ($(e.target).hasClass('.carouselGallery-wrapper')) {
+			removeModal();
+		}
+	});
+	*/
+}
+
 
 var removeModal = function() {
 	$('body').find('.carouselGallery-wrapper').remove();
 	$('body').removeClass('noscroll');
 	$('body').css('position', 'static');
-	$('body').animate({
-		scrollTop: scrollTo
-	}, 0);
+	$('body').animate({scrollTop: scrollTo}, 0);
 };
 
 // Avoid break on small devices
 var carouselGalleryScrollMaxHeight = function() {
 	if ($('.carouselGallery-scrollbox').length) {
 		maxHeight = $(window).height() - 100;
-		$('.carouselGallery-scrollbox').css('max-height',
-			maxHeight + 'px');
+		$('.carouselGallery-scrollbox').css('max-height', maxHeight + 'px');
 	}
 }
 
@@ -330,10 +325,3 @@ $(window).resize(function() { // set event on resize
 	clearTimeout(this.id);
 	this.id = setTimeout(carouselGalleryScrollMaxHeight, 100);
 });
-
-document.onkeydown = function(evt) {
-	evt = evt || window.event;
-	if (evt.keyCode == 27) {
-		removeModal();
-	}
-};

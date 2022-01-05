@@ -27,18 +27,6 @@ public class CommunityRestAPIServiceImpl implements CommunityRestAPIService {
 	}
 
 	@Override
-	public FeedDTO selectOneFeed() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<CommentDTO> selectListComment() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void insertComment(Map map) {
 		dao.insertComment(map);
 

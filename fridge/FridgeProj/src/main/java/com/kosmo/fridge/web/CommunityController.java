@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.kosmo.fridge.service.MemberProfileDTO;
 import com.kosmo.fridge.service.impl.CommunityServiceImpl;
 
 @Controller
@@ -20,7 +18,6 @@ public class CommunityController {
 
 	@RequestMapping("/community/main")
 	public String toCoummunityMain(Map map) {
-		map.put("Test", "이게머야...");
 		return "community/CommunityList.tiles";
 	}
 	
@@ -32,19 +29,19 @@ public class CommunityController {
 	
 	@RequestMapping("/community/write.do")
 	public String toCoummunityWrite() {
-		return "community/CommunityList.tiles";
+		return "community/WriteTestForm.tiles";
 	}
 	
 	@RequestMapping("/community/writeProcess.do")
 	public String insertFeed(MultipartHttpServletRequest mhsr) {
 		service.insertFeed(mhsr);		
-		return "community/CommunityList.tiles";
+		return "community/WriteTestForm.tiles";
 	}
 	
 	@RequestMapping("/community/setUserImg.do")
 	public String uploadMemberImg(MultipartHttpServletRequest mhsr) throws IllegalStateException, IOException{
 						
 		System.out.println(service.updateMemberImg(mhsr));		
-		return "community/CommunityList.tiles";
+		return "community/WriteTestForm.tiles";
 	}
 }

@@ -25,30 +25,21 @@ public class CommunityRestAPIController {
 	
 	@GetMapping("/community/feeds/{nick}")
 	public List<FeedDTO> selectListFeedInCoummunityMain(@PathVariable String nick){
-		System.out.println("요청은 들어오니?");
 		return service.selectListFeedInCommunityMain(nick);
 	}
 	
 	@GetMapping("/profile/feeds/{nick}")
 	public List<FeedDTO> selectListFeedInProfile(@PathVariable String nick){
-		return service.selectListFeedInProfile(nick);		
+		return service.selectListFeedInProfile(nick.trim());		
 	}
 	
 	@PostMapping("/community/comment/")
-	public String insertComment(@RequestParam Map map) {
-		
-		System.out.println(map.get("fb_no"));
-		System.out.println(map.get("fc_content"));
-		System.out.println(map.get("nick"));
+	public void insertComment(@RequestParam Map map) {
 		service.insertComment(map);
-		return map.get("fc_content").toString();
 	}
 	
 	@PostMapping("/community/like/")
 	public void updateLike(@RequestParam Map map) {
-		System.out.println(map.get("fb_no"));
-		System.out.println(map.get("flag"));		
-		System.out.println(map.get("nick"));
 		service.updateLike(map);
 	}
 	

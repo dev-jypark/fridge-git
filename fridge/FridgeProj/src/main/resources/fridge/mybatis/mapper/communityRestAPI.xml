@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="selectList_f_com" resultType="CommentDTO">
-		select c.*, nick from member m join f_com c on m.id=c.id where fb_no=#{fb_no}
+		select c.*, nick from member m join f_com c on m.id=c.id where fb_no=#{fb_no} order by fc_no desc
 	</select>
 	
 	<select id="selectListFeed" parameterType="String" resultMap="FeedDTOResult">
