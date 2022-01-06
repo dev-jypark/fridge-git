@@ -11,14 +11,22 @@
 		property:자바빈(OneMemoDTO)의 속성명
 		column:테이블의 컬럼(조회(SELECT)결과의 컬럼명들 의미)
 		 -->
-		<result column="tbNo" property="tb_no"/>
-		<result column="id" property="id"/>
-		<result column="tbTitle" property="tb_title"/>
-		<result column="tbContent" property="tb_content"/>
-		<result column="tbVisitCount" property="tb_visitcount"/>
-		<result column="tbPostDate" property="tb_postdate"/>
-		<result column="likeCount" property="likeCount"/>
-		<result column="addr" property="addr"/>	
+		<!-- <result property="tbNo" column="tb_no"/>
+		<result property="id" column="id"/>
+		<result property="tbTitle" column="tb_title"/>
+		<result property="tbContent" column="tb_content"/>
+		<result property="tbVisitCount" column="tb_visitcount"/>
+		<result property="tbPostDate" column="tb_postdate"/>
+		<result property="likeCount" column="likeCount"/>
+		<result property="addr" column="addr"/>	 -->
+		<result property="tbNo" column="tb_no"/>
+		<result property="id" column="id"/>
+		<result property="tbTitle" column="tb_title"/>
+		<result property="tbContent" column="tb_content"/>
+		<result property="tbVisitCount" column="tb_visitcount"/>
+		<result property="tbPostDate" column="tb_postdate"/>
+		<result property="likeCount" column="likeCount"/>
+		<result property="addr" column="addr"/>	
 		<!-- 
 		1:N관계 매핑용
 		column: 조인조건의 컬럼명 (ON onememo.no = linecomments.no)
@@ -48,8 +56,8 @@
 		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	 -->
-	<select id="shareSelectList" parameterType="Map" resultType="shareDTO">
-		SELECT t.*,m.id as id,m.addr as addr,(SELECT COUNT(*) FROM t_like WHERE tb_no=t.tb_no) as likeCount FROM 
+	<select id="shareSelectList" parameterType="Map" resultMap="shareDTOResult">
+		SELECT t.*,m.addr as addr,(SELECT COUNT(*) FROM t_like WHERE tb_no=t.tb_no) as likeCount FROM 
 			t_bbs t JOIN member m ON m.id=t.id 
 		<if test="searchWord !=null">
 			WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'

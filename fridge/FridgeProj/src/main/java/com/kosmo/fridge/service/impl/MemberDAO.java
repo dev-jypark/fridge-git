@@ -37,7 +37,8 @@ public class MemberDAO {
 	//로그인
 	@Resource(name = "sqlSessionFactory")
 	private SqlSessionFactory sqlMapper;
-	@Resource(name="template")
+	
+	@Autowired
 	private SqlSessionTemplate template;
 
 	public boolean isLogin(Map map){

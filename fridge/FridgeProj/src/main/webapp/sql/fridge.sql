@@ -23,7 +23,6 @@ DROP TABLE t_bbs CASCADE CONSTRAINTS;
 DROP TABLE member CASCADE CONSTRAINTS;
 
 
-
 /* Drop Sequences */
 
 DROP SEQUENCE SEQ_a_com_a_no;
