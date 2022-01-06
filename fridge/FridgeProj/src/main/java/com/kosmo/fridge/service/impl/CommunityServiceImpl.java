@@ -26,40 +26,44 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public boolean insertFeed(MultipartHttpServletRequest mhsr) {
 		
-		String nick = mhsr.getParameter("nick");
-		String fb_content = mhsr.getParameter("fb_content");
-		Map map = new HashMap<>();
+		String nick = mhsr.getParameter("nick"); // 파라미터로 sql에서 검색할 키 값 받아오기 : 저는 닉네임으로 id를 검색해서 db에 넣습니다.
+		String fb_content = mhsr.getParameter("fb_content"); // 파라미터로 sql에 저장할 본문 텍스트 가져오기
 		
-		List<MultipartFile> listImgFile= mhsr.getFiles("fl_src");
 		
-		System.out.println(nick);
-		map.put("nick", nick);
+		List<MultipartFile> listImgFile= mhsr.getFiles("fl_src"); // 파라미터로 저장할 이미지 경로 리스트를 받아오기
+		
+		System.out.println(nick);	
 		System.out.println(fb_content);
+		
+		// DAO에서 활용할 map 데이터 생성
+		Map map = new HashMap<>();
+		map.put("nick", nick);
 		map.put("fb_content", fb_content);		
 		
+		// Map을 통해 먼저 글을 입력
 		try {
-			dao.insertFeed(map);
+			dao.insertFeed(map); // DAO를 통해 먼저 글 입력
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		System.out.println("작성된 글 번호: " + map.get("fb_no"));
-		map.put("fi_src", listImgFile);
+		System.out.println("작성된 글 번호: " + map.get("fb_no")); // DB에 방금 저장한 글의 키값을 map을 통해 받아옴, 결과값 확인
+		map.put("fi_src", listImgFile); // 맵에 이미지 소스 에 대한 리스트 넣기
 		
 		int affected = 0;
 		try {
-		 affected = dao.insertFeedImgs(map);
+		 affected = dao.insertFeedImgs(map); // DAO를 통해 이미지 소스 일괄 처리
 		} catch (Exception e) {
 			System.out.println("imginserterror");
 			System.out.println(e);
 		}
 		System.out.println(affected);
-		if(affected != listImgFile.size()) {
+		if(affected != listImgFile.size()) { // 영향받은 갯수와, 이미지 리스트 사이즈를 비교해 파일 입력성공여부 판단
 			return false;
 		}
 		
-		String path = mhsr.getServletContext().getRealPath("/upload/feed");
+		String path = mhsr.getServletContext().getRealPath("/upload/feed"); // 서버에 저장할 경로 설정
 		
-		for(MultipartFile imgFile : listImgFile) {			
+		for(MultipartFile imgFile : listImgFile) {	// 각 파일 경로에 대해 폴더를 설정하고, 받아온 이미지 모두 입력	
 			
 			String imgsrc = path+File.separator+map.get("fb_no")+File.separator+ imgFile.getOriginalFilename();
 			System.out.println(imgsrc);

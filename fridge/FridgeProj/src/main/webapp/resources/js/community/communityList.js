@@ -6,7 +6,7 @@ var feeds = Array(); // 에이작스로 가져온 모든 데이터(피드글)를
 
 $.ajax({
 	url: "/community/feeds/" + nick,
-	//dataType: 'json'
+	dataType: 'json'
 }).done(function(data) {
 	printFeed(data);
 	console.log(feeds);
@@ -50,11 +50,11 @@ function printFeed(data) {
 		
 		feedString += '<li><a href="javascript:void(0);" onclick="likeProcess(0)"><i class="'+temp+' fa-heart" data-index="' + index + '"></i></a></li>';
 		feedString += '<li><a href="javascript:void(0);" onclick="showModal('+ index +')"><i class="far fa-clone"></i></a></li>';
-		feedString += '<li class="pull-right"><a href="' + '' + '"><i class="fas fa-bars"></i></a></li></ul></div>';
+		feedString += '<li class="pull-right"><a href="' + '/*TODO:글관련메뉴바*/' + '"><i class="fas fa-bars"></i></a></li></ul></div>';
 
 		feedString += '<div class="legend">';
-		feedString += '<h3><a href="' + '' + '"><i class="far fa-heart"></i> 좋아요 <span class="likeCount">' + feed["list_f_likeMember"].length + '</span>개</a></h3>';
-		//feedString += '<h4 class="pull-left"><a href="' + '' + '">' + '' + '</a></h4>';
+		feedString += '<h3><a href="' + '/*TODO:좋아요목록뿌려주기*/' + '"><i class="far fa-heart"></i> 좋아요 <span class="likeCount">' + feed["list_f_likeMember"].length + '</span>개</a></h3>';
+		//feedString += '<h4 class="pull-left"><a href="' + '' + '">' + '' + '</a></h4>';//아마 필요없는 코드 작업후 필요없으면 삭제
 		feedString += '<p>' + feed["fb_content"] + '</p></div>';
 
 		
@@ -214,17 +214,17 @@ function showModal(index) {
 			modalHtml += "<div class='carouselGallery-modal-text'>";
 
 			modalHtml += "<div class='header'>";
-			modalHtml += "<a href='" + "" + "'><img alt='' src='/upload/profile/" + feed["nick"] + ".jpg' class='img-circle pull-left'><span>" + feed["nick"] + "</a></div>";
+			modalHtml += "<a href='/memberProfile/" + feed["nick"] + "'><img alt='"+feed["nick"]+"' src='/upload/profile/" + feed["nick"] + ".jpg' class='img-circle pull-left'><span>" + feed["nick"] + "</a></div>";
 
 			modalHtml += "<div class='body'>";
-			modalHtml += "<div class='content'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["nick"] + ".jpg' class='img-circle pull-left'>";
-			modalHtml += "<p><a href='" + '' + "'>" + feed["nick"] + "</a>" + feed["fb_content"] + "</p></div>";
+			modalHtml += "<div class='content'><a href='/memberProfile/" + feed["nick"] + "'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["nick"] + ".jpg' class='img-circle pull-left'>";
+			modalHtml += "<p>" + feed["nick"] +"</a>"+ feed["fb_content"] + "</p></div>";
 
 			// 모달 댓글 출력 파트
 			modalHtml += "<div class='comments'>";
 			$.each(feed["list_f_comment"], function(i, comment) {
-				modalHtml += "<div class='content'><img alt='' src='/upload/profile/" + comment["nick"] + ".jpg' class='img-circle pull-left'>";
-				modalHtml += "<p><a href='" + "" + "'>" + comment["nick"] + "</a>" + comment["fc_content"] + "</p>";
+				modalHtml += "<div class='content'><a href='/memberProfile/" + comment["nick"] + "'><img alt='"+comment+"' src='/upload/profile/" + comment["nick"] + ".jpg' class='img-circle pull-left'>";
+				modalHtml += "<p>" + comment["nick"] + "</a>" + comment["fc_content"] + "</p>";
 				modalHtml += "</div>";
 			});
 			modalHtml += "</div></div>";
