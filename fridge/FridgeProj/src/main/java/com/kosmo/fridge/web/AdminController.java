@@ -24,7 +24,7 @@ public class AdminController {
 	//로그인 폼으로 이동	
 	@RequestMapping("Login")
 	public String login() {
-		return "notice/Login";
+		return "/admin/Login";
 	}
 	
 	//로그인 처리]
@@ -38,7 +38,7 @@ public class AdminController {
 			model.addAttribute("NotAdmin","관리자가 아닙니다.");
 		}
 		//뷰정보 번환]
-		return "forward:/notice/List";
+		return "forward:/admin/userchart";
 	}
 	
 	//로그아웃 처리]
@@ -46,6 +46,6 @@ public class AdminController {
 	public String logout(SessionStatus status){
 		status.setComplete();
 		//뷰정보 번환]
-		return "home";
+		return "/admin/Login";
 	}
 }//
