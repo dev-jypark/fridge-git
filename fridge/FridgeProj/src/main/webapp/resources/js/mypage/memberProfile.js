@@ -1,11 +1,8 @@
-var nick = $("input[name=nick]").val();
-//var user = $("input[name=user]").val();
-var user = 'Kil_dong'
-
-if(user.length == 0)
-	user = "Miji_"
+var nick = $("input[name=nick]").val(); /// 현재 보여지는 프로필 멤버에 대한 닉네임
+//var user = $("input[name=user]").val(); // 현재 로그인 하고있는 유저에 대한 닉네임 
+var	user = "ho"// 현재 로그인 하고있는 유저의 닉네임 테스트용
 console.log(nick);
-
+console.log(user);
 var feeds = Array();
 
 $.ajax({
