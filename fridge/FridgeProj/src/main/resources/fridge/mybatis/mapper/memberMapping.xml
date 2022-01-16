@@ -9,13 +9,43 @@
 			SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}
 		</select>
 		<!-- 회원가입 -->
-		<insert id="memberInsert" parameterType="MemberDTO" >
-			INSERT INTO member 
-			VALUES(#{id},#{pwd},#{email},#{nick},#{addr},null,SYSDATE)
-
+		<insert id="memberInsert" parameterType="MemberDTO" >	
+			INSERT INTO member
+			VALUES(#{id},#{pwd},#{email},#{nick},#{addr},null,null,SYSDATE)
+		</insert>
+		<!-- 약관동의 -->
+		<insert id="agreeInsert" parameterType="MemberDTO" >
+			INSERT INTO m_agree
+			VALUES(#{id},#{agree})
 		</insert>
 		<!-- 아이디중복확인 -->
-		<select id="checkMember" parameterType="String" resultType="int">
+		<select id="memberIdCheck" parameterType="String" resultType="int">
   			SELECT COUNT(*) FROM member WHERE id=#{id}
   		</select>
+  		<!-- 닉네임중복확인 -->
+		<select id="memberNickCheck" parameterType="String" resultType="int">
+  			SELECT COUNT(*) FROM member WHERE nick=#{nick}
+  		</select>
+  		<!-- 비밀번호변경 -->
+  		<update id="pwdUpdate">
+  			UPDATE member SET pwd=#{pwd} WHERE id=#{id}
+  		</update>
+  		<!-- 아이디찾기 -->
+  		<select id="findId" resultType="MemberDTO">
+  			SELECT COUNT(*) FROM member WHERE nick=#{nick} AND email=#{email}
+  		</select>
+  		<!-- 비밀번호찾기 -->
+  		<select id="findPwd" resultType="MemberDTO">
+  			SELECT COUNT(*) FROM member WHERE id=#{id} AND email=#{email}
+  		</select>
+  		<!-- 회원정보조회 -->
+  		<select id="viewMember" resultType="MemberDTO">
+  			SELECT COUNT(*) FROM member WHERE id=#{id}
+  		</select>
+  		<!-- 회원정보수정 -->
+  		<update id="memberUpdate">
+			UPDATE member SET
+			email=#{email},nick=#{nick},addr=#{addr}
+			WHERE id=#{id}
+		</update>
   </mapper>

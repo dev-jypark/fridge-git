@@ -18,7 +18,9 @@ public class MemberDTO {
 	private String pwd;
 	private String email;
 	private String nick;
+	private String self;
 	private String addr;
+	private String agree;
 	private String imgsrc;
 	private java.sql.Date regdate;
 }

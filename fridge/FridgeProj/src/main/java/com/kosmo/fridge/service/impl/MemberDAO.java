@@ -52,9 +52,47 @@ public class MemberDAO {
 		session.insert("memberInsert", memberDTO);
 		session.commit();
 	}
+	//약관동의
+	public void agreeOK(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		session.insert("agreeInsert", memberDTO);
+		session.commit();
+	}
 	//아이디중복확인
-	public int checkMember(String id) {
-		int result=template.selectOne("chekcMember",id);
+	public int checkMember(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		int result=session.selectOne("memberIdCheck",memberDTO);
 		return result;//존재:1 미존재:0
+	}
+	//닉네임중복확인
+	public int checkNick(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		int result=session.selectOne("memberNickCheck",memberDTO);
+		return result;//존재:1 미존재:0
+	}
+	//비밀번호변경
+	public void changePwd(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		session.update("pwdUpdate",memberDTO);
+	}
+	//아이디찾기
+	public MemberDTO searchId(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		return session.selectOne("findId",memberDTO);
+	}
+	//비밀번호찾기
+	public MemberDTO searchPwd(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		return session.selectOne("findPwd",memberDTO);
+	}
+	//회원정보조회
+	public MemberDTO readMember(String id) {
+		SqlSession session= sqlMapper.openSession();
+		return session.selectOne("viewMember",id);	
+	}
+	//회원정보수정
+	public void memberEdit(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		session.update("memberUpdate", memberDTO);	
 	}
 }
