@@ -24,7 +24,7 @@ public class PagingUtil {
 		while(blockCount <= blockPage && intTemp <= totalPage){  // 페이지 오버 를 체크
 				//현재 페이지를 의미함
 			if(intTemp == nowPage){  
-				pagingStr+="<span style='Color:red'>"+intTemp+"</span>&nbsp;";
+				pagingStr+="<span style='Color:gray'>"+intTemp+"</span>&nbsp;";
 			}
 		     else
 		    	 pagingStr+="<a href='"+page+"nowPage="+intTemp+"'>"+intTemp+"</a>&nbsp;";

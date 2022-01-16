@@ -1,0 +1,91 @@
+.Csboard {
+    font-size: 36px;
+    color: #333333;
+    text-align: center;
+    width: 100%;
+    line-height: 100%;
+    font-weight: 700;
+    letter-spacing: -0.9px;
+    transform: skew(-0.001deg);
+}
+
+.csboard_menu {
+    width: 207.5px;
+    height: 150px;
+    border-right: 1px solid #f2f2f2;
+    display: inline-block;
+    font-size: 0px;
+    cursor: pointer;
+}
+
+.csboard_menu:hover {
+    background-color: #f6f6f6;
+}
+
+.csmenu_on {
+    background-color: #f6f6f6;
+}
+
+.csboard_menu .csboard_menu_con {
+    height: 130px;    
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+.csboard_menu .csboard_menu_con .menu_sub {
+    font-size: 15px;
+    color: #333333;
+    font-weight: 700;
+    line-height: 1;
+    padding-top: 10px;
+    transform: skew(-0.001deg);
+}
+
+.customer_info_wrap {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.customer_info_box .customer_info {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+.customer_info_box .customer_info .customer_style {
+    font-weight: 300;
+    font-size: 14px;
+    padding-left: 3px;
+    color: #333;
+}
+
+.customer_info_box .customer_num {
+    position: relative;
+    padding: 0 12px 0 27px;
+}
+
+.customer_info_box .customer_time {
+    padding-left: 7px;
+}
+
+.customer_info_box .customer_num::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 0;
+    background: url("/images/csboard/ic-call.png") no-repeat;
+}
+
+.customer_info_box .customer_num::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    height: 10px;
+    top: 6px;
+    right: 0;
+    border-right: 1px solid #ccc;
+}

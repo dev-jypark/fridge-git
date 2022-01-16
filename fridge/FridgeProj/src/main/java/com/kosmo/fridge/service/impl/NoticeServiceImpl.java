@@ -32,7 +32,6 @@ public class NoticeServiceImpl implements NoticeService {
 	public boolean isAdmin(Map map) {
 		return dao.isAdmin(map);
 	}
- 
 	@Override
 	public ListPagingData<NoticeDTO> selectList(
 			Map map, HttpServletRequest req, int nowPage) {
