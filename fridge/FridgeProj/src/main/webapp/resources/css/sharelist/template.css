@@ -7,6 +7,12 @@
 @import 'https://fonts.googleapis.com/css?family=Montserrat:400,700';
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700';
 @import 'https://fonts.googleapis.com/css?family=Kaushan+Script';
+
+.articleTitle{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 html, body {
 	line-height: 1.7;
 	margin: 0;
@@ -398,7 +404,7 @@ img.img-full-width {
 }
 /* =============== LAYOUT - CONTENT AREA =============== */
 section {
-	padding: 80px 0;
+	/* padding: 80px 0; */
 }
 #nino-slider .nino-sectionHeading {
 	font-size: 110px;

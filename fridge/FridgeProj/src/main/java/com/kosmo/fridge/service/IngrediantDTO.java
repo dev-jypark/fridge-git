@@ -13,11 +13,11 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShareProductDTO {
-	private String tNo;
-	private String iNo;
-	private String tbNo;
-	private Date tDeadLine;
-	private String tCnt;
-	private String tResult;
+public class IngrediantDTO {
+	private String i_no;
+	private String id;
+	private String i_name;
+	private String i_cnt;
+	private Date i_enddate;
+	private Date i_postdate;
 }

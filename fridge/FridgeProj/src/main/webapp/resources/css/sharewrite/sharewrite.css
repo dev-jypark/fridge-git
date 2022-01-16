@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 /* 체크박스 페이지 스타일 */
-html { height: 100%; }
+/* html { height: 100%; }
 
 body {
   height: 100%;
@@ -10,7 +10,7 @@ body {
   display: -webkit-flex;
   display: flex;
   align-items: center;
-}
+} */
 
 .boxes {
   margin: auto;
@@ -19,7 +19,7 @@ body {
 }
 
 /* 체크박스 스타일 */
-input[type="checkbox"] { display: none; }
+/* input[type="checkbox"] { display: none; }
 
 input[type="checkbox"] + label {
   display: block;
@@ -60,13 +60,11 @@ input[type="checkbox"]:checked + label:before {
   border-left-color: transparent;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+} */
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+  background-color: #95E1D3;
 }
 
-/* step 템플릿 + 텍스트박스 스타일 */
-body{ 
-    margin-top:40px; 
-    
-}
 
 .stepwizard-step p {
     margin-top: 10px;
@@ -173,4 +171,42 @@ body{
   content: attr(data-placeholder);
   color: #999;
   font-size: .9em;
+}
+
+
+.active .bs-stepper-circle {
+  background-color: #95E1D3 ;
+}
+
+.step-trigger:focus{color:#95E1D3;outline:0}
+
+
+/* hashtag css */
+.selected-ingrediants ul {
+  padding: 16px 0;
+}
+
+.selected-ingrediants ul li {
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 14px;
+  letter-spacing: -.5px;
+}
+.selected-ingrediants  ul li.tag-item {
+  padding: 4px 8px;
+  background-color: #2ea591;
+  color: #fff;
+  border-radius: 15px;
+}
+
+.selected-ingrediants .tag-item:hover {
+  background-color: #95E1D3;
+  color: #000;
+}
+
+.selected-ingrediants .del-btn {
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 8px;
 }

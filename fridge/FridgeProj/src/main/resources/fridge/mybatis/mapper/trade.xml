@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. --> 
+<mapper namespace="fridge.mybatis.mapper.trade">
+	<resultMap type="tradeDTO" id="tradeDTOResult">
+		<result property="tNo" column="t_no"/>
+		<result property="iNo" column="i_no"/>
+		<result property="tbNo" column="tb_no"/>
+		<result property="tDeadLine" column="t_deadline"/>
+		<result property="tCnt" column="t_cnt"/>
+		<result property="tResult" column="t_result"/>
+	</resultMap>
+	
+	<select id="selectProductList" parameterType="Map" resultMap="tradeDTOResult">
+		SELECT * FROM 
+	</select>
+</mapper>
