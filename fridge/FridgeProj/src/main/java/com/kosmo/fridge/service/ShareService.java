@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.kosmo.fridge.util.ListPagingData;
 
 public interface ShareService {
@@ -14,7 +16,7 @@ public interface ShareService {
 	//상세보기용]
 	ShareDTO selectOne(Map map);
 	//입력/수정/삭제용]	
-	int insert(Map map);
+	boolean insert(MultipartHttpServletRequest multipartRequest);
 	int delete(Map map);
 	int update(Map map);
 }

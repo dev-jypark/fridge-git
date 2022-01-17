@@ -75,6 +75,38 @@
         $(e.target).parent().remove();
 	}
 	function nextStep1() {
+		var count = 0;
+		/* var notChecked=[];
+		for(var i=0;i<obj.check.length;i++){
+			if(obj.check[i].checked){
+				count++;
+			}
+			else notChecked.push[i];
+		}
+		if(count < 1){
+			alert('나눔 재료를 한 개 이상 선택하세요');
+			return false;
+		} */
+		
+		$("input[name=check]").each(function(idx){
+			if($(this).is(":checked")){
+				count=count+1;
+			}
+		});
+		
+		if(count < 1){
+			alert('나눔 재료를 한 개 이상 선택하세요');
+			return false;
+		}
+		
+		/* if($("input[name=count]").val() > $("input[name=count]").attr('max')){
+			alert('보유 재료 이하의 개수를 입력하세요');
+			return false;
+		}
+		else($("input[name=count]").val() < 1){
+			alert('1개 이상 입력하세요');
+			return false;
+		} */
 		stepper.next();
 		console.log("next step1");
 	}
@@ -84,6 +116,14 @@
 	}
 	function send() {
 		// step3 예외 처리 필요
+		if($("input[name=title]").val().length==0){
+			alert('제목을 입력해주세요');
+			return false;
+		}
+		if($("textarea#comment").val().length==0){
+			alert('내용을 입력해주세요');
+			return false;
+		}
 		var url = "/app/shareWrite.do";
 		var formData = new FormData($("form")[0]);
 		var checkboxes = [];
@@ -172,6 +212,7 @@
 									  </tr>
 									</thead>
 									<tbody>
+									<!--  -->
 									<!-- 시작 -->
 									<c:forEach var="item" items="${listIngrediant }" varStatus="loop">
 									  <tr>
@@ -238,6 +279,7 @@
 						<label class="control-label col-sm-2" for="fname"><strong>제목</strong></label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="fname" placeholder="제목을 입력하세요" name="title">
+							<input type="hidden" name="id" value="kim"/>
 						</div>
 					</div>
 					<div class="form-group">

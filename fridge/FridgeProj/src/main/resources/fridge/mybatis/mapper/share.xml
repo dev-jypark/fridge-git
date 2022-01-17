@@ -19,6 +19,7 @@
 		<result property="tbPostDate" column="tb_postdate"/>
 		<result property="likeCount" column="likeCount"/>
 		<result property="addr" column="addr"/>	
+		<result property="thumbnail" column="thumbnail"/>	
 		<!-- 
 		1:N관계 매핑용
 		column: 조인조건의 컬럼명 (ON onememo.no = linecomments.no)
@@ -54,10 +55,36 @@
 					WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 				</if>				
 				ORDER BY tb_no DESC) D)
-		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="shareSelectIngrediantList" parameterType="Map" resultMap="ingrediantDTOResult">
 		SELECT * FROM ingrediant ORDER BY i_postdate DESC
 	</select>
+	
+	<insert id="sharePostInsert" parameterType="Map">
+		INSERT INTO t_bbs VALUES (SEQ_t_bbs_tb_no.NEXTVAL, #{id}, #{title}, #{content}, DEFAULT, SYSDATE)
+		<selectKey keyProperty="tb_no" resultType="int" order="AFTER">
+			SELECT SEQ_t_bbs_tb_no.currval FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="sharePostImgInsert" parameterType="Map">
+		INSERT INTO t_imgsrc(ti_no,tb_no,ti_src)
+	 	SELECT SEQ_t_imgsrc_ti_no.nextval, A.* FROM(
+		<foreach item="item" collection="fileSrc" separator="UNION ALL">
+			SELECT #{tb_no} AS tb_no, #{item.originalFilename} AS ti_src FROM DUAL
+       </foreach>) A
+	</insert>
+	
+	<!-- <insert id="imgsrcInsert" parameterType="Map">
+	 insert into t_imgsrc(ti_no,tb_no,ti_src)
+	 select SEQ_t_imgsrc_ti_no.nextval, A.* from(
+		<foreach item="item" collection="fi_src" separator="UNION ALL ">
+			select #{tb_no} as tb_no, #{item.originalFilename} as ti_src from dual
+       </foreach>) A
+	</insert> -->
+	
+	<insert id="shareProductInsert" parameterType="Map">
+		
+	</insert>
 </mapper>

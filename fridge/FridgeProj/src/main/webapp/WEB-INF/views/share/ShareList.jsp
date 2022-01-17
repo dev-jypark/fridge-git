@@ -42,7 +42,7 @@
     <section id="nino-latestBlog">
     	<div class="container">
 			<div class="sectionContent">
-				<div class="row">
+				<div class="row"> 
 				<!-- 컨텐츠 시작 -->
 					<div class="col-md-4 col-sm-4">
 						<article>
@@ -79,6 +79,7 @@
 						<article>
 							<div class="articleThumb">
 								<!-- 이미지 -->
+								<!-- resources/images/share-list/our-blog/img-1.jpg -->
 								<a href="#"><img src="resources/images/share-list/our-blog/img-1.jpg" alt=""></a>
 							</div>
 							<!-- 글 제목 -->

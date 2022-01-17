@@ -35,5 +35,13 @@ public class ShareDAO {
 		List<IngrediantDTO> listIngrediant= template.selectList("shareSelectIngrediantList");
 		return listIngrediant;
 	}
+
+	public int insertSharePost(Map map) {
+		return template.insert("sharePostInsert", map);
+	}
+
+	public int insertSharePostImgs(Map map) {
+		return template.insert("sharePostImgInsert", map);
+	}
 	
 }
