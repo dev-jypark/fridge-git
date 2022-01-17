@@ -55,5 +55,7 @@
 	
 	<context:property-placeholder
 		location="classpath:fridge/resource/notice.properties" /> 
+	<context:property-placeholder
+		location="classpath:/fridge/resource/question.properties" />
 	
 </beans:beans>

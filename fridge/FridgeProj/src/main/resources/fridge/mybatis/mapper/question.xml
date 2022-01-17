@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="fridge.mybatis.mapper.question">
+  
+  	<resultMap type="questionDTO" id="questionDTOResult">
+		<!-- 
+		property:자바빈(OneMemoDTO)의 속성명
+		column:테이블의 컬럼(조회(SELECT)결과의 컬럼명들 의미)
+		 -->
+		<result column="q_no" property="q_no"/>
+		<result column="id" property="id"/>
+		<result column="q_title" property="q_title"/>
+		<result column="q_content" property="q_content"/>
+		<result column="q_postdate" property="q_postdate"/>
+		<result column="q_secret" property="q_secret"/>
+		<result column="originNo" property="originNo"/>
+		<result column="groupOrd" property="groupOrd"/>
+	</resultMap>
+  
+  	<!-- 회원 로그인여부 확인 -->
+  	<select id="isLogin" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}		
+	</select>
+
+	<select id="questionSelectList" parameterType="Map" resultType="questionDTO">
+		SELECT * FROM q_bbs ORDER BY groupOrd DESC 
+	</select>
+	
+	<select id="questionTotalRowCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM q_bbs
+	</select>
+	
+	<insert id="questionInsert" parameterType="Map" >
+		INSERT INTO q_bbs(q_no,id,q_title,q_content,originNo,groupOrd)
+		VALUES(SEQ_Q_BBS.NEXTVAL,#{id},#{q_title},#{q_content},SEQ_Q_BBS.CURRVAL,0)
+	</insert>
+	
+	<select id="questionSelectOne" parameterType="Map" resultMap="questionDTOResult">
+		SELECT * FROM q_bbs WHERE q_no=#{q_no}	
+	</select>
+	
+	<update id="questionUpdate" parameterType="Map">
+		UPDATE q_bbs SET q_title=#{q_title},q_content=#{q_content} WHERE q_no=#{q_no}
+	</update>
+	
+	<delete id="questionDelete" parameterType="Map">
+		DELETE q_bbs WHERE q_no=#{q_no}
+	</delete>
+	
+	<select id="getBoardReplyInfo" parameterType="Map" resultType="questionDTO">
+    
+	    SELECT q_no
+	         , originNo
+	         , groupOrd
+	         , groupLayer
+	    FROM q_bbs
+	    WHERE originNo = #{q_no}
+ 
+	</select>
+
+	<update id="updateBoardReSeq" parameterType="Map">	    
+	    UPDATE q_bbs
+	       SET groupOrd = groupOrd + 1
+	    WHERE <![CDATA[ originNo = #{originNo} and groupOrd > #{groupOrd}]]>  
+	</update>
+	
+	<insert id="questionInsertReply" parameterType="Map" >
+		INSERT INTO q_bbs(q_no,id,q_title,q_content,originNo,groupOrd)
+		VALUES(SEQ_Q_BBS.NEXTVAL,#{id},#{q_title},#{q_content},{q_no},#{groupOrd}+1)
+	</insert>
+	
+  </mapper>

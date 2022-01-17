@@ -105,7 +105,26 @@
 	    border-right: 1px solid #ccc;
 	}
 	
+	.fs-it-btn {
 	
+	  border: 1px solid #a2a2a2;
+	  border-radius: 0;
+	  color: #fff;
+	  font-weight: bold;
+	  margin-left: 1000px;
+	}
+	.fs-it-btn-vertical-line {
+	  text-align:center;
+	  padding: 4px 0 5px 10px;
+	  margin-left: 10px;
+	  border-left: 1px solid #a2a2a2;
+	}
+	.bg-blue {
+	    background-color: silver;
+	}
+	.text-uppercase {
+	    text-transform: uppercase;
+	}
   </style>    
   
 	<!-- <link href="admin.css" rel="stylesheet"> -->
@@ -141,7 +160,7 @@
                         <div style="border:solid 1px #e0e0e0;height:120px;font-size:0px; text-align: center;">
 
                             <a href="#" style="text-decoration:none;">
-                                <div class="csboard_menu csmenu_on" id="customerboardnotice"><a href="<c:url value="/notice/List.do"/>">
+                                <div class="csboard_menu" id="customerboardnotice"><a href="<c:url value="/notice/List.do"/>">
                                     <div class="csboard_menu_con">
                                         <div class="csboard_menu_con_list">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="34" height="36" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
@@ -153,7 +172,7 @@
                                 </div>
                             </a>
                              <a href="#" style="text-decoration:none;">
-                                <div class="csboard_menu " id="customerboardqna"><a href="<c:url value="/question/Q_List.do"/>">
+                                <div class="csboard_menu csmenu_on" id="customerboardqna"><a href="<c:url value="/question/Q_List.do"/>">
                                     <div class="csboard_menu_con">
                                         <div class="csboard_menulist">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="34" height="36" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
@@ -181,7 +200,8 @@
     </div>
     
 	<div class="container">
- 
+	
+
 		<div class="row">
 			<div class="col-xs-12 col-lg-12 col-md-12 action">
 
@@ -192,15 +212,15 @@
 				<!-- 테이블 컬럼폭은 col-*-*계열로 설정 -->
 				<tr style="background-color: activeborder; border-top-style: double; border-bottom-style: double;">
 					<th class="text-center col-md-1" style="font-weight: bold;">번호</th>
-					<th class="text-center col-md-6" style="font-weight: bold;">제목</th>
-	
+					<th class="text-center col-md-5" style="font-weight: bold;">제목</th>
+					<th class="text-center col-md-1" style="font-weight: bold;">작성자</th>
 					<th class="text-center col-md-2" style="font-weight: bold;">등록일</th>
 				</tr>
 	
 
 				<c:if test="${empty listPagingData.lists }" var="isEmpty">
 					<tr>
-						<td colspan="4">등록된 공지사항이 없습니다.</td>
+						<td colspan="4" style="color: gray;">등록된 문의글이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:if test="${not isEmpty }">
@@ -209,17 +229,27 @@
 							<td>${listPagingData.totalRecordCount - (((listPagingData.nowPage - 1) * listPagingData.pageSize) + loop.index)}</td>										
 							<td class="text-left">
 								<details>
-								    <summary>${item.n_title }</summary>
-								    <p><br>${item.n_content}</p>
+								    <summary>${item.q_title }</summary>
+								    <p><br>${item.q_content}</p>
 								</details></td>
-						
-							<td>${item.n_postDate }</td>
+							<td>${id}</td>
+							<td>${item.q_postDate }</td>
 						</tr>
 					</c:forEach>
 				</c:if>
 			</table>
 			</div>
 		</div>
+		 <!-- 글작성버튼 ui -->
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+				<div class="container">
+					<div class="row" >
+						<button type="button" class="btn bg-blue fs-it-btn">
+						    <i class="fa fa-plus" aria-hidden="true"></i>
+						    <span class="fs-it-btn-vertical-line"></span>
+						    문의하기</button>
+					</div>
+				</div>
 			<c:if test="${listPagingData.lists.size() !=0 }">
 		<div class="row">
 			<div class="col-md-12 text-center" style="margin-left: 360px">${listPagingData.pagingString}</div>
