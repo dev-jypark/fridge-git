@@ -22,7 +22,7 @@ import com.kosmo.fridge.service.NoticeDTO;
 import com.kosmo.fridge.service.impl.NoticeServiceImpl;
 
 @SessionAttributes("adminid")
-@RequestMapping("/notice/")
+@RequestMapping("/admin_notice/")
 @Controller
 public class NoticeController {
 	
@@ -43,13 +43,13 @@ public class NoticeController {
 		//데이타 저장]
 		model.addAttribute("listPagingData", listPagingData);
 		//뷰정보 반환]
-		return "notice/List";
+		return "/admin/notice/List";
 	}
 	//입력폼으로 이동]
 	@RequestMapping(value="/Write",method = RequestMethod.GET)
 	public String write(@ModelAttribute("adminid") String adminid){				
 		//뷰정보 반환]
-		return "notice/Write";
+		return "/admin/notice/Write";
 	}
 	//입력처리]
 	@RequestMapping(value="/Write",method = RequestMethod.POST)
@@ -61,7 +61,7 @@ public class NoticeController {
 		map.put("adminid", adminid);
 		noticeService.insert(map);
 		//뷰정보 반환]목록으로 이동
-		return "forward:/notice/List";
+		return "forward:/admin/notice/List";
 	}
 	//컨트롤러 메소드 작성 규칙]
 	/*
@@ -89,7 +89,7 @@ public class NoticeController {
 		model.addAttribute("hits", hits);
 		/////////////////////////////////////////////
 		//뷰정보 반환]
-		return "notice/View";
+		return "/admin/notice/View";
 	}
 	//수정폼으로 이동 및 수정처리]
 	@RequestMapping("Edit")
@@ -103,13 +103,13 @@ public class NoticeController {
 			//데이타 저장]
 			req.setAttribute("record", record);
 			//수정 폼으로 이동]
-			return "notice/Edit";
+			return "/admin/notice/Edit";
 		}
 		//수정처리후 상세보기로 이동
 		//서비스 호출
 		noticeService.update(map);
 		//뷰로 포워드
-		return "forward:/notice/View";
+		return "forward:/admin/notice/View";
 	}
 	//삭제처리]
 	@RequestMapping("Delete")
@@ -119,7 +119,7 @@ public class NoticeController {
 		//서비스 호출
 		noticeService.delete(map);
 		//뷰로 포워드
-		return "forward:/notice/List";
+		return "forward:/admin/notice/List";
 		
 	}
 

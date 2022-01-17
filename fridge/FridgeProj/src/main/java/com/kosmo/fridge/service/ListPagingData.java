@@ -12,7 +12,7 @@ import lombok.Setter;
 //Lombok사용시
 @Getter
 @Setter
-@Builder
+@NoArgsConstructor
 /*
 public class ListPagingData<T> {
 	//레코드 목록
