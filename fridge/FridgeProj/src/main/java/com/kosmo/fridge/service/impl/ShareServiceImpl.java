@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -91,7 +92,7 @@ public class ShareServiceImpl implements ShareService{
 		String title=multipartRequest.getParameter("title");
 		String content=multipartRequest.getParameter("content");
 		String id=multipartRequest.getParameter("id");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		/*
 		for(int i=0; i<checkboxes.length; i++) {
 			System.out.println(checkboxes[i]);
@@ -133,6 +134,7 @@ public class ShareServiceImpl implements ShareService{
 			String imgsrc = path+File.separator+map.get("tb_no")+File.separator+ imgFile.getOriginalFilename();
 			System.out.println(imgsrc);
 			File dest = new File(imgsrc);
+			if(!dest.exists()) dest.mkdirs();
 			try {
 				imgFile.transferTo(dest);				
 			} catch (IllegalStateException | IOException e) {
@@ -141,13 +143,15 @@ public class ShareServiceImpl implements ShareService{
 				return false;
 			}
 		}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
 		//trade 저장		
 		for(int index = 0; index < counts.length; index++) {
 			map.put("count", counts[index]);
 			map.put("no", checkboxes[index]);
 			try {
-				map.put("date", (java.sql.Date)format.parse(endDates[index]));
+				map.put("date", format.parse(endDates[index]));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
