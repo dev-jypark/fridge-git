@@ -85,6 +85,6 @@
 	</insert> -->
 	
 	<insert id="shareProductInsert" parameterType="Map">
-		
+		INSERT INTO trade VALUES (SEQ_trade_t_no.NEXTVAL, #{no}, #{tb_no}, #{endDate}, #{count}, DEFAULT)
 	</insert>
 </mapper>

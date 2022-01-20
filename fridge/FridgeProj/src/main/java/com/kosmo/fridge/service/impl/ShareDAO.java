@@ -43,5 +43,9 @@ public class ShareDAO {
 	public int insertSharePostImgs(Map map) {
 		return template.insert("sharePostImgInsert", map);
 	}
+
+	public int insertShareProduct(Map map) {
+		return template.insert("shareProductInsert", map);
+	}
 	
 }

@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+.badge{
+	margin-left:15px;
+}
+
+.msg-container{
+	max-width:1170px;
+	margin:auto;
+}
+
+img{max-width:100%;}
+
+.inbox_people{
+	background: #f8f8f8 none repeat scroll 0 0;
+	float: left;
+	overflow: hidden;
+	width: 40;
+	border-right: 1px solid #f7f7f7;
+}
+
+.inbox_msg{
+	border: 1px solid #f7f7f7;
+	border-radius: 15px;
+	clear: both;
+	overflow: hidden;
+}
+
+.top_spac{
+	margin: 20px 0 0;
+}
+
+.msg-container{max-width:1170; margin:auto;}
+
+.recent_heading{float: left; width:40%;}
+
+.srch_bar input{
+	border:1px solid #cdcdcd;
+	border-width: 0 0 1px 0;
+	width: 80%;
+	padding: 2px 0 4px 6px;
+	background: none;
+	font-family: 'Nanum pen Script', cursive;
+	font-size: 25px;
+}
+.srch_bar .input-group-addon button{
+	background: rgba(0,0,0,0) none repeat scroll 0 0;
+	border: medium none;
+	padding: 0;
+	color: #707070;
+	font-size: 18px;
+}
+.srch_bar .input-group-addon{
+	margin: 0 0 0 -27px;
+}
+
+.chat_ib h5{font-size:20px; color:#464646; margin:0 0 8px 0; font-family:'Nanum Pen Script', cursive;}
+.chat_ib h5 span{font-size:17px; float:right;}
+.chat_ib p{font-size:14px; color:#989898; margin:auto}
+.chat_img{
+	float: left;
+	width: 11%;
+}
+.chat_id{
+	float: left;
+	padding: 0 0 0 15px;
+	width: 88%
+}
+.chat_people{
+	overflow:hidden;
+	clear:both;
+}
+.chat_list{
+	border-bottom: 1px solid #f7f7f7;
+	margin: 0;
+	padding: 18px 16px 10px;
+}
+
+.chat_list_box :hover{
+	background-color: #d6ead0;
+}
+
+.invox_chat :hover{
+	background_color
+}

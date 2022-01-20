@@ -67,7 +67,7 @@ public class ShareController {
 	public String write(Model model) {
 		List<IngrediantDTO> listIngrediant = shareService.selectIngrediantList();
 		model.addAttribute("listIngrediant", listIngrediant);
-		return "share/ShareWrite.tiles";
+		return "share/ShareWrite";
 	}
 	
 	/*
@@ -75,7 +75,7 @@ public class ShareController {
 	 */
 	//글 등록
 	@RequestMapping(value = "/shareWrite.do", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
-	//@ResponseBody
+	@ResponseBody
 	public String writeOK(MultipartHttpServletRequest multipartRequest) throws JsonProcessingException {
 		/*List<MultipartFile> file = multipartRequest.getFiles("file");
 		System.out.println(file);
@@ -95,7 +95,6 @@ public class ShareController {
 		//System.out.println(mapper.writeValueAsString(map));
 		//return mapper.writeValueAsString(map);*/
 		
-		shareService.insert(multipartRequest);
-		return "share/ShareList.tiles";
+		return shareService.insert(multipartRequest) ? "success" : "error";
 	}
 }

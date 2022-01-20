@@ -15,7 +15,6 @@
 	<link href="resources/css/sharewrite/MDB-Free_4.20.0/css/addons/datatables.min.css" rel="stylesheet">
 	<!-- MDBootstrap Datatables  -->
 	<script type="text/javascript" src="resources/css/sharewrite/MDB-Free_4.20.0/js/addons/datatables.min.js"></script>
-	
 	<title>찍먹냉장고 | 재료나눔게시판 글쓰기</title>
 </head>
 <script>
@@ -128,12 +127,16 @@
 		var formData = new FormData($("form")[0]);
 		var checkboxes = [];
 		var counts = [];
+		var endDates = [];
 		
 		$("input:checkbox[name='check']:checked").each(function(){
 			checkboxes.push($(this).val());
 		});
 		$("input[type='number']:not([readonly])").each(function(){
 			counts.push($(this).val());
+		});
+		$("input[name='endDate']:not([readonly])").each(function(){
+			endDates.push($(this).val());
 		});
 		$.each($("input[type='file']")[0].files, function(i, file){
 			console.log(file);
@@ -142,6 +145,7 @@
 		
 		formData.append("checkboxes", checkboxes);
 		formData.append("counts", counts);
+		formData.append("endDates", endDates);
 		
 		$.ajax({
 			url : url,
@@ -149,12 +153,14 @@
 			data : formData,
 			cache : false,
 			contentType : false,
+			dataType : 'text',
 			processData: false,
 			error : function(jqWHR, textStatus, errorThrown){
-				
+				alert(jqWHR.statusText);
 			},
 			success : function(data, jqWHR, textStatus){
-				if(data>0){
+				console.log("Success!");
+				if(data){
 					alert("등록을 완료했습니다!");
 					location.href="/app/shareList.do";
 				}
@@ -230,6 +236,7 @@
 										<td>
 											<input type="number" min="1" max="${item.i_cnt}" step="1" class="form-control" id="selectidx${item.i_no}" name="count" readonly><!--max에 불러온 보유갯수 넣기-->
 											<input type="hidden" name="idx" value="${item.i_no}"><!-- 재료 불러와서 재료 idx 넣기-->
+											<input type="hidden" name="endDate" value="${item.i_enddate}">
 										</td>
 									  </tr>
 									  </c:forEach>
@@ -252,14 +259,6 @@
 				  <div id="step-2" role="tabpanel" class="content bs-stepper-pane" aria-labelledby="step-2-trigger">
 					<h4><strong>거래글 작성</strong></h4>
 					&nbsp;
-					<!-- <div class="col-md-10">
-						<div class="form-group files color">
-							<label><strong>사진 등록하기</strong></label>
-							<br>
-							이미지 첨부(1)
-							<input type="file" class="form-control" multiple="multiple">
-						</div>
-					</div> -->
 			
 					<!-- 이미지 첨부(2) 이미지 미리보기/삭제 제어용 js 예시 -->
 					<div id='image_preview'>

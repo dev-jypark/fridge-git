@@ -2,6 +2,10 @@ package com.kosmo.fridge.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,17 +84,22 @@ public class ShareServiceImpl implements ShareService{
 	@Override
 	public boolean insert(MultipartHttpServletRequest multipartRequest) {
 		List<MultipartFile> listImgFile = multipartRequest.getFiles("file");
-		//System.out.println(file);
+		//저장에 필요한 객체들
 		String[] checkboxes = multipartRequest.getParameterValues("checkboxes");
 		String[] counts = multipartRequest.getParameterValues("counts");
+		String[] endDates = multipartRequest.getParameterValues("endDates");		
 		String title=multipartRequest.getParameter("title");
 		String content=multipartRequest.getParameter("content");
 		String id=multipartRequest.getParameter("id");
-		/*for(int i=0; i<checkboxes.length; i++) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		/*
+		for(int i=0; i<checkboxes.length; i++) {
 			System.out.println(checkboxes[i]);
 			System.out.println(counts[i]);
+			System.out.println(endDates[i]);
 		}*/
-		System.out.println(id);
+		
+		//게시글 업로드 시작
 		Map map = new HashMap<>();
 		map.put("title", title);
 		map.put("content", content);
@@ -103,9 +112,8 @@ public class ShareServiceImpl implements ShareService{
 		catch(Exception e) {e.printStackTrace();}
 		
 		System.out.println(map.get("tb_no"));
+		
 		map.put("fileSrc", listImgFile);
-		
-		
 		
 		try {
 			 affected = dao.insertSharePostImgs(map); // DAO를 통해 이미지 소스 일괄 처리
@@ -113,19 +121,17 @@ public class ShareServiceImpl implements ShareService{
 			System.out.println("imginserterror");
 			System.out.println(e);
 		}
-		
+
 		System.out.println(affected);
 		if(affected != listImgFile.size()) { // 영향받은 갯수와, 이미지 리스트 사이즈를 비교해 파일 입력성공여부 판단
 			return false;
 		}
 		
+		//파일 저장
 		String path = multipartRequest.getServletContext().getRealPath("/upload/share");
-		for(MultipartFile imgFile : listImgFile) {	// 각 파일 경로에 대해 폴더를 설정하고, 받아온 이미지 모두 입력	
-			String rename=FileUpDownUtil.getNewFileName(path, imgFile.getOriginalFilename());
-			String imgsrc = path+File.separator+map.get("tb_no")+File.separator+ rename;
-			//String imgsrc = path+File.separator+map.get("tb_no")+File.separator+ imgFile.getOriginalFilename();
+		for(MultipartFile imgFile : listImgFile) {	// 각 파일 경로에 대해 폴더를 설정하고, 받아온 이미지 모두 입력
+			String imgsrc = path+File.separator+map.get("tb_no")+File.separator+ imgFile.getOriginalFilename();
 			System.out.println(imgsrc);
-			
 			File dest = new File(imgsrc);
 			try {
 				imgFile.transferTo(dest);				
@@ -135,6 +141,20 @@ public class ShareServiceImpl implements ShareService{
 				return false;
 			}
 		}
+		
+		//trade 저장		
+		for(int index = 0; index < counts.length; index++) {
+			map.put("count", counts[index]);
+			map.put("no", checkboxes[index]);
+			try {
+				map.put("date", (java.sql.Date)format.parse(endDates[index]));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			System.out.println(counts[index]+","+checkboxes[index]+","+endDates[index]);
+			dao.insertShareProduct(map);
+		}
+		
 		return true;
 	}
 
