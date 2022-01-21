@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+ 
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,viewport-fit=cover"/>
     <meta name="naver-site-verification" content="907a7f8c9a61df897ccf0f03a835f6d2668945b1"/>
@@ -25,6 +26,7 @@
     <!-- css관련부분 -->
     <link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/preamble-97ede701.chunk.css"><link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/templates-Home-HomePage-f3a55bf4.chunk.css"><link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/21-0e75de9b.chunk.css"><link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/23-2ef16b9a.chunk.css"><link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/App-6e6c2f0c.chunk.css">
     
+  
   <script>
     dataLayer = [{
       
@@ -127,15 +129,15 @@
 
  <!-- 우측 바 -->
 <div class="layout-navigation-bar-login">
-<a class="layout-navigation-bar-login__item" href="<c:url value="/login.do"/>">로그인</a>
+<a class="layout-navigation-bar-login__item" href="<c:url value="/member/login.do"/>">로그인</a>
 <a class="layout-navigation-bar-login__item" href="<c:url value="/notice.do"/>">알림</a>
 <a class="layout-navigation-bar-login__item" href="<c:url value="/mail.do"/>">쪽지</a>
-<a class="layout-navigation-bar-login__item" href="<c:url value="/userchart.do"/>">냉장고</a>
+<a class="layout-navigation-bar-login__item" href="<c:url value="/fridgelist.do"/>">냉장고</a>
 <a class="layout-navigation-bar-login__item" href="<c:url value="/mail.do"/>">글쓰기</a>
 <a class="layout-navigation-bar-login__item" href="<c:url value="/notice.do"/>">프로필</a>
 <a class="layout-navigation-bar-login__item" href="<c:url value="/frigochart.do"/>">통계</a>
 <a class="layout-navigation-bar-login__item" href="<c:url value="/qna.do"/>">마이페이지</a>
-<a class="layout-navigation-bar-login__item" href="<c:url value="/qna.do"/>">회원가입 </a>
+<a class="layout-navigation-bar-login__item" href="<c:url value="/member/SignUp.do"/>">회원가입 </a>
 
 
 
@@ -144,6 +146,7 @@
 <div data-sticky-enabled="false" data-sticky-disabled="true" data-sticky-always="true" data-sticky-ignore="true" data-direction="top" data-offset="0" class="sticky-container layout-navigation-secondary-wrap">
    
 <section class="container home-section home-rank"><header class="row home-section__header">
+
 
 <style data-emotion="css vagntg-Image">.css-vagntg-Image.css-vagntg-Image.css-vagntg-Image{width:100%;background-color:transparent;}</style><picture>
 
@@ -195,6 +198,9 @@
     });
   </script>
   <script type="text/javascript" async="async" src="//cdn-aitg.widerplanet.com/js/wp_astg_4.0.js"></script>
+
+
+
 
   </body>
 </html>
