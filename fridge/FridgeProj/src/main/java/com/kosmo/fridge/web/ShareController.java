@@ -76,25 +76,12 @@ public class ShareController {
 	//글 등록
 	@RequestMapping(value = "/shareWrite.do", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
 	@ResponseBody
-	public String writeOK(MultipartHttpServletRequest multipartRequest) throws JsonProcessingException {
-		/*List<MultipartFile> file = multipartRequest.getFiles("file");
-		System.out.println(file);
-		String title=multipartRequest.getParameter("title");
-		String content=multipartRequest.getParameter("content");
-		System.out.println("title : "+title);
-		System.out.println("content : "+content);
-		String[] checkboxes = multipartRequest.getParameterValues("checkboxes");
-		String[] counts = multipartRequest.getParameterValues("counts");
-		for(int i=0; i<checkboxes.length; i++) {
-			System.out.println(checkboxes[i]);
-			System.out.println(counts[i]);
-		}
-		//System.out.println("map : "+ map.toString());
-		//return "share/ShareList.tiles";
-		//map.put("Sucess", "sucess");
-		//System.out.println(mapper.writeValueAsString(map));
-		//return mapper.writeValueAsString(map);*/
-		
+	public String writeOK(MultipartHttpServletRequest multipartRequest) throws JsonProcessingException {		
 		return shareService.insert(multipartRequest) ? "success" : "error";
+	}
+	
+	@RequestMapping(value = "/shareEdit.do", method = RequestMethod.GET)
+	public String edit(@RequestParam Map map ,HttpServletRequest req) {
+		return null;
 	}
 }

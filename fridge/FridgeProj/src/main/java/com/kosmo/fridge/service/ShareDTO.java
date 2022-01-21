@@ -27,5 +27,5 @@ public class ShareDTO {
 	private String likeCount;
 	private String addr;
 	
-	private String thumbnail;
+	List<ImageDTO> listImage;
 }

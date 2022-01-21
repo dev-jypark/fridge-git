@@ -85,13 +85,14 @@ public class ShareServiceImpl implements ShareService{
 	@Override
 	public boolean insert(MultipartHttpServletRequest multipartRequest) {
 		List<MultipartFile> listImgFile = multipartRequest.getFiles("file");
-		//저장에 필요한 객체들
+		//폼에서 받아온 정보
 		String[] checkboxes = multipartRequest.getParameterValues("checkboxes");
 		String[] counts = multipartRequest.getParameterValues("counts");
 		String[] endDates = multipartRequest.getParameterValues("endDates");		
 		String title=multipartRequest.getParameter("title");
 		String content=multipartRequest.getParameter("content");
 		String id=multipartRequest.getParameter("id");
+		System.out.println("c1 : "+counts[0]);
 		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		/*
 		for(int i=0; i<checkboxes.length; i++) {
@@ -149,13 +150,14 @@ public class ShareServiceImpl implements ShareService{
 		//trade 저장		
 		for(int index = 0; index < counts.length; index++) {
 			map.put("count", counts[index]);
-			map.put("no", checkboxes[index]);
+			map.put("i_no", checkboxes[index]);
+			/*
 			try {
 				map.put("date", format.parse(endDates[index]));
 			} catch (ParseException e) {
 				e.printStackTrace();
-			}
-			System.out.println(counts[index]+","+checkboxes[index]+","+endDates[index]);
+			}*/
+			System.out.println("c : "+counts[index]+", cbox : "+checkboxes[index]); //+", enddate : "+endDates[index]);
 			dao.insertShareProduct(map);
 		}
 		

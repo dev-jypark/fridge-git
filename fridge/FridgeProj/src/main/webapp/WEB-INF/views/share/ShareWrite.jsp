@@ -75,17 +75,6 @@
 	}
 	function nextStep1() {
 		var count = 0;
-		/* var notChecked=[];
-		for(var i=0;i<obj.check.length;i++){
-			if(obj.check[i].checked){
-				count++;
-			}
-			else notChecked.push[i];
-		}
-		if(count < 1){
-			alert('나눔 재료를 한 개 이상 선택하세요');
-			return false;
-		} */
 		
 		$("input[name=check]").each(function(idx){
 			if($(this).is(":checked")){
@@ -127,25 +116,21 @@
 		var formData = new FormData($("form")[0]);
 		var checkboxes = [];
 		var counts = [];
-		var endDates = [];
 		
 		$("input:checkbox[name='check']:checked").each(function(){
 			checkboxes.push($(this).val());
+			console.log($(this).val());
 		});
 		$("input[type='number']:not([readonly])").each(function(){
 			counts.push($(this).val());
 		});
-		$("input[name='endDate']:not([readonly])").each(function(){
-			endDates.push($(this).val());
-		});
+
 		$.each($("input[type='file']")[0].files, function(i, file){
-			console.log(file);
 			formData.append('file', file);
 		});
 		
 		formData.append("checkboxes", checkboxes);
 		formData.append("counts", counts);
-		formData.append("endDates", endDates);
 		
 		$.ajax({
 			url : url,
