@@ -34,12 +34,12 @@ public class MemberDAO {
 	   -위 프로그래밍 순서의 (가)  및 (나)에서는 commit()호출
 		그리고 (다)의 close()호출 불필요 
 	 */
-	//로그인
 	@Resource(name = "sqlSessionFactory")
 	private SqlSessionFactory sqlMapper;
 	@Resource(name="template")
 	private SqlSessionTemplate template;
 
+	//로그인
 	public boolean isLogin(Map map){
 		SqlSession session= sqlMapper.openSession();
 		int count=session.selectOne("memberLogin",map);
