@@ -14,8 +14,8 @@
     <meta name="viewport" content="width=device-width">
     <title>찍먹냉장고</title>
     <!-- css 파일 연결한 위치 -->
-    <link href="../resources/css/memberlogin/login_insta.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="../resources/js/memberlogin/login.js"></script>
+    <link href="resources/css/memberlogin/login_insta.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="resources/js/memberlogin/login.js"></script>
   </head>
   <style>
   	.alert_login {
@@ -50,7 +50,7 @@
 				</div>
 			</div>
 		</c:if>
-		<form name="form1" method="post" action="<c:url value='/member/loginprocess.do'/>" onsubmit="return Login();">
+		<form name="form1" method="post" action="<c:url value='loginprocess.do'/>" onsubmit="return Login();">
 	    <c:if test="${not isLogin}">
 	      <input type="text" class="input_login" name="id" id="id" placeholder="아이디">
 	      <input type="password" class="input_login" name="pwd" id="pwd" placeholder="비밀번호">
@@ -59,12 +59,12 @@
 	      
 	      <div id="naverIdLogin">
 	      	<a id="naverIdLogin_loginButton" href=#>
-	      	<img src="../resources/images/memberlogin/btnG_완성형.png" height="30">
+	      	<img src="resources/images/memberlogin/btnG_완성형.png" height="30">
 	      	</a>   
 	      	</div>
 	      	<div id="kakaoIdLogin">
 	      	<a id="kakaoIdLogin_loginButton" href=#>
-	      	<img src="../resources/images/memberlogin/kakao_login_medium_narrow.png" height="30">
+	      	<img src="resources/images/memberlogin/kakao_login_medium_narrow.png" height="30">
 	      	</a>  
 	      	</div>	
 	      	
@@ -72,14 +72,15 @@
 	      	<span class="button_forgot" onClick="location.href='<c:url value="/member/SignUp.do"/>'">
 	      	회원이 아니신가요?</span>
 	      	
-	      <span class="button_forgot">계정을 잊어버리셨나요?</span>
+	      <span class="button_forgot" onClick="location.href='<c:url value="/mypage/memberinfo/PwdUpdate.do"/>'">
+	      계정을 잊어버리셨나요?</span>
 	      </c:if>
 	    </form>
 	    
 	    
     </div>
     <!-- JS 파일 걸어줄 위치 -->
-    <script src="../resources/js/memberlogin/login.js"></script>
+    <script src="resources/js/memberlogin/login.js"></script>
   </body>
 </html>
 

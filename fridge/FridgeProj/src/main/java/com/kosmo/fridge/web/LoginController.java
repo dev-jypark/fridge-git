@@ -4,11 +4,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -16,7 +13,6 @@ import com.kosmo.fridge.service.impl.MemberServiceImpl;
 
 @SessionAttributes({"id"})
 @Controller
-@RequestMapping("/member")
 public class LoginController {
 	
 	@Resource(name="memberService")
@@ -25,7 +21,7 @@ public class LoginController {
 	//로그인 폼으로 이동
 	@RequestMapping("/login")
 	public String login() {
-		return "member/Login.tiles";
+		return "member/Login";
 	}
 	//로그인 처리
 	@RequestMapping("/loginprocess")
@@ -38,13 +34,13 @@ public class LoginController {
 			model.addAttribute("NotMember","아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
 		//뷰정보 반환
-		return "member/Login.tiles";
+		return "member/Login";
 	}
 	//로그아웃 처리
 	@RequestMapping("/logout")
 	public String logout(SessionStatus status){
 		status.setComplete();
 		//뷰정보 반환
-		return "member/Login.tiles";
+		return "member/Login";
 	}
 }
