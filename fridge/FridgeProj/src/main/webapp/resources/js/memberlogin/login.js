@@ -13,7 +13,7 @@ function Login() {
 	//패스워드 필수 입력 조건문
 	 if (pwd.value == "")
 	 {
-      alert("패스워드를 입력 해야 합니다!");
+      alert("비밀번호를 입력해야 합니다!");
       pwd.focus();//포커스를 Password박스로 이동.
       return false;
 	 }	

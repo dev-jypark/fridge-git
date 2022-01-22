@@ -11,7 +11,10 @@ body {
 p, span {
     font-size: 14px;
 }
-.container {
+.inputbox{
+	margin-top: 50px;
+}
+.login_container {
     width: 350px;
     height: 380px;
     margin: 100px auto;
@@ -74,14 +77,15 @@ img.logo {
 }
 #btn_login {
     width: 268px;
-    height: 30px;
-    margin: 13px auto;
+    height: 35px;
+    margin: 13px 39px auto;
     background-color: #0095f6;
     border: none;
     border-radius: 3px;
     color: white;
     font-size: 14px;
     font-weight: 600;
+    
 }
 #btn_login:disabled {
     background-color: #B9DFFC;
@@ -100,10 +104,23 @@ a {
 }
 .button_forgot {
     color : #00366B;
-    align-self: center;
     font-size: 12px;
     margin-top: 15px;
+    display: flex;
+    justify-content: center;
 }
 .button_forgot:hover {
     cursor: pointer;
+}
+#socialLogin{
+	display:inline-block;
+	margin: 10px 39px 50px;
+}
+#google{
+	width: 134px;
+	height: 35px;
+}
+#kakao{
+	width: 132px;
+	height: 32px;
 }

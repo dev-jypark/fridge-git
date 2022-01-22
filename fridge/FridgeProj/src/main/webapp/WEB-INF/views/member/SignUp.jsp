@@ -28,7 +28,7 @@
 				</li>
 				<li class="css-1balhvh-SNSItem e111gxds0">
 					<a href="#">
-					<img id="naver" alt="네이버 로그인" src="../resources/images/membersignup/naver.png" style="width:183px; heigth: 45px;">
+					<img id="google" alt="구글 로그인" src="../resources/images/membersignup/google.png"  style="width:190px; heigth: 50px;">
 					</a>
 				</li>
 			</ul>			
@@ -72,7 +72,7 @@
 					<div class="invalid-feedback"> 올바른 이메일 양식이 아닙니다. 다시 확인해주세요. </div>
 					
 					<input type="text" pattern="^[0-9]{5}$" class="form-control" id="certificationCode" placeholder="인증코드를 입력해주세요." style="margin-top: 10px;  display:none" required/>
-					<div class="invalid-feedback"> 올바른 인증코드 양식이 아닙니다. 다시 확인해주세요. </div>
+					<!--  <div class="invalid-feedback"> 올바른 인증코드 양식이 아닙니다. 다시 확인해주세요. </div>-->
 					
 					<!-- <input type="hidden" name="checkedEmail" value=""> -->
 					
