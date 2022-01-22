@@ -12,7 +12,7 @@
 	<link href="<c:url value="/resources/css/sharewrite/sharewrite.css?v=220109"/>" rel="stylesheet" type="text/css">
 	<script src="resources/js/sharewrite/template.js"></script>
 	<!-- MDBootstrap Datatables  -->
-	<link href="<c:url valeu="/resources/css/sharewrite/MDB-Free_4.20.0/css/addons/datatables.min.css"/>" rel="stylesheet">
+	<link href="<c:url value="/resources/css/sharewrite/MDB-Free_4.20.0/css/addons/datatables.min.css"/>" rel="stylesheet">
 	<!-- MDBootstrap Datatables  -->
 	<script type="text/javascript" src="<c:url value="resources/css/sharewrite/MDB-Free_4.20.0/js/addons/datatables.min.js"/>"></script>
 	<title>찍먹냉장고 | 재료나눔게시판 글쓰기</title>

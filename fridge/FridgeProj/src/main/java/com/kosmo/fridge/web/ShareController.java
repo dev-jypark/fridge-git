@@ -65,6 +65,7 @@ public class ShareController {
 	//글 작성 폼으로 이동
 	@RequestMapping(value = "/shareWrite.do", method = RequestMethod.GET)
 	public String write(Model model) {
+		//로그인 회원가입 연결하고 나서 사용자 id와 일치하는 재료만 받아오기
 		List<IngrediantDTO> listIngrediant = shareService.selectIngrediantList();
 		model.addAttribute("listIngrediant", listIngrediant);
 		return "share/ShareWrite";
@@ -80,12 +81,18 @@ public class ShareController {
 		return shareService.insert(multipartRequest) ? "success" : "error";
 	}
 	
+	//글 수정
 	@RequestMapping(value = "/shareEdit.do", method = RequestMethod.GET)
 	public String edit(@RequestParam Map map ,HttpServletRequest req) {
+		//수정 페이지로 이동
 		if(req.getMethod().equals("GET")) {
 			ShareDTO record = shareService.selectOne(map);
 			req.setAttribute("record", record);
 			return "share/ShareEdit";
+		}
+		//글 수정 작업 진행
+		else {
+			
 		}
 		return null;
 	}

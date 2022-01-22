@@ -20,4 +20,6 @@ public class IngrediantDTO {
 	private String i_cnt;
 	private Date i_enddate;
 	private Date i_postdate;
+	private String t_cnt;
+	private String t_no;
 }

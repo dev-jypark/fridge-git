@@ -20,4 +20,6 @@ public class TradeDTO {
 	private Date tDeadLine;
 	private String tCnt;
 	private String tResult;
+	private String i_name;
+	private String i_cnt;
 }

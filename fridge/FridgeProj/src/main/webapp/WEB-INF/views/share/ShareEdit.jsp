@@ -185,7 +185,7 @@
 				  </div>
 				</div>
 				
-				<form action="<c:url value='/shareWrite.do'/>" method="post" enctype="multipart/form-data">
+				<form action="<c:url value='/shareEdit.do'/>" method="post" enctype="multipart/form-data">
 				<div class="bs-stepper-content">
 				  <!-- step1 content -->
 				  <div id="step-1" role="tabpanel" class="content bs-stepper-pane" aria-labelledby="step-1-trigger">
@@ -206,7 +206,7 @@
 									</thead>
 									<tbody>
 									<!-- 시작 -->
-									<c:forEach var="item" items="${listIngrediant }" varStatus="loop">
+									<c:forEach var="item" items="${record.listShareProduct }" varStatus="loop">
 									  <tr>
 										<td>
 										  <div class="custom-control custom-checkbox">
@@ -217,7 +217,7 @@
 										</div>
 										</td>
 										<td class="name">${item.i_name}</td>
-										<td>${item.i_enddate}</td>
+										<td>${item.t_deadline}</td>
 										<td>${item.i_cnt}</td>
 										<td>
 											<input type="number" min="1" max="${item.i_cnt}" step="1" class="form-control" id="selectidx${item.i_no}" name="count" readonly><!--max에 불러온 보유갯수 넣기-->

@@ -13,9 +13,14 @@
 		<result property="tDeadLine" column="t_deadline"/>
 		<result property="tCnt" column="t_cnt"/>
 		<result property="tResult" column="t_result"/>
+		<result property="i_name" column="i_name"/>
+		<result property="i_cnt" column="i_cnt"/>
 	</resultMap>
 	
-	<select id="selectProductList" parameterType="Map" resultMap="tradeDTOResult">
-		SELECT * FROM 
+	<select id="tradeSelectList" parameterType="Map" resultMap="tradeDTOResult">
+		SELECT t.*, i_name, i_cnt
+		FROM ingrediant i JOIN trade t ON i.id=t.id
+		WHERE tb_no = #{no}
+		ORDER BY t_deadline DESC
 	</select>
 </mapper>

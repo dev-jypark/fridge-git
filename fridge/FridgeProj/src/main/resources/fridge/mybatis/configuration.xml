@@ -11,11 +11,13 @@
 		<typeAlias type="com.kosmo.fridge.service.TradeDTO" alias="tradeDTO"/>
 		<typeAlias type="com.kosmo.fridge.service.IngrediantDTO" alias="ingrediantDTO"/>
 		<typeAlias type="com.kosmo.fridge.service.ImageDTO" alias="imageDTO"/>		
-	</typeAliases>	
+	</typeAliases>
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
 	<mappers>					
 		<mapper resource="fridge/mybatis/mapper/share.xml" />	
-		<mapper resource="fridge/mybatis/mapper/trade.xml" />	
+		<mapper resource="fridge/mybatis/mapper/trade.xml" />
+		<mapper resource="fridge/mybatis/mapper/ingrediant.xml" />	
+		<mapper resource="fridge/mybatis/mapper/image.xml" />	
 	</mappers>
 </configuration>

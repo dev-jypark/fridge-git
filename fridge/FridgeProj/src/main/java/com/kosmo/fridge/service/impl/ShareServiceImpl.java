@@ -184,12 +184,13 @@ public class ShareServiceImpl implements ShareService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
 	public ShareDTO selectOne(Map map) {
 		return dao.selectOne(map);
 	}
 
+	//글 작성 페이지로 이동할 때 사용자 재료 목록 조회
 	public List<IngrediantDTO> selectIngrediantList() {
 		List<IngrediantDTO> listIngrediant = dao.selectIngrediantList();
 		return listIngrediant;
