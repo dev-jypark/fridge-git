@@ -19,18 +19,17 @@
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="resources/js/sharelist/select.min.js"></script>
 	
-	
 	<!-- 페이징 -->
 	<!-- <link rel="stylesheet" type="text/css" href="resources/css/sharelist/paging.css" /> -->
 	<!-- css -->
-	<link rel="stylesheet" type="text/css" href="resources/css/sharelist/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="resources/css/sharelist/materialdesignicons.min.css" />
-	<link rel="stylesheet" type="text/css" href="resources/css/sharelist/jquery.mCustomScrollbar.min.css" />
-	<link rel="stylesheet" type="text/css" href="resources/css/sharelist/prettyPhoto.css" />
-	<link rel="stylesheet" type="text/css" href="resources/css/sharelist/unslider.css" />
-	<link rel="stylesheet" type="text/css" href="resources/css/sharelist/template.css" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/sharelist/bootstrap.min.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/sharelist/materialdesignicons.min.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/sharelist/jquery.mCustomScrollbar.min.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/sharelist/prettyPhoto.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/sharelist/unslider.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/sharelist/template.css"/>" />
 	<!-- 정렬 드롭다운 -->
-	<link rel="stylesheet" type="text/css" href="resources/css/sharelist/justselect.css" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="resources/css/sharelist/justselect.css"/>" />
 </head>
 <body>
 	<div class="container">
@@ -48,7 +47,7 @@
 						<article>
 							<div class="articleThumb">
 								<!-- 이미지 -->
-								<a href="#"><img src="resources/images/share-list/our-blog/img-1.jpg" alt=""></a>
+								<a href="<c:url value="/"/>"><img src="<c:url value="/resources/images/share-list/our-blog/img-1.jpg"/>" alt=""></a>
 								<!-- 유통기한 5일 미만의 상품은 남은 날짜 표시 -->
 								<div class="date">
 									<span class="number">D-3</span>
@@ -80,7 +79,7 @@
 							<div class="articleThumb">
 								<!-- 이미지 -->
 								<!-- resources/images/share-list/our-blog/img-1.jpg -->
-								<a href="#"><img src="resources/images/share-list/our-blog/img-1.jpg" alt=""></a>
+								<a href="<c:url value="/shareEdit.do?no=${item.tbNo }"/>"><img src="<c:url value="/resources/images/share-list/our-blog/img-1.jpg"/>" alt=""></a>
 							</div>
 							<!-- 글 제목 -->
 							<!-- 글 제목 한 줄 넘어가면 ... 으로 표시하기 -->
@@ -111,16 +110,6 @@
 			</div>
     	</div>
     </section>
-    <!-- Start Pagination -->
-	<!-- <ul class="pagination">
-		<li><a href="#0">&lt;</a></li>
-		<li><a class="active" href="#0">1</a></li>
-		<li><a href="#0">2</a></li>
-		<li><a href="#0">3</a></li>
-		<li><a href="#0">4</a></li>
-		<li><a href="#0">&gt;</a></li>
-	</ul> -->
-	<!-- End Pagination -->
 </body>
 <script>
 	//셀렉트 박스 크기 설정

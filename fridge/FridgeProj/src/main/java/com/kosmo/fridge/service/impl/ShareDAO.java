@@ -47,5 +47,9 @@ public class ShareDAO {
 	public int insertShareProduct(Map map) {
 		return template.insert("shareProductInsert", map);
 	}
+
+	public ShareDTO selectOne(Map map) {
+		return template.selectOne("shareSelectOne",map);
+	}
 	
 }

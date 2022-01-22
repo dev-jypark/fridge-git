@@ -27,7 +27,7 @@
 		javaType : OneMemoDTO의 자식레코드를 담을 컬렉션 타입
 		ofType : 자식의 DTO타입
 		 -->
-		<collection property="photo" column="no" select="onememo.mybatis.mapper.linecomment.commentListsUsingCollection" javaType="List" ofType="imageDTO"/>
+		<collection property="listImage" column="no" select="onememo.mybatis.mapper.linecomment.commentListsUsingCollection" javaType="List" ofType="imageDTO"/>
 	</resultMap>
 	
 	<resultMap type="ingrediantDTO" id="ingrediantDTOResult">
@@ -86,6 +86,14 @@
 	
 	<insert id="shareProductInsert" parameterType="Map">
 		INSERT INTO trade VALUES
-		(SEQ_trade_t_no.NEXTVAL, #{i_no}, #{tb_no}, (SELECT i_enddate FROM ingrediant WHERE 1=1 AND i_no=#{no}), #{count}, DEFAULT)
+		(SEQ_trade_t_no.NEXTVAL, #{i_no}, #{tb_no}, (SELECT i_enddate FROM ingrediant WHERE 1=1 AND i_no=#{i_no}), #{count}, DEFAULT)
 	</insert>
+	
+	<!-- shareSelectOne -->
+	<select id="shareSelectOne" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM t_bbs t JOIN member m ON m.id=t.id
+		<if test="searchWord !=null">
+			WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+		</if>
+	</select>
 </mapper>

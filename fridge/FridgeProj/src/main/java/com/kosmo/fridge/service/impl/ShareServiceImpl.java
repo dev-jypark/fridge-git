@@ -3,6 +3,7 @@ package com.kosmo.fridge.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -84,24 +85,25 @@ public class ShareServiceImpl implements ShareService{
 
 	@Override
 	public boolean insert(MultipartHttpServletRequest multipartRequest) {
-		List<MultipartFile> listImgFile = multipartRequest.getFiles("file");
 		//폼에서 받아온 정보
+		List<MultipartFile> listImgFile = multipartRequest.getFiles("file");
 		String[] checkboxes = multipartRequest.getParameterValues("checkboxes");
-		String[] counts = multipartRequest.getParameterValues("counts");
-		String[] endDates = multipartRequest.getParameterValues("endDates");		
+		String[] counts = multipartRequest.getParameterValues("counts");	
 		String title=multipartRequest.getParameter("title");
 		String content=multipartRequest.getParameter("content");
 		String id=multipartRequest.getParameter("id");
-		System.out.println("c1 : "+counts[0]);
-		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		/*
-		for(int i=0; i<checkboxes.length; i++) {
-			System.out.println(checkboxes[i]);
-			System.out.println(counts[i]);
-			System.out.println(endDates[i]);
-		}*/
 		
-		//게시글 업로드 시작
+		checkboxes = checkboxes[0].split(",");
+		counts = counts[0].split(",");
+		/*배열에 담긴 값 확인
+		System.out.println("checkboxes.length : "+ checkboxes.length);
+		System.out.println("counts.length : "+ counts.length);
+		for(int i=0; i<checkboxes.length; i++) {
+			System.out.println("checkboxes : " + checkboxes[i]);
+			System.out.println("counts : " + counts[i]);
+		}
+		*/
+		//글 내용 업로드 시작
 		Map map = new HashMap<>();
 		map.put("title", title);
 		map.put("content", content);
@@ -111,17 +113,24 @@ public class ShareServiceImpl implements ShareService{
 		try {	
 			affected=dao.insertSharePost(map);	
 		}
-		catch(Exception e) {e.printStackTrace();}
+		catch(Exception e) {
+			System.out.println("postinserterror");
+			e.printStackTrace();
+			return false;
+		}
+		//글 내용 업로드 마침
 		
-		System.out.println(map.get("tb_no"));
+		System.out.println("글번호 : "+map.get("tb_no"));
 		
+		//사진 업로드 시작
 		map.put("fileSrc", listImgFile);
 		
 		try {
 			 affected = dao.insertSharePostImgs(map); // DAO를 통해 이미지 소스 일괄 처리
 		} catch (Exception e) {
 			System.out.println("imginserterror");
-			System.out.println(e);
+			e.printStackTrace();
+			return false;
 		}
 
 		System.out.println(affected);
@@ -129,7 +138,7 @@ public class ShareServiceImpl implements ShareService{
 			return false;
 		}
 		
-		//파일 저장
+		//사진 저장
 		String path = multipartRequest.getServletContext().getRealPath("/upload/share");
 		for(MultipartFile imgFile : listImgFile) {	// 각 파일 경로에 대해 폴더를 설정하고, 받아온 이미지 모두 입력
 			String imgsrc = path+File.separator+map.get("tb_no")+File.separator+ imgFile.getOriginalFilename();
@@ -139,27 +148,27 @@ public class ShareServiceImpl implements ShareService{
 			try {
 				imgFile.transferTo(dest);				
 			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
 				System.out.println("서버에 share사진 업로드 실패");
+				e.printStackTrace();
 				return false;
 			}
 		}
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		//사진 업로드 마침
 		
-		//trade 저장		
+		//거래물(trade) 업로드 시작	
 		for(int index = 0; index < counts.length; index++) {
 			map.put("count", counts[index]);
 			map.put("i_no", checkboxes[index]);
-			/*
+			System.out.println("cnt : "+counts[index]+", cbox : "+checkboxes[index]);
 			try {
-				map.put("date", format.parse(endDates[index]));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}*/
-			System.out.println("c : "+counts[index]+", cbox : "+checkboxes[index]); //+", enddate : "+endDates[index]);
 			dao.insertShareProduct(map);
+			} catch(Exception e) {
+				System.out.println("tradeinserterror");
+				e.printStackTrace();
+				return false;
+			}
 		}
+		//거래물(trade) 업로드 마침
 		
 		return true;
 	}
@@ -178,8 +187,7 @@ public class ShareServiceImpl implements ShareService{
 
 	@Override
 	public ShareDTO selectOne(Map map) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectOne(map);
 	}
 
 	public List<IngrediantDTO> selectIngrediantList() {

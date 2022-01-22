@@ -82,6 +82,11 @@ public class ShareController {
 	
 	@RequestMapping(value = "/shareEdit.do", method = RequestMethod.GET)
 	public String edit(@RequestParam Map map ,HttpServletRequest req) {
+		if(req.getMethod().equals("GET")) {
+			ShareDTO record = shareService.selectOne(map);
+			req.setAttribute("record", record);
+			return "share/ShareEdit";
+		}
 		return null;
 	}
 }
