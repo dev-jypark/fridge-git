@@ -39,7 +39,7 @@ public class mailSenderController {
 						+"찍먹냉장고"+"</span>"
 						
 						+"<span style='font-weight:600;font-size:1.3em;font-family:Nanum Gothic,Georgia;color:#708090;'>"
-						+" 에 오신 것을 진심으로 환영합니다."+"</span>"+"<br/>"
+						+" 에 오신 것을 진심으로 환영합니다!"+"</span>"+"<br/>"
 						
 						+"<img src=\"https://image.freepik.com/free-vector/isometric-obesity-horizontal-composition-with-view-kitchen-interior-with-fat-person-opening-door-fridge_1284-58600.jpg\">"
 						

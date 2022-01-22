@@ -13,6 +13,7 @@ import com.kosmo.fridge.service.impl.MemberServiceImpl;
 
 @SessionAttributes({"id"})
 @Controller
+@RequestMapping("/member")
 public class LoginController {
 	
 	@Resource(name="memberService")
@@ -21,7 +22,7 @@ public class LoginController {
 	//로그인 폼으로 이동
 	@RequestMapping("/login")
 	public String login() {
-		return "member/Login";
+		return "member/Login.tiles";
 	}
 	//로그인 처리
 	@RequestMapping("/loginprocess")
@@ -34,13 +35,13 @@ public class LoginController {
 			model.addAttribute("NotMember","아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
 		//뷰정보 반환
-		return "member/Login";
+		return "member/Login.tiles";
 	}
 	//로그아웃 처리
 	@RequestMapping("/logout")
 	public String logout(SessionStatus status){
 		status.setComplete();
 		//뷰정보 반환
-		return "member/Login";
+		return "member/Login.tiles";
 	}
 }
