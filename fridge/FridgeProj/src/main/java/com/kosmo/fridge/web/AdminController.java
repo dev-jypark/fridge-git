@@ -3,6 +3,7 @@ package com.kosmo.fridge.web;
 import java.util.Map;
 
 
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,7 @@ import com.kosmo.fridge.service.impl.NoticeServiceImpl;
 
 @SessionAttributes({"adminid"})
 @Controller
-@RequestMapping("/notice/")
+@RequestMapping("/admin/")
 public class AdminController {
 	//서비스 주입
 	@Resource(name="noticeService")
@@ -29,7 +30,7 @@ public class AdminController {
 	}
 	
 	//로그인 처리]
-	@RequestMapping("LoginProcess")
+	@RequestMapping("LoginProcess.do")
 	public String process(@RequestParam Map map,Model model,SessionStatus status){
 		//서비스 호출]
 		boolean flag= noticeService.isAdmin(map);
@@ -39,11 +40,11 @@ public class AdminController {
 			model.addAttribute("NotAdmin","관리자가 아닙니다.");
 		}
 		//뷰정보 번환]
-		return "forward:/admin/userchart";
+		return "/admin/notice/List";
 	}
 	
 	//로그아웃 처리]
-	@RequestMapping("Logout")
+	@RequestMapping("Logout.do")
 	public String logout(SessionStatus status){
 		status.setComplete();
 		//뷰정보 번환]

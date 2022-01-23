@@ -7,33 +7,25 @@
 <div class="container">
 	
 	<div>
-		<form id="myform" class="form-horizontal" method="post"	enctype="multipart/form-data"
-			action="<c:url value="/dataroom/Edit.kosmo"/>">
-			<input type="hidden" name="no" value="${dto.no}"/>
-			<input type="hidden" name="originalFilename" value="${dto.attachfile}"/>
+		<form id="myform" class="form-horizontal" method="post"	
+			action="<c:url value="/question/Edit.do"/>">
+			<input type="hidden" name="no" value="${dto.q_no}"/>
+			
 			<div class="form-group">
 				<label class="col-sm-2 control-label">작성자</label>
 				<div class="col-sm-4">
 					<input type="text" class="form-control" name="name"
-						placeholder="이름을 입력하세요?" value="${dto.name}">
+						placeholder="이름을 입력하세요?" value="${dto.id}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">제 목</label>
 				<div class="col-sm-4">
 					<input type="text" class="form-control" name="title"
-						placeholder="제목을 입력하세요?" value="${dto.title}">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">파일 업로드</label>
-				<div class="col-sm-8">
-					<input type="file" name="attachfile">
-					<p class="help-block">파일을 첨부하세요(기존 첨부파일:${dto.attachfile})</p>
+						placeholder="제목을 입력하세요?" value="${dto.q_title}">
 				</div>
 			</div>
 			
-
 			<div class="form-group">
 				<label class="col-sm-2 control-label">내 용</label>
 				<!-- 중첩 컬럼 사용 -->
@@ -41,7 +33,7 @@
 					<div class="row">
 						<div class="col-sm-8">
 							<textarea rows="5" class="form-control" name="content"
-								placeholder="내용을 입력하세요">${dto.content }</textarea>
+								placeholder="내용을 입력하세요">${dto.q_content }</textarea>
 						</div>
 					</div>
 				</div>
@@ -56,6 +48,7 @@
 </div>
 <!-- container -->
 <!-- 실제 내용 끝-->
+
 <!-- 경고창 모달 시작 -->
 <div class="modal  fade" id="small-modal" data-backdrop="static">
 	<div class="modal-dialog modal-sm">

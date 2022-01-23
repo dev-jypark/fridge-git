@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width">
     <title>찍먹냉장고</title>
     <!-- css 파일 연결한 위치 -->
-    <link href="../resources/css/memberlogin/login_insta.css" rel="stylesheet" type="text/css" />
+    <link href="../resources/css/adminlogin/login_insta.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../resources/js/memberlogin/login.js"></script>
   </head>
   <style>
@@ -50,7 +50,7 @@
 				</div>
 			</div>
 		</c:if>
-		<form name="form1" method="post" action="<c:url value='/admin/loginprocess.do'/>" onsubmit="return Login();">
+		<form name="form1" method="post" action="<c:url value='/admin/LoginProcess.do'/>" onsubmit="return Login();">
 	    <c:if test="${not isAdmin}">
 	      <input type="text" class="input_login" name="adminid" id="adminid" placeholder="아이디">
 	      <input type="password" class="input_login" name="adminpw" id="adminpw" placeholder="비밀번호">

@@ -342,7 +342,7 @@
                 <div class="modal-body">로그아웃을 원하시면 아래 Logout 버튼을 눌러 주세요.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.do">Logout</a>
+                    <a class="btn btn-primary" href="<c:url value="/admin/adminLogin.do"/>">Logout</a>
                 </div>
             </div>
         </div>

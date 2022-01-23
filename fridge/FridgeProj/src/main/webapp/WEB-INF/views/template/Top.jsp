@@ -63,22 +63,6 @@
     
   </script>
 
-  <script type="application/ld+json">
-  {
-   "@context": "http://schema.org",
-   "@type": "Organization",
-   "name": "오늘의집",
-   "url": "https://ohou.se",
-   "sameAs": [
-     "https://www.instagram.com/todayhouse/?hl=ko",
-     "https://www.facebook.com/interiortoday",
-     "https://m.post.naver.com/my.nhn?memberNo=202156",
-     "https://itunes.apple.com/kr/app/id1008236892",
-     "https://play.google.com/store/apps/details?id=net.bucketplace&hl=ko",
-     "https://www.youtube.com/channel/UCBKtitA1RwY7F32rCniV1dA/featured"
-   ]
-  }
-  </script>
 
 
     <!--[if lte IE 9]>
@@ -148,52 +132,16 @@
 <style data-emotion="css vagntg-Image">.css-vagntg-Image.css-vagntg-Image.css-vagntg-Image{width:100%;background-color:transparent;}</style><picture>
 
   <script type="text/javascript" src="https://wcs.naver.net/wcslog.js"></script>
-  <script>
-  
-    if (window.wcs != null) {
-      if (!window.wcs_add) window.wcs_add = {};
-      window.wcs_add["wa"] = "s_2e85116be219";
-      if (!_nasa) var _nasa = {};
-      wcs.inflow();
-      wcs_do(_nasa);
-    }
-  </script>
 
   
   <script type="text/javascript" charset="UTF-8" src="//t1.daumcdn.net/adfit/static/kp.js"></script>
-  <script>
-    if (window.kakaoPixel != null) {
-      kakaoPixel('7919701595446099671').pageView();
-    }
-  </script>
-
   
-  <script>
-    function handleEnlipleLoad () {
-      var rf = new EN();
-      rf.setData('userid', 'bucketplace');
-      rf.setSSL(true);
-      rf.sendRf();
-      if (typeof handleEnlipleLoadShop === 'function') {
-        handleEnlipleLoadShop();
-      }
-    }
-  </script>
+ 
   <script src="https://cdn.megadata.co.kr/js/en_script/3.5/enliple_min3.5.js" async="async" onload="handleEnlipleLoad()"></script>
 
   
   <div id="wp_tg_cts" style="display: none;"></div>
-  <script>
-    window.wptg_tagscript_vars = window.wptg_tagscript_vars || [];
-    window.wptg_tagscript_vars.push(function () {
-      return {
-        wp_hcuid: '',
-        ti: '47350',
-        ty: 'Home',
-        device: navigator.userAgent.match(/ios|iphone|ipad|android/i) ? 'mobile' : 'web',
-      };
-    });
-  </script>
+ 
   <script type="text/javascript" async="async" src="//cdn-aitg.widerplanet.com/js/wp_astg_4.0.js"></script>
 
   </body>

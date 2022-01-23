@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- 상단메뉴 시작 -->	
-<jsp:include page="/WEB-INF/views/template/Side.jsp"/>
-<!-- 상단메뉴 끝 -->
-
+<!-- 실제 내용 시작 -->
 
 <!-- side -->
 <head>
@@ -18,18 +16,19 @@
     <title>사용자 통계 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="<c:url value="/resources/vendor/frigochart/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
+    <link href="resources/vendor/frigochart/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<c:url value="/resources/css/frigochart/sb-admin-2.min.css"/>" rel="stylesheet">
+    <link href="resources/css/frigochart/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 <!-- side 끝 -->
 
 <!-- 실제 내용 시작 -->
+
 <div class="container">
 	
 	<div class="page-header">
@@ -98,81 +97,83 @@
 
                 </nav>
                 <!-- End of Topbar -->
-
                 
- <!-- Begin Page Content -->
-                <div class="container-fluid">
+                
+                
+<div class="container">
+	
+	<div>
+		<form id="myform" class="form-horizontal" method="post"	enctype="multipart/form-data"
+			action="<c:url value="admin/notice/Write.do"/>">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">작성자</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" name="name"
+						placeholder="이름을 입력하세요?">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">제 목</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" name="title"
+						placeholder="제목을 입력하세요?">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">파일 업로드</label>
+				<div class="col-sm-8">
+					<input type="file" name="attachfile">
+					<p class="help-block">파일을 첨부하세요</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">비밀번호</label>
+				<div class="col-sm-4">
+					<input type="password" class="form-control" name="password"
+						placeholder="비밀번호를 입력하세요">
+				</div>
+			</div>
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
-                   
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">찍먹냉장고</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>제목</th>
-                                            <th>조회수</th>
-                                            <th>등록일</th>
-                                         
-                                        </tr>
-                                    </thead>
-            
-                        <c:if test="${empty list }" var="isEmpty">
-                            <tr class="text-center">
-                                <td colspan="6">등록된 게시물이 없습니다</td>
-                            </tr>
-                        </c:if>
-                        <c:if test="${not isEmpty}">
-                            <c:forEach var="record" items="${list }" varStatus="loop">
-                                <tr>
-                                    <td class="text-center col-md-1">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
-                                    
-                                    <td class="text-left"><a href="<c:url value="/admin_notice/View.do?n_no=${list.n_no}&nowPage="/><c:out value="${list.nowPage }" default="1"/>">${list.n_title}</a></td>
-                                    <td class="text-center col-md-1">${list.n_hit}</td>                                 
-                                    <td class="text-center col-md-5">${list.n_postdate}</td>
-                                </tr>
-                            </c:forEach>
-                        </c:if>
-                    </table>
-                                             <!-- 작성하기 버튼 -->
-	<div class="text-right">
-		
-		<a href="<c:url value="/admin_notice/Write.do"/>" class="btn btn-primary">글쓰기</a>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">내 용</label>
+				<!-- 중첩 컬럼 사용 -->
+				<div class="col-sm-10">
+					<div class="row">
+						<div class="col-sm-8">
+							<textarea rows="5" class="form-control" name="content"
+								placeholder="내용을 입력하세요"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-4">
+					<button class="btn btn-primary">등록</button>
+				</div>
+			</div>
+		</form>
 	</div>
-             
-
-                                                   
-                                </table>
-                                
-                                <!-- 페이징 -->
-	<c:if test="${listPagingData.lists.size() !=0 }">
-		<div class="row">
-			<div class="col-md-12 text-center">${listPagingData.pagingString}</div>
+</div>
+<!-- container -->
+<!-- 실제 내용 끝-->
+<!-- 경고창 모달 시작 -->
+<div class="modal  fade" id="small-modal" data-backdrop="static">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+				<h5 class="modal-title">
+					<span class="glyphicon glyphicon-blackboard"></span> 확인 메시지
+				</h5>
+				<h5 id="warningMessage" style="color: red"></h5>
+			</div>
 		</div>
-	</c:if>
-                                
-                   
-                            </div>
-                        </div>
-             
-  
+	</div>
+</div>
 
-                </div>
-                <!-- /.container-fluid -->
-                
- 
-            </div>
-            <!-- End of Main Content -->
-            
-
-           <!-- Scroll to Top Button-->
+        <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
@@ -191,12 +192,79 @@
                 <div class="modal-body">로그아웃을 원하시면 아래 Logout 버튼을 눌러 주세요.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<c:url value="/admin/adminLogin.do"/>">Logout</a>
+                    <a class="btn btn-primary" href="login.do">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
-<!-- 실제 내용 끝-->
+<script>
+	/*    	
+	//파일 사이즈(바이트):파일객체(자스 DOM).files[0].size
+	//파일 명:파일객체(자스 DOM).files[0].name
+	//파일 컨텐츠 타입:파일객체(자스 DOM).files[0].type
+	*/
+	
+	$(function(){
+		var focusObject;
+		var jsDom = $('input[name=attachfile]').get(0);
+		//hidden.bs.modal는 모달창이 닫히면 발생하는 이벤트
+		$('#small-modal').on('hidden.bs.modal',function(){
+			focusObject.focus();
+		});
+		
+		$('#myform').on('submit',function(){
+			var form = $(this).get(0);//자바스크립트 form객체
+			var file=$(this).get(0).attachfile;//자바스크립트 input type="file"객체
+			
+			if(form.name.value==""){
+				$('#warningMessage').html('이름을 입력하세요');
+				$('#small-modal').modal('show');
+				focusObject = form.name;
+				return false;
+			}
+			if(form.title.value==""){
+				$('#warningMessage').html('제목을 입력하세요');
+				$('#small-modal').modal('show');
+				focusObject = form.title;
+				return false;
+			}
+			if(form.attachfile.value==""){
+				$('#warningMessage').html('파일을 첨부하세요');
+				$('#small-modal').modal('show');
+				focusObject = form.attachfile;
+				return false;
+			}
+			/*
+			else{//파일을 첨부한 경우:파일 업로드 최대 용량 체크
+				console.log('파일 크기:',file.files[0].size);
+				console.log('파일 이름:',file.files[0].name);
+				console.log('컨텐츠 타입:',file.files[0].type);
+				if(file.files[0].size > 500*1024){
+					$('#warningMessage').html('업로드 최대 용량(500KB)을 초과했어요');
+					$('#small-modal').modal('show');
+					focusObject = form.attachfile;
+					return false;
+				}
+			}*/
+			
+			if($('textarea').val()==""){
+				$('#warningMessage').html('내용을 입력하세요');
+				$('#small-modal').modal('show');
+				focusObject = $('textarea');
+				return false;
+			}
+			
+			
+		});///////////////
+		
+		
+	});
+
+
+
+
+</script>
+
 
 

@@ -18,17 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kosmo.fridge.service.ListPagingData;
-import com.kosmo.fridge.service.NoticeDTO;
-import com.kosmo.fridge.service.impl.NoticeServiceImpl;
+import com.kosmo.fridge.service.QuestionDTO;
+import com.kosmo.fridge.service.impl.QuestionServiceImpl;
 
-@SessionAttributes("adminid")
-@RequestMapping("/admin_notice/")
+
+@SessionAttributes("id")//스프링 씨큐리티를 사용할때 주석
+@RequestMapping("/question/")
 @Controller
-public class NoticeController {
-	
+public class QuestionController {
 	//서비스 주입
-	@Resource(name="noticeService")
-	private NoticeServiceImpl noticeService;
+	@Resource(name="questionService")
+	private QuestionServiceImpl questionService;
 	//목록 처리
 	@RequestMapping("List.do")
 	public String list(	   
@@ -39,88 +39,97 @@ public class NoticeController {
 			           
 			) {
 		//서비스 호출]
-		ListPagingData<NoticeDTO> listPagingData= noticeService.selectList(map, req, nowPage);		
+		ListPagingData<QuestionDTO> listPagingData= questionService.selectList(map, req, nowPage);		
 		//데이타 저장]
 		model.addAttribute("listPagingData", listPagingData);
 		//뷰정보 반환]
-		return "/admin/notice/List";
+		return "question/List";
 	}
 	//입력폼으로 이동]
 	@RequestMapping(value="/Write.do",method = RequestMethod.GET)
-	public String write(@ModelAttribute("adminid") String adminid){				
+	public String write(@ModelAttribute("id") String id){				
 		//뷰정보 반환]
-		return "/admin/notice/Write";
+		return "question/Write";
 	}
 	//입력처리]
 	@RequestMapping(value="/Write.do",method = RequestMethod.POST)
 	public String writeOk(
-			@ModelAttribute("adminid") String adminid,
+			@ModelAttribute("id") String id,
 			@RequestParam Map map
 			) throws Exception {
 		//서비스 호출]	
-		map.put("adminid", adminid);
-		noticeService.insert(map);
+		map.put("id", id);
+		questionService.insert(map);
 		//뷰정보 반환]목록으로 이동
-		return "/admin/notice/List";
+		return "forward:/question/List";
 	}
-	//컨트롤러 메소드 작성 규칙]
-	/*
-	 * 접근지정자 : public
-	 * 반환타입 : 주로 String(뷰정보를 문자열로 반환)
-	 * 메소드명: 임의
-	 * 인자 : 원하는 타입을 사용할 수 있다(단, 사용할 수 있는 타입이 정해져 있다)
-	 *       어노테이션도 가능
-	 * 예외를 throws할 수 있다(선택) 
-	 */
+
 	//상세보기]
 	@RequestMapping("View.do")
 	public String view(
-			@ModelAttribute("adminid") String adminid,
-			@ModelAttribute("n_no") String n_no,
+			@ModelAttribute("id") String id,
+			@ModelAttribute("q_no") String q_no,
 			@RequestParam Map map,Model model) {
 		//서비스 호출]
-		
-		NoticeDTO record= noticeService.selectOne(map);
-		int hits = noticeService.increaseHit(n_no);
+		QuestionDTO record= questionService.selectOne(map);
+
 		//데이타 저장]
 		//줄바꿈 처리
-		record.setN_content(record.getN_content().replace("\r\n","<br/>"));
+		record.setQ_content(record.getQ_content().replace("\r\n","<br/>"));
 		model.addAttribute("record", record);
-		model.addAttribute("hits", hits);
+		
 		/////////////////////////////////////////////
 		//뷰정보 반환]
-		return "/admin/notice/View";
+		return "question/View";
 	}
 	//수정폼으로 이동 및 수정처리]
 	@RequestMapping("Edit.do")
 	public String edit(
-			@ModelAttribute("adminid") String adminid,
+			@ModelAttribute("id") String id,
 			@RequestParam Map map,
 			HttpServletRequest req) {
 		if(req.getMethod().equals("GET")) {
 			//서비스 호출]
-			NoticeDTO record= noticeService.selectOne(map);
+			QuestionDTO record= questionService.selectOne(map);
 			//데이타 저장]
 			req.setAttribute("record", record);
 			//수정 폼으로 이동]
-			return "/admin/notice/Edit";
+			return "question/Edit";
 		}
 		//수정처리후 상세보기로 이동
 		//서비스 호출
-		noticeService.update(map);
+		questionService.update(map);
 		//뷰로 포워드
-		return "forward:/admin/notice/View";
+		return "forward:/question/View";
 	}
 	//삭제처리]
 	@RequestMapping("Delete.do")
 	public String delete(
-			@ModelAttribute("adminid") String adminid,
+			@ModelAttribute("id") String id,
 			@RequestParam Map map) throws Exception {
 		//서비스 호출
-		noticeService.delete(map);
+		questionService.delete(map);
 		//뷰로 포워드
-		return "forward:/admin/notice/List";
+		return "forward:/question/List";
 		
+	}
+	//게시판 답글페이지 이동
+	@RequestMapping(value="/WriteReply.do",method = RequestMethod.GET)
+	public String writeReply(/*@ModelAttribute("id") String id*/){				
+		//뷰정보 반환]
+		return "question/WriteReply";
+	}
+	//입력처리]
+	@RequestMapping(value="/WriteReply.do",method = RequestMethod.POST)
+	public String writeReplyOk(
+			@ModelAttribute("id") String id,
+			@RequestParam Map map
+			) throws Exception {
+		//서비스 호출]	
+		map.put("id", id);
+		questionService.insertReply(map);
+		//뷰정보 반환]목록으로 이동
+		return "forward:/question/List";
 	}
 
 }//

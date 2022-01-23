@@ -7,8 +7,8 @@
 <div class="container">
 	
 	<div>
-		<form id="myform" class="form-horizontal" method="post"	enctype="multipart/form-data"
-			action="<c:url value="admin_notice/Edit.do"/>">
+		<form id="myform" class="form-horizontal" method="post"	
+			action="<c:url value="/admin_notice/Edit.do"/>">
 			<input type="hidden" name="no" value="${dto.n_no}"/>
 			
 			<div class="form-group">

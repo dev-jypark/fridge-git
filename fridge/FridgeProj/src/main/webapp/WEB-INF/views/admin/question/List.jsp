@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/Side.jsp"/>
 <!-- 상단메뉴 끝 -->
 
-
+<!-- 실제 내용 시작 -->
 <!-- side -->
 <head>
 
@@ -18,22 +18,23 @@
     <title>사용자 통계 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="<c:url value="/resources/vendor/frigochart/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
+    <link href="resources/vendor/frigochart/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<c:url value="/resources/css/frigochart/sb-admin-2.min.css"/>" rel="stylesheet">
+    <link href="resources/css/frigochart/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 <!-- side 끝 -->
 
 <!-- 실제 내용 시작 -->
+
 <div class="container">
 	
 	<div class="page-header">
-		<h1>관리자 <small>공지사항 게시판</small></h1>
+		<h1>관리자 <small>QnA 게시판</small></h1>
 	</div>
 	<body id="page-top">
 
@@ -98,13 +99,12 @@
 
                 </nav>
                 <!-- End of Topbar -->
-
                 
- <!-- Begin Page Content -->
+  <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
+                    <h1 class="h3 mb-2 text-gray-800">QnA</h1>
                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -118,7 +118,7 @@
                                         <tr>
                                             <th>번호</th>
                                             <th>제목</th>
-                                            <th>조회수</th>
+                                            <th>작성자</th>
                                             <th>등록일</th>
                                          
                                         </tr>
@@ -134,9 +134,9 @@
                                 <tr>
                                     <td class="text-center col-md-1">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
                                     
-                                    <td class="text-left"><a href="<c:url value="/admin_notice/View.do?n_no=${list.n_no}&nowPage="/><c:out value="${list.nowPage }" default="1"/>">${list.n_title}</a></td>
-                                    <td class="text-center col-md-1">${list.n_hit}</td>                                 
-                                    <td class="text-center col-md-5">${list.n_postdate}</td>
+                                    <td class="text-left"><a href="<c:url value="/question/View.do?q_no=${list.q_no}&nowPage="/><c:out value="${list.nowPage }" default="1"/>">${list.q_title}</a></td>
+                                    <td class="text-center col-md-1">${list.id}</td>                                 
+                                    <td class="text-center col-md-5">${list.q_postdate}</td>
                                 </tr>
                             </c:forEach>
                         </c:if>
@@ -144,7 +144,7 @@
                                              <!-- 작성하기 버튼 -->
 	<div class="text-right">
 		
-		<a href="<c:url value="/admin_notice/Write.do"/>" class="btn btn-primary">글쓰기</a>
+		<a href="<c:url value="/question/Write.do"/>" class="btn btn-primary">글쓰기</a>
 	</div>
              
 
@@ -162,17 +162,13 @@
                             </div>
                         </div>
              
-  
-
                 </div>
                 <!-- /.container-fluid -->
                 
- 
             </div>
             <!-- End of Main Content -->
-            
-
-           <!-- Scroll to Top Button-->
+                
+                           <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
@@ -199,4 +195,5 @@
 
 <!-- 실제 내용 끝-->
 
-
+    
+    

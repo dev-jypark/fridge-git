@@ -19,26 +19,26 @@
 			<table class="table table-bordered table-striped">
 				<tr>
 					<th class="col-md-2 text-center">번 호</th>
-					<td>${record.n_no }</td>
+					<td>${list.n_no }</td>
 				</tr>
 				<tr>
 					<th class="text-center">제 목</th>
-					<td>${record.n_title }</td>
+					<td>${list.n_title }</td>
 				</tr>
 				<tr>
-					<th class="text-center">작성자</th>
-					<td>${record.n_hit}</td>
+					<th class="text-center">조회수</th>
+					<td>${list.n_hit}</td>
 				</tr>
 				
 				<tr>
 					<th class="text-center">등록일</th>
-					<td>${record.n_postdate}</td>
+					<td>${list.n_postdate}</td>
 				</tr>
 				<tr>
 					<th class="text-center" colspan="2">내 용</th>
 				</tr>
 				<tr>
-					<td colspan="2">${record.n_content }</td>
+					<td colspan="2">${list.n_content }</td>
 				</tr>
 			</table>
 		</div>
