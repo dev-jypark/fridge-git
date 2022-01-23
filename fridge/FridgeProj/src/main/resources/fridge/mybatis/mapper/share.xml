@@ -59,7 +59,9 @@
 	</select>
 	
 	<select id="shareSelectIngrediantList" parameterType="Map" resultMap="ingrediantDTOResult">
-		SELECT * FROM ingrediant ORDER BY i_postdate DESC
+		SELECT * 
+		FROM ingrediant ORDER BY i_postdate DESC
+		WHERE id=#{id}
 	</select>
 	
 	<insert id="sharePostInsert" parameterType="Map">

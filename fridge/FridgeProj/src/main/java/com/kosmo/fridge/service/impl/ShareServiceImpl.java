@@ -191,8 +191,8 @@ public class ShareServiceImpl implements ShareService{
 	}
 
 	//글 작성 페이지로 이동할 때 사용자 재료 목록 조회
-	public List<IngrediantDTO> selectIngrediantList() {
-		List<IngrediantDTO> listIngrediant = dao.selectIngrediantList();
+	public List<IngrediantDTO> selectIngrediantList(String id) {
+		List<IngrediantDTO> listIngrediant = dao.selectIngrediantList(id);
 		return listIngrediant;
 	}
 	

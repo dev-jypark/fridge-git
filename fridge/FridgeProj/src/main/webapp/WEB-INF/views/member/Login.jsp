@@ -35,8 +35,7 @@
   	</div>
 	-
     <div class="login_container">  
-	    
-    	
+	        	
 		<form name="form1" method="post" action="<c:url value='/member/loginprocess.do'/>" onsubmit="return Login();">
 		<!-- 아이디가 일치하면 -->
 		<div class="alert_login">
@@ -64,10 +63,10 @@
 	      
 	      <div id="socialLogin">
 	      	<a href=#>
-	      	<img id="kakao" alt="카카오 로그인" src="../resources/images/membersignup/kakao.png">
+	      	<img id="kakao" alt="카카오 로그인" src="<c:url value="/resources/images/membersignup/kakao.png"/>">
 	      	</a>   
 	      	<a href=#>
-	      	<img id="google" alt="구글 로그인" src="../resources/images/membersignup/google.png">
+	      	<img id="google" alt="구글 로그인" src="<c:url value="/resources/images/membersignup/google.png"/>">
 	      	</a>  
 	      </div>	
 	      	
@@ -77,7 +76,7 @@
 	    </form>	    
     </div>
     <!-- JS 파일 걸어줄 위치 -->
-    <script src="../resources/js/memberlogin/login.js"></script>
+    <script src="<c:url value="/resources/js/memberlogin/login.js"/>"></script>
   </body>
 </html>
 

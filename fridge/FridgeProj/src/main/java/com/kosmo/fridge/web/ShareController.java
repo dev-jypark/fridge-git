@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,9 +65,9 @@ public class ShareController {
 	
 	//글 작성 폼으로 이동
 	@RequestMapping(value = "/shareWrite.do", method = RequestMethod.GET)
-	public String write(Model model) {
+	public String write(@ModelAttribute("id") String id, Model model) {
 		//로그인 회원가입 연결하고 나서 사용자 id와 일치하는 재료만 받아오기
-		List<IngrediantDTO> listIngrediant = shareService.selectIngrediantList();
+		List<IngrediantDTO> listIngrediant = shareService.selectIngrediantList(id);
 		model.addAttribute("listIngrediant", listIngrediant);
 		return "share/ShareWrite";
 	}

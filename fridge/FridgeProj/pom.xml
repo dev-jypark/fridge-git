@@ -31,6 +31,7 @@
 			<version>${org.springframework-version}</version>
 			<exclusions>
 			
+			
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -149,7 +150,7 @@
 		</dependency> 
 		<!-- 오라클 연결 -->
 		<!-- https://mvnrepository.com/artifact/oracle/ojdbc6 -->
-		<dependency>
+	 	<dependency>
 		    <groupId>oracle</groupId>
 		    <artifactId>ojdbc6</artifactId>
 		    <version>11.2.0.3</version>
@@ -289,6 +290,7 @@
 		    <artifactId>spring-context-support</artifactId>
 		    <version>4.3.30.RELEASE</version>
 		</dependency>
+
 	</dependencies>
 	
     <build>

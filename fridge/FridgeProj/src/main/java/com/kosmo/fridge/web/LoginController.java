@@ -24,9 +24,12 @@ public class LoginController {
 	public String login() {
 		return "member/Login.tiles";
 	}
+	
 	//로그인 처리
 	@RequestMapping("/loginprocess")
 	public String process(@RequestParam Map map,Model model,SessionStatus status){
+		System.out.println("id : "+map.get("id"));
+		System.out.println("pwd : "+map.get("pwd"));
 		//서비스 호출
 		boolean flag= memberService.isLogin(map);
 		model.addAttribute("id", map.get("id"));
@@ -35,8 +38,9 @@ public class LoginController {
 			model.addAttribute("NotMember","아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
 		//뷰정보 반환
-		return "member/Login.tiles";
+		return "home.tiles";
 	}
+	
 	//로그아웃 처리
 	@RequestMapping("/logout")
 	public String logout(SessionStatus status){
