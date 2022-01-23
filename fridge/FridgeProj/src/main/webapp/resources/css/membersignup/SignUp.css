@@ -1,0 +1,81 @@
+body { 
+		min-height: 100vh; 
+		background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#54cfba)); 
+		background: -webkit-linear-gradient(bottom left, #92b5db 0%, #54cfba 100%); 
+		background: -moz-linear-gradient(bottom left, #92b5db 0%, #54cfba 100%); 
+		background: -o-linear-gradient(bottom left, #92b5db 0%, #54cfba 100%); 
+		background: linear-gradient(to top right, #92b5db 0%, #54cfba 100%); 
+		letter-spacing: -.4px;
+	} 
+	.input-form { 
+		max-width: 680px; 
+		margin-top: 80px; 
+		padding: 50px 100px; 
+		background: #fff; 
+		-webkit-border-radius: 10px; 
+		-moz-border-radius: 10px; 
+		border-radius: 10px; 
+		-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15); 
+		-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15); 
+		box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15) 
+	} 
+	.description {
+	    margin-bottom: 10px;
+	    font-size: 13px;
+	    color: #757575;
+	    line-height: 1.4;
+	}
+	.lable {
+	    display: block;
+	    margin: 0 0 12px;
+	    font-size: 15px;
+	    font-weight: bold;
+	    color: #292929;
+	    line-height: 21px;
+	    word-break: keep-all;
+	}
+	.checkBox-require {
+	    color: #35c5f0;
+	    font-size: 12px;
+	    margin-left: 4px;
+	}
+	.checkBox-option {
+	    color: #bdbdbd;
+	    font-size: 12px;
+	    margin-left: 4px;
+	}
+	.socialLoginTitle {
+    font-size: 12px;
+    text-align: center;
+    margin: 15px 0;
+    color: #757575;
+	}
+	
+	.email-input__separator{
+    font-family: "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.4px;
+    font-size: 13px;
+    -webkit-box-direction: normal;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-box-flex: 0;
+    flex: 0 0 20px;
+    text-align: center;
+    line-height: 40px;
+    color: #dbdbdb;	
+	}
+	.css-1k406r0-SNSList {
+    display: flex;
+    -webkit-box-pack: center;
+	}
+	.css-1balhvh-SNSItem {
+    margin: 0px 10px;
+	}
+	ul {
+    list-style: none;
+	}
+	img{
+	width: 185px;
+	height: 45px;
+	}
+	

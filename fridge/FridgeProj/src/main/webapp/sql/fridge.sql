@@ -111,8 +111,8 @@ CREATE TABLE a_com
 CREATE TABLE chat
 (
 	c_no number NOT NULL UNIQUE,
-	c_src varchar2(40) NOT NULL,
-	c_dest varchar2(40) NOT NULL,
+	c_src varchar2(24) NOT NULL,
+	c_dest varchar2(24) NOT NULL,
 	c_content nvarchar2(500) NOT NULL,
 	c_date date DEFAULT sysdate NOT NULL,
 	PRIMARY KEY (c_no)
@@ -121,8 +121,8 @@ CREATE TABLE chat
 
 CREATE TABLE follow
 (
-	f_src varchar2(40) NOT NULL,
-	f_dest varchar2(40) NOT NULL,
+	f_src varchar2(24) NOT NULL,
+	f_dest varchar2(24) NOT NULL,
 	UNIQUE (f_src, f_dest)
 );
 
@@ -130,7 +130,7 @@ CREATE TABLE follow
 CREATE TABLE f_bbs
 (
 	fb_no number NOT NULL,
-	id varchar2(40) NOT NULL,
+	id varchar2(24) NOT NULL,
 	fb_content nvarchar2(2000) NOT NULL,
 	fb_postdate date DEFAULT sysdate,
 	PRIMARY KEY (fb_no)
@@ -140,7 +140,7 @@ CREATE TABLE f_bbs
 CREATE TABLE f_com
 (
 	fc_no number NOT NULL,
-	id varchar2(40) NOT NULL,
+	id varchar2(24) NOT NULL,
 	fb_no number NOT NULL,
 	fc_content nvarchar2(500) NOT NULL,
 	fc_postdate date DEFAULT sysdate,
@@ -160,7 +160,7 @@ CREATE TABLE f_imgsrc
 CREATE TABLE f_like
 (
 	fl_no number NOT NULL,
-	id varchar2(40) NOT NULL,
+	id varchar2(24) NOT NULL,
 	fb_no number NOT NULL,
 	PRIMARY KEY (fl_no)
 );
@@ -181,10 +181,11 @@ CREATE TABLE history
 CREATE TABLE ingrediant
 (
 	i_no number NOT NULL,
-	id varchar2(40) NOT NULL,
+	id varchar2(24) NOT NULL,
 	i_name nvarchar2(20) NOT NULL,
 	i_cnt number NOT NULL,
 	i_enddate date NOT NULL,
+	i_postdate date NOT NULL,
 	PRIMARY KEY (i_no)
 );
 
@@ -204,9 +205,8 @@ CREATE TABLE member
 
 CREATE TABLE m_agree
 (
-	id varchar2(40) NOT NULL UNIQUE,
-	a_base char(1) NOT NULL,
-	a_marketing char(1) NOT NULL,
+	id varchar2(24) NOT NULL,
+	agree nvarchar2(25) NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -235,7 +235,7 @@ CREATE TABLE n_imgsrc
 CREATE TABLE q_bbs
 (
 	q_no number NOT NULL,
-	id varchar2(40) NOT NULL,
+	id varchar2(24) NOT NULL,
 	q_title nvarchar2(100) NOT NULL,
 	q_content nvarchar2(2000) NOT NULL,
 	q_postdate date DEFAULT SYSDATE,
@@ -268,7 +268,7 @@ CREATE TABLE trade
 CREATE TABLE t_bbs
 (
 	tb_no number NOT NULL,
-	id varchar2(40) NOT NULL,
+	id varchar2(24) NOT NULL,
 	tb_title nvarchar2(100) NOT NULL,
 	tb_content nvarchar2(2000) NOT NULL,
 	tb_visitcount number DEFAULT 0 NOT NULL,
@@ -289,7 +289,7 @@ CREATE TABLE t_imgsrc
 CREATE TABLE t_like
 (
 	tl_no number NOT NULL,
-	id varchar2(40) NOT NULL,
+	id varchar2(24) NOT NULL,
 	tb_no number NOT NULL,
 	PRIMARY KEY (tl_no)
 );
@@ -335,13 +335,13 @@ ALTER TABLE trade
 
 
 ALTER TABLE chat
-	ADD FOREIGN KEY (c_dest)
+	ADD FOREIGN KEY (c_src)
 	REFERENCES member (id)
 ;
 
 
 ALTER TABLE chat
-	ADD FOREIGN KEY (c_src)
+	ADD FOREIGN KEY (c_dest)
 	REFERENCES member (id)
 ;
 
