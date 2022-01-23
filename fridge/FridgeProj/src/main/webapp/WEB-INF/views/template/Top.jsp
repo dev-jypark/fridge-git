@@ -68,7 +68,7 @@
                     
                     <!-- logo -->
                     <div class="navbar-brand">
-                        <a href="index.html" >
+                        <a href="/app" >
                             <img src="<c:url value="/resources/images/template/logo.png"/>" alt="">
                         </a>
                     </div>
@@ -79,33 +79,35 @@
                 <nav class="collapse navbar-collapse navbar-right" role="navigation">
                     <div class="main-menu">
                         <ul class="nav navbar-nav navbar-right">
-                        	<li><a href="#">회원가입</a></li>
-                        	<li><a href="#">로그인</a></li>
-                            <li>
-                                <a href="#" >커뮤니티</a>
-                            </li>
-                            <li><a href="about.html">나눔</a></li>
-                            <li><a href="service.html">레시피</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">냉장고 <span class="caret"></span></a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a href="#">404 Page</a></li>
-                                        <li><a href="#">Gallery</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<span class="caret"></span></a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a href="#">프로필</a></li>
-                                        <li><a href="#">설정</a></li>
-                                        <li><a href="#">로그아웃</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="contact.html">채팅</a></li>
+                        	<c:if test="${empty sessionScope.id }" var="isLogin">
+	                        	<li><a href="<c:url value="/member/SignUp.do"/>">회원가입</a></li>
+	                        	<li><a href="<c:url value="/member/login.do"/>">로그인</a></li>                        	
+							</c:if>
+                            <c:if test="${not isLogin }">
+	                            <li><a href="#" >커뮤니티</a></li>
+	                            <li><a href="about.html">나눔</a></li>
+	                            <li><a href="service.html">레시피</a></li>
+	                            <li class="dropdown">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">냉장고 <span class="caret"></span></a>
+	                                <div class="dropdown-menu">
+	                                    <ul>
+	                                        <li><a href="#">404 Page</a></li>
+	                                        <li><a href="#">Gallery</a></li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            <li class="dropdown">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<span class="caret"></span></a>
+	                                <div class="dropdown-menu">
+	                                    <ul>
+	                                        <li><a href="#">프로필</a></li>
+	                                        <li><a href="#">설정</a></li>
+	                                        <li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            <li><a href="contact.html">채팅</a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </nav>

@@ -31,8 +31,8 @@ public class ShareDAO {
 		return listShare;
 	}
 
-	public List selectIngrediantList() {
-		List<IngrediantDTO> listIngrediant= template.selectList("shareSelectIngrediantList");
+	public List selectIngrediantList(String id) {
+		List<IngrediantDTO> listIngrediant= template.selectList("shareSelectIngrediantList", id);
 		return listIngrediant;
 	}
 

@@ -12,10 +12,12 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width">
+    <meta name ="google-signin-client_id" content="441484038811-mrvbvmvhpf3ufmobggcl7cffjscj4f2q.apps.googleusercontent.com">
     <title>찍먹냉장고</title>
     <!-- css 파일 연결한 위치 -->
-    <link href="../resources/css/memberlogin/login_insta.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="../resources/js/memberlogin/login.js"></script>
+    <link href="<c:url value='/resources/css/memberlogin/login.css'/>" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<c:url value='/resources/js/memberlogin/login.js'/>"></script>
+  	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
   </head>
   <style>
   	.alert_login {
@@ -31,10 +33,11 @@
   	<div class>
   		찍먹냉장고(로고가 들어갈 자리입니다)
   	</div>
-	
-    <div class="container">  
-	    
-    	<!-- 아이디가 일치하면 -->
+	-
+    <div class="login_container">  
+	        	
+		<form name="form1" method="post" action="<c:url value='/member/loginprocess.do'/>" onsubmit="return Login();">
+		<!-- 아이디가 일치하면 -->
 		<div class="alert_login">
 			<c:if test="${not empty sessionScope.id and empty NotMember}" var="isLogin">
 				<div class="col-xs-offset-1 col-xs-6 alert alert-success">
@@ -50,36 +53,30 @@
 				</div>
 			</div>
 		</c:if>
-		<form name="form1" method="post" action="<c:url value='/member/loginprocess.do'/>" onsubmit="return Login();">
+	    <div class="inputbox">
 	    <c:if test="${not isLogin}">
 	      <input type="text" class="input_login" name="id" id="id" placeholder="아이디">
 	      <input type="password" class="input_login" name="pwd" id="pwd" placeholder="비밀번호">
 	     <button type="submit" id="btn_login">로그인</button>
-	      <!-- 네이버, 카카오 -->
+	     </div>
+	      <!--카카오, 구글 -->
 	      
-	      <div id="naverIdLogin">
-	      	<a id="naverIdLogin_loginButton" href=#>
-	      	<img src="../resources/images/memberlogin/btnG_완성형.png" height="30">
+	      <div id="socialLogin">
+	      	<a href=#>
+	      	<img id="kakao" alt="카카오 로그인" src="<c:url value="/resources/images/membersignup/kakao.png"/>">
 	      	</a>   
-	      	</div>
-	      	<div id="kakaoIdLogin">
-	      	<a id="kakaoIdLogin_loginButton" href=#>
-	      	<img src="../resources/images/memberlogin/kakao_login_medium_narrow.png" height="30">
+	      	<a href=#>
+	      	<img id="google" alt="구글 로그인" src="<c:url value="/resources/images/membersignup/google.png"/>">
 	      	</a>  
-	      	</div>	
+	      </div>	
 	      	
 	      	<!-- 회원가입, 계정찾기 -->
-	      	<span class="button_forgot" onClick="location.href='<c:url value="/member/SignUp.do"/>'">
-	      	회원이 아니신가요?</span>
-	      	
-	      <span class="button_forgot">계정을 잊어버리셨나요?</span>
+	      	<span class="button_forgot" onClick="location.href='<c:url value="/member/SignUp.do"/>'"> 회원이 아니신가요?</span>	      
 	      </c:if>
-	    </form>
-	    
-	    
+	    </form>	    
     </div>
     <!-- JS 파일 걸어줄 위치 -->
-    <script src="../resources/js/memberlogin/login.js"></script>
+    <script src="<c:url value="/resources/js/memberlogin/login.js"/>"></script>
   </body>
 </html>
 

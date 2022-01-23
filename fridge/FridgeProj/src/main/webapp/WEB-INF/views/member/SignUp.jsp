@@ -28,7 +28,7 @@
 				</li>
 				<li class="css-1balhvh-SNSItem e111gxds0">
 					<a href="#">
-					<img id="naver" alt="네이버 로그인" src="../resources/images/membersignup/naver.png" style="width:183px; heigth: 45px;">
+					<img id="google" alt="구글 로그인" src="../resources/images/membersignup/google.png"  style="width:190px; heigth: 50px;">
 					</a>
 				</li>
 			</ul>			
@@ -38,12 +38,12 @@
 				<div class="mb-3"> 
 					<label class="lable" for="id">아이디</label>
 					<div class="description">영문이나 영문, 숫자 포함 4~12자</div>
-					<input type="text" pattern="^[a-z0-9_-]{4,12}$" class="form-control" id="userId" name="id" placeholder="아이디를 입력해주세요." required/> 
+					<input type="text" pattern="^[a-z0-9_-]{4,12}$" class="form-control" id="id" name="id" placeholder="아이디를 입력해주세요." required/> 
 					<!-- <img alt="체크마크" src="check.png" id="checkSucess" style=" width:38px; height:38px;"> -->
-					<div class="invalid-feedback"> 올바른 아이디 양식이 아닙니다. 다시 확인해주세요. </div>
-					<button class="btn btn-lg btn-block" id="idCheck" onclick="idDuplCheck();"
-					style="border-color: #95E1D3; color: #95E1D3; margin-top:10px" 
-					>중복 확인</button>
+					<div class="invalid-feedback" id="checkMsg"> 올바른 아이디 양식이 아닙니다. 다시 확인해주세요. </div>
+					<button class="btn btn-lg btn-block" type="button" id="idCheck" onclick="idDuplCheck();" value="N" 
+					style="border-color: #95E1D3; color: #95E1D3; margin-top:10px"> 
+					중복 확인</button>
 					
 				</div> 
 				<!-- 이메일 -->				
@@ -68,9 +68,19 @@
 						</select>
 					</div> 
 					-->
-					<input type="email" pattern="^[A-Za-z0-9_\.\-]+@[a-z\-]+\.[a-z\-]+" class="form-control" id="userEmail" name="email" placeholder="you@example.com" required/>
+					<input type="email" pattern="^[A-Za-z0-9_\.\-]+@[a-z\-]+\.[a-z\-]+" class="form-control" id="email" name="email" placeholder="you@example.com" required/>
 					<div class="invalid-feedback"> 올바른 이메일 양식이 아닙니다. 다시 확인해주세요. </div>
-					<button class="btn btn-lg btn-block" id="emailCheck" onclick="certification();"
+					
+					<input type="text" pattern="^[0-9]{5}$" class="form-control" id="certificationCode" placeholder="인증코드를 입력해주세요." style="margin-top: 10px;  display:none" required/>
+					<!--  <div class="invalid-feedback"> 올바른 인증코드 양식이 아닙니다. 다시 확인해주세요. </div>-->
+					
+					<!-- <input type="hidden" name="checkedEmail" value=""> -->
+					
+					<button class="btn btn-lg btn-block" id="codeCheck" onclick="certificationCodeSubmit();"
+					style="border-color: #95E1D3; color: #95E1D3; margin-top:10px; display:none" 
+					type="button">인증코드 제출</button>
+					
+					<button class="btn btn-lg btn-block" id="emailCheck" onclick="certificationEmail();"
 					style="border-color: #95E1D3; color: #95E1D3; margin-top:10px" 
 					type="button">인증하기</button>
 					<!-- <button class="btn btn-lg btn-block" style="border-color: #95E1D3; color: #95E1D3; margin-top:10px" type="submit">이메일 확인</button> -->
@@ -104,8 +114,11 @@
 				<div class="mb-3"> 
 					<label class="lable" for="nickname">별명</label>
 					<div class="description">한글 2~8자</div>
-					<input type="text" pattern="^[가-힣]{2,8}$" class="form-control" id="nickname" name="nick" placeholder="사용하실 별명을 입력해주세요." required/> 
+					<input type="text" pattern="^[가-힣]{2,8}$" class="form-control" id="nick" name="nick" placeholder="사용하실 별명을 입력해주세요." required/> 
 					<div class="invalid-feedback"> 올바른 별명 양식이 아닙니다. 다시 확인해주세요. </div>					
+					<button class="btn btn-lg btn-block" id="nicknameCheck" type="button" onclick="nicknameDuplCheck();" value="N" 
+					style="border-color: #95E1D3; color: #95E1D3; margin-top:10px" 
+					>중복 확인</button>
 				</div>
 				
 				<!-- 주소 -->
@@ -117,24 +130,24 @@
 				</div> 
 				
 				<label class="lable">약관동의</label>
-				<div style="border: solid 1px #ced4da; padding:20px;">
-					<div class="custom-control custom-checkbox"> 
-						<input type="checkbox" class="custom-control-input" id="allAgreement"/> 
-						<label class="custom-control-label" for="allAgreement">전체동의</label> 
-					</div> 
+				<div style="border: solid 1px #CED4DA; padding:20px;">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="allAgreement"/>
+						<label class="custom-control-label" for="allAgreement">전체동의</label>
+					</div>
 					<hr class="mb-4">
-					<div class="custom-control custom-checkbox"> 
+					<div class="custom-control custom-checkbox">
 					<!-- input에 id값, label에 for값 추가(for랑 id는 같아야 함) 동의 1번 참고 -->
 					<!-- 필수 기입 사항에는 required 속성 붙여주기 동의 1번 참고 -->
-						<input type="checkbox" class="custom-control-input" name="" value="check" id="agreement1" required/> 
-						<label class="custom-control-label" for="agreement1" style="font-size: 13px;">어플리케이션 사용을 위한 필수 정보 제공에 동의합니다.</label> 
+						<input type="checkbox" class="custom-control-input" name="agree" id="agreement1" required/>
+						<label class="custom-control-label" for="agreement1" style="font-size: 13px;">어플리케이션 사용을 위한 필수 정보 제공에 동의합니다.</label>
 						<span class="checkBox-require">(필수)</span>
-					</div> 
-					<div class="custom-control custom-checkbox"> 
-						<input type="checkbox" class="custom-control-input" name="" value="check" id="agreement2"/> 
-						<label class="custom-control-label" for="agreement2" style="font-size: 13px;">개인정보의 제3자 제공 및 마케팅 활용에 동의합니다.</label> 
+					</div>
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" name="agree" id="agreement2"/>
+						<label class="custom-control-label" for="agreement2" style="font-size: 13px;">개인정보의 제3자 제공 및 마케팅 활용에 동의합니다.</label>
 						<span class="checkBox-option">(선택)</span>
-					</div>  
+					</div>
 				</div>
 				<div class="mb-4"></div> 
 				<button class="btn btn-lg btn-block" type="submit"
