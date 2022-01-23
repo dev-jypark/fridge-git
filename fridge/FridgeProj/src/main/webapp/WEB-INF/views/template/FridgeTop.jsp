@@ -13,7 +13,6 @@
 
 <!-- Template CSS Files================================================== -->
 	<!-- Twitter Bootstrs CSS -->
-	<link rel="stylesheet" href="<c:url value="/resources/plugins/template/bootstrap/bootstrap.min.css"/>">
 	<!-- Ionicons Fonts Css -->
 	<link rel="stylesheet" href="<c:url value="/resources/plugins/template/ionicons/ionicons.min.css"/>">
 	<!-- animate css -->
