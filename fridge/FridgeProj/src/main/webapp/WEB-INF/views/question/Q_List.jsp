@@ -136,7 +136,7 @@
 <body>
 
     <div id="container">
-        <div class="layer_screen_100" style="margin-left: 350px;">
+        <div class="layer_screen_100">
             <div class="layer_contets_width_1040">
 
                 <div class="layer_screen_100">
@@ -252,7 +252,7 @@
 				</div>
 			<c:if test="${listPagingData.lists.size() !=0 }">
 		<div class="row">
-			<div class="col-md-12 text-center" style="margin-left: 360px">${listPagingData.pagingString}</div>
+			<div class="col-md-12 text-center">${listPagingData.pagingString}</div>
 		</div>
 	</c:if>
 	</div>
