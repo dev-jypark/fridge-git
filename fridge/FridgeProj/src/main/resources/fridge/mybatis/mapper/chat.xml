@@ -7,21 +7,21 @@
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. --> 
 <mapper namespace="fridge.mybatis.mapper.chat">
 	<select id="message_list" parameterType="messageDTO" resultType="messageDTO">
-		select c_no, room, send_id AS send_nick, recv_id AS recv_nick, TO_CHAR(send_time, 'YY-MM-DD HH24:MI') send_time, read_time, content, read_chk
+		select c_no, room, send_id AS send_nick, recv_id AS recv_nick, TO_CHAR(send_time, 'MM-DD HH24:MI') send_time, read_time, content, read_chk
 	    from chat
 	    where c_no in (select max(c_no) from chat group by room) and (send_id = #{nick} or recv_id=#{nick})
 	    order by c_no desc
 	</select>
 	
-	<!-- 안읽은 메세지 갯수 가져오기 -->
+	<!-- 안읽은 메세지 갯수 가져오기 read_chk = 1이면 안읽음-->
 	<select id="count_unread" parameterType="messageDTO" resultType="Int">
 	    select count(c_no) from chat 
-	    where recv_id=#{nick} and read_chk=0 and room=#{room}
+	    where recv_id=#{nick} and read_chk=1 and room=#{room}
 	</select>
 	
 	<!-- 메세지 list에서 상대방 profile 가져오기 -->
 	<select id="get_other_profile" parameterType="messageDTO" resultType="String">
-	    select profile from user
+	    select imgsrc from member
 	    <choose>
 	        <when test="send_nick == nick">
 	            where nick = #{recv_nick}
@@ -31,4 +31,61 @@
 	        </otherwise>
 	    </choose>
 	</select>
+	
+	<!-- 메세지 내용 가져오기 -->
+	<select id="room_content_list" parameterType="messageDTO" resultType="messageDTO">
+	    SELECT c.c_no, c.room, c.send_id AS send_nick, c.recv_id AS recv_nick, TO_CHAR(send_time, 'MM-DD HH24:MI') send_time, c.read_time, c.content, c.read_chk, m.imgsrc
+	    FROM chat c left outer join member m
+	    on c.send_id = m.id
+	    <choose>
+	        <when test="room != 0">
+	            where room=#{room}
+	        </when>
+	        <otherwise>
+	            where (recv_id = #{recv_nick} and send_id = #{nick}) or (send_id = #{recv_nick} and recv_id = #{nick})
+	        </otherwise>
+	    </choose>
+	</select>
+	
+	<!-- 메세지 읽음 처리 -->
+	<update id="message_read_chk" parameterType="messageDTO">
+	    update chat set read_chk=0
+	    <choose>
+	        <when test="room != 0">
+	            where room=#{room} and read_chk=1 and recv_id=#{nick}
+	        </when>
+	        <otherwise>
+	            where send_id=#{recv_nick} and read_chk=1 and recv_id=#{nick}
+	        </otherwise>
+	    </choose>
+	</update>
+	
+	<!-- 메세지 이력이 있는지 검색 -->
+	<select id="exist_chat" parameterType="messageDTO" resultType="Int">
+	    select count(c_no) from chat 
+	    where (recv_id = #{recv_nick} and send_id=#{send_nick}) or (send_id = #{recv_nick} and recv_id=#{send_nick})
+	</select>
+	
+	<!-- room 번호 최댓값 구하기 -->
+	<select id="max_room"  parameterType="messageDTO" resultType="Int">
+	    select max(room) from chat
+	</select>
+	
+	<!-- 기존 메세지 내역의 room 번호를 가져옴 -->
+	<select id="select_room"  parameterType="messageDTO" resultType="String">
+	    select room from chat
+	    where (recv_id = #{recv_nick} and send_id=#{send_nick}) or (send_id = #{recv_nick} and recv_id=#{send_nick})
+	</select>
+	
+	<!-- 메세지리스트에서 메세지 보내기 -->
+	<insert id="messageSendInlist" parameterType="messageDTO">
+	    <choose>
+	        <when test="room != 0">
+	            insert into chat values(SEQ_chat_c_no.NEXTVAL, #{send_nick}, #{recv_nick}, SYSDATE, SYSDATE, #{content}, 1, #{room})
+	        </when>
+	        <otherwise>
+	            insert into chat values(SEQ_chat_c_no.NEXTVAL, #{send_nick}, #{recv_nick}, SYSDATE, SYSDATE, #{content}, 1,  #{room})
+	        </otherwise>
+	    </choose>
+	</insert>
 </mapper>

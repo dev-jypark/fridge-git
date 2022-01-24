@@ -15,8 +15,6 @@ public class ChatServer extends TextWebSocketHandler{
 	private List<WebSocketSession> clientList = new ArrayList<WebSocketSession>();
 	private Map<String, Object> clientMap = new HashMap<>();
 	
-	
-	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		clientList.add(session);

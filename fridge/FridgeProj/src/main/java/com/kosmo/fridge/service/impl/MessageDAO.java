@@ -78,5 +78,4 @@ public class MessageDAO {
 		int flag = sqlSession.insert("messageSendInlist",to);
 		return flag;
 	}
-
 }

@@ -27,7 +27,7 @@ public class MessageController {
 		// System.out.println("현대 사용자 nick : " + session.getAttribute("nick"));
 
 		String nick = (String) request.getSession().getAttribute("id");
-		System.out.println("list 컨트롤러 들어옴");
+
 		MessageTO to = new MessageTO();
 		to.setNick(nick);
 
@@ -45,7 +45,7 @@ public class MessageController {
 		// System.out.println("현대 사용자 nick : " + session.getAttribute("id"));
 
 		String nick = (String) request.getSession().getAttribute("id");
-		System.out.println("ajax 컨트롤러 들어옴");
+
 		MessageTO to = new MessageTO();
 		to.setNick(nick);
 
@@ -58,14 +58,14 @@ public class MessageController {
 	}
 
 	@RequestMapping(value = "/message_content_list.do")
-	public String message_content_list(HttpServletRequest request, HttpSession session) {
+	public String message_content_list(HttpServletRequest request) {
 
 		int room = Integer.parseInt(request.getParameter("room"));
 
 		MessageTO to = new MessageTO();
 		to.setRoom(room);
-		to.setNick((String) session.getAttribute("nick"));
-
+		to.setNick((String) request.getSession().getAttribute("id"));
+		to.setRecv_nick(request.getParameter(""));
 		// 메세지 내용을 가져온다.
 		ArrayList<MessageTO> clist = messageDao.roomContentList(to);
 
@@ -82,7 +82,7 @@ public class MessageController {
 
 		MessageTO to = new MessageTO();
 		to.setRoom(room);
-		to.setSend_nick((String) session.getAttribute("nick"));
+		to.setSend_nick((String) session.getAttribute("id"));
 		to.setRecv_nick(other_nick);
 		to.setContent(content);
 

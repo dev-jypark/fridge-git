@@ -23,7 +23,7 @@
 	<br /> 
 	<br /> 
 	<br /> 
-	
+
 	<div class="msg-container">
 	
 		<div class="messaging">
@@ -198,7 +198,7 @@
 			url:"message_content_list.do",
 			method:"GET",
 			data:{
-				room : room,
+				room : room
 			},
 			success:function(data){
 				console.log("메세지 내용 가져오기 성공");
@@ -257,7 +257,6 @@
 				}
 			});
 		}
-		
 	};
 	
 	$(document).ready(function(){
