@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. --> 
+<mapper namespace="fridge.mybatis.mapper.chat">
+	<select id="message_list" parameterType="messageDTO" resultType="messageDTO">
+		select c_no, room, send_id AS send_nick, recv_id AS recv_nick, TO_CHAR(send_time, 'YY-MM-DD HH24:MI') send_time, read_time, content, read_chk
+	    from chat
+	    where c_no in (select max(c_no) from chat group by room) and (send_id = #{nick} or recv_id=#{nick})
+	    order by c_no desc
+	</select>
+	
+	<!-- 안읽은 메세지 갯수 가져오기 -->
+	<select id="count_unread" parameterType="messageDTO" resultType="Int">
+	    select count(c_no) from chat 
+	    where recv_id=#{nick} and read_chk=0 and room=#{room}
+	</select>
+	
+	<!-- 메세지 list에서 상대방 profile 가져오기 -->
+	<select id="get_other_profile" parameterType="messageDTO" resultType="String">
+	    select profile from user
+	    <choose>
+	        <when test="send_nick == nick">
+	            where nick = #{recv_nick}
+	        </when>
+	        <otherwise>
+	            where nick = #{send_nick}
+	        </otherwise>
+	    </choose>
+	</select>
+</mapper>

@@ -106,7 +106,7 @@
 	                                    </ul>
 	                                </div>
 	                            </li>
-	                            <li><a href="contact.html">채팅</a></li>
+	                            <li><a href="<c:url value="/message_list.do"/>">채팅</a></li>
                             </c:if>
                         </ul>
                     </div>
