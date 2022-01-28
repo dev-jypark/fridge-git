@@ -35,7 +35,7 @@ public class HomeController {
 		 * model.addAttribute("serverTime", formattedDate );
 		 */
 		
-		return "community/CommunityList.tiles";
+		return "/home.tiles";
 	}
 	
 }
