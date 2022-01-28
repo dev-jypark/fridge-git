@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,10 +8,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>찍먹냉장고 | 회원가입</title> <!-- Bootstrap CSS --> 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link href="../resources/css/membersignup/SignUp.css" rel="stylesheet" type="text/css"/>
+<link href="<c:url value="/resources/css/membersignup/SignUp.css"/>" rel="stylesheet" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="../resources/js/membersignup/SignUp.js"></script> 
-
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="<c:url value="/resources/js/member/SignUp.js"/>"></script> 
 </head>
 <body>
 <div class="container">
@@ -20,20 +20,29 @@
 			<h4 class="mb-3" style="font-weight: bold;">회원가입</h4>
 			<div class="socialLoginTitle">SNS 계정으로 간편하게 회원가입</div>
 			<!-- 소셜로그인 로고 자리 -->
+			<form action="<c:url value='/member/socialLogin.do'/>" method="post" id="form">
+			<div id="socialLogin">
 			<ul class="css-1k406r0-SNSList e111gxds1">
-				<li class="css-1balhvh-SNSItem e111gxds0">
-					<a href="#">
-					<img id="kakao" alt="카카오 로그인" src="../resources/images/membersignup/kakao.png">
+				<li class="css-1balhvh-SNSItem e111gxds0" onclick="social.kakao.login()">
+					<a href="javascript:kakaologin()">
+					<img id="kakao" alt="카카오 로그인" src="<c:url value="/resources/images/member/kakao.png"/>">
 					</a>
 				</li>
-				<li class="css-1balhvh-SNSItem e111gxds0">
-					<a href="#">
-					<img id="google" alt="구글 로그인" src="../resources/images/membersignup/google.png"  style="width:190px; heigth: 50px;">
+				<li id="googleBtn" class="css-1balhvh-SNSItem e111gxds0">
+					<a href="javascript:void(0)">
+					<img id="google" alt="구글 로그인" src= "<c:url value="/resources/images/member/google.png"/>">
 					</a>
 				</li>
-			</ul>			
+			</ul>
+			</div>
+			<input type="hidden" name="loginType" id="loginType">
+	      	<input type="hidden" name="socialId" id="socialId">
+	      	<input type="hidden" name="socialEmail" id="socialEmail">
+			<input type="hidden" name="socialNickname" id="socialNickname">
+			</form>			
 			<hr/>
-			<form method="post" action="SignUp.do" class="validation-form" novalidate="novalidate">
+			<form method="post" action="SignUp.do" class="validation-form" novalidate="novalidate" name="login_frm">
+				<input type="hidden" name="login_ok" value="1"/>
 				<!-- 아이디 -->
 				<div class="mb-3"> 
 					<label class="lable" for="id">아이디</label>
@@ -139,7 +148,7 @@
 					<div class="custom-control custom-checkbox">
 					<!-- input에 id값, label에 for값 추가(for랑 id는 같아야 함) 동의 1번 참고 -->
 					<!-- 필수 기입 사항에는 required 속성 붙여주기 동의 1번 참고 -->
-						<input type="checkbox" class="custom-control-input" name="agree" id="agreement1" required/>
+						<input type="checkbox" class="custom-control-input" name="agree" id="agreement1" checked required/>
 						<label class="custom-control-label" for="agreement1" style="font-size: 13px;">어플리케이션 사용을 위한 필수 정보 제공에 동의합니다.</label>
 						<span class="checkBox-require">(필수)</span>
 					</div>
@@ -159,8 +168,6 @@
 	<footer class="my-3 text-center text-small"> 
 	<!-- <p class="mb-1">&copy; 2021 </p>--> </footer> 
 </div> 
-<script> 
-
-</script> 
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> 
 </body> 
 </html>

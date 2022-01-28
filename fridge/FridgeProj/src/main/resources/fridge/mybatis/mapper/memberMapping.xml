@@ -8,15 +8,29 @@
 		<select id="memberLogin" parameterType="Map" resultType="int">
 			SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}
 		</select>
+		<!-- 소셜로그인 -->
+		<select id="memberSocialLogin" parameterType="Map" resultType="int">
+			SELECT COUNT(*) FROM member WHERE id=#{socialId}
+		</select>
 		<!-- 회원가입 -->
 		<insert id="memberInsert" parameterType="MemberDTO" >	
 			INSERT INTO member
 			VALUES(#{id},#{pwd},#{email},#{nick},#{addr},null,null,SYSDATE)
 		</insert>
+		<!-- 소셜회원가입 -->
+		<insert id="memberSocialSignUp" parameterType="MemberDTO" >	
+			INSERT INTO member
+			VALUES(#{socialId},'20220214',#{email},#{nick},#{addr},null,null,SYSDATE)
+		</insert>
 		<!-- 약관동의 -->
 		<insert id="agreeInsert" parameterType="MemberDTO" >
 			INSERT INTO m_agree
 			VALUES(#{id},#{agree})
+		</insert>
+		<!-- 소셜약관동의 -->
+		<insert id="socialAgreeInsert" parameterType="MemberDTO" >
+			INSERT INTO m_agree
+			VALUES(#{socialId},#{agree})
 		</insert>
 		<!-- 아이디중복확인 -->
 		<select id="memberIdCheck" parameterType="String" resultType="int">

@@ -1,5 +1,6 @@
 package com.kosmo.fridge.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -19,15 +20,29 @@ public class MemberServiceImpl implements MemberService{
 	public boolean isLogin(Map map) {
 		return memberDAO.isLogin(map);
 	}
+	//소셜로그인
+	@Override
+	public int isSocialLogin(Map map) {
+		return memberDAO.isSocialLogin(map);
+		}
 	//회원가입
 	@Override
 	public void signUp(MemberDTO memberDTO) {
 		memberDAO.signUp(memberDTO);	
 	}
+	//소셜회원가입
+	@Override
+	public void SocialSignUp(MemberDTO memberDTO) {
+		memberDAO.SocialSignUp(memberDTO);
+	}
 	//약관동의
 	@Override
 	public void agreeOK(MemberDTO memberDTO) {
 		memberDAO.agreeOK(memberDTO);	
+	}
+	//소셜약관동의
+	public void socialAgreeOK(MemberDTO memberDTO) {
+		memberDAO.socialAgreeOK(memberDTO);			
 	}	
 	//아이디중복확인
 	@Override
@@ -63,5 +78,5 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void memberEdit(MemberDTO memberDTO) {
 		memberDAO.memberEdit(memberDTO);
-	}	
+	}
 }

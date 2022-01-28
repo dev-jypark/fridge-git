@@ -1,3 +1,102 @@
+//소셜 로그인 
+let social = {
+	kakao : {
+		data : {key : 'ab245ed56c428f41a272afe5487d647e'},
+		init : function(){
+			Kakao.init(social.kakao.data.key);},
+		login : function (){
+			Kakao.Auth.login({
+				success: function (response){
+					console.log("카카오 로그인 성공", response);
+					social.kakao.info();
+				},
+			fail: function (error) {
+					console.log("카카오 로그인 실패", error);},
+			})
+		},
+		info : function (){
+			Kakao.API.request({
+				url: '/v2/user/me',
+				success: function (response) {
+					console.log("카카오 정보 불러오기 성공 ", response)
+					let userInfo = {
+						type : 'kakao',
+						id : response.id,
+						nm : response.properties.nickname,
+						email : response.kakao_account.email
+						};
+					socialGetInfo(userInfo);
+					setTimeout(social.kakao.logout, 500);
+						},
+ 				fail: function (error) {
+						console.log("카카오 정보 불러오기 오류 ", error);
+					},
+				})
+			},
+			logout : function (){
+				if (Kakao.Auth.getAccessToken()) {
+				Kakao.API.request({
+					url: '/v1/user/unlink',
+					success: function (response) {
+						console.log("카카오 로그아웃 성공", response);},
+					fail: function (error) {
+						console.log("카카오 로그아웃 실패", error);}
+				})
+				Kakao.Auth.setAccessToken(undefined)
+			}
+		},
+		},
+		google : {
+		data : {
+			clientId : '1048162818783-hjp4j0h4m9uehdm28uvq9fe6299otejd.apps.googleusercontent.com',
+			apikey : 'AIzaSyCBY096HpUHFEEd6FV_qYaKEYBYtPoVNNk',
+		},
+			init : function (elId){
+				gapi.load('auth2', function() {
+				gapi.auth2.init({client_id: social.google.data.clientId});
+				let options = new gapi.auth2.SigninOptionsBuilder();
+				options.setPrompt('select_account');
+				options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
+				gapi.auth2.getAuthInstance().attachClickHandler(elId, options, social.google.loginSuccess, social.google.logoutFail);
+			});
+			},
+			loginSuccess : function (googleUser){
+			 console.log("구글 로그인 성공", googleUser);
+			let profile = googleUser.getBasicProfile();
+				let userInfo = {
+				type : 'google',
+				id : profile.getId(),
+				nm : profile.getName(),
+				email : profile.getEmail()
+				};
+			socialGetInfo(userInfo);
+			setTimeout(social.google.logout, 500);
+			},
+		logoutFail : function (error){
+			console.log("구글 로그인 실패", error);
+		},
+		logout : function (){
+			let auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function () {
+			 console.log('구글 로그아웃 성공 ');
+			});
+			}
+		}
+	}
+	
+$(function(){
+			social.kakao.init();
+			social.google.init("googleBtn");			
+		});
+		
+		function socialGetInfo(info){
+			$('#loginType').val(info.type);
+			$('#socialId').val(info.id);
+			$('#socialEmail').val(info.email);
+			$('#sociaNickname').val(info.nm);
+			setTimeout($('#form').submit(), 2000);
+		}	
+	
 //유효성 검사
 const forms = document.getElementsByClassName('validation-form'); 
 window.addEventListener('load', () => { 
@@ -12,6 +111,7 @@ window.addEventListener('load', () => {
             }, false); 
         }); 
     }, false);
+    
 //이메일 인증 
 function certification(){
     if($('#userEmail').val() == '') {
@@ -47,6 +147,7 @@ $("#emailCheck").click(function(){
         }
     });
 });
+
 //이메일 인증코드 입력시 동일한지 확인
 $("#emailCheck").click(function(){
     var inputCode=$("#certificationCode").val();
@@ -61,12 +162,14 @@ $("#emailCheck").click(function(){
         }
     }
 });
+
 //비밀번호 일치 확인
 function pwdCheck(){    
     if ($('#pwd2').val() != "" && $('#pwd1').val() !== $('#pwd2').val()){
         alert("비밀번호가 일치하지 않습니다. 정확하게 입력해주세요.");
     }
 }
+
 //아이디 중복 검사
 function idDuplCheck(){
     //공란인 채로 중복확인 눌렀을 때
@@ -217,3 +320,6 @@ $(document).ready(function(){
         }
     });
 });
+
+
+	

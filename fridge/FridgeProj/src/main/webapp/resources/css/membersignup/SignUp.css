@@ -51,19 +51,6 @@ body {
     color: #757575;
 	}
 	
-	.email-input__separator{
-    font-family: "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    letter-spacing: -0.4px;
-    font-size: 13px;
-    -webkit-box-direction: normal;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-box-flex: 0;
-    flex: 0 0 20px;
-    text-align: center;
-    line-height: 40px;
-    color: #dbdbdb;	
-	}
 	.css-1k406r0-SNSList {
     display: flex;
     -webkit-box-pack: center;
@@ -74,7 +61,12 @@ body {
 	ul {
     list-style: none;
 	}
-	img{
+	#kakao{
+	width: 185px;
+	height: 45px;
+	/*transform: translate(-50%, -50%);*/
+	}
+	#google{
 	width: 185px;
 	height: 45px;
 	}
