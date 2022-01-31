@@ -34,6 +34,7 @@ public class LoginController {
 		if(!flag) {//로그인 실패시
 			status.setComplete();
 			model.addAttribute("NotMember","아이디 또는 비밀번호가 일치하지 않습니다.");
+			return "member/Login.tiles";
 		}
 		//뷰정보 반환
 		return "home.tiles";

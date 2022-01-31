@@ -40,10 +40,13 @@
 	    <choose>
 	        <when test="room != 0">
 	            where room=#{room}
+	            ORDER BY c.c_no
 	        </when>
 	        <otherwise>
 	            where (recv_id = #{recv_nick} and send_id = #{nick}) or (send_id = #{recv_nick} and recv_id = #{nick})
+	            ORDER BY c.c_no
 	        </otherwise>
+	        
 	    </choose>
 	</select>
 	
@@ -81,10 +84,10 @@
 	<insert id="messageSendInlist" parameterType="messageDTO">
 	    <choose>
 	        <when test="room != 0">
-	            insert into chat values(SEQ_chat_c_no.NEXTVAL, #{send_nick}, #{recv_nick}, SYSDATE, SYSDATE, #{content}, 1, #{room})
+	            insert into chat values(SEQ_chat_c_no.NEXTVAL, #{send_nick}, #{recv_nick}, TO_DATE(#{send_time},'MM-DD HH24:MI'), SYSDATE, #{content}, #{read_chk}, #{room})
 	        </when>
 	        <otherwise>
-	            insert into chat values(SEQ_chat_c_no.NEXTVAL, #{send_nick}, #{recv_nick}, SYSDATE, SYSDATE, #{content}, 1,  #{room})
+	            insert into chat values(SEQ_chat_c_no.NEXTVAL, #{send_nick}, #{recv_nick}, TO_DATE(#{send_time},'MM-DD HH24:MI'), SYSDATE, #{content}, #{read_chk},  #{room})
 	        </otherwise>
 	    </choose>
 	</insert>

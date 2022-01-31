@@ -19,7 +19,7 @@
 	                <a href="https://themefisher.com/free-bootstrap-templates/" target="_blank">
 	                    Free Bootstrap Templates
 	                </a>
-	            </p>s
+	            </p>
 	        </div>
 	        <div class="col-md-4">
 	            <!-- Social Media -->

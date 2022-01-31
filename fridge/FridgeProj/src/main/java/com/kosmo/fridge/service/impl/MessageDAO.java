@@ -61,7 +61,6 @@ public class MessageDAO {
 	
 	// 메세지 list에서 메세지를 보낸다.
 	public int messageSendInlist(MessageTO to) {
-		
 		// 메세지리스트에서 보낸건지 프로필에서 보낸건지 구분하기 위함
 		if(to.getRoom() == 0) {	// room이 0이라면 프로필에서 보낸거다
 			int exist_chat = sqlSession.selectOne("exist_chat", to);

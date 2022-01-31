@@ -21,6 +21,7 @@ public class MessageController {
 	@Autowired
 	private MessageDAO messageDao;
 
+	
 	// 메세지 목록
 	@RequestMapping(value = "/message_list.do")
 	public String message_list(HttpServletRequest request) {
@@ -74,6 +75,7 @@ public class MessageController {
 		return "message/message_content_list";
 	}
 
+	
 	// 메세지 리스트에서 메세지 보내기
 	@ResponseBody
 	@RequestMapping(value = "/message_send_inlist.do")
@@ -83,6 +85,7 @@ public class MessageController {
 		MessageTO to = new MessageTO();
 		to.setRoom(room);
 		to.setSend_nick((String) session.getAttribute("id"));
+		System.out.println((String) session.getAttribute("id"));
 		to.setRecv_nick(other_nick);
 		to.setContent(content);
 
