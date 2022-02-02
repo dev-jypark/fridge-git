@@ -276,6 +276,19 @@
 		    <artifactId>spring-context-support</artifactId>
 		    <version>4.3.30.RELEASE</version>
 		</dependency>
+		<!-- 구글 클라우드api 사용 -->
+		<dependency>
+		      <groupId>org.springframework.cloud</groupId>
+		      <artifactId>spring-cloud-gcp-dependencies</artifactId>
+		      <version>1.2.8.RELEASE</version>
+		      <type>pom</type>
+		      <scope>import</scope>
+	    </dependency>
+	    <dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-vision</artifactId>
+			<version>1.75.0</version>
+		</dependency>
 	</dependencies>
 	
     <build>
