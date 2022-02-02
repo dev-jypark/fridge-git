@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>찍먹냉장고 | 재료 작성하기</title>
+<title>찍먹냉장고 | 재료 상세보기</title>
 	<!-- css(외부라이브러리) -->	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -21,50 +21,60 @@
 </head>
 <body>
 
-<form method="POST" action="insert.do">
+
 	<div class="commerce-cart-wrap"
 		style="display: flex; align-items: center; justify-content: center;">
 		<div class="commerce-cart" style="width: 30%;">
-			<div class="cart-wrap" 
+			<div class="cart-wrap"
 				style="padding: 5px 30px 15px 30px; background-color: #fafafa; border: 1px solid #ededed; border-radius: 7px; margin-top: 180px;">
 
 				<h1 class="commerce-cart__group__header"
 					style="margin-top: 20px; border-bottom: 1px solid #ededed;">재료
-					작성하기</h1>
+					상세보기</h1>
 
-				<input type="text" class="form-control" id="" placeholder="작성자"
-						name="id" value="${sessionScope.id}" style="display: none;">
-						
+
 				<div class="form-group" style="margin-top: 20px;">
+					<input type="text" class="form-control" id="" placeholder="재료번호"
+						name="i_no" value="${data.i_no}" style="display: none;">
+				</div>
+				<div class="form-group">
 					<label for="recipient-name" class="control-label">재료명</label> <input
 						type="text" class="form-control" id="" placeholder="재료명"
-						name="i_name" value="">
+						value="${data.i_name}" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="recipient-name" class="control-label">수량</label> <input
 						type='number' min='1' max='500' step='1' class="form-control"
-						name="i_cnt" id="" placeholder="수량" value="">
+						id="" placeholder="수량" value="${data.i_cnt}" readonly="readonly">
 				</div>
 				<div class="form-group registration-date">
 					<label for="recipient-name" class="control-label">유통기한</label>
 					<div class="input-group registration-date-time">
 						<span class="input-group-addon" id="basic-addon1"> <span
 							class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-						</span> <input class="form-control" name="i_enddate"
-							id="registration-date" type="date" value="">
+						</span> <input class="form-control" id="registration-date" 
+							type="date" value="${data.i_enddate}" readonly="readonly">
+					</div>
+				</div>
+				<div>
+					<label for="recipient-name" class="control-label">등록일</label>
+					<div style="margin-bottom: 20px;">
+						<span>${data.i_postdate}</span>
 					</div>
 				</div>
 				<!-- 모달 취소&확인 버튼 -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default"><a href="/app/fridge/fridgeList.do">취소</a></button>
-					<input type="submit" class="btn btn-default"
-						style="background-color: #c3eee6; color: white;" value="확인" />
+					<button type="button" class="btn btn-default" style="background-color: #c3eee6; color: white;">
+					<a href="/app/fridge/fridgeEdit.do?i_no=${data.i_no}">수정</a></button>
 				</div>
+
 			</div>
 		</div>
+
 	</div>
-</form>
-<!-- </form> -->
+
+	<!-- </form> -->
 </body>
 </html>
 <jsp:include page="/WEB-INF/views/template/Footer.jsp" />

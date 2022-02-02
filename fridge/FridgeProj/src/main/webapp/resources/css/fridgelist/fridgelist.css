@@ -488,6 +488,13 @@ circle[Attributes Style] {
     position: relative;
     background-color: #fff;
 }
+.cart-wrap{
+	padding: 5px 30px 15px 30px;
+    background-color: #fafafa;
+    border: 1px solid #ededed;
+    border-radius: 7px;
+    margin-top: 180px;
+}
 @media (min-width: 1024px)
 .container {
     margin-right: auto;
@@ -866,8 +873,19 @@ a * {
     margin-block-start: 1.33em;
     margin-block-end: 1.33em;
 }
-.css-f55hds-Caption {
+.enddate {
     font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    margin: 0;
+    color: rgb(117, 117, 117);
+    overflow-wrap: break-word;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.enddate_copy{
+	font-weight: normal;
     font-size: 13px;
     line-height: 15px;
     margin: 0;
@@ -1743,6 +1761,7 @@ a:hover, a:focus {
    width: 100%;
    height: 100%;
    background-color: #95E1D3;
+   color: #fff;
 }
 /*nice select(드롭다운)*/
 .nice-select {
