@@ -30,9 +30,22 @@ public class IngrediantServiceImpl implements IngrediantService{
 	public void fridgeWrite(IngrediantDTO ingrediantDTO) {
 		ingrediantDAO.fridgeWrite(ingrediantDTO);	
 	}
-	
+	//상세보기
+	@Override
+	public IngrediantDTO detail(int i_no) {
+		return ingrediantDAO.detail(i_no);
+	}
 	//수정
-	
+	@Override
+	public void fridgeEdit(IngrediantDTO ingrediantDTO) {
+		ingrediantDAO.fridgeEdit(ingrediantDTO);
+	}
 	//삭제
-	
+	public void ingreDelete(String i_no) {
+		ingrediantDAO.ingreDelete(i_no);
+	}
+	//유통기한 임박순 정렬
+	public List<IngrediantDTO> sortByEnd() {
+		return ingrediantDAO.sortByEnd();
+	}
 }

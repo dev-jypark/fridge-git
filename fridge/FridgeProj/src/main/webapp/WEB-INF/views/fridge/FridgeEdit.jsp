@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>찍먹냉장고 | 재료 작성하기</title>
+<title>찍먹냉장고 | 재료 수정하기</title>
 	<!-- css(외부라이브러리) -->	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<form method="POST" action="insert.do">
+<form method="post" action="edit.do">
 	<div class="commerce-cart-wrap"
 		style="display: flex; align-items: center; justify-content: center;">
 		<div class="commerce-cart" style="width: 30%;">
@@ -30,20 +30,26 @@
 
 				<h1 class="commerce-cart__group__header"
 					style="margin-top: 20px; border-bottom: 1px solid #ededed;">재료
-					작성하기</h1>
+					수정하기</h1>
 
-				<input type="text" class="form-control" id="" placeholder="작성자"
-						name="id" value="${sessionScope.id}" style="display: none;">
-						
+
 				<div class="form-group" style="margin-top: 20px;">
+					<input type="text" class="form-control" id="" placeholder="재료번호" 
+						name="i_no" value="${data.i_no}" style="display: none;">
+				</div>
+				
+				<input type="text" class="form-control" placeholder="작성자"
+						name="id" value="${sessionScope.id}" style="display: none;">
+				
+				<div class="form-group">
 					<label for="recipient-name" class="control-label">재료명</label> <input
 						type="text" class="form-control" id="" placeholder="재료명"
-						name="i_name" value="">
+						name="i_name" value="${data.i_name}">
 				</div>
 				<div class="form-group">
 					<label for="recipient-name" class="control-label">수량</label> <input
 						type='number' min='1' max='500' step='1' class="form-control"
-						name="i_cnt" id="" placeholder="수량" value="">
+						name="i_cnt" id="" placeholder="수량" value="${data.i_cnt}">
 				</div>
 				<div class="form-group registration-date">
 					<label for="recipient-name" class="control-label">유통기한</label>
@@ -51,14 +57,15 @@
 						<span class="input-group-addon" id="basic-addon1"> <span
 							class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 						</span> <input class="form-control" name="i_enddate"
-							id="registration-date" type="date" value="">
+							id="registration-date" type="date" value="${data.i_enddate}">
 					</div>
 				</div>
 				<!-- 모달 취소&확인 버튼 -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default"><a href="/app/fridge/fridgeList.do">취소</a></button>
-					<input type="submit" class="btn btn-default"
-						style="background-color: #c3eee6; color: white;" value="확인" />
+					<button type="button" class="btn btn-default">
+						<a href="/app/fridge/fridgeView.do">취소</a>
+					</button>
+					<button class="btn btn-default" type="submit" style="background-color: #c3eee6; color: white;">확인</button>
 				</div>
 			</div>
 		</div>

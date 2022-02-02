@@ -50,9 +50,24 @@ public class IngrediantDAO {
 		SqlSession session= sqlMapper.openSession();
 		session.insert("fridgeWrite", ingrediantDTO);
 	}
-	
+	//상세보기
+	public IngrediantDTO detail(int i_no) {
+		SqlSession session= sqlMapper.openSession();
+		return session.selectOne("detail", i_no);
+	}
 	//수정
-
+	public void fridgeEdit(IngrediantDTO ingrediantDTO) {
+		SqlSession session= sqlMapper.openSession();
+		session.update("fridgeEdit", ingrediantDTO);
+	}
 	//삭제
-	
+	public void ingreDelete(String i_no) {
+		SqlSession session= sqlMapper.openSession();
+		session.delete("ingreDelete", i_no);
+	}
+	//유통기한 임박순
+	public List<IngrediantDTO> sortByEnd() {
+		SqlSession session= sqlMapper.openSession();
+		return session.selectList("sortByEnd");
+	}
 }
