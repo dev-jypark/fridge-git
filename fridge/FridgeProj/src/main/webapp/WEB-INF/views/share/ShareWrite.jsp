@@ -71,6 +71,8 @@
 							return ($(element).attr("value")==index);
 						});
 		$(element).parents("tr").find("input:checkbox[name='check']").prop("checked", false);
+		$(element).parents("tr").find("input[type='number']").attr('readonly',true);
+		$(element).parents("tr").find("input[type='number']").val("");
         $(e.target).parent().remove();
 	}
 	function nextStep1() {
@@ -116,22 +118,26 @@
 		var formData = new FormData($("form")[0]);
 		var checkboxes = [];
 		var counts = [];
-		
+		var ingrediantcounts = [];
+		//텍스트박스 값 추출
 		$("input:checkbox[name='check']:checked").each(function(){
 			checkboxes.push($(this).val());
 			console.log("checkboxes"+$(this).val());
 		});
-		
+		//사용자 입력 갯수, 기존 재료 갯수 추출
 		$("input[type='number']:not([readonly])").each(function(){
 			counts.push($(this).val());
+			ingrediantcounts.push($(this).attr("max"));
 		});
-
+		
+		
 		$.each($("input[type='file']")[0].files, function(i, file){
 			formData.append('file', file);
 		});
 	
 		formData.append("checkboxes", checkboxes);
 		formData.append("counts", counts);
+		formData.append("ingrediantcounts", ingrediantcounts);
 		
 		console.log("%O",checkboxes);
 		$.ajax({
@@ -152,17 +158,16 @@
 					location.href="/app/shareList.do";
 				}
 			} 
-		});
-		
+		});	
 	}
 	
 
 </script>
-<div class="container">
+<div class="container" style="margin-top : 100px;">
 	<div class="row">
 		<div class="mb-5 p-4 bg-white shadow-sm col-lg-12">
 			<div class="bs-stepper linear col-lg-12">
-				<div class="bs-stepper-header" role="tablist">
+				<div class="bs-stepper-header" role="tablist" style="margin-top : 50px;">
 				  <div class="step" data-target="#step-1">
 					<button type="button" class="step-trigger" role="tab" aria-controls="step-1-trigger" id="step-1-trigger">
 					  <span class="bs-stepper-circle">1</span>
@@ -239,7 +244,7 @@
 						<ul class="tag-list">
 						</ul>
 					</div>
-					<button class="btn btn-primary" onclick="nextStep1();">Next</button>
+					<button class="btn btn-primary" onclick="nextStep1();" style="float: right; background-color : #95E1D3; border : 0px">Next</button>
 				  </div>
 				  
 				  <!-- step2 content -->
@@ -255,8 +260,8 @@
 					<script src="<c:url value="/resources/js/sharewrite/image.js"/>"></script>
 					&nbsp;
 					
-					<button class="btn btn-primary" onclick="stepper.previous();console.log('previous');">Previous</button>
-					<button class="btn btn-primary" onclick="nextStep2();">Next</button>
+					<button class="btn btn-primary" onclick="stepper.previous();console.log('previous');" style="float: left ; background-color : #95E1D3; border : 0px">Previous</button>
+					<button class="btn btn-primary" onclick="nextStep2();" style="float: right; background-color : #95E1D3; border : 0px">Next</button>
 				  </div>
 				  <!-- step3 content -->
 				  <div id="step-3" role="tabpanel" class="content bs-stepper-pane" aria-labelledby="step-3-trigger">
@@ -265,7 +270,6 @@
 						<label class="control-label col-sm-2" for="fname"><strong>제목</strong></label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="fname" placeholder="제목을 입력하세요" name="title">
-							<input type="hidden" name="id" value="kim"/>
 						</div>
 					</div>
 					<div class="form-group">
@@ -274,8 +278,8 @@
 							<textarea class="form-control" rows="5" id="comment" placeholder="상세내용을 입력하세요" name="content"></textarea>
 						</div>
 					</div>
-					<button class="btn btn-primary" onclick="stepper.previous()">Previous</button>
-					<button class="btn btn-primary" onclick="send()">등록</button>
+					<button class="btn btn-primary" onclick="stepper.previous()" style="float: left; background-color : #95E1D3; border : 0px">Previous</button>
+					<button class="btn btn-primary" onclick="send()" style="float: right; background-color : #95E1D3; border : 0px">등록</button>
 				</div>
 					<!-- <div class="form-group">
 					  <label for="exampleInputEmail1">Email address</label>

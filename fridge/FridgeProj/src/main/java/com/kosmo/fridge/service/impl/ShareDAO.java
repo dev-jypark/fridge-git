@@ -31,8 +31,9 @@ public class ShareDAO {
 		return listShare;
 	}
 
-	public List selectIngrediantList(String id) {
-		List<IngrediantDTO> listIngrediant= template.selectList("shareSelectIngrediantList", id);
+	public List selectIngrediantList(Map map) {
+		//System.out.println("DAO 아이디 : "+map.get("id"));
+		List<IngrediantDTO> listIngrediant= template.selectList("shareSelectIngrediantList", map);
 		return listIngrediant;
 	}
 
@@ -50,6 +51,29 @@ public class ShareDAO {
 
 	public ShareDTO selectOne(Map map) {
 		return template.selectOne("shareSelectOne",map);
+	}
+
+	public void updateIngrediant(Map map) {
+		template.update("ingrediantCountUpdate", map);
+	}
+
+	public int deleteSharePost(Map map) {
+		return template.delete("sharePostDelete",map);
+	}
+
+	public int rollbackIngrediant(List list) {
+		return template.update("ingrediantRollback",list);
+		
+	}
+	//트레이드에서 재료에 더해줄 것들 개수, i_no 가져옴
+	public List selectRollbackIngre(Map map) {
+		System.out.println("롤백 dao 들어옴");
+		List<IngrediantDTO> listIngrediant = template.selectList("shareSelectRollbackIngre",map);
+		for(IngrediantDTO dto : listIngrediant) {
+			System.out.println(dto);
+		}
+		
+		return listIngrediant;
 	}
 	
 }

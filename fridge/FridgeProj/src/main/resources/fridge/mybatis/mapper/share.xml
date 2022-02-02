@@ -60,8 +60,10 @@
 	
 	<select id="shareSelectIngrediantList" parameterType="Map" resultMap="ingrediantDTOResult">
 		SELECT * 
-		FROM ingrediant ORDER BY i_postdate DESC
-		WHERE id=#{id}
+		FROM ingrediant
+		<!-- 유통기한 3일 이상 남은 식품만 가져온다 -->
+		WHERE id=#{id} AND TO_CHAR(i_enddate,'YY/MM/dd') >= TO_CHAR(SYSDATE-3,'YY/MM/dd')
+		ORDER BY i_postdate DESC
 	</select>
 	
 	<insert id="sharePostInsert" parameterType="Map">
@@ -100,4 +102,26 @@
 			WHERE tb_no=#{no}
 		</if>
 	</select>
+	
+	<!-- ingredianCountUpdate -->
+	<update id="ingrediantCountUpdate" parameterType="Map">
+		UPDATE ingrediant SET i_cnt=#{i_cnt} WHERE i_no=#{i_no}
+	</update>
+	
+	<select id="shareSelectRollbackIngre" parameterType="Map" resultMap="ingrediantDTOResult">
+		SELECT t_cnt, i_no
+		FROM trade
+		WHERE tb_no=#{tb_no}
+	</select>
+	
+	<update id="ingrediantRollback" parameterType="List">
+		<foreach collection="list" item="item" separator=",">
+			UPDATE ingrediant SET i_cnt = i_cnt + #{item.t_cnt} WHERE i_no=#{item.i_no}
+		</foreach>
+	</update>
+	
+	<delete id="sharePostDelete" parameterType="Map">
+		DELETE FROM t_bbs WHERE tb_no=#{tb_no}
+	</delete>
+	
 </mapper>

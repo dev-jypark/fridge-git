@@ -79,7 +79,7 @@
 							<div class="articleThumb">
 								<!-- 이미지 -->
 								<!-- resources/images/share-list/our-blog/img-1.jpg -->
-								<a href="<c:url value="/shareEdit.do?no=${item.tbNo }"/>"><img src="<c:url value="/resources/images/share-list/our-blog/img-1.jpg"/>" alt=""></a>
+								<a href="<c:url value="/shareDelete.do?tb_no=${item.tbNo }"/>"><img src="<c:url value="/resources/images/share-list/our-blog/img-1.jpg"/>" alt=""></a>
 							</div>
 							<!-- 글 제목 -->
 							<!-- 글 제목 한 줄 넘어가면 ... 으로 표시하기 -->

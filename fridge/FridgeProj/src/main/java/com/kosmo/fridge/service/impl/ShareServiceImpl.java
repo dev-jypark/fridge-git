@@ -15,8 +15,12 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -89,12 +93,15 @@ public class ShareServiceImpl implements ShareService{
 		List<MultipartFile> listImgFile = multipartRequest.getFiles("file");
 		String[] checkboxes = multipartRequest.getParameterValues("checkboxes");
 		String[] counts = multipartRequest.getParameterValues("counts");	
+		String[] ingrediantcounts = multipartRequest.getParameterValues("ingrediantcounts");
 		String title=multipartRequest.getParameter("title");
 		String content=multipartRequest.getParameter("content");
-		String id=multipartRequest.getParameter("id");
+		
+		String id=(String) multipartRequest.getSession().getAttribute("id");
 		
 		checkboxes = checkboxes[0].split(",");
 		counts = counts[0].split(",");
+		ingrediantcounts = ingrediantcounts[0].split(",");
 		/*배열에 담긴 값 확인
 		System.out.println("checkboxes.length : "+ checkboxes.length);
 		System.out.println("counts.length : "+ counts.length);
@@ -159,9 +166,12 @@ public class ShareServiceImpl implements ShareService{
 		for(int index = 0; index < counts.length; index++) {
 			map.put("count", counts[index]);
 			map.put("i_no", checkboxes[index]);
+			//거래 등록한 제품 수 빼고 재료 테이블 i_cnt 업데이트
+			map.put("i_cnt", Integer.parseInt(ingrediantcounts[index]) - Integer.parseInt(counts[index]));
 			System.out.println("cnt : "+counts[index]+", cbox : "+checkboxes[index]);
 			try {
 			dao.insertShareProduct(map);
+			dao.updateIngrediant(map);
 			} catch(Exception e) {
 				System.out.println("tradeinserterror");
 				e.printStackTrace();
@@ -169,14 +179,34 @@ public class ShareServiceImpl implements ShareService{
 			}
 		}
 		//거래물(trade) 업로드 마침
-		
 		return true;
 	}
 
+	/*
+	 * @Autowired private TransactionTemplate transactionTemplate;
+	 */
 	@Override
 	public int delete(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("삭제 서비스");
+		int affected=0;
+		/*
+		 * int affected=0; try { transactionTemplate.execute(new
+		 * TransactionCallback<Integer>() {
+		 * 
+		 * @Override public Integer doInTransaction(TransactionStatus status) {
+		 * dao.deleteSharePost(map); return null; } });
+		 * 
+		 * } catch(Exception e) {e.printStackTrace();} return 0;
+		 */
+		List<IngrediantDTO> listIngrediant = dao.selectRollbackIngre(map);
+		/*
+		 * for(IngrediantDTO dto : listIngrediant) { System.out.println(dto); }
+		 */
+			
+		dao.rollbackIngrediant(listIngrediant);
+		//casecade 제약조건 붙어있어서 post만 삭제하면 관련된 것들 모두 삭제됨
+		affected = dao.deleteSharePost(map);
+		return affected;
 	}
 
 	@Override
@@ -191,8 +221,9 @@ public class ShareServiceImpl implements ShareService{
 	}
 
 	//글 작성 페이지로 이동할 때 사용자 재료 목록 조회
-	public List<IngrediantDTO> selectIngrediantList(String id) {
-		List<IngrediantDTO> listIngrediant = dao.selectIngrediantList(id);
+	public List<IngrediantDTO> selectIngrediantList(Map map) {
+		//System.out.println("서비스 아이디 : "+map.get("id"));
+		List<IngrediantDTO> listIngrediant = dao.selectIngrediantList(map);
 		return listIngrediant;
 	}
 	

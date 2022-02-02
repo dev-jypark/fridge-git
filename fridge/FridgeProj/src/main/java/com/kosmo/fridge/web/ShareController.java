@@ -5,7 +5,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.fridge.service.IngrediantDTO;
+import com.kosmo.fridge.service.MemberDTO;
 import com.kosmo.fridge.service.ShareDTO;
 import com.kosmo.fridge.service.TradeDTO;
 import com.kosmo.fridge.service.impl.ShareServiceImpl;
@@ -65,9 +68,13 @@ public class ShareController {
 	
 	//글 작성 폼으로 이동
 	@RequestMapping(value = "/shareWrite.do", method = RequestMethod.GET)
-	public String write(@ModelAttribute("id") String id, Model model) {
+	public String write(HttpSession session, Model model) {
 		//로그인 회원가입 연결하고 나서 사용자 id와 일치하는 재료만 받아오기
-		List<IngrediantDTO> listIngrediant = shareService.selectIngrediantList(id);
+		//map에 아이디 저장
+		Map map = new HashedMap();
+		map.put("id", session.getAttribute("id"));
+		//System.out.println("컨트롤러 아이디 : "+map.get("id"));
+		List<IngrediantDTO> listIngrediant = shareService.selectIngrediantList(map);
 		model.addAttribute("listIngrediant", listIngrediant);
 		return "share/ShareWrite";
 	}
@@ -97,4 +104,17 @@ public class ShareController {
 		}
 		return null;
 	}
+	
+	//글 삭제
+	@RequestMapping(value="/shareDelete.do")
+	public String delete(@RequestParam Map map ,HttpServletRequest req) {
+		System.out.println("삭제 컨트롤러");
+		System.out.println(map.get("tb_no"));
+		//삭제할 때 #{tb_no} 임
+		shareService.delete(map);
+		return "share/ShareList.tiles";
+	}
+	
+	@RequestMapping(value="/shareLike.do")
+	
 }

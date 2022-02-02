@@ -28,8 +28,6 @@ public class LoginController {
 	//로그인 처리
 	@RequestMapping("/loginprocess")
 	public String process(@RequestParam Map map,Model model,SessionStatus status){
-		System.out.println("id : "+map.get("id"));
-		System.out.println("pwd : "+map.get("pwd"));
 		//서비스 호출
 		boolean flag= memberService.isLogin(map);
 		model.addAttribute("id", map.get("id"));

@@ -85,7 +85,7 @@
 							</c:if>
                             <c:if test="${not isLogin }">
 	                            <li><a href="#" >커뮤니티</a></li>
-	                            <li><a href="about.html">나눔</a></li>
+	                            <li><a href="<c:url value="/shareWrite.do"/>">나눔</a></li>
 	                            <li><a href="service.html">레시피</a></li>
 	                            <li class="dropdown">
 	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">냉장고 <span class="caret"></span></a>
