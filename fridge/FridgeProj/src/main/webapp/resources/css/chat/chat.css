@@ -44,7 +44,8 @@ img{ max-width:100%;}
   width: 60%; 
   /*padding:*/
 }
-.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #f7f7f7;}
+.headind_srch{ padding:20px 29px 20px 20px; overflow:hidden; border-bottom:1px solid #f7f7f7;}
+.trade_info{ padding:20px 29px 20px 20px; overflow:hidden; border-bottom:1px solid #f7f7f7;  position: fixed; width:100%; background-color:#FFFFFF}
 
 .recent_heading h4 {
   color: #5fcf80;
@@ -120,7 +121,7 @@ inbox_chat { height: 550px; overflow-y: scroll;}
 .received_withd_msg { width: 57%;}
 .mesgs {
   float: left;
-  padding: 30px 15px 0 25px;
+  padding: 0 15px 0 25px;
   width: 60%;
 }
 

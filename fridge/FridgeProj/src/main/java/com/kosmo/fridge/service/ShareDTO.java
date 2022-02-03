@@ -26,6 +26,7 @@ public class ShareDTO {
 	
 	private String likeCount;
 	private String addr;
+	private String img;
 	
 	List<TradeDTO> listShareProduct;
 	List<ImageDTO> listImage;

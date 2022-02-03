@@ -54,6 +54,7 @@
 	        
 	        <!-- 메세지 내용 영역 -->
 	        <div class="mesgs">
+	        
 	          <!-- 메세지 내용 목록 -->
 	          <div class="msg_history" name="contentList">
 	            <!-- 메세지 내용이 올 자리 -->

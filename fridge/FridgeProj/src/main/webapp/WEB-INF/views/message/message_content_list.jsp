@@ -2,14 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<div class="trade_info">
+  <div class="recent_heading">
+    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/04/09/76706e4c14cfa819139505369b55425d1_m.jpg">
+    <span style="margin : 10px">오늘 먹은 두부 드려욜</span>
+    <button style="float : right">거래완료</button>
+  </div>
+</div>
 
-
-<c:forEach var="tmp" items="${clist }">
-	
+<div style="padding-top:65px">
+<c:forEach var="tmp" items="${clist }" varStatus="status">
+	<c:set var="status_count" value="${status.count }"/>
 	<c:choose>
 		<c:when test="${sessionScope.id ne tmp.send_nick }">
 		<!-- 받은 메세지 -->
-		<div class="incoming_msg">
+		<div class="incoming_msg" <c:if test="${status.count} eq 1">style="padding-top:65px"</c:if>>
 			<div class="incoming_msg_img">
 				<a href="other_profile.do?other_nick=${tmp.send_nick }">
 					<%--보낸사람 프로필 생기면 이거 넣기 --%>
@@ -28,7 +35,7 @@
 		
 		<c:otherwise>
 		<!-- 보낸 메세지 -->
-		<div class="outgoing_msg">
+		<div class="outgoing_msg" <c:if test="${status.count} eq 1">style="padding-top:65px"</c:if>>
 			<div class="sent_msg">
 				<p>${tmp.content }</p>
 				<span class="time_date"> ${tmp.send_time }</span>
@@ -37,3 +44,4 @@
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
+</div>
