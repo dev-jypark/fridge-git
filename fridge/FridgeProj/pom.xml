@@ -255,7 +255,11 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>4.2.20.RELEASE</version>
 		</dependency>
-		
+		<dependency>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20210307</version>
+     	 </dependency>
 		<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
 		<dependency>
 		    <groupId>javax.annotation</groupId>
