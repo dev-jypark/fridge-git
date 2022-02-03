@@ -79,12 +79,5 @@
       </div>
     </div>
    
-    <script src="js/jquery-1.11.3.min.js"></script>
-
-    <script>
-    $('.comment').focusin(function(e) {
-    	$(this).next().css("color", "black").css("cursor", "pointer");
-    });
-    </script>
   </body>
 </html>

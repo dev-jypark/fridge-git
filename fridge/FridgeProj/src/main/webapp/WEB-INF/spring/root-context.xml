@@ -15,7 +15,7 @@
 		<property name="configLocation"	value="classpath:fridge/mybatis/configuration.xml" />
 	</bean>
 	
-	<bean  class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="template"  class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>	
 </beans>
