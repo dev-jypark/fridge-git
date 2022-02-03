@@ -1,5 +1,6 @@
 package com.kosmo.fridge.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -38,7 +39,7 @@ public class MemberDAO {
 	private SqlSessionFactory sqlMapper;
 	@Resource(name="template")
 	private SqlSessionTemplate template;
-
+	
 	//로그인
 	public boolean isLogin(Map map){
 		SqlSession session= sqlMapper.openSession();
@@ -46,16 +47,34 @@ public class MemberDAO {
 		session.close();
 		return count==1 ? true : false;
 	}
+	//소셜로그인
+	public int isSocialLogin(Map map){
+		SqlSession session= sqlMapper.openSession();
+		 int result=session.selectOne("memberSocialLogin",map);
+		return result;		 
+		}	
 	//회원가입
 	public void signUp(MemberDTO memberDTO) {
 		SqlSession session= sqlMapper.openSession();
 		session.insert("memberInsert", memberDTO);
 		session.commit();
 	}
+	//소셜회원가입
+	public void SocialSignUp(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		session.insert("memberSocialSignUp", memberDTO);
+		session.commit();
+		}
 	//약관동의
 	public void agreeOK(MemberDTO memberDTO) {
 		SqlSession session= sqlMapper.openSession();
 		session.insert("agreeInsert", memberDTO);
+		session.commit();
+	}
+	//소셜약관동의
+	public void socialAgreeOK(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		session.insert("socialAgreeInsert", memberDTO);
 		session.commit();
 	}
 	//아이디중복확인
@@ -95,4 +114,5 @@ public class MemberDAO {
 		SqlSession session= sqlMapper.openSession();
 		session.update("memberUpdate", memberDTO);	
 	}
+
 }

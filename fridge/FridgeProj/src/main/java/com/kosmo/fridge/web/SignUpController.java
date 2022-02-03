@@ -3,8 +3,10 @@ package com.kosmo.fridge.web;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosmo.fridge.service.MemberDTO;
 import com.kosmo.fridge.service.impl.MemberServiceImpl;
@@ -27,6 +29,17 @@ public class SignUpController {
 		memberService.agreeOK(memberDTO);
 		return "community/CommunityList.tiles";
 	}
+	@RequestMapping(value="/SocialSignUp",method=RequestMethod.GET)
+	public void SocialSignUpGET() {
+	}
+	//소셜 회원가입 POST]
+	@RequestMapping(value="/SocialSignUp",method=RequestMethod.POST)
+	public String socialSignUpPOST(@RequestParam Map map, MemberDTO memberDTO) {
+		memberService.SocialSignUp(memberDTO);
+		memberService.socialAgreeOK(memberDTO);
+		return "community/CommunityList.tiles";
+		}
+
 	//아이디중복 체크]
 	@RequestMapping(value="/checkMember",method=RequestMethod.POST) 
 	@ResponseBody

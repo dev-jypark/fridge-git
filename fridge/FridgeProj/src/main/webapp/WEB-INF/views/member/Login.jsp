@@ -6,26 +6,28 @@
 	session = request.getSession(true); 
 	String id = request.getParameter("id"); 
 	request.getSession().setAttribute("id", id); 
+	String socialId = request.getParameter("socialId"); 
+	request.getSession().setAttribute("socialId", socialId); 
 %>
 <!-- 실제 내용 시작 -->
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width">
-    <meta name ="google-signin-client_id" content="441484038811-mrvbvmvhpf3ufmobggcl7cffjscj4f2q.apps.googleusercontent.com">
+    <meta name ="google-signin-client_id" content="1048162818783-hjp4j0h4m9uehdm28uvq9fe6299otejd.apps.googleusercontent.com">
     <title>찍먹냉장고</title>
     <!-- css 파일 연결한 위치 -->
-    <link href="<c:url value='/resources/css/memberlogin/login.css'/>" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="<c:url value='/resources/js/memberlogin/login.js'/>"></script>
-  	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <link href=<c:url value="/resources/css/memberlogin/login.css"/> rel="stylesheet" type="text/css"/>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+   	<script src="<c:url value="/resources/js/member/login.js"/>"></script>  	
   </head>
   <style>
   	.alert_login {
 	  	margin-top: 10px;
-		margin-bottom: 10px;
-		
+		margin-bottom: 10px;		
 		text-align: center;
-		font-size: 14px;
+		font-size: 12px;
 		color: #8e8e8e;
   	}
   </style>
@@ -33,51 +35,62 @@
   	<div class>
   		찍먹냉장고(로고가 들어갈 자리입니다)
   	</div>
-	-
-    <div class="login_container">  
-	    
+	
+    <div class="login_container">  	    
     	
 		<form name="form1" method="post" action="<c:url value='/member/loginprocess.do'/>" onsubmit="return Login();">
-		<!-- 아이디가 일치하면 -->
-		<div class="alert_login">
-			<c:if test="${not empty sessionScope.id and empty NotMember}" var="isLogin">
-				<div class="col-xs-offset-1 col-xs-6 alert alert-success">
-					${sessionScope.id }님 찍먹냉장고에 오신 걸 환영합니다!
+			<!-- 아이디가 일치하면 -->
+			<div class="alert_login">
+				<c:if test="${not empty sessionScope.id and empty NotMember}" var="isLogin">
+					<!--  div class="col-xs-offset-1 col-xs-10 alert alert-success">
+						${sessionScope.id }님 찍먹냉장고에 오신 걸 환영합니다!
+					</div>-->
+				</c:if>
+			</div>
+			<!-- 아이디 또는 비밀번호 일치하지 않을때 -->
+		    <c:if test="${! empty  NotMember}">
+		    <!-- process의 NotMember value 띄우기 -->
+				<div class="alert_login">
+					<div class="col-xs-offset-1 col-xs-10 alert alert-warning fade in">				
+						${NotMember}
+					</div>
 				</div>
 			</c:if>
-		</div>
-		<!-- 아이디 또는 비밀번호 일치하지 않을때 -->
-	    <c:if test="${! empty  NotMember}">
-			<div class="alert_login">
-				<div class="col-xs-offset-1 col-xs-6 alert alert-warning fade in">
-					${NotMember}
-				</div>
-			</div>
-		</c:if>
-	    <div class="inputbox">
-	    <c:if test="${not isLogin}">
-	      <input type="text" class="input_login" name="id" id="id" placeholder="아이디">
-	      <input type="password" class="input_login" name="pwd" id="pwd" placeholder="비밀번호">
-	     <button type="submit" id="btn_login">로그인</button>
-	     </div>
+			<c:if test="${not isLogin}">
+			    <div class="inputbox">
+			      <input type="text" class="input_login" name="id" id="id" placeholder="아이디">
+			      <input type="password" class="input_login" name="pwd" id="pwd" placeholder="비밀번호">
+			     <button type="submit" id="btn_login">로그인</button>
+			     </div>
+			</c:if>
+	    </form>	 
 	      <!--카카오, 구글 -->
-	      
+	    <form action="<c:url value='/member/socialLogin.do'/>" method="post" id="form">
 	      <div id="socialLogin">
-	      	<a href=#>
-	      	<img id="kakao" alt="카카오 로그인" src="../resources/images/membersignup/kakao.png">
-	      	</a>   
-	      	<a href=#>
-	      	<img id="google" alt="구글 로그인" src="../resources/images/membersignup/google.png">
-	      	</a>  
+		      	<ul class="css-1k406r0-SNSList e111gxds1">
+				<li class="css-1balhvh-SNSItem e111gxds0" onclick="social.kakao.login()">
+					<a href="javascript:kakaologin()">
+					<img id="kakao" alt="카카오 로그인" src="<c:url value="/resources/images/member/kakao.png"/>">
+					</a>
+				</li>
+				<li id="googleBtn" class="css-1balhvh-SNSItem e111gxds0">
+					<a href="javascript:void(0)">
+					<img id="google" alt="구글 로그인" src= "<c:url value="/resources/images/member/google.png"/>">
+					</a>
+				</li>
+			</ul>
 	      </div>	
-	      	
-	      	<!-- 회원가입, 계정찾기 -->
+	      	<input type="hidden" name="loginType" id="loginType">
+	      	<input type="hidden" name="socialId" id="socialId">
+	      	<input type="hidden" name="socialEmail" id="socialEmail">
+			<input type="hidden" name="socialNickname" id="socialNickname">
+
+		</form>	 
+	      	<!-- 회원가입 -->
 	      	<span class="button_forgot" onClick="location.href='<c:url value="/member/SignUp.do"/>'"> 회원이 아니신가요?</span>	      
-	      </c:if>
-	    </form>	    
+	     	   
     </div>
-    <!-- JS 파일 걸어줄 위치 -->
-    <script src="../resources/js/memberlogin/login.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script> 
   </body>
 </html>
 

@@ -6,7 +6,7 @@
 <head>
 <!-- 나중에 파비콘 만들어 -->
 <!-- <link rel="icon" href="favicon.ico"> -->
-<title>찍먹냉장고 | 찍고 먹는 식품 제고 관리 커뮤니티</title>
+<title>찍먹냉장고 | 찍고 먹는 식품 재고 관리 커뮤니티</title>
 <!-- Mobile Specific Metas================================================== -->
 <meta name="format-detection" content="telephone=no">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,8 +68,9 @@
                     
                     <!-- logo -->
                     <div class="navbar-brand">
-                        <a href="/app" >
-                            <img src="<c:url value="/resources/images/template/logo.png"/>" alt="">
+                    
+                        <a href="<c:url value="/"/>"> 
+                        	찍먹냉장고                                
                         </a>
                     </div>
                    	<!-- /logo -->
@@ -79,7 +80,7 @@
                 <nav class="collapse navbar-collapse navbar-right" role="navigation">
                     <div class="main-menu">
                         <ul class="nav navbar-nav navbar-right">
-                        	<c:if test="${empty sessionScope.id }" var="isLogin">
+                        	<c:if test="${empty sessionScope.id && empty sessionScope.socialId}" var="isLogin">
                         	<li><a href="<c:url value="/member/SignUp.do"/>">회원가입</a></li>
                         	<li><a href="<c:url value="/member/login.do"/>">로그인</a></li>                        	
 							</c:if>
@@ -101,7 +102,7 @@
                                 <div class="dropdown-menu">
                                     <ul>
                                         <li><a href="#">프로필</a></li>
-                                        <li><a href="#">설정</a></li>
+                                        <li><a href="<c:url value="/mypageEdit.do"/>">회원정보 수정</a></li>
                                         <li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>
                                     </ul>
                                 </div>

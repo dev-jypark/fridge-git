@@ -1,15 +1,16 @@
 package com.kosmo.fridge.service;
 
 import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+ import lombok.NoArgsConstructor;
+ import lombok.Setter;
 
-@Data
+//@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,5 +23,10 @@ public class MemberDTO {
 	private String addr;
 	private String agree;
 	private String imgsrc;
+	private String socialId;
+	private String socialEmail;
+	private String socialNickname;
 	private java.sql.Date regdate;
+	
+	
 }
