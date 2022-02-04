@@ -2,11 +2,8 @@ package com.kosmo.fridge.service.impl;
 
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
-
 import com.kosmo.fridge.service.MemberDTO;
 import com.kosmo.fridge.service.MemberService;
 
@@ -41,6 +38,7 @@ public class MemberServiceImpl implements MemberService{
 		memberDAO.agreeOK(memberDTO);	
 	}
 	//소셜약관동의
+	@Override
 	public void socialAgreeOK(MemberDTO memberDTO) {
 		memberDAO.socialAgreeOK(memberDTO);			
 	}	
@@ -54,11 +52,6 @@ public class MemberServiceImpl implements MemberService{
 	public int checkNick(MemberDTO memberDTO) {
 		return memberDAO.checkNick(memberDTO);
 	}
-	//비밀번호변경
-	@Override
-	public void changePwd(MemberDTO memberDTO) {
-		memberDAO.changePwd(memberDTO);
-	}
 	//아이디찾기
 	@Override
 	public MemberDTO searchId(MemberDTO memberDTO) {
@@ -69,14 +62,10 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDTO searchPwd(MemberDTO memberDTO) {
 		return memberDAO.searchPwd(memberDTO);
 	}
-	//회원정보보기
+	//비밀번호수정
 	@Override
-	public MemberDTO readMember(String id) {
-		return memberDAO.readMember(id);
+	public void pwdEdit(MemberDTO memberDTO) {
+		memberDAO.pwdEdit(memberDTO);
 	}
-	//회원정보수정
-	@Override
-	public void memberEdit(MemberDTO memberDTO) {
-		memberDAO.memberEdit(memberDTO);
-	}
+
 }

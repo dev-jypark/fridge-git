@@ -23,8 +23,8 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-	</servlet>
-		
+		</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
@@ -32,7 +32,8 @@
 	
 	<!-- 한글 깨짐 해결 -->
 	<filter>
-		<filter-name>CharacterEncoding</filter-name><!-- filter-name은 임의로 -->
+		<filter-name>CharacterEncoding</filter-name>
+		<!-- filter-name은 임의로 -->
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<!-- param-name과 param-value은 아래처럼 -->

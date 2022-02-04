@@ -80,34 +80,65 @@
                 <nav class="collapse navbar-collapse navbar-right" role="navigation">
                     <div class="main-menu">
                         <ul class="nav navbar-nav navbar-right">
-                        	<c:if test="${empty sessionScope.id && empty sessionScope.socialId}" var="isLogin">
+                        	<!-- 로그인 여부 판별. 로그인 전이라면 회원가입과 로그인만 노출 -->
+                        	<c:if test="${empty sessionScope.id && empty sessionScope.socialId}" var="beforeLogin">
                         	<li><a href="<c:url value="/member/SignUp.do"/>">회원가입</a></li>
                         	<li><a href="<c:url value="/member/login.do"/>">로그인</a></li>                        	
 							</c:if>
-                            <c:if test="${not isLogin }">
-                            <li><a href="#" >커뮤니티</a></li>
-                            <li><a href="about.html">나눔</a></li>
-                            <li><a href="service.html">레시피</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">냉장고 <span class="caret"></span></a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a href="#">404 Page</a></li>
-                                        <li><a href="#">Gallery</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<span class="caret"></span></a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a href="#">프로필</a></li>
-                                        <li><a href="<c:url value="/mypageEdit.do"/>">회원정보 수정</a></li>
-                                        <li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="contact.html">채팅</a></li>
+                            <c:if test="${not beforeLogin }">
+                            <!-- 세션 저장값으로 소셜로그인 여부 판별. 소셜로그인인 경우 마이페이지:비밀번호변경 카테고리 숨김 -->
+	                            <c:if test="${empty sessionScope.id}" var="isSocialLogin">
+	                            <li><a href="<c:url value=""/>" >커뮤니티</a></li>
+	                            <li><a href="about.html">나눔</a></li>
+	                            <li><a href="service.html">레시피</a></li>
+	                            <li class="dropdown">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">냉장고 <span class="caret"></span></a>
+	                                <div class="dropdown-menu">
+	                                    <ul>
+	                                        <li><a href="#">404 Page</a></li>
+	                                        <li><a href="#">Gallery</a></li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            <li class="dropdown">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<span class="caret"></span></a>
+	                                <div class="dropdown-menu">
+	                                    <ul>
+	                                        <li><a href="<c:url value="/mypage/memberinfo/Profile.do"/>">프로필</a></li>
+	                                        <li><a href="<c:url value="/mypage/memberinfo/Edit.do"/>">회원상세정보</a></li>
+	                                        <li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            <li><a href="contact.html">채팅</a></li>
+	                            </c:if>
+	                            
+	                            <c:if test="${not isSocialLogin }">
+	                            <li><a href="<c:url value=""/>" >커뮤니티</a></li>
+	                            <li><a href="about.html">나눔</a></li>
+	                            <li><a href="service.html">레시피</a></li>
+	                            <li class="dropdown">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">냉장고 <span class="caret"></span></a>
+	                                <div class="dropdown-menu">
+	                                    <ul>
+	                                        <li><a href="#">404 Page</a></li>
+	                                        <li><a href="#">Gallery</a></li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            <li class="dropdown">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">마이페이지<span class="caret"></span></a>
+	                                <div class="dropdown-menu">
+	                                    <ul>
+	                                        <li><a href="<c:url value="/mypage/memberinfo/Profile.do"/>">프로필</a></li>
+	                                        <li><a href="<c:url value="/mypage/memberinfo/Edit.do"/>">회원상세정보</a></li>
+	                                        <li><a href="<c:url value="/mypage/memberinfo/Password.do"/>">비밀번호변경</a></li>
+	                                        <li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            <li><a href="contact.html">채팅</a></li>
+	                            </c:if>
                             </c:if>
                         </ul>
                     </div>

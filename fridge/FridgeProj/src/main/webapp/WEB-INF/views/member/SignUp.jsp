@@ -94,14 +94,6 @@
 					type="button">인증하기</button>
 					<!-- <button class="btn btn-lg btn-block" style="border-color: #95E1D3; color: #95E1D3; margin-top:10px" type="submit">이메일 확인</button> -->
 				</div>
-				<!-- 폰번호
-				<div class="mb-3"> 
-					<label class="lable" for="phone">휴대폰번호</label>
-					<div class="description">- 없이 숫자만 입력</div>
-					<div class="description"></div>
-					<input type="text" pattern="^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$" class="form-control" id="phone" placeholder="휴대폰 번호를 입력해주세요." required> 
-					<div class="invalid-feedback"> 올바른 휴대폰번호 양식이 아닙니다. 다시 확인해주세요. </div>
-				</div>  -->
 				
 				<!-- 비밀번호 -->
 				<div class="mb-3"> 

@@ -1,16 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../../resources/css/mypage/memberinfo/Password.css" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/memberinfo/Password.css"/>" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="../../resources/js/mypage/memberinfo/Password.js"></script> 
+<script src="<c:url value="/resources/js/memberinfo/Password.js"/>"></script> 
 <title>찍먹냉장고 | 비밀번호 변경</title>
 </head>
 <body>
 	<div class="edit-user-info">
+	<!-- 
 			<div class="myhome-nav myhome-nav--owner">
 				<nav class="page-navigation myhome-nav__owner">
 					<ul style="transform: translateX(0px);">
@@ -35,23 +36,23 @@
 						</li>
 					</ul>
 				</nav>
-
 			</div>
-
+	 -->
 		<div class="update-password__wrap">
 			<h1 class="update-password__title">비밀번호 변경</h1>
-			<form>
+			<form method="post" action="<c:url value='/mypage/memberinfo/Password.do'/>">
+				<input type="hidden" name="id" value=${sessionScope.id }/>
 				<div class="update-password__section">
 					<div class="update-password__section__title">
 					새 비밀번호
 					</div>
 					<div class="update-password__section__sub-title">
-					영문, 숫자, 특수문자를 포함한 8~20자 비밀번호를 입력해주세요.
+					영문, 숫자, 특수문자를 포함한 8~20자
 					</div>
 					<div class="expert-form-group">
 						<div class="expert-form-group__content">
 							<div class="expert-form-group__input">
-								<input id="pwd1" pattern="(?=.*[a-zA-Z]+)(?=.*[0-9]+)(?=.*[`~!@@#$%^&*|₩₩₩'₩;:₩/?]+).{8,20}" type="password" class="form-control" required>
+								<input id="pwd1" name="pwd" pattern="(?=.*[a-zA-Z]+)(?=.*[0-9]+)(?=.*[`~!@@#$%^&*|₩₩₩'₩;:₩/?]+).{8,20}" type="password" class="form-control" placeholder="비밀번호를 입력해주세요." required>
 							</div>
 						</div>
 					</div>
@@ -63,12 +64,12 @@
 					<div class="expert-form-group">
 						<div class="expert-form-group__content">
 							<div class="expert-form-group__input">
-								<input id="pwd2" pattern="(?=.*[a-zA-Z]+)(?=.*[0-9]+)(?=.*[`~!@@#$%^&*|₩₩₩'₩;:₩/?]+).{8,20}" type="password" class="form-control" required>
+								<input id="pwd2" pattern="(?=.*[a-zA-Z]+)(?=.*[0-9]+)(?=.*[`~!@@#$%^&*|₩₩₩'₩;:₩/?]+).{8,20}" type="password" class="form-control" placeholder="비밀번호를 한번 더 입력해주세요." onchange="pwdCheck()" required>
 							</div>
 						</div>
 					</div>
 				</div>
-				<button class="button button--color-blue button--size-50 button--shape-4 update-password__submit" type="submit"  onclick="pwdCheck()">비밀번호 변경</button>
+				<button class="button button--color-blue button--size-50 button--shape-4 update-password__submit" type="submit" onclick="pwdCheck()">비밀번호 변경</button>
 			</form>
 		</div>
 	</div>

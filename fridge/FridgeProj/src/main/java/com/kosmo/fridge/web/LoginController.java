@@ -33,6 +33,7 @@ public class LoginController {
 			//서비스 호출
 			boolean flag= memberService.isLogin(map);
 			model.addAttribute("id", map.get("id"));
+			
 			if(!flag) {//로그인 실패시
 				//세션에 저장된 모델 삭제
 				status.setComplete();
@@ -46,10 +47,8 @@ public class LoginController {
 	//소셜로그인 처리
 	@RequestMapping("/socialLogin")
 	public String socialLogin(@RequestParam Map map,Model model,SessionStatus status,HttpSession session){
-	//public String socialLogin(@RequestParam Map map,Model model,SessionStatus status,HttpSession session,HttpServletRequest req){
 		//회원정보 유무 판별
 		int flag = memberService.isSocialLogin(map);
-		System.out.println(flag);
 		String loginType = map.get("loginType").toString();
 		String socialId = map.get("socialId").toString();
 		String socialNickname = map.get("socialNickname").toString();
@@ -59,13 +58,10 @@ public class LoginController {
 		model.addAttribute("socialId", socialId);
 		model.addAttribute("socialNickname",socialNickname);
 		model.addAttribute("socialEmail", socialEmail);
-		System.out.printf("socialId:%s%n", socialId);
 		//세션에 카카오나 구글로부터 받은 아이디와 별명, 이메일 저장
 		session.setAttribute("socialId", socialId);
 		session.setAttribute("socialNickname", socialNickname);
 		session.setAttribute("socialEmail", socialEmail);
-		System.out.printf("id:%s, nick:%s, email:%s%n",socialId,socialNickname,socialEmail);
-		
 		//로그인시 loginType에 kakao나 google이 저장되므로 비었다면 로그인 실패		
 		if(loginType.isEmpty()) {		
 			status.setComplete();
