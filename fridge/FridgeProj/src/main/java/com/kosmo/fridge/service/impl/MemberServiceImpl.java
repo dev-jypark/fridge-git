@@ -18,6 +18,9 @@ public class MemberServiceImpl implements MemberService{
 	//로그인
 	@Override
 	public boolean isLogin(Map map) {
+		System.out.println("service");
+		System.out.println("id : "+map.get("id"));
+		System.out.println("pwd : "+map.get("pwd"));
 		return memberDAO.isLogin(map);
 	}
 	//소셜로그인
