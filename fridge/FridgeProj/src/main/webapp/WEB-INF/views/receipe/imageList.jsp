@@ -126,22 +126,24 @@ $(document).ready(function(){
 	
 	</script>
 <div class="container">
-	<div class="row">
+	<div class="row" style="margin-top:200px;">
 		<div class="col-md-8 col-md-offset-2">
 			<fieldset>
 				<legend>영수증사진입력</legend>
-				<form action="<c:url value="/receipe/reciptList.do"/>" method="post" enctype="multipart/form-data" >
-					<div>
-					<input type="text" name="nick" size="50""/>
-					</div>
-					<div>
+				<form id="ajaxFrom" <%-- action="<c:url value="/receipe/reciptList.do"/>" --%> method="post" enctype="multipart/form-data" >
+					<!--<div>
+					 <input type="text" name="nick" size="50"/> 
+					</div>-->
+					<!-- <div>
 						<label for="input" class="image-previewer" data-cropzee="input"></label>
-						<input id="input" name="imgsrc" type="file" accept="image/*">
+						<input type="file" id="input" name="imgsrc" onchange="ajaxFileChange();" accept="image/*" style="display:none;">
+						<input type="button" onclick="ajaxFileUpload();" value="업로드"/>
 						<button onclick="alert(cropzeeGetImage('input'))">Get Image (as blob / data-url)</button>
-					</div>
+					</div> -->
 					<div>
-					<input type="submit" value="영수증입력" />
-					<input type="button" id="btn1" value="영수증입력" />
+					<input type='file' id="myFile" />
+    				<img id="View" src="#" alt="이미지 미리보기" />
+					<!-- <input type="submit" value="영수증입력" /> -->
 					</div>
 				</form>
 			</fieldset>
@@ -149,7 +151,66 @@ $(document).ready(function(){
 	</div>
 </div>
 <script>
-$('#btn1').on('click', function(){
+/*ajax 파일업로드*/
+/* function ajaxFileUpload(){
+	$("#input").click();
+}
+
+function ajaxFileChange(){
+	submit Transmit();
+}
+
+function submit Transmit(){
+	var form = $("ajaxFrom")[0];
+	var formData=new FormData(form);
+	formData.append("message","파일 확인 창 숨기기");
+	formData.append("file",$("#input")[0].files[0]);
+} */
+
+	/* $.ajax({
+		url:"/receipe/reciptList.do",
+		type: "POST",
+		processData : false,
+       contentType : false,
+		data: formData,
+		success: function(json) {
+			var obj = JSON.parse(json);
+		}
+	}) */
+/* 	$.ajax({
+	    url: " /receipe/reciptList.do",
+	    type: "POST",
+	    data: formData,
+	    contentType: "application/json; charset=utf-8;",
+	    dataType: "json",
+	    success: function(data){
+	        for(var i=0; i<data.length; i++){
+	            $('#result').append(data[i] + "<br>");
+	        }
+	    },
+	    error: function(){
+	        alert("restController err");
+	    }
+    });
+} */
+$(function() {
+    $("#myFile").on('change', function(){
+    readURL(this);
+    });
+});
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        $('#View').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>    
+
+<script>
+/* $('#btn1').on('click', function(){
     var form = {
             name: "jamong",
             age: 23
@@ -169,6 +230,6 @@ $('#btn1').on('click', function(){
             alert("restController err");
         }
     });
-});
+});*/
 </script>
   

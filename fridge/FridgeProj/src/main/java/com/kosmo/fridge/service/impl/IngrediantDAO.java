@@ -49,6 +49,7 @@ public class IngrediantDAO {
 	public void fridgeWrite(IngrediantDTO ingrediantDTO) {
 		SqlSession session= sqlMapper.openSession();
 		session.insert("fridgeWrite", ingrediantDTO);
+		session.commit();
 	}
 	//상세보기
 	public IngrediantDTO detail(int i_no) {

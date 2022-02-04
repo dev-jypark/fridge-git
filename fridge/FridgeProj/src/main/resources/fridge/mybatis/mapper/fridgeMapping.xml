@@ -7,7 +7,7 @@
   <mapper namespace="fridge.mybatis.mapper.fridgeMapping">
 		<!-- 목록(등록일순) -->
 		<select id="fridgeList" resultType="IngrediantDTO">
-			SELECT * FROM ingrediant ORDER BY i_postdate desc
+			SELECT * FROM ingrediant <!-- WHERE id=#{id} --> ORDER BY i_postdate desc
 		</select>	
 		<!-- 입력 -->
 		<insert id="fridgeWrite">
@@ -30,6 +30,6 @@
 		</delete>
 		<!-- 유통기한 임박순 정렬 -->
 		<select id="sortByEnd" resultType="IngrediantDTO">
-			SELECT * FROM ingrediant ORDER BY i_enddate ASC
+			SELECT * FROM ingrediant <!-- WHERE id=#{id} --> ORDER BY i_enddate ASC 
 		</select>
 	</mapper>

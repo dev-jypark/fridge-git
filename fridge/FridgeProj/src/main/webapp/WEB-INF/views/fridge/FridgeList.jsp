@@ -80,7 +80,7 @@
 									<a href="<c:url value="/fridge/fridgeWrite.do"/>"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 								</div>
 								<div class="glytwo">
-									<a href="<c:url value="/fridge/fridgeImage.do"/>"><span class="glyphicon glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+									<a href="<c:url value="/receipe/imageList.do"/>"><span class="glyphicon glyphicon glyphicon-picture" aria-hidden="true"></span></a>
 								</div>
 								<!-- 모달 -->
 								<div class="modal fade" id="addfridgeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -115,7 +115,10 @@
 								<input type="button" class="commerce-cart__header__delete" value="선택삭제" onclick="deleteValue();">
 							</span>
 						</div>
-						
+						<!-- id -->
+						<%-- <input type="text" class="form-control" id=""
+							placeholder="작성자" name="id" value="${sessionScope.id}"
+							style="display: none;"> --%>
 					</div>
 					<!-- 체크박스~유통기한순~선택삭제 부분 div 끝 -->
 					<ul class="commerce-cart__content__group-list ">
@@ -272,57 +275,6 @@
 		clearTimeout(set);
 	}
 
-	<!-- 선택삭제 -->
-	$(function(){
-			var chkObj=document.getElementsByName("RowCheck");
-			var rowCnt=chkObj.length;
-		
-		$("input[name='allCheck']").click(function(){
-			var chk_listArr=$("input[name='RowCheck']");
-			for(var i=0; i<chk_listArr.length; i++){
-				chk_listArr[i].checked=this.checked;
-			}
-		});
-		$("input[name='RowCheck']").click(function(){
-			if($("input[name='RowCheck']:checked").length==rowCnt){
-				$("input[name='allCheck']")[0].checked= true;
-			}
-			else{
-				$("input[name='allCheck']")[0].checked= false;
-			}
-		});
-	});
-	function deleteValue(){
-		var url="ingreDelete.do";
-		var valueArr=new Array();
-		var list=$("input[name='RowCheck']");
-		for(var i=0; i<list.length; i++){
-			if(list[i].checked){
-				valueArr.push(list[i].value);
-			}
-		}
-		if(valueArr.length==0){
-			alert("선택된 글이 없는디용");
-		}
-		else{
-			var chk=confirm("정말 삭제할고양?");
-			$.ajax({
-				url: url,
-				type: 'POST',
-				traditional: true,
-				data: {valueArr : valueArr},
-				success: function(jdata){
-					if(jdata=1){
-						alert("선택한 재료가 삭제되었습니다.");
-						location.replace("fridgeList.do");
-					}
-					else{
-						alert("삭제실패");
-					}
-				}
-			});
-		}
-	}
 	</script>
 </body>
 </html>

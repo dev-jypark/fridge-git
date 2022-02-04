@@ -672,6 +672,19 @@ path[Attributes Style] {
     line-height: 1;
     transition: opacity .1s;
 }
+.addform{
+	display: inline-block;
+    margin-bottom: 5px;
+    padding: 0px;
+    background: none;
+    border: none;
+    color: #424242;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+    transition: opacity .1s;
+}
 .delete_fridge{
 		display: inline-block;
     padding: 0px;
@@ -685,6 +698,9 @@ path[Attributes Style] {
 }
 .modal-footer_first{
 	  float:left;
+}
+.okCancle{
+	text-align: right;
 }
 [role=button], a, button, input[type=button], input[type=reset], input[type=submit] {
     cursor: pointer;
@@ -752,8 +768,19 @@ article {
     border-radius: 6px 6px 0 0;
 }
 .commerce-cart__group__header {
+	margin-top: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #ededed;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 20px;
+    text-align: center;
+    color: #424242;
+    background-color: #fafafa;
+}
+.commerce-cart__group__header_sub{
+	padding-bottom: 20px;
     font-size: 17px;
     font-weight: 600;
     font-family: 'Noto Sans KR', sans-serif;
@@ -789,14 +816,29 @@ ul ul {
     margin-bottom: 12px;
     background-color: #fff;
 }
+.commerce-cart__delivery-group-copy{
+	margin-bottom: 12px;
+    background-color: #fff;
+    margin-top: 40px;
+}
 @media (min-width: 768px)
 .carted-product {
+    padding: 20px 15px 20px 54px;
+}
+@media (min-width: 768px)
+.carted-product-copy {
     padding: 20px 15px 20px 54px;
 }
 .carted-product {
 	border-bottom: 1px solid #ededed;
     position: relative;
     height: 130px;
+}
+.carted-product-copy{
+	border-bottom: 1px solid #ededed;
+    position: relative;
+    height: 100px;
+    vertical-align: middle;
 }
 @media (min-width: 768px)
 .carted-product__select {
@@ -1341,7 +1383,6 @@ a:hover, a:focus {
 .codrops-icon-prev:before {
 	content: "\e004";
 }
-
 /* Related demos */
 .related {
 	text-align: center;

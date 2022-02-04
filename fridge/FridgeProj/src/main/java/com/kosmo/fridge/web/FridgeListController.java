@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kosmo.fridge.service.IngrediantDTO;
-import com.kosmo.fridge.service.IngrediantPagingData;
 import com.kosmo.fridge.service.impl.IngrediantServiceImpl;
 
 @Controller
@@ -48,11 +47,6 @@ public class FridgeListController {
 	public String writePost(IngrediantDTO ingrediantDTO,HttpSession session) {
 		ingrediantService.fridgeWrite(ingrediantDTO);
 		return "redirect:fridgeList.do";
-	}
-	//사진으로 입력 get
-	@RequestMapping("/fridgeImage")
-	public String imageGet() {
-		return "fridge/FridgeImage";
 	}
 	//상세보기
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)
@@ -103,7 +97,6 @@ public class FridgeListController {
 			System.out.println(dto);
 		}
 		return "fridge/FridgeAjaxList";
-		
 	}
 	//등록일 기준 정렬
 	@RequestMapping("/fridgeSortPostdate.do")

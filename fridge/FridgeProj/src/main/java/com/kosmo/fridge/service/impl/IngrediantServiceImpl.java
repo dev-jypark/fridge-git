@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.kosmo.fridge.service.IngrediantDTO;
 import com.kosmo.fridge.service.IngrediantService;
-import com.kosmo.fridge.service.IngrediantPagingUtil;
-import com.kosmo.fridge.service.IngrediantPagingData;
 
 @Service("ingrediantService")
 public class IngrediantServiceImpl implements IngrediantService{

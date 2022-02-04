@@ -22,6 +22,11 @@
 			
 	<!-- 브로콜리 이름 띄어주기 -->
 	<section class="carted-product">
+	<!-- id -->
+	<%-- <input type="text" class="form-control" id=""
+		placeholder="작성자" name="id" value="${sessionScope.id}"
+		style="display: none;"> --%>
+		
 		<h4 class="product-small-item__title">${item.i_name}</h4>
 
 		<!-- 수량 -->
@@ -95,7 +100,62 @@ $(function(){
 		if(d < 0){
 			$('#content'+cnt).html(d+' 일');
 			$('#content'+cnt).css('background-color','#F0E68C');
-		}	
+		}
+		else if(d==0){
+			$('#content'+cnt).html('오늘까지!');
+			$('#content'+cnt).css('background-color','#F0E68C');
+		}
 	}//for문					
 });
+
+$(function(){
+	var chkObj=document.getElementsByName("RowCheck");
+	var rowCnt=chkObj.length;
+
+	$("input[name='allCheck']").click(function(){
+		var chk_listArr=$("input[name='RowCheck']");
+		for(var i=0; i<chk_listArr.length; i++){
+			chk_listArr[i].checked=this.checked;
+		}
+	});
+	$("input[name='RowCheck']").click(function(){
+		if($("input[name='RowCheck']:checked").length==rowCnt){
+			$("input[name='allCheck']")[0].checked= true;
+		}
+		else{
+			$("input[name='allCheck']")[0].checked= false;
+		}
+	});
+	});
+	function deleteValue(){
+	var url="ingreDelete.do";
+	var valueArr=new Array();
+	var list=$("input[name='RowCheck']");
+	for(var i=0; i<list.length; i++){
+		if(list[i].checked){
+			valueArr.push(list[i].value);
+		}
+	}
+	if(valueArr.length==0){
+		alert("선택된 글이 없는디용");
+	}
+	else{
+		var chk=confirm("정말 삭제할고양?");
+		$.ajax({
+			url: url,
+			type: 'POST',
+			traditional: true,
+			data: {valueArr : valueArr},
+			success: function(jdata){
+				if(jdata=1){
+					alert("선택한 재료가 삭제되었습니다.");
+					location.replace("fridgeList.do");
+				}
+				else{
+					alert("삭제실패");
+				}
+			}
+		});
+	}
+}
 </script>
