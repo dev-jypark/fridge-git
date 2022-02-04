@@ -11,14 +11,16 @@
 		<typeAlias alias="MemberProfileDTO" type="com.kosmo.fridge.service.MemberProfileDTO"/>
 		<typeAlias alias="FeedDTO" type="com.kosmo.fridge.service.FeedDTO"/>
 		<typeAlias alias="CommentDTO" type="com.kosmo.fridge.service.CommentDTO"/>
-		
+		<typeAlias type="com.kosmo.fridge.service.MemberDTO" alias="memberDTO"/>
+      	<typeAlias type="com.kosmo.fridge.service.IngrediantDTO" alias="ingrediantDTO"/>
 	</typeAliases>	
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
 	<mappers>		
 		<mapper resource="fridge/mybatis/recipe.xml" />	
 		<mapper resource="fridge/mybatis/mapper/example.xml" />	
-		<mapper resource="fridge/mybatis/mapper/example.xml"/>
+		<mapper resource="fridge/mybatis/mapper/memberMapping.xml" />
+      	<mapper resource="fridge/mybatis/mapper/fridgeMapping.xml" />
 		<mapper resource="fridge/mybatis/mapper/community.xml"/>
 		<mapper resource="fridge/mybatis/mapper/communityRestAPI.xml"/>
 	</mappers>
