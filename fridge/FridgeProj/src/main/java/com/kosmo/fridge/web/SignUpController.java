@@ -27,17 +27,18 @@ public class SignUpController {
 	public String signUpPOST(Map map, MemberDTO memberDTO) {
 		memberService.signUp(memberDTO);
 		memberService.agreeOK(memberDTO);
-		return "community/CommunityList.tiles";
+		return "home.tiles";
 	}
+	//소셜회원가입 GET]
 	@RequestMapping(value="/SocialSignUp",method=RequestMethod.GET)
 	public void SocialSignUpGET() {
 	}
-	//소셜 회원가입 POST]
+	//소셜회원가입 POST]
 	@RequestMapping(value="/SocialSignUp",method=RequestMethod.POST)
 	public String socialSignUpPOST(@RequestParam Map map, MemberDTO memberDTO) {
 		memberService.SocialSignUp(memberDTO);
 		memberService.socialAgreeOK(memberDTO);
-		return "community/CommunityList.tiles";
+		return "home.tiles";
 		}
 
 	//아이디중복 체크]

@@ -1,15 +1,14 @@
 package com.kosmo.fridge.service.impl;
 
-import java.util.List;
+
 import java.util.Map;
-
 import javax.annotation.Resource;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kosmo.fridge.service.MemberDTO;
 
@@ -89,11 +88,6 @@ public class MemberDAO {
 		int result=session.selectOne("memberNickCheck",memberDTO);
 		return result;//존재:1 미존재:0
 	}
-	//비밀번호변경
-	public void changePwd(MemberDTO memberDTO) {
-		SqlSession session= sqlMapper.openSession();
-		session.update("pwdUpdate",memberDTO);
-	}
 	//아이디찾기
 	public MemberDTO searchId(MemberDTO memberDTO) {
 		SqlSession session= sqlMapper.openSession();
@@ -104,15 +98,27 @@ public class MemberDAO {
 		SqlSession session= sqlMapper.openSession();
 		return session.selectOne("findPwd",memberDTO);
 	}
-	//회원정보조회
+	//회원정보보기
 	public MemberDTO readMember(String id) {
 		SqlSession session= sqlMapper.openSession();
-		return session.selectOne("viewMember",id);	
+		return session.selectOne("viewMember",id);
 	}
 	//회원정보수정
-	public void memberEdit(MemberDTO memberDTO) {
+	public void memberEdit(MemberDTO memberDTO, MultipartFile imgsrc) {
 		SqlSession session= sqlMapper.openSession();
-		session.update("memberUpdate", memberDTO);	
+		session.update("memberUpdate", memberDTO);
+		//session.update("imgUpdate", imgsrc.getOriginalFilename());	
+		session.commit();
+		session.close();
+	}
+	//비밀번호변경
+	public void pwdEdit(MemberDTO memberDTO) {		
+		memberDTO.setId(memberDTO.getId().replace("/", ""));
+		//id 뒤에 / 붙어서 들어가는 문제가 있어서 임시로 조치 by 고호 최
+		SqlSession session= sqlMapper.openSession();
+		session.update("pwdUpdate", memberDTO);
+		session.commit();		
+		session.close();
 	}
 
 }

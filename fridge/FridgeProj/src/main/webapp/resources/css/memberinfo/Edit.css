@@ -7,7 +7,7 @@
     font-size: 13px;
     -webkit-box-direction: normal;
     -webkit-tap-highlight-color: transparent;
-    margin: 0 auto;
+    margin: 150px auto auto !important;
     padding: 0;
     -webkit-box-flex: 0;
     flex: 0 auto;
