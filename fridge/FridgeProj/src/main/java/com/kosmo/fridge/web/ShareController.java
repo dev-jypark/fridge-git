@@ -115,6 +115,6 @@ public class ShareController {
 		return "share/ShareList.tiles";
 	}
 	
-	@RequestMapping(value="/shareLike.do")
+	//@RequestMapping(value="/shareLike.do")
 	
 }
