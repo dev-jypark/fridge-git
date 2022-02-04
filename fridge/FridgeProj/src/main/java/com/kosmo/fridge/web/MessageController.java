@@ -1,19 +1,26 @@
 package com.kosmo.fridge.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.fridge.service.MessageTO;
+import com.kosmo.fridge.service.ShareDTO;
+import com.kosmo.fridge.service.impl.MemberServiceImpl;
 import com.kosmo.fridge.service.impl.MessageDAO;
+import com.kosmo.fridge.service.impl.ShareServiceImpl;
 
 @Controller
 public class MessageController {
@@ -21,6 +28,8 @@ public class MessageController {
 	@Autowired
 	private MessageDAO messageDao;
 
+	@Resource(name="shareService")
+	private ShareServiceImpl shareService;
 	
 	// 메세지 목록
 	@RequestMapping(value = "/message_list.do")
@@ -92,6 +101,17 @@ public class MessageController {
 		int flag = messageDao.messageSendInlist(to);
 
 		return flag;
+	}
+	
+	@RequestMapping(value="/message_send_trade.do")
+	public String message_send_trade(@RequestParam int tb_no, Model model) {
+		Map map = new HashMap<>();
+		map.put("tb_no", tb_no);
+		ShareDTO dto = shareService.selectOne(map);
+		String content;
+		
+		model.addAttribute("trade",shareService.selectOne(map));
+		return "message/message_list.tiles";
 	}
 
 }

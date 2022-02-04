@@ -2,14 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="trade_info">
-  <div class="recent_heading">
-    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/04/09/76706e4c14cfa819139505369b55425d1_m.jpg">
-    <span style="margin : 10px">오늘 먹은 두부 드려욜</span>
-    <button style="float : right">거래완료</button>
-  </div>
+<%-- <c:if test=${!empty trade }>
+	<div class="trade_info">
+	  <div class="recent_heading">
+	    <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/04/09/76706e4c14cfa819139505369b55425d1_m.jpg">
+	    <span style="margin : 10px">${trade.tbTitle }</span>
+	    <span style="margin : 10px">${trade.tbContent }</span>
+	    <button style="float : right">거래완료</button>
+  	</div>
 </div>
-
+</c:if> --%>
 <div style="padding-top:65px">
 <c:forEach var="tmp" items="${clist }" varStatus="status">
 	<c:set var="status_count" value="${status.count }"/>
