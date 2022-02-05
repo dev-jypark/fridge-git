@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="fridge.mybatis.mapper.communityRestAPI">	
+
+	
+
+	
+	<resultMap type="FeedDTO" id="FeedDTOResult">
+		<result column="fb_no" property="fb_no"/>
+		<result column="id" property="id"/>
+		<result column="fb_content" property="fb_content"/>
+		<result column="fb_postdate" property="fb_postdate"/>
+		<result column="nick" property="nick"/>
+		<collection property="list_fi_src" column="fb_no" select="selectList_fi_src" javaType="List" ofType="String"/>
+		<collection property="list_f_likeMember" column="fb_no" select="selectList_f_like" javaType="List" ofType="MemberProfileDTO"/>
+		<collection property="list_f_comment" column="fb_no" select="selectList_f_com" javaType="List" ofType="CommentDTO"/>
+	</resultMap>
+	
+	<select id="selectList_fi_src" resultType="String">
+		select fi_src from f_imgsrc i where i.fb_no=#{fb_no}		
+	</select>
+	
+	<select id="selectList_f_like" resultType="MemberProfileDTO">
+		select l.id, nick from member m join f_like l on m.id=l.id where fb_no=#{fb_no}
+	</select>
+	
+	<select id="selectList_f_com" resultType="CommentDTO">
+		select c.*, nick from member m join f_com c on m.id=c.id where fb_no=#{fb_no} order by fc_no desc
+	</select>
+	
+	<select id="selectListFeed" parameterType="String" resultMap="FeedDTOResult">
+		select f_bbs.*, nick from f_bbs join
+		(select f_dest, (select nick from member where f_dest=id) nick from member join follow on id = f_src where nick=#{nick}) on id=f_dest
+	</select>
+	
+	<select id="selectListFeedInProfile" parameterType="String" resultMap="FeedDTOResult">
+		select f.*, nick from f_bbs f join member m on f.id=m.id where nick=#{nick}
+	</select>
+	
+	<insert id="insertComment" parameterType="Map">
+		insert into f_com values(seq_f_com.nextval, (select id from member where nick=#{nick}), #{fb_no}, #{fc_content}, sysdate)
+	</insert>
+	
+	<insert id="insertLikeMmeber" parameterType="Map">
+		insert into f_like values(seq_f_like.nextval, (select id from member where nick=#{nick}),#{fb_no})
+	</insert>
+	
+	<delete id="deleteLikeMmeber">
+		delete from f_like where fb_no=#{fb_no} and id=(select id from member where nick=#{nick})
+	</delete>
+</mapper>

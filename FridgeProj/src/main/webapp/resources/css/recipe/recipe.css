@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+*{
+   font-family: 'Do Hyeon', sans-serif !important;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+ .recipe-tilte{
+ 	display:block;
+ 	margin-top:200px;
+ }
+  .row {
+      display: flex;
+      justify-content: center;
+  }
+  .row div{
+      margin-left: 30px;
+  }
+  .row div:nth-child(1){
+      margin: 0;
+  }
+  
+  h1 { 
+  display:block;
+  margin:150px auto 50px auto;
+  text-align: center;}
+  
+  .image-demo1 {position: absolute; background-image:url();
+          width: 100%;
+          height: 100%;
+          background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center; }
+  .image-demo2 {position: absolute; background-image:url();
+          width: 100%;
+          height: 100%;
+          background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center; }
+  .image-demo3 {position: absolute; background-image:url();
+          width: 100%;
+          height: 100%;
+          background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center; }
+  .image-demo4 {position: absolute; background-image:url();
+          width: 100%;
+          height: 100%;
+          background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+  .clear {clear:both}
+
+  .style-1{
+      padding: 14px 16px;
+      border: 1px solid black;
+      border-radius: 5px;
+      background: transparent;
+    }
+    
+    .btn-style{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      cursor: pointer;
+      transform: translate(-50%,-50%);
+    }
+    
+    
+    /* Left Slider */
+    .box-container-left-style{
+      position:absolute;
+      right: 100%;
+      top:0;
+      opacity: 0.8;
+      overflow: hidden;
+      transition: 0.2s ease;
+    }
+    
+    
+    /* Down slider */
+    .box-container-down-style{
+      position:absolute;
+      bottom: 100%;
+      opacity: 0.8;
+      overflow: hidden;
+      transition: 0.2s ease;
+    }
+    
+    /* Right Slider */
+    .box-container-right-style{
+      position: absolute;
+      left:100%;
+      top:0;
+      opacity: 0.8;
+      overflow: hidden;
+      transition: 0.2s ease;
+    }
+    
+    /* Up Slider */
+    .box-container-up-style{
+      position: absolute;
+      top: 100%;
+      opacity: 0.8;
+      overflow: hidden;
+      transition: 0.2s ease;
+    }
+   
+/*버튼 css*/
+  button{
+    background:#95E1D3;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  }
+  button:hover{
+    background:#fff;
+    color:#1AAB8A;
+  }
+  button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:0;
+    width:0;
+    background: #95E1D3;
+    transition:400ms ease all;
+  }
+  button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  button:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+  
+/*타이틀 애니메이션 부분*/  
+.start-screen {
+  display: flex;
+  justify-content: center;
+  flex-flow: nowrap column;
+  align-items: center;
+  margin-top: 150px;
+}
+
+.loading {
+  display: flex;
+  margin: 14px 0;
+}
+
+.loading__element {
+  font: normal 100 3rem/1 Roboto;
+  letter-spacing: 0.5em;
+}
+
+[class*=el] {
+  animation: bouncing 3s infinite ease;
+}
+
+.el1 {
+  animation-delay: 0.1s;
+}
+
+.el2 {
+  animation-delay: 0.2s;
+}
+
+.el3 {
+  animation-delay: 0.3s;
+}
+
+.el4 {
+  animation-delay: 0.4s;
+}
+
+.el5 {
+  animation-delay: 0.5s;
+}
+
+.el6 {
+  animation-delay: 0.6s;
+}
+
+.el7 {
+  animation-delay: 0.7s;
+}
+
+.el8 {
+  animation-delay: 0.8s;
+}
+
+.el9 {
+  animation-delay: 0.9s;
+}
+
+@keyframes bouncing {
+  0% {
+    transform: none;
+  }
+  25%{
+  	transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  75%{
+  	transform: scale(1);
+  }
+  100% {
+    transform: none;
+  }
+}

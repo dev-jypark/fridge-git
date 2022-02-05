@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="fridge.mybatis.mapper.community">
+	<update id="imgsrcUpdate" parameterType="Map">
+		update member set imgsrc=#{imgsrc} where nick=#{nick}
+	</update>  
+	
+	<insert id="feedInsert" parameterType="Map">
+		insert into f_bbs(fb_no,id,fb_content,fb_postdate) values(seq_f_bbs.nextval,(select id from member where nick=#{nick}),#{fb_content},sysdate)
+		<selectKey keyProperty="fb_no" resultType="int" order="AFTER">
+			SELECT seq_f_bbs.currval FROM DUAL
+		</selectKey>
+	</insert>
+	 
+	 <insert id="imgsrcInsert" parameterType="Map">
+	 insert into f_imgsrc(fi_no,fb_no,fi_src)
+	 select seq_f_imgsrc.nextval, A.* from(
+		<foreach item="item" collection="fi_src" separator="UNION ALL ">
+			select #{fb_no} as fb_no, #{item.originalFilename} as fi_src from dual
+       </foreach>) A
+	</insert>
+	
+	
+	<resultMap type="MemberProfileDTO" id="MemberProfileResult">
+		<result column="id" property="id"/>
+		<result column="nick" property="nick"/>
+		<result column="self" property="self"/>
+		<result column="feedcount" property="feedcount"/>
+		<collection property="followers" column="nick" select="followerSelectList" javaType="List" ofType="String"/>
+		<collection property="follows" column="nick" select="followSelectList" javaType="List" ofType="String"/> 
+	</resultMap>
+	
+	<select id="memberSelectOne" parameterType="String" resultMap="MemberProfileResult">
+		select id, nick, self, (select count(*) from f_bbs where id=(select id from member where nick=#{nick})) feedcount from member where nick=#{nick}
+	</select>
+	
+	<select id="followerSelectList" parameterType="String" resultType="String">
+		select nick from follow join member on f_src=id where f_dest=(select id from member where nick=#{nick})
+	</select>
+	
+	<select id="followSelectList" parameterType="String" resultType="String">
+		select nick from follow join member on f_dest=id where f_src=(select id from member where nick=#{nick})
+	</select>
+	
+</mapper>

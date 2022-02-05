@@ -1,0 +1,46 @@
+body {
+	text-align: center;
+	font-family: "Helvetica Neue", sans-serif;
+	color: #333;
+}
+footer{
+	position: fixed;
+	bottom: 20px;
+	left: 0;
+	margin-top:50px;
+	width:100%;
+	text-align: center;
+	font-size: 12px;
+}
+
+.justselect-wrapper {
+	margin: auto;
+	margin-top:30px;
+}
+
+.container {
+	margin-top: 120px;
+}
+
+h1 svg {
+	margin-right: 10px;
+}
+
+h1 img{
+	width: 70px;
+	height: auto;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+h1 {
+	font-size: 36px;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+p.lead {
+	font-size: 21px;
+	font-weight: 300;
+	margin: 0;
+}
