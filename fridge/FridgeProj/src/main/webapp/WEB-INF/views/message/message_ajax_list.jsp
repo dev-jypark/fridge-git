@@ -10,7 +10,7 @@
 				<div class="chat_img" >
 					<a href="other_profile.do?other_nick=${tmp.other_nick }">
 						<%-- <img src="./upload/profile/${tmp.profile}" alt="sunil" > --%>
-						<img src="<c:url value="/resources/images/chat/none_profile.png"/>" alt="sunil" >
+						<img id="sendProfile" src="<c:url value="/resources/images/chat/none_profile.png"/>" alt="sunil" >
 					</a>
 				</div>
 				<div class="chat_ib">

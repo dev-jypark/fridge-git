@@ -1,6 +1,11 @@
 package com.kosmo.fridge.web;
 
+import java.io.Console;
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +29,6 @@ import com.kosmo.fridge.service.impl.ShareServiceImpl;
 
 @Controller
 public class MessageController {
-
 	@Autowired
 	private MessageDAO messageDao;
 
@@ -97,20 +101,46 @@ public class MessageController {
 		System.out.println((String) session.getAttribute("id"));
 		to.setRecv_nick(other_nick);
 		to.setContent(content);
-
+		
 		int flag = messageDao.messageSendInlist(to);
 
 		return flag;
 	}
 	
+	//내 게시물이면 채팅하기 버튼 안뜨게 하기
 	@RequestMapping(value="/message_send_trade.do")
-	public String message_send_trade(@RequestParam int tb_no, Model model) {
+	public String message_send_trade(@RequestParam int no, HttpSession session, Model model) {
 		Map map = new HashMap<>();
-		map.put("tb_no", tb_no);
-		ShareDTO dto = shareService.selectOne(map);
-		String content;
+		map.put("tb_no", no);
+		//게시글 조회해오기
+		ShareDTO sharDto = shareService.selectOne(map);
+		System.out.println("message_send_trade dto"+sharDto);
+		//알림 메시지 내용 작성
+		String content, path, imgsrc, sendTime;
 		
-		model.addAttribute("trade",shareService.selectOne(map));
+		path = session.getServletContext().getRealPath("/upload/share");
+		//imgsrc = path+File.separator+Integer.toString(no)+File.separator+sharDto.getImg();
+		content = "[거래 요청 안내]";
+		content += "</br>";
+
+		//content += "<img src=\""+"<c:url value=\"/upload/share/"+sharDto.getImg()+"\"/>"+"\"/>";
+		content += "<img src= \'/upload/share/"+Integer.toString(no)+"/"+sharDto.getImg()+"\'/>";
+		content += "<b>\""+ sharDto.getTbTitle() +"\"</b>";
+		System.out.println("content : "+content);
+		//전송 시간 세팅
+		DateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm");
+		Date date = new Date();
+		sendTime = dateFormat.format(date);
+		//거래 요청 알림 메시지 전송
+		MessageTO messageTo = new MessageTO();
+		messageTo.setContent(content);
+		messageTo.setSend_nick((String) session.getAttribute("id"));
+		messageTo.setRecv_nick(sharDto.getId());
+		messageTo.setRoom(0);
+		messageTo.setSend_time(sendTime);
+		messageTo.setRead_chk("1");
+		messageDao.messageSendInlist(messageTo);
+		//model.addAttribute("trade",shareService.selectOne(map));
 		return "message/message_list.tiles";
 	}
 

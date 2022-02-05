@@ -27,11 +27,15 @@ public class MessageDAO {
 			// 현재 사용자가 해당 room에서 안읽은 메세지의 갯수를 가져온다.
 			int unread = sqlSession.selectOne("count_unread", mto);
 			// 현재 사용자가 메세지를 주고받는 상대 profile을 가져온다.
-			//String profile = sqlSession.selectOne("get_other_profile",mto);
+			String profile = sqlSession.selectOne("get_other_profile",mto);
+			if(profile != null) {
+				// 사용자 프로필 이름에 경로 붙여주기
+				profile = "/user/profile/"+profile;
+			}
 			// 안읽은 메세지 갯수를 mto에 set한다.
 			mto.setUnread(unread);
 			// 메세지 상대의 프로필사진을 mto에 set한다.
-			//mto.setProfile(profile);
+			mto.setProfile(profile);
 			// 메세지 상대 nick을 세팅한다. other_nick
 			if (nick.equals(mto.getSend_nick())) {
 				mto.setOther_nick(mto.getRecv_nick());

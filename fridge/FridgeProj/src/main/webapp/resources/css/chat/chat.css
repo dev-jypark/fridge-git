@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-img{
+#sendProfile{
 	/*글쓴이의 프로필 사진을 둥글게*/
 	width: 40px;
 	height: 40px;
@@ -48,7 +48,7 @@ img{ max-width:100%;}
 .trade_info{ padding:20px 29px 20px 20px; overflow:hidden; border-bottom:1px solid #f7f7f7;  position: fixed; width:100%; background-color:#FFFFFF}
 
 .recent_heading h4 {
-  color: #5fcf80;
+  color: #95E1D3;
   font-size: 30px;
   margin: auto;
   font-family: 'Nanum Pen Script', cursive;
@@ -85,7 +85,7 @@ img{ max-width:100%;}
 
 
 .chat_list_box :hover{
-	background-color: #d6ead0;
+	background-color: rgb(208, 233, 234);
 }
 
 inbox_chat { height: 550px; overflow-y: scroll;}
@@ -126,7 +126,7 @@ inbox_chat { height: 550px; overflow-y: scroll;}
 }
 
  .sent_msg p {
-  background: #97df93 none repeat scroll 0 0;
+  background: #95E1D3 none repeat scroll 0 0;
   border-radius: 7px;
   font-size: 14px;
   margin: 0; color:#fff;
@@ -151,7 +151,7 @@ inbox_chat { height: 550px; overflow-y: scroll;}
 
 .type_msg {border-top: 1px solid #dfdfdf;position: relative;}
 .msg_send_btn {
-  background: #97df93 none repeat scroll 0 0;
+  background: #95E1D3 none repeat scroll 0 0;
   border: medium none;
   border-radius: 50%;
   color: #fff;
@@ -165,7 +165,7 @@ inbox_chat { height: 550px; overflow-y: scroll;}
 }
 
 .msg_send_btn:hover{
-	background: #5fcd58 none repeat scroll 0 0;
+	background: rgb(86, 189, 207) none repeat scroll 0 0;
 }
 
 .messaging { padding: 0 0 50px 0;}

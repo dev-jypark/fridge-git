@@ -78,6 +78,7 @@
 	<select id="select_room"  parameterType="messageDTO" resultType="String">
 	    select room from chat
 	    where (recv_id = #{recv_nick} and send_id=#{send_nick}) or (send_id = #{recv_nick} and recv_id=#{send_nick})
+	    group by room
 	</select>
 	
 	<!-- 메세지리스트에서 메세지 보내기 -->
