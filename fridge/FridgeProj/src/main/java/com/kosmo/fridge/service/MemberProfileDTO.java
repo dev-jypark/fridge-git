@@ -14,6 +14,7 @@ public class MemberProfileDTO {
 	private String id;  
 	private String nick;
 	private String self;
+	private String imgsrc;
 	private int feedcount;
 	private List<String> followers;
 	private List<String> follows;	

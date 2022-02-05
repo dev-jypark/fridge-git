@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kosmo.fridge.service.FeedDTO;
+import com.kosmo.fridge.service.MemberProfileDTO;
 
 @Repository
 public class CommunityRestAPIDAO {
@@ -19,8 +20,8 @@ public class CommunityRestAPIDAO {
 		return template.selectList("selectListFeed", id);
 	}
 
-	public List<FeedDTO> selectListFeedInProfile(String nick) {
-		return template.selectList("selectListFeedInProfile", nick);
+	public List<FeedDTO> selectListFeedInProfile(String id) {
+		return template.selectList("selectListFeedInProfile", id);
 	}
 
 	public void insertComment(Map map) {
@@ -36,6 +37,10 @@ public class CommunityRestAPIDAO {
 	public int deleteLikeMember(Map map) {
 		return template.delete("deleteLikeMmeber", map);
 		
+	}
+
+	public MemberProfileDTO selectOneUser(String id) {
+		return template.selectOne("selectOneUser", id);
 	}
 
 	

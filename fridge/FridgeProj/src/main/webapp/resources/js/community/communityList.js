@@ -1,19 +1,37 @@
-var nick = $("input[name=nick]").val(); // 히든박스에 닉네임저장 
-nick = nick.length == 0 ? "Kil_dong" : nick;  // 임시로 아이디가 없으면 김길동으로 테스트 하기위한 코드
-console.log(nick);
 
-var feeds = Array(); // 에이작스로 가져온 모든 데이터(피드글)를 관리할 전역변수
+var user;
+var userid; 
+var nick;
+
+var feeds = Array();
 
 $.ajax({
-	url: "/community/feeds/" + nick,
+	url: "/community/" + $("input[name=id]").val(),
 	dataType: 'json'
 }).done(function(data) {
-	printFeed(data);
-	console.log(feeds);
-	initListenerOnDocument();	
+	user=data;
+	userid=data["id"];
+	nick=data["nick"];
+	console.log(user);	
+	console.log(userid);
+	console.log(nick);
+	$.ajax({
+		url: "/community/feeds/" + userid,
+		dataType: 'json'
+	}).done(function(data) {
+		printFeed(data);
+		console.log(feeds);
+		initListenerOnDocument();
+	}).fail(function(req, error) {
+		console.log('응답코드:%s,에러 메시지:%s,error:%s', req.status, req.responseText, error);
+	});
+
 }).fail(function(req, error) {
 	console.log('응답코드:%s,에러 메시지:%s,error:%s', req.status, req.responseText, error);
 });
+
+
+
 
 
 function printFeed(data) {
@@ -28,7 +46,7 @@ function printFeed(data) {
 		feedString += '<section class="feedify-item">';
 		feedString += '<header class="feedify-item-header clearfix">';
 		feedString += '<h1 class="pull-left"><a href="/memberProfile/' + feed["nick"] + '">';
-		feedString += '<img alt="' + feed["nick"] + '" src="/upload/profile/' + feed["nick"] + '.jpg" class="img-circle pull-left">' + feed["nick"] + '</a></h1>';
+		feedString += '<img alt="' + feed["nick"] + '" src="/upload/profile/' + feed["imgsrc"] + '" class="img-circle pull-left">' + feed["nick"] + '</a></h1>';
 		feedString += '<h2 class="pull-right hidden-xs">' + feed["fb_postdate"] + '</h2>';
 		feedString += '</header>';
 
@@ -94,7 +112,7 @@ function insertComment(flag) {
 	
 	$.ajax({
 		url: "/community/comment/",
-		data: { fb_no: e.next().val(), fc_content: e.prev().val(), "nick": nick },
+		data: { fb_no: e.next().val(), fc_content: e.prev().val(), "id": userid },
 		type: 'post',
 	}).done(function(data) {
 		console.log("댓글 입력 성공");
@@ -111,13 +129,13 @@ function insertComment(flag) {
 	$('ul.comments:eq(' + index + ') li:eq(2)').remove();
 	$('ul.comments:eq(' + index + ')').prepend(commentString);
 	
-	feeds[index]['list_f_comment'].unshift({"nick":nick, "fc_content":fb_content});
+	feeds[index]['list_f_comment'].unshift({"nick":nick, "fc_content":fb_content, "imgsrc":user["imgsrc"]});
 	console.log(feeds[index]['list_f_comment']);
 	
 	if (flag != 0) {
 		
 		commentString = "";
-		commentString += "<div class='content'><img alt='"+nick+"' src='/upload/profile/" + nick + ".jpg' class='img-circle pull-left'>";
+		commentString += "<div class='content'><img alt='"+nick+"' src='/upload/profile/" + user["imgsrc"] + "' class='img-circle pull-left'>";
 		commentString += "<p><a href='/memberProfile/" + nick + "'>" + nick + "</a>" + fb_content + "</p>";
 		commentString += "</div>";
 
@@ -175,7 +193,7 @@ function likeProcess(flag) {
 	
 	$.ajax({
 		url: "/community/like/",
-		data: { fb_no: feeds[index]['fb_no'], "nick": nick, "flag":param },
+		data: { fb_no: feeds[index]['fb_no'], "id": userid, "flag":param },
 		type: 'post',
 	}).done(function(data) {
 		console.log("좋아요 요청 성공");
@@ -214,16 +232,16 @@ function showModal(index) {
 			modalHtml += "<div class='carouselGallery-modal-text'>";
 
 			modalHtml += "<div class='header'>";
-			modalHtml += "<a href='/memberProfile/" + feed["nick"] + "'><img alt='"+feed["nick"]+"' src='/upload/profile/" + feed["nick"] + ".jpg' class='img-circle pull-left'><span>" + feed["nick"] + "</a></div>";
+			modalHtml += "<a href='/memberProfile/" + feed["nick"] + "'><img alt='"+feed["nick"]+"' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'><span>" + feed["nick"] + "</a></div>";
 
 			modalHtml += "<div class='body'>";
-			modalHtml += "<div class='content'><a href='/memberProfile/" + feed["nick"] + "'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["nick"] + ".jpg' class='img-circle pull-left'>";
+			modalHtml += "<div class='content'><a href='/memberProfile/" + feed["nick"] + "'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'>";
 			modalHtml += "<p>" + feed["nick"] +"</a>"+ feed["fb_content"] + "</p></div>";
 
 			// 모달 댓글 출력 파트
 			modalHtml += "<div class='comments'>";
 			$.each(feed["list_f_comment"], function(i, comment) {
-				modalHtml += "<div class='content'><a href='/memberProfile/" + comment["nick"] + "'><img alt='"+comment+"' src='/upload/profile/" + comment["nick"] + ".jpg' class='img-circle pull-left'>";
+				modalHtml += "<div class='content'><a href='/memberProfile/" + comment["nick"] + "'><img alt='"+comment+"' src='/upload/profile/" + comment["imgsrc"] + "' class='img-circle pull-left'>";
 				modalHtml += "<p>" + comment["nick"] + "</a>" + comment["fc_content"] + "</p>";
 				modalHtml += "</div>";
 			});

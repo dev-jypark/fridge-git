@@ -13,4 +13,5 @@ public class CommentDTO {
 	private String fc_content;
 	private String fc_postdate;
 	private String nick;
+	private String imgsrc;
 }
