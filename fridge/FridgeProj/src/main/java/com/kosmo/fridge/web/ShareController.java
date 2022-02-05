@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus; //@@추가
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -29,15 +30,13 @@ import com.kosmo.fridge.service.TradeDTO;
 import com.kosmo.fridge.service.impl.ShareServiceImpl;
 import com.kosmo.fridge.util.ListPagingData;
 
-//@RequestMapping("/fridge/share/")
+@RequestMapping("/share")
 @Controller
 public class ShareController {
 	
 	@Resource(name="shareService")
 	private ShareServiceImpl shareService;
 	
-	//목록
-	@RequestMapping("/shareList.do")
 	/*
 	 * public String list(@RequestParam Map map,//검색 파라미터 및 페이징용 키값 저장용 Model model
 	 * ) { System.out.println("--------------컨트롤러 들어옴--------------");
@@ -50,31 +49,66 @@ public class ShareController {
 	 * 
 	 * }
 	 */
+	//목록
+	@RequestMapping("/shareList.do")	
 	public String list(	   
-			   @RequestParam Map map,//검색 파라미터 및 페이징용 키값 저장용
-			   @RequestParam(required = false,defaultValue = "1") int nowPage,
-	           HttpServletRequest req,//페이징에 사용할 컨텍스트 루트 경로 얻기용
-	           Model model
-	           
-	) {
-		//서비스 호출]
-		ListPagingData<ShareDTO>  listPagingData = shareService.selectList(map, req, nowPage);
+			@RequestParam Map map,
+			@RequestParam(required = false,defaultValue = "1") int nowPage,
+			HttpServletRequest req ,
+			Model model,
+			SessionStatus status) throws JsonProcessingException {
 		
-		//데이타 저장]
-		model.addAttribute("listPagingData", listPagingData);
-		//뷰정보 반환]
+		//서비스 호출
+		ListPagingData<ShareDTO> datas = shareService.selectList(map,req,nowPage);
+		List<ShareDTO> Bbslists = datas.getLists();
+		//데이터 셋
+		ObjectMapper mapper = new ObjectMapper();
+		String lists = mapper.writeValueAsString(Bbslists);
+		model.addAttribute("listPagingData", datas);
+		model.addAttribute("lists", lists);
+		//지도 중심좌표 찍기용 임시 세션 - addr -> 로그인 유저의 addr로 넘겨줄 것.
+		model.addAttribute("addr", "가산동");		//비회원인 경우를 위한 현재 위치 잡아주려면 geolocation 써줘야하니...
+
 		return "share/ShareList.tiles";
 	}
+	////////////
+	@RequestMapping(value="/list",produces = "application/json; charset=UTF-8")//value 사용 시 서블릿 매핑에서 .do 붙나?
+	public @ResponseBody String list(@RequestParam Map map,HttpServletRequest req) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		//1]서비스 호출	
+		ListPagingData<ShareDTO> datas= shareService.selectList(map, req, 1);
+		List<ShareDTO> listss= datas.getLists();
+		System.out.println(listss);
+		return mapper.writeValueAsString(listss);
+	}
+	
+	//에이작스로 가자
+	@RequestMapping(value="/view",produces = "application/json; charset=UTF-8")
+	public @ResponseBody String view(
+		@RequestParam Map map,HttpServletRequest req) throws JsonProcessingException {
+		req.setAttribute("tbno", 8);//@@
+		System.out.println("tbno "+req.getParameter("tbno"));//@@tbaddr
+		ObjectMapper mapper = new ObjectMapper();
+		ShareDTO record= shareService.selectOne(map);
+		record.setTbContent(record.getTbContent().replace("\r\n","<br/>"));
+		
+		System.out.println(mapper.writeValueAsString(record));//@@
+		//뷰정보 반환]
+		return mapper.writeValueAsString(record);
+	}///////////////
 	
 	//글 작성 폼으로 이동
-	@RequestMapping(value = "/shareWrite.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/shareWrite", method = RequestMethod.GET)
 	public String write(HttpSession session, Model model) {
 		//로그인 회원가입 연결하고 나서 사용자 id와 일치하는 재료만 받아오기
 		//map에 아이디 저장
+		
 		Map map = new HashedMap();
 		map.put("id", session.getAttribute("id"));
 		//System.out.println("컨트롤러 아이디 : "+map.get("id"));
+		System.out.println("write 들어옴 select 전");
 		List<IngrediantDTO> listIngrediant = shareService.selectIngrediantList(map);
+		System.out.println("write 들어옴 select 후");
 		model.addAttribute("listIngrediant", listIngrediant);
 		return "share/ShareWrite";
 	}
@@ -83,9 +117,10 @@ public class ShareController {
 	 * @Autowired private ObjectMapper mapper;
 	 */
 	//글 등록
-	@RequestMapping(value = "/shareWrite.do", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+	@RequestMapping(value = "/shareWrite", produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
 	@ResponseBody
-	public String writeOK(MultipartHttpServletRequest multipartRequest) throws JsonProcessingException {		
+	public String writeOK(MultipartHttpServletRequest multipartRequest) throws JsonProcessingException {
+		
 		return shareService.insert(multipartRequest) ? "success" : "error";
 	}
 	

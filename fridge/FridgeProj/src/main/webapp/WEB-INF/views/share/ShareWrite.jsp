@@ -114,7 +114,7 @@
 			alert('내용을 입력해주세요');
 			return false;
 		}
-		var url = "/app/shareWrite.do";
+		var url = "/app/share/shareWrite.do";
 		var formData = new FormData($("form")[0]);
 		var checkboxes = [];
 		var counts = [];
@@ -155,7 +155,7 @@
 				console.log("Success!");
 				if(data){
 					alert("등록을 완료했습니다!");
-					location.href="/app/shareList.do";
+					location.href="/app/share/shareList.do";
 				}
 			} 
 		});	
