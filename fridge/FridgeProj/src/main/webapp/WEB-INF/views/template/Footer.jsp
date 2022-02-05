@@ -14,12 +14,14 @@
 	<footer id="footer">
 	    <div class="container">
 	        <div class="col-md-8">
-	            <p class="copyright">Copyright: <span><script>document.write(new Date().getFullYear())</script></span> Design and Developed by <a href="http://www.Themefisher.com" target="_blank">Themefisher</a>. <br> 
-	                Get More 
-	                <a href="https://themefisher.com/free-bootstrap-templates/" target="_blank">
-	                    Free Bootstrap Templates
+	            <p class="copyright">Copyright: <span><script>document.write(new Date().getFullYear())</script></span> Design and Developed by <a href="#">찍먹냉장고</a><br> 
+	                <a href="<c:url value='/question/Q_List.do'/>" target="_blank">
+	                    공지사항
+	                </a>|
+	                <a href="<c:url value='/notice/List.do'/>" target="_blank">
+	                    QnA
 	                </a>
-	            </p>s
+	            </p>
 	        </div>
 	        <div class="col-md-4">
 	            <!-- Social Media -->

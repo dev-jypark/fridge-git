@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import com.kosmo.fridge.service.MemberDTO;
 import com.kosmo.fridge.service.MemberService;
 
@@ -17,11 +19,19 @@ public class MemberServiceImpl implements MemberService{
 	public boolean isLogin(Map map) {
 		return memberDAO.isLogin(map);
 	}
+	//프로필사진
+	public String memberProfile(Map map) {
+		return memberDAO.memberProfile(map);
+	}	
 	//소셜로그인
 	@Override
 	public int isSocialLogin(Map map) {
 		return memberDAO.isSocialLogin(map);
 		}
+	//소셜프로필사진
+//	public String socialMemberProfile(Map map) {
+//		return memberDAO.socialMemberProfile(map);
+//	}
 	//회원가입
 	@Override
 	public void signUp(MemberDTO memberDTO) {
@@ -67,5 +77,6 @@ public class MemberServiceImpl implements MemberService{
 	public void pwdEdit(MemberDTO memberDTO) {
 		memberDAO.pwdEdit(memberDTO);
 	}
+
 
 }

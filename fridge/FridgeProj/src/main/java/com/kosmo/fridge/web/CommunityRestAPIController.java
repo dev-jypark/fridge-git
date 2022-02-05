@@ -1,0 +1,46 @@
+package com.kosmo.fridge.web;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.kosmo.fridge.service.CommunityRestAPIService;
+import com.kosmo.fridge.service.FeedDTO;
+
+@RestController
+public class CommunityRestAPIController {
+	
+	@Autowired
+	CommunityRestAPIService service;
+	
+	@GetMapping("/community/feeds/{nick}")
+	public List<FeedDTO> selectListFeedInCoummunityMain(@PathVariable String nick){
+		return service.selectListFeedInCommunityMain(nick);
+	}
+	
+	@GetMapping("/profile/feeds/{nick}")
+	public List<FeedDTO> selectListFeedInProfile(@PathVariable String nick){
+		return service.selectListFeedInProfile(nick.trim());		
+	}
+	
+	@PostMapping("/community/comment/")
+	public void insertComment(@RequestParam Map map) {
+		service.insertComment(map);
+	}
+	
+	@PostMapping("/community/like/")
+	public void updateLike(@RequestParam Map map) {
+		service.updateLike(map);
+	}
+	
+}

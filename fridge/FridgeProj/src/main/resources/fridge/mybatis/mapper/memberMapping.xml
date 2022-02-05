@@ -8,19 +8,18 @@
 		<select id="memberLogin" parameterType="Map" resultType="int">
 			SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}
 		</select>
+		<!-- 프로필사진 -->
+		<select id="memberProfile" parameterType="Map" resultType="String">
+			SELECT imgsrc FROM member WHERE id=#{id}
+		</select>
 		<!-- 소셜로그인 -->
 		<select id="memberSocialLogin" parameterType="Map" resultType="int">
-			SELECT COUNT(*) FROM member WHERE id=#{socialId}
+			SELECT COUNT(*) FROM member WHERE id=#{socialId} AND pwd='20220214'
 		</select>
 		<!-- 회원가입 -->
 		<insert id="memberInsert" parameterType="MemberDTO" >	
 			INSERT INTO member
-			VALUES(#{id},#{pwd},#{email},#{nick},#{addr},null,'null',SYSDATE)
-		</insert>
-		<!-- 소셜회원가입 -->
-		<insert id="memberSocialSignUp" parameterType="MemberDTO" >	
-			INSERT INTO member
-			VALUES(#{socialId},'20220214',#{email},#{nick},#{addr},'null','null',SYSDATE)
+			VALUES(#{id},#{pwd},#{email},#{nick},#{addr},null,null,SYSDATE)
 		</insert>
 		<!-- 소셜회원가입 -->
 		<insert id="memberSocialSignUp" parameterType="MemberDTO" >	

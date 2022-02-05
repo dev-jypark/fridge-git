@@ -3,8 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -25,6 +27,9 @@
 	<!-- webapp의 어느 디렉토리에 스태틱 리소스(이미지,.css,.js등)를 두더라도 읽어 올수 있도록 설정하는 부분-->
 	<default-servlet-handler/> 
 	
+	<context:property-placeholder
+		location="classpath:fridge/share.properties" />
+	
 	<!-- 스프링 프레임 워크에서 파일 업로드를 위한 API id는 반드시 multipartResolver로 지정 왜냐하면 파일업로드와 
 		관련된 스프링의 다른 클래스들이 multipartResolver란 이름으로 참조하여 사용함으로...... -->
 	<!-- 최대 업로드 용량 사이즈 설정:maxUploadSize속성(바이트) -1:무제한 -->
@@ -42,6 +47,15 @@
 	    <beans:constructor-arg value="D:\gm\teamProj\profile_img"/>
 	</beans:bean>
 	
+	<!-- 웹소켓 서버용 빈 등록 -->
+	<beans:bean id="chatServer"
+		class="com.kosmo.fridge.web.ChatServer"></beans:bean>
+	<!-- 웹소켓 서버와 클라이언트에서 접속하는 path와 매핑:엔드포인트 설정 -->
+	<websocket:handlers allowed-origins="*">
+		<websocket:mapping handler="chatServer"
+			path="/chat-ws.do" />
+	</websocket:handlers>
+	
 	<!-- tiles사용을 위한 bean등록 -->
 	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions">
@@ -58,5 +72,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.kosmo.fridge" />
-	
+	<context:property-placeholder
+		location="classpath:fridge/resource/fridgelist.properties"/>
+		
 </beans:beans>

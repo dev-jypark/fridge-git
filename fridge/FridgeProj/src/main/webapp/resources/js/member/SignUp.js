@@ -92,8 +92,8 @@ $(function(){
 		function socialGetInfo(info){
 			$('#loginType').val(info.type);
 			$('#socialId').val(info.id);
-			$('#socialEmail').val(info.email);
-			$('#sociaNickname').val(info.nm);
+			$('#email').val(info.email);
+			$('#nick').val(info.nm);
 			setTimeout($('#form').submit(), 2000);
 		}	
 	
