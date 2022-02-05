@@ -26,7 +26,7 @@
 	</select>
 
 	<select id="questionSelectList" parameterType="Map" resultType="questionDTO">
-		SELECT * FROM q_bbs ORDER BY groupOrd DESC 
+		SELECT * FROM q_bbs <!-- ORDER BY groupOrd DESC -->
 	</select>
 	
 	<select id="questionTotalRowCount" parameterType="Map" resultType="int">
@@ -50,7 +50,7 @@
 		DELETE q_bbs WHERE q_no=#{q_no}
 	</delete>
 	
-	<select id="getBoardReplyInfo" parameterType="Map" resultType="questionDTO">
+<!--  <select id="getBoardReplyInfo" parameterType="Map" resultType="questionDTO">
     
 	    SELECT q_no
 	         , originNo
@@ -71,5 +71,5 @@
 		INSERT INTO q_bbs(q_no,id,q_title,q_content,originNo,groupOrd)
 		VALUES(SEQ_Q_BBS.NEXTVAL,#{id},#{q_title},#{q_content},{q_no},#{groupOrd}+1)
 	</insert>
-	
+	-->
   </mapper>
