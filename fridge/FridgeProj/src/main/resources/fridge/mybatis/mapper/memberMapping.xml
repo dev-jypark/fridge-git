@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="fridge.mybatis.mapper.memberMapping">
+  
+ 	 <resultMap type="shareBbsDTO" id="ShareBbsDTOResult">
+		<result column="tb_no" property="tb_no"/>
+		<result column="id" property="id"/>
+		<result column="tb_title" property="tb_title"/>
+		<result column="tb_content" property="tb_content"/>
+		<result column="tb_visitcount" property="tb_visitcount"/>
+		<result column="tb_postDate" property="tb_postDate"/>		
+	  </resultMap>
+	  
+		<!-- 게시물 1개 상세 -->
+		<select id="shareSelectOne" parameterType="Map" resultMap="ShareBbsDTOResult">
+			SELECT t.*,m.id,m.addr FROM
+			member m JOIN t_bbs t ON m.id=t.id 
+			where tb_no = #{tbno}
+		</select>
+		<!-- 특정 동의 게시물 수 -->
+		<select id="shareCount" resultType="int">
+			SELECT count(*) FROM member m JOIN t_bbs t on m.id=t.id <!-- WHERE m.addr = #{addr}; -->
+		</select>
+		
+		<!-- 게시물 -->
+		<select id="shareSelectList" parameterType="Map" resultType="ShareBbsDTO">
+			SELECT * FROM
+			(SELECT t.*,ROWNUM R FROM
+				(SELECT t.*,m.nick,m.addr
+				 FROM t_bbs t JOIN member m ON m.id=t.id
+				 <if test="tbaddr !=null">
+					WHERE m.addr LIKE '%' || #{tbaddr} || '%'
+				</if> 				
+					ORDER BY tb_no DESC) T)
+			WHERE R BETWEEN #{start} AND #{end} 
+		</select>
+		
+		
+		<!-- where m.addr = #{addr} -->
+		<!-- temp
+		<select id="memoSelectList" parameterType="Map" resultType="oneMemoDTO">
+			SELECT * FROM
+			(SELECT T.*,ROWNUM R FROM
+				(SELECT o.*,m.name,(SELECT COUNT(*) FROM linecomments WHERE no=o.no) as commentCount FROM 
+					onememo o JOIN member m ON m.id=o.id 
+					<if test="searchWord !=null">
+						WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+					</if>				
+					ORDER BY no DESC) T)
+			WHERE R BETWEEN #{start} AND #{end}
+		</select>
+		 -->
+  </mapper>

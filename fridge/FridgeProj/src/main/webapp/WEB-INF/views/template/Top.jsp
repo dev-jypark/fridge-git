@@ -111,7 +111,7 @@
 </g></svg></a></div>
 <nav class="layout-navigation-primary__menu">
 <a class="layout-navigation-primary__menu__item layout-navigation-primary__menu__item--active layout-navigation-primary__menu__item--open" href="/">커뮤니티</a>
-<a class="layout-navigation-primary__menu__item" href="<c:url value="/share.do"/>">나눔</a>
+<a class="layout-navigation-primary__menu__item" href="<c:url value="/share/shareMap.do"/>">나눔</a>
 <a class="layout-navigation-primary__menu__item" href="<c:url value="/qna.do"/>">레시피</a></nav>
 <div class="layout-navigation-primary__right">
 <div class="layout-navigation-bar-search">
