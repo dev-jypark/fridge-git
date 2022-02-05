@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
 //별명 중복 검사
 function nicknameDuplCheck(){
     //공란인 채로 중복확인 눌렀을 때
-    if($('#socialNickname').val() == ''){
+    if($('#nick').val() == ''){
         alert('별명을 입력해주세요.')
         return;
     }
@@ -26,7 +26,7 @@ function nicknameDuplCheck(){
     //}
     
     //입력한 별명값이 바뀔 때
-    $('#socialNickname').change(function(){
+    $('#nick').change(function(){
         $('#nicknameCheck').show(); 
     })
     
@@ -35,7 +35,7 @@ function nicknameDuplCheck(){
         url: "checksocialNick.do",
         type: "post",
         dataType: "json",
-        data: {"nick":$("#socialNickname").val()},
+        data: {"nick":$("#nick").val()},
         success: function (data) {
             if(data ==1){
             alert("이미 존재하는 별명입니다.");
