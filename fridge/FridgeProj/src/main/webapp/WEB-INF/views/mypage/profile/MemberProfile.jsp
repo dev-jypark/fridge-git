@@ -6,16 +6,16 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="<c:url value="/resources/css/mypage/memberProfile.css"/>" rel="stylesheet">
 
-<input type="hidden" name="nick" value="${nick }">
-<input type="hidden" name="user" value="${nick }">
+<input type="hidden" name="id" value="${id }">
+<input type="hidden" name="target" value="${memberProfile.id }">
 <header>
 	<!-- 사용자 상단 프로필 파트 -->
-	<div class="container">
+	<div class="container" style="margin-top: 100px;">
 		
 		<div class="profile">
 			
 			<div class="profile-image">
-				<img src="<c:url value="/upload/profile/${memberProfile.nick }.jpg"/>" alt="${memberProfile.id }">
+				<img src="<c:url value="/upload/profile/${memberProfile.imgsrc }"/>" alt="${memberProfile.nick }">
 			</div>
 
 			<div class="profile-user-settings">
@@ -37,7 +37,7 @@
 			</div>
 
 			<div class="profile-bio">
-				<p>${memberProfile.self }📷✈️🏕️</p>
+				<p>${memberProfile.self }</p>
 			</div>
 
 		</div>

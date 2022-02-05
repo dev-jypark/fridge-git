@@ -115,8 +115,4 @@ public class CommunityServiceImpl implements CommunityService{
 		return dto;
 	}
 
-	public String selectOneNick(String id) {
-		return dao.selectOneNick(id);
-	}
-
 }

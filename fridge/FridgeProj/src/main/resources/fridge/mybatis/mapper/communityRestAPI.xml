@@ -34,12 +34,12 @@
 		select f.*, nick, imgsrc from f_bbs f join (select * from member where id in (select f_dest from follow where f_src=#{id})) m on f.id=m.id order by fb_no desc
 	</select>
 	
-	<select id="selectListFeedInProfile" parameterType="String" resultMap="FeedDTOResult">
-		select f.*, nick, imgsrc from f_bbs f where id=#{id}
-	</select>
-	
 	<select id="selectOneUser" parameterType="String" resultType="MemberProfileDTO">
 		select * from member where id=#{id}
+	</select>
+	
+	<select id="selectListFeedInProfile" parameterType="String" resultMap="FeedDTOResult">
+		select f.*, nick, imgsrc from f_bbs f join member m on f.id=m.id where f.id=#{id}
 	</select>
 	
 	<insert id="insertComment" parameterType="Map">
