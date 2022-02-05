@@ -5,7 +5,7 @@
 <html>
 <head>
 <!-- 나중에 파비콘 만들어 -->
-<!-- <link rel="icon" href="favicon.ico"> -->
+<link rel="icon" href="<c:url value="/resources/favicon.ico"/>">
 <title>찍먹냉장고 | 찍고 먹는 식품 재고 관리 커뮤니티</title>
 <!-- Mobile Specific Metas================================================== -->
 <meta name="format-detection" content="telephone=no">
