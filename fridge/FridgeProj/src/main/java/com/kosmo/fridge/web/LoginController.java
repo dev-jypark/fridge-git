@@ -55,8 +55,8 @@ public class LoginController {
 		int flag = memberService.isSocialLogin(map);
 		String loginType = map.get("loginType").toString();
 		String socialId = map.get("socialId").toString();
-		String nick = map.get("socialNickname").toString();
-		String email = map.get("socialEmail").toString();	
+		String nick = map.get("nick").toString();
+		String email = map.get("email").toString();	
 		//모델에 값 추가
 		model.addAttribute("loginType", loginType);
 		model.addAttribute("socialId", socialId);
@@ -66,6 +66,8 @@ public class LoginController {
 		session.setAttribute("socialId", socialId);
 		session.setAttribute("nick", nick);
 		session.setAttribute("email", email);
+		System.out.println("닉:"+nick);
+		System.out.println("이멜:"+email);
 		//로그인시 loginType에 kakao나 google이 저장되므로 비었다면 로그인 실패		
 		if(loginType.isEmpty()) {		
 			status.setComplete();

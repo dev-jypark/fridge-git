@@ -54,6 +54,7 @@ public class MemberDAO {
 	public int isSocialLogin(Map map){
 		SqlSession session= sqlMapper.openSession();
 		 int result=session.selectOne("memberSocialLogin",map);
+		 System.out.println("dao의 map: "+map);
 		return result;		 
 		}
 	//소셜프로필사진
