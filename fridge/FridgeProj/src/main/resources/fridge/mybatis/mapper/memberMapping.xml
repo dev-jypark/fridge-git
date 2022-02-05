@@ -22,11 +22,6 @@
 			INSERT INTO member
 			VALUES(#{socialId},'20220214',#{email},#{nick},#{addr},'null','null',SYSDATE)
 		</insert>
-		<!-- 소셜회원가입 -->
-		<insert id="memberSocialSignUp" parameterType="MemberDTO" >	
-			INSERT INTO member
-			VALUES(#{socialId},'20220214',#{email},#{nick},#{addr},null,null,SYSDATE)
-		</insert>
 		<!-- 약관동의 -->
 		<insert id="agreeInsert" parameterType="MemberDTO" >
 			INSERT INTO m_agree

@@ -11,12 +11,12 @@ DROP TABLE f_com CASCADE CONSTRAINTS;
 DROP TABLE f_imgsrc CASCADE CONSTRAINTS;
 DROP TABLE f_like CASCADE CONSTRAINTS;
 DROP TABLE f_bbs CASCADE CONSTRAINTS;
-DROP TABLE history CASCADE CONSTRAINTS;
 DROP TABLE trade CASCADE CONSTRAINTS;
 DROP TABLE ingrediant CASCADE CONSTRAINTS;
 DROP TABLE m_agree CASCADE CONSTRAINTS;
 DROP TABLE q_imgsrc CASCADE CONSTRAINTS;
 DROP TABLE q_bbs CASCADE CONSTRAINTS;
+DROP TABLE t_com CASCADE CONSTRAINTS;
 DROP TABLE t_imgsrc CASCADE CONSTRAINTS;
 DROP TABLE t_like CASCADE CONSTRAINTS;
 DROP TABLE t_bbs CASCADE CONSTRAINTS;
@@ -39,9 +39,7 @@ DROP SEQUENCE SEQ_f_com_fc_no;
 DROP SEQUENCE SEQ_f_com_tc_no;
 DROP SEQUENCE SEQ_f_imgsrc_fi_no;
 DROP SEQUENCE SEQ_f_like_fl_no;
-DROP SEQUENCE SEQ_history_h_no;
 DROP SEQUENCE SEQ_ingrediant_i_no;
-DROP SEQUENCE SEQ_management_history_m_no;
 DROP SEQUENCE SEQ_notice_n_no;
 DROP SEQUENCE SEQ_n_imgsrc_ni_no;
 DROP SEQUENCE SEQ_q_bbs_q_no;
@@ -58,32 +56,30 @@ DROP SEQUENCE SEQ_t_like_tl_no;
 
 /* Create Sequences */
 
-CREATE SEQUENCE SEQ_a_com_a_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_chat_chat_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_chat_c_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_c_bbs_c_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_c_com_cc_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_c_like_cl_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_fb_imgsrc_fi_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_bbs_fb_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_bbs_f_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_com_fc_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_com_tc_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_imgsrc_fi_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_like_fl_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_history_h_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_ingrediant_i_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_management_history_m_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_notice_n_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_n_imgsrc_ni_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_q_bbs_q_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_q_imgsrc_qi_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_trade_t_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_bbs_tb_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_bbs_t_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_com_tc_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_imgsrc_ti_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_like_tl_no INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE SEQ_a_com_a_no nocycle nocache;
+CREATE SEQUENCE SEQ_chat_chat_no nocycle nocache;
+CREATE SEQUENCE SEQ_chat_c_no nocycle nocache;
+CREATE SEQUENCE SEQ_c_bbs_c_no nocycle nocache;
+CREATE SEQUENCE SEQ_c_com_cc_no nocycle nocache;
+CREATE SEQUENCE SEQ_c_like_cl_no nocycle nocache;
+CREATE SEQUENCE SEQ_fb_imgsrc_fi_no nocycle nocache;
+CREATE SEQUENCE SEQ_f_bbs_fb_no nocycle nocache;
+CREATE SEQUENCE SEQ_f_bbs_f_no nocycle nocache;
+CREATE SEQUENCE SEQ_f_com_fc_no nocycle nocache;
+CREATE SEQUENCE SEQ_f_com_tc_no nocycle nocache;
+CREATE SEQUENCE SEQ_f_imgsrc_fi_no nocycle nocache;
+CREATE SEQUENCE SEQ_f_like_fl_no nocycle nocache;
+CREATE SEQUENCE SEQ_ingrediant_i_no nocycle nocache;
+CREATE SEQUENCE SEQ_notice_n_no nocycle nocache;
+CREATE SEQUENCE SEQ_n_imgsrc_ni_no nocycle nocache;
+CREATE SEQUENCE SEQ_q_bbs_q_no nocycle nocache;
+CREATE SEQUENCE SEQ_q_imgsrc_qi_no nocycle nocache;
+CREATE SEQUENCE SEQ_trade_t_no nocycle nocache;
+CREATE SEQUENCE SEQ_t_bbs_tb_no nocycle nocache;
+CREATE SEQUENCE SEQ_t_bbs_t_no nocycle nocache;
+CREATE SEQUENCE SEQ_t_com_tc_no nocycle nocache;
+CREATE SEQUENCE SEQ_t_imgsrc_ti_no nocycle nocache;
+CREATE SEQUENCE SEQ_t_like_tl_no nocycle nocache;
 
 
 
@@ -111,8 +107,8 @@ CREATE TABLE a_com
 CREATE TABLE chat
 (
 	c_no number NOT NULL UNIQUE,
-	c_src varchar2(24) NOT NULL,
-	c_dest varchar2(24) NOT NULL,
+	c_src varchar2(40) NOT NULL,
+	c_dest varchar2(40) NOT NULL,
 	c_content nvarchar2(500) NOT NULL,
 	c_date date DEFAULT sysdate NOT NULL,
 	PRIMARY KEY (c_no)
@@ -121,8 +117,8 @@ CREATE TABLE chat
 
 CREATE TABLE follow
 (
-	f_src varchar2(24) NOT NULL,
-	f_dest varchar2(24) NOT NULL,
+	f_src varchar2(40) NOT NULL,
+	f_dest varchar2(40) NOT NULL,
 	UNIQUE (f_src, f_dest)
 );
 
@@ -130,7 +126,7 @@ CREATE TABLE follow
 CREATE TABLE f_bbs
 (
 	fb_no number NOT NULL,
-	id varchar2(24) NOT NULL,
+	id varchar2(40) NOT NULL,
 	fb_content nvarchar2(2000) NOT NULL,
 	fb_postdate date DEFAULT sysdate,
 	PRIMARY KEY (fb_no)
@@ -140,7 +136,7 @@ CREATE TABLE f_bbs
 CREATE TABLE f_com
 (
 	fc_no number NOT NULL,
-	id varchar2(24) NOT NULL,
+	id varchar2(40) NOT NULL,
 	fb_no number NOT NULL,
 	fc_content nvarchar2(500) NOT NULL,
 	fc_postdate date DEFAULT sysdate,
@@ -160,7 +156,7 @@ CREATE TABLE f_imgsrc
 CREATE TABLE f_like
 (
 	fl_no number NOT NULL,
-	id varchar2(24) NOT NULL,
+	id varchar2(40) NOT NULL,
 	fb_no number NOT NULL,
 	PRIMARY KEY (fl_no)
 );
@@ -181,11 +177,10 @@ CREATE TABLE history
 CREATE TABLE ingrediant
 (
 	i_no number NOT NULL,
-	id varchar2(24) NOT NULL,
+	id varchar2(40) NOT NULL,
 	i_name nvarchar2(20) NOT NULL,
 	i_cnt number NOT NULL,
 	i_enddate date NOT NULL,
-	i_postdate date NOT NULL,
 	PRIMARY KEY (i_no)
 );
 
@@ -205,8 +200,9 @@ CREATE TABLE member
 
 CREATE TABLE m_agree
 (
-	id varchar2(24) NOT NULL,
-	agree nvarchar2(25) NOT NULL,
+	id varchar2(40) NOT NULL UNIQUE,
+	a_base char(1) NOT NULL,
+	a_marketing char(1) NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -235,7 +231,7 @@ CREATE TABLE n_imgsrc
 CREATE TABLE q_bbs
 (
 	q_no number NOT NULL,
-	id varchar2(24) NOT NULL,
+	id varchar2(40) NOT NULL,
 	q_title nvarchar2(100) NOT NULL,
 	q_content nvarchar2(2000) NOT NULL,
 	q_postdate date DEFAULT SYSDATE,
@@ -268,12 +264,23 @@ CREATE TABLE trade
 CREATE TABLE t_bbs
 (
 	tb_no number NOT NULL,
-	id varchar2(24) NOT NULL,
+	id varchar2(40) NOT NULL,
 	tb_title nvarchar2(100) NOT NULL,
 	tb_content nvarchar2(2000) NOT NULL,
 	tb_visitcount number DEFAULT 0 NOT NULL,
 	tb_postdate date DEFAULT sysdate,
 	PRIMARY KEY (tb_no)
+);
+
+
+CREATE TABLE t_com
+(
+	tc_no number NOT NULL,
+	id varchar2(40) NOT NULL,
+	tb_no number NOT NULL,
+	tc_content nvarchar2(500) NOT NULL,
+	tc_postdate date DEFAULT sysdate,
+	PRIMARY KEY (tc_no)
 );
 
 
@@ -289,7 +296,7 @@ CREATE TABLE t_imgsrc
 CREATE TABLE t_like
 (
 	tl_no number NOT NULL,
-	id varchar2(24) NOT NULL,
+	id varchar2(40) NOT NULL,
 	tb_no number NOT NULL,
 	PRIMARY KEY (tl_no)
 );
@@ -335,13 +342,13 @@ ALTER TABLE trade
 
 
 ALTER TABLE chat
-	ADD FOREIGN KEY (c_src)
+	ADD FOREIGN KEY (c_dest)
 	REFERENCES member (id)
 ;
 
 
 ALTER TABLE chat
-	ADD FOREIGN KEY (c_dest)
+	ADD FOREIGN KEY (c_src)
 	REFERENCES member (id)
 ;
 
@@ -376,12 +383,6 @@ ALTER TABLE f_like
 ;
 
 
-ALTER TABLE history
-	ADD FOREIGN KEY (id)
-	REFERENCES member (id)
-;
-
-
 ALTER TABLE ingrediant
 	ADD FOREIGN KEY (id)
 	REFERENCES member (id)
@@ -401,6 +402,12 @@ ALTER TABLE q_bbs
 
 
 ALTER TABLE t_bbs
+	ADD FOREIGN KEY (id)
+	REFERENCES member (id)
+;
+
+
+ALTER TABLE t_com
 	ADD FOREIGN KEY (id)
 	REFERENCES member (id)
 ;
@@ -431,6 +438,12 @@ ALTER TABLE q_imgsrc
 
 
 ALTER TABLE trade
+	ADD FOREIGN KEY (tb_no)
+	REFERENCES t_bbs (tb_no)
+;
+
+
+ALTER TABLE t_com
 	ADD FOREIGN KEY (tb_no)
 	REFERENCES t_bbs (tb_no)
 ;

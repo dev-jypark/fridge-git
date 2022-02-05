@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Transactional
-@Service("ingredient")
+@Service("ingredientService")
 public class IngredientServiceImpl implements IngredientService {
 
 	
@@ -18,13 +18,14 @@ public class IngredientServiceImpl implements IngredientService {
 	
 	@Override
 	public String selectStock(Map map) {
-		// TODO Auto-generated method stub
+		System.out.println("serviceid"+map.get("id"));
 		return dao.selectStock(map);
 	}
 
 	@Override
 	public String selectDate(Map map) {
 		// TODO Auto-generated method stub
+		System.out.println("serviceid---------------dd-------"+map.get("id"));
 		return dao.selectDate(map);
 	}
 	
