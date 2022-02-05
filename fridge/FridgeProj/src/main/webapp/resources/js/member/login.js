@@ -117,8 +117,8 @@ $(function(){
 		
 		function socialGetInfo(info){
 			$('#loginType').val(info.type);
-			$('#socialNickname').val(info.nm);
-			$('#socialEmail').val(info.email);
+			$('#nick').val(info.nm);
+			$('#email').val(info.email);
 			$('#socialId').val(info.id);
 			setTimeout($('#form').submit(), 2000);
 		}

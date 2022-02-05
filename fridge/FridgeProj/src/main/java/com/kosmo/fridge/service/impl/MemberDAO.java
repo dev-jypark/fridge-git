@@ -46,12 +46,20 @@ public class MemberDAO {
 		session.close();
 		return count==1 ? true : false;
 	}
+	//프로필사진
+	public String memberProfile(Map map) {
+		return template.selectOne("memberProfile",map);
+	}
 	//소셜로그인
 	public int isSocialLogin(Map map){
 		SqlSession session= sqlMapper.openSession();
 		 int result=session.selectOne("memberSocialLogin",map);
 		return result;		 
-		}	
+		}
+	//소셜프로필사진
+//	public String socialMemberProfile(Map map) {
+//		return template.selectOne("socialMemberProfile",map);
+//	}
 	//회원가입
 	public void signUp(MemberDTO memberDTO) {
 		SqlSession session= sqlMapper.openSession();
@@ -120,5 +128,6 @@ public class MemberDAO {
 		session.commit();		
 		session.close();
 	}
+
 
 }
