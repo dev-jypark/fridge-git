@@ -20,6 +20,7 @@
 		<result property="likeCount" column="likeCount"/>
 		<result property="addr" column="addr"/>	
 		<result property="thumbnail" column="thumbnail"/>	
+		<result property="img" column="ti_src"/>	
 		<!-- 
 		1:N관계 매핑용
 		column: 조인조건의 컬럼명 (ON onememo.no = linecomments.no)
@@ -107,9 +108,10 @@
 	
 	<!-- shareSelectOne -->
 	<select id="shareSelectOne" parameterType="Map" resultMap="shareDTOResult">
-		SELECT * 
-		FROM t_bbs t JOIN member m ON m.id=t.id
-		where tb_no = #{tbno}
+		SELECT *
+		FROM t_bbs b INNER JOIN t_imgsrc i
+		ON (b.tb_no = i.tb_no)
+		WHERE b.tb_no=#{tb_no} AND ROWNUM=1
 	</select>
 	
 	<!-- ingredianCountUpdate -->
