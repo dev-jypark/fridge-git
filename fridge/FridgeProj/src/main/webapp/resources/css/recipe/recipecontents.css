@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+*{
+   font-family: 'Do Hyeon', sans-serif !important;
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*상단영역*/
+.container-body{
+	margin-top: 200px;
+}
+.recipetitle{
+	text-align: center;
+}
+.view_pic1 {
+    margin: 0 auto;
+    padding: 50px 0 70px;
+    position: relative;
+    text-align: center;
+    background: #fff;
+    max-width: 600px;
+    max-height: 500px;
+          width: 600px;
+          height: 400px;
+          object-fit: cover;
+     
+}
+
+.view1_summary.st3 {
+    width: 640px;
+    margin: 40px auto 0;
+    padding-bottom: 40px;
+    font-size: 19px;
+}
+
+.view1_summary.in {
+    position: relative;
+    padding: 2px 10px 10px 10px;
+    color: #aaa;
+    font-size: 16px;
+    line-height: 170%;
+    font-style: normal;
+    margin: 0;
+    width: 100%;
+}
+
+.view1_summary_info {
+    padding: 2px 15px 0;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.view1_summary_info span {
+    display: inline-block;
+    width: 32%;
+    padding-top: 56px;
+    color: #bcb7b7;
+    font-size: 16px;
+}
+.view1_summary_info1 {
+    background: url(//recipe1.ezmember.co.kr/img/mobile/icon_man.png) center no-repeat;
+    background-size: 34px;
+}
+.view1_summary_info2 {
+    background: url(//recipe1.ezmember.co.kr/img/mobile/icon_time2.png) center no-repeat;
+    background-size: 34px;
+}
+.view1_summary_info3 {
+    background: url(//recipe1.ezmember.co.kr/img/mobile/icon_star.png) center no-repeat;
+    background-size: 34px;
+}
+.recipetitle .best_tit {
+    margin: 25px;
+}
+
+.best_tit {
+    font-size: 25px;
+    color: #000;
+    padding: 0 35px 5px 35px;
+}
+.best_tit span {
+    /*color: #ccc;*/
+    color: #95E1D3;
+    font-size: 25px;
+    font-style: italic;
+    padding-left: 4px;
+    
+}
+
+.recipecontents ul.case1 li {
+    width: 41%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.recipecontents ul.case1 {
+    padding: 10px 6px;
+    list-style: none;
+    margin: 0 20px;
+    font-size: 19px;
+}
+
+.recipecontents li {
+    border-bottom: 1px solid #ececec;
+    padding: 10px 6px;
+    list-style: none;
+    margin: 0 35px;
+    font-size: 16px;
+}
+
+/* 조리 순서 영역*/
+/* .view_step_cont {
+    background: url() no-repeat center 60px;
+    background-size: 36px;
+} */
+/* .view_step_cont.step2 {
+    background: url() no-repeat 48px 6px;
+    background-size: 36px;
+}
+.view_step_cont.step3 {
+    background: url() no-repeat 48px 6px;
+    background-size: 36px;
+}
+.view_step_cont.step4 {
+    background: url() no-repeat 48px 6px;
+    background-size: 36px;
+}
+.view_step_cont.step5 {
+    background: url() no-repeat 48px 6px;
+    background-size: 36px;
+}
+.view_step_cont.step6 {
+    background: url() no-repeat 48px 6px;
+    background-size: 36px;
+}
+.view_step_cont.step7 {
+    background: url() no-repeat 48px 6px;
+    background-size: 36px;
+}
+.view_step_cont.step8 {
+    background: url() no-repeat 48px 6px;
+    background-size: 36px;
+}
+.view_step_cont.step9 {
+    background: url() no-repeat 48px 6px;
+    background-size: 36px;
+} */
+
+.view_step_cont {
+/*	 margin: 0 auto;
+    padding: 50px 0 70px;
+    position: relative;
+    text-align: center;
+    background: #fff;
+    max-width: 600px;
+    max-height: 500px;
+              width: 600px;
+          height: 400px;
+          object-fit: cover; */
+   padding: auto;
+    width: 550px;
+    font-size: 19px;
+     border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+     position: relative;
+    text-align: center;
+    vertical-align: middle;
+     margin-top: 15px; 
+    
+}
+/* .media-body, .media-left, .media-right {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.media-right, .media>.pull-right {
+    padding-left: 10px;
+}
+
+.media, .media-body {
+    zoom: 1;
+} */
+
+/* 
+.recipeStep .view_step_cont .media-right img {
+    max-width: 300px;
+}
+
+.view_step_cont .media-right img {
+    margin: 0;
+} */
+.view_step_cont img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0 10px;
+     position: relative;
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}

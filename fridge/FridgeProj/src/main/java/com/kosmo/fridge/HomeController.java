@@ -51,29 +51,29 @@ public class HomeController {
 		 * model.addAttribute("serverTime", formattedDate );
 		 */
 		
-		return "recipe/recipe.tiles";
+		return "recipe/RecipeHome.tiles";
 	}
 	
 	@RequestMapping(value = "/recipedetail1.do", method = RequestMethod.GET)
 	public String rerecipedetail(Locale locale, Model model) {
 
-		return "recipe/recipedetail1.tiles";
+		return "recipe/Recipecontents.tiles";
 	}
 	
 	@RequestMapping(value = "/recipedetail2.do", method = RequestMethod.GET)
 	public String rerecipedetail2(Locale locale, Model model) {
 
-		return "recipe/recipedetail2.tiles";
+		return "recipe/Recipecontents2.tiles";
 	}
 	@RequestMapping(value = "/recipedetail3.do", method = RequestMethod.GET)
 	public String rerecipedetail3(Locale locale, Model model) {
 
-		return "recipe/recipedetail3.tiles";
+		return "recipe/Recipecontents3.tiles";
 	}
 	@RequestMapping(value = "/recipedetail4.do", method = RequestMethod.GET)
 	public String rerecipedetail4(Locale locale, Model model) {
 
-		return "recipe/recipedetail14.tiles";
+		return "recipe/Recipecontents4.tiles";
 	}
 	
 	
