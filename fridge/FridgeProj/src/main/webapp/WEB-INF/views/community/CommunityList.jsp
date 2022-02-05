@@ -49,7 +49,7 @@
                
                 <div class="legend">
                   <h3><a href="#"><i class="far fa-heart"></i> 좋아요 51개</a></h3>
-                  <h4 class="pull-left"><a href="#">Marcus Lewis</a></h4>
+                  <h4 class="pull-left"><a href="#">가나다</a></h4>
                   <p>뭐라고 적어야 할지 모르겠다</p>
                 </div>
                 

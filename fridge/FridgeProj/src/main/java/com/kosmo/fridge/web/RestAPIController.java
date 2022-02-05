@@ -1,9 +1,11 @@
 package com.kosmo.fridge.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ import com.kosmo.fridge.service.RestAPIService;
 
 @RestController
 public class RestAPIController {
-	@Resource(name="ingredient")
-	private IngredientServiceImpl ingredient;
+	@Resource(name="ingredientService")
+	private IngredientServiceImpl ingredientService;
 	
 	/*
 	 [RestTemplate]
@@ -44,8 +46,10 @@ public class RestAPIController {
 	
 	//먼저 https://www.jsonschema2pojo.org/사이트에서 JSON을 DTO로 변환
 	@GetMapping(value="/recipe.do",produces = "application/json;charset=UTF-8")
-	public List<Map> list(){//List<Map>로 받을때-DTO 불필요
-		String enddate = ingredient.selectDate(null);
+	public List<Map> list(HttpSession session){//List<Map>로 받을때-DTO 불필요
+		Map map = new HashMap<>();
+		map.put("id", session.getAttribute("id"));
+		String enddate = ingredientService.selectDate(map);
 		//1.요청헤더 설정용 객체 생성
 		HttpHeaders headers= new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
@@ -71,12 +75,15 @@ public class RestAPIController {
 	}////////////
 
 	@GetMapping(value="/recipedetail1.do",produces = "application/json;charset=UTF-8")
-	public List<Map> detail(){//List<Map>로 받을때-DTO 불필요
+	public List<Map> detail(HttpSession session){//List<Map>로 받을때-DTO 불필요
+		Map map = new HashMap<>();
+		map.put("id", session.getAttribute("id"));
+		String enddate = ingredientService.selectDate(map);
 		//1.요청헤더 설정용 객체 생성
 		HttpHeaders headers= new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 		HttpEntity entity = new HttpEntity(headers);
-		String url = "http://127.0.0.1:5000/detail?ingre=오이";
+		String url = "http://127.0.0.1:5000/detail?ingre="+enddate;
 		ResponseEntity<List> response= //List<Map 혹은 DTO>로 받을때		
 				restTemplate.exchange(
 				url,//요청 URI
@@ -94,12 +101,15 @@ public class RestAPIController {
 	}////////////
 	
 	@GetMapping(value="/recipedetail2.do",produces = "application/json;charset=UTF-8")
-	public List<Map> detail2(){//List<Map>로 받을때-DTO 불필요
+	public List<Map> detail2(HttpSession session){//List<Map>로 받을때-DTO 불필요
+		Map map = new HashMap<>();
+		map.put("id", session.getAttribute("id"));
+		String enddate = ingredientService.selectDate(map);
 		//1.요청헤더 설정용 객체 생성
 		HttpHeaders headers= new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 		HttpEntity entity = new HttpEntity(headers);
-		String url = "http://127.0.0.1:5000/detail?ingre=오이";
+		String url = "http://127.0.0.1:5000/detail?ingre="+enddate;
 		ResponseEntity<List> response= //List<Map 혹은 DTO>로 받을때		
 				restTemplate.exchange(
 				url,//요청 URI
@@ -117,12 +127,15 @@ public class RestAPIController {
 	}////////////
 	
 	@GetMapping(value="/recipedetail3.do",produces = "application/json;charset=UTF-8")
-	public List<Map> detail3(){//List<Map>로 받을때-DTO 불필요
+	public List<Map> detail3(HttpSession session){//List<Map>로 받을때-DTO 불필요
+		Map map = new HashMap<>();
+		map.put("id", session.getAttribute("id"));
+		String enddate = ingredientService.selectDate(map);
 		//1.요청헤더 설정용 객체 생성
 		HttpHeaders headers= new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 		HttpEntity entity = new HttpEntity(headers);
-		String url = "http://127.0.0.1:5000/detail?ingre=오이";
+		String url = "http://127.0.0.1:5000/detail?ingre="+enddate;
 		ResponseEntity<List> response= //List<Map 혹은 DTO>로 받을때		
 				restTemplate.exchange(
 				url,//요청 URI
@@ -140,12 +153,15 @@ public class RestAPIController {
 	}////////////
 	
 	@GetMapping(value="/recipedetail4.do",produces = "application/json;charset=UTF-8")
-	public List<Map> detail4(){//List<Map>로 받을때-DTO 불필요
+	public List<Map> detail4(HttpSession session){//List<Map>로 받을때-DTO 불필요
+		Map map = new HashMap<>();
+		map.put("id", session.getAttribute("id"));
+		String enddate = ingredientService.selectDate(map);
 		//1.요청헤더 설정용 객체 생성
 		HttpHeaders headers= new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 		HttpEntity entity = new HttpEntity(headers);
-		String url = "http://127.0.0.1:5000/detail?ingre=오이";
+		String url = "http://127.0.0.1:5000/detail?ingre="+enddate;
 		ResponseEntity<List> response= //List<Map 혹은 DTO>로 받을때		
 				restTemplate.exchange(
 				url,//요청 URI
