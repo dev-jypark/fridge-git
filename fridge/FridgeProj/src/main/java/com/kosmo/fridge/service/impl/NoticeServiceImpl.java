@@ -63,10 +63,6 @@ public class NoticeServiceImpl implements NoticeService {
 		listPagingData.setPagingString(pagingString);
 		listPagingData.setTotalRecordCount(totalRecordCount);
 		
-		System.out.println("찍어보기");
-		for(NoticeDTO dto: listPagingData.getLists()) {
-			System.out.println(dto);
-		}
 		return listPagingData;
 	}
 	

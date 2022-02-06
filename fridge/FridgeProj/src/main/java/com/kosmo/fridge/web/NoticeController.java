@@ -2,6 +2,7 @@ package com.kosmo.fridge.web;
 
 import java.util.Collection;
 
+
 import java.util.Map;
 
 import javax.annotation.Resource;

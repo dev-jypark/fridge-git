@@ -55,9 +55,6 @@ public class UserchartController {
 			model.addAttribute("addrCount",addrCount);
 			
 			List<UserchartDTO> favoriteFood=userchartService.favoriteFood();
-			for(UserchartDTO dto:favoriteFood) {
-				System.out.println(dto);
-			}
 			model.addAttribute("favoriteFood",favoriteFood);
 			
 			return "/admin/Userchart";

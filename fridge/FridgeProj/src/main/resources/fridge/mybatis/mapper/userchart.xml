@@ -8,14 +8,13 @@
   
   	<!-- 회원 로그인여부 확인 -->
   	<select id="isLogin" parameterType="Map" resultType="int">
-		SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}		
+		SELECT COUNT(*) FROM admin WHERE adminid=#{adminid} AND adminpw=#{adminpw}			
 	</select>
 	
 	<!-- 게시글 수 -->
 	<select id="totalPostCount" parameterType="Map" resultType="int">
 		SELECT COUNT(*) FROM f_bbs
-		
-		
+				
 	</select>
 	
 	<!-- 거래게시글 수 -->
