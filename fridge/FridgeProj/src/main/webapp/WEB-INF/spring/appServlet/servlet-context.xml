@@ -16,7 +16,7 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/upload/share/**" location="file:///C:/Project/fridge-git/fridge/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/FridgeProj/upload/share/"/>
+	<resources mapping="/upload/share/**" location="file:///D:/FridgPro/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/FridgeProj/upload/share/"/>
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="order" value="3" />

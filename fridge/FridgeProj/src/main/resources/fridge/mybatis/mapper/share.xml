@@ -53,8 +53,8 @@
 			(SELECT t.*,ROWNUM R FROM
 				(SELECT t.*,m.nick,m.addr
 				 FROM t_bbs t JOIN member m ON m.id=t.id
-				 <if test="tbaddr !=null">
-					WHERE m.addr LIKE '%' || #{tbaddr} || '%'
+				 <if test="mAddr !=null">
+					WHERE m.addr LIKE '%' || #{mAddr} || '%'
 				</if> 				
 					ORDER BY tb_no DESC) T)
 			<!-- WHERE R BETWEEN #{start} AND #{end} -->

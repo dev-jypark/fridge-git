@@ -61,15 +61,12 @@ public class ShareServiceImpl implements ShareService{
 	public ListPagingData<ShareDTO> selectList(Map map, HttpServletRequest req, int nowPage) {
 		//페이징을 위한 로직
 		int totalRecordCount = dao.getTotalRowCount(map);
-		System.out.println(totalRecordCount);
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
 		int start = (nowPage-1)*pageSize+1;
 		int end = nowPage*pageSize;
 		
 		map.put("start", start);
-		System.out.println(start);
 		map.put("end", end);
-		System.out.println(end);
 		//글 전체 목록 얻기
 		List listsShare = dao.selectList(map);
 		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, 
@@ -196,9 +193,11 @@ public class ShareServiceImpl implements ShareService{
 		 * for(IngrediantDTO dto : listIngrediant) { System.out.println(dto); }
 		 */
 			
-		dao.rollbackIngrediant(listIngrediant);
+		int i = dao.rollbackIngrediant(listIngrediant);
+		System.out.println("i"+i);
 		//casecade 제약조건 붙어있어서 post만 삭제하면 관련된 것들 모두 삭제됨
 		affected = dao.deleteSharePost(map);
+		System.out.println("return 전 영향받은 행"+affected);
 		return affected;
 	}
 

@@ -1,5 +1,6 @@
 package com.kosmo.fridge.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.fridge.service.IngrediantDTO;
 import com.kosmo.fridge.service.MemberDTO;
+import com.kosmo.fridge.service.MessageTO;
 import com.kosmo.fridge.service.ShareDTO;
 import com.kosmo.fridge.service.TradeDTO;
 import com.kosmo.fridge.service.impl.ShareServiceImpl;
@@ -81,21 +83,25 @@ public class ShareController {
 		System.out.println(listss);
 		return mapper.writeValueAsString(listss);
 	}
+	//@@@ 되면 위에꺼 날려 c...
+	@RequestMapping(value = "/shareAjaxList.do")
+	public String shareAjaxList(@RequestParam Map map, HttpServletRequest req) {
+		ListPagingData<ShareDTO> datas = shareService.selectList(map, req,1);
+		List<ShareDTO> bbslists = datas.getLists();
+		// List<ShareDTO Bbslists = shareService.selectList(map, req, 1).getLists();	
+		req.setAttribute("list", bbslists);
+		return "share/ShareAjaxList";
+	}
 	
 	//에이작스로 가자
-	@RequestMapping(value="/view",produces = "application/json; charset=UTF-8")
-	public @ResponseBody String view(
-		@RequestParam Map map,HttpServletRequest req) throws JsonProcessingException {
-		req.setAttribute("tbno", 2);//@@
-		System.out.println("tbno "+req.getParameter("tbno"));//@@tbaddr
+	@RequestMapping(value="/view.do")
+	public String view(@RequestParam Map map,HttpServletRequest req) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		ShareDTO record= shareService.viewSelectOne(map);
-		System.out.println(record);
 		record.setTbContent(record.getTbContent().replace("\r\n","<br/>"));
-		
-		System.out.println(mapper.writeValueAsString(record));//@@
-		//뷰정보 반환]
-		return mapper.writeValueAsString(record);
+		req.setAttribute("record", record);
+		System.out.println("넘겨줌");
+		return "share/ShareView";
 	}///////////////
 	
 	//글 작성 폼으로 이동
@@ -145,6 +151,7 @@ public class ShareController {
 	//글 삭제
 	@RequestMapping(value="/shareDelete.do")
 	public String delete(@RequestParam Map map ,HttpServletRequest req) {
+		System.out.println(map.size());
 		System.out.println("삭제 컨트롤러");
 		System.out.println(map.get("tb_no"));
 		//삭제할 때 #{tb_no} 임
