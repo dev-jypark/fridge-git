@@ -67,9 +67,7 @@
                     
                     <!-- logo -->
                     <div class="navbar-brand">
-                        <a href="/app" >
-                            <img src="<c:url value="/resources/images/template/logo.png"/>" alt="">
-                        </a>
+                         <a href="<c:url value="/"/>"><img src="<c:url value="/resources/images/top/logo_full.png"/>" alt="찍먹냉장고" style="width:20%; height:20%; float:left;"/></a>
                     </div>
                    	<!-- /logo -->
                 </div>
@@ -78,28 +76,37 @@
                 <nav class="collapse navbar-collapse navbar-right" role="navigation">
                     <div class="main-menu">
                         <ul class="nav navbar-nav navbar-right">
+                        	<!-- 로그인 여부 판별. 로그인 전이라면 회원가입과 로그인만 노출 -->
                         	<c:if test="${empty sessionScope.id && empty sessionScope.socialId}" var="beforeLogin">
-                        	<li><a href="<c:url value="/member/SignUp.do"/>">회원가입</a></li>
-                        	<li><a href="<c:url value="/member/login.do"/>">로그인</a></li>                        	
+                        	<li><a href="<c:url value="/member/SignUp.do"/>"><img src="<c:url value="/resources/images/top/top6.png"/>" alt="회원가입" style="width:80%; height:80%;"/></a></li>
+                        	<li><a href="<c:url value="/member/login.do"/>"><img src="<c:url value="/resources/images/top/top7.png"/>" alt="로그인" style="width:80%; height:80%;"/></a></li>                        	
 							</c:if>
-                            <c:if test="${not beforeLogin }">
-                            <li><a href="<c:url value=""/>" >커뮤니티</a></li>
-	                        <li><a href="<c:url value=""/>">나눔</a></li>
-	                        <li><a href="<c:url value='/recipe.do'/>">레시피</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">냉장고 <span class="caret"></span></a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a href="<c:url value="/fridge/fridgeList.do"/>">재료목록</a></li>
-	                                    <li><a href="#">Gallery</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                             <!-- 세션 저장값으로 소셜로그인 여부 판별. 소셜로그인인 경우 마이페이지:비밀번호변경 카테고리 숨김 -->	   
+                            <c:if test="${not beforeLogin }">                         
+	                            <li><a style="padding-right: 0px;" href="<c:url value=""/>" ><img src="<c:url value="/resources/images/top/top1.png"/>" alt="커뮤니티" style="width:70%; height:70%;"/></a></li>
+	                            <li class="dropdown">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<c:url value="/resources/images/top/top2.png"/>" alt="나눔" style="width:58%; height:58%;"/><span class="caret"></span></a>
+	                                <div class="dropdown-menu">
+	                                    <ul>
+	                                        <li><a href="<c:url value="/share/shareList.do"/>">주변나눔확인</a></li>
+	                                        <li><a href="/message_list.do">채팅하기</a></li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            <li><a href="<c:url value='/recipe.do'/>"><img src="<c:url value="/resources/images/top/top3.png"/>" alt="레시피" style="width:70%; height:70%;"/></a></li>                          
+	                            <li class="dropdown">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<c:url value="/resources/images/top/top4.png"/>" alt="냉장고" style="width:62%; height:62%;"/><span class="caret"></span></a>
+	                                <div class="dropdown-menu">
+	                                    <ul>
+	                                        <li><a href="<c:url value="/fridge/fridgeList.do"/>">재료목록</a></li>
+	                                        <li><a href="#">Gallery</a></li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            <!-- 회원상세정보에서 프로필사진을 지정하지 않은 경우 기본 이미지-->
 	                            <c:if test="${empty sessionScope.profileImg }" var="nullImgsrc">
 		                            <li class="dropdown">		                           
 		                                <a href="#" class="dropdown-toggle_profile" data-toggle="dropdown" 
-		                                style="padding-top: 6.5px;padding-left: 5px;padding-right: 5px;">	                                
+		                                style="padding-top: 6.5px;padding-left: 5px;margin-right: 5px;">	                                
 		                                <img class="profileImg" id="profileImg" src="<c:url value="/resources/images/template/basic_profile.png"/>">                              
 		                                <span class="caret"></span></a>
 		                                <div class="dropdown-menu">
@@ -137,7 +144,7 @@
 		                                </div>
 		                            </li>
 	                            </c:if> 
-	                            <li><a href="contact.html">채팅</a></li>
+	                        
                             </c:if>
                         </ul>
                     </div>
