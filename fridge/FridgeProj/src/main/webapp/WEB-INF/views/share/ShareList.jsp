@@ -115,7 +115,6 @@
 
 				var positions = list[i].addr;
 				geocoder.addressSearch(list[i].addr, function(result, status) {
-
 				    // 정상적으로 검색이 완료됐으면 
 				     if (status === kakao.maps.services.Status.OK) {					
 				        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -124,7 +123,8 @@
 				            map: map,
 				            position: coords
 				        });
-						//거래보기 a태그 자리에 이벤트 세팅
+						
+						//오버레이용 ctc
 						var content = '<div class="wrap">' + 
 					    '    <div class="info">' + 
 					    '        <div class="title">' + 
@@ -138,7 +138,7 @@
 					    '           </div>' + 
 					    '            <div class="desc">' + 
 					    '                <div class="ellipsis">희망 거래 '+cntMarker["list[i].addr"]+'개</div>' + 
-					    '                <div><a href="javascript:void(0)" onclick="fold()"><input id="tbaddr" type="hidden" name="tbaddr" value="'+list[i].addr+'">거래목록보기</a></div>' + 
+					    '                <div><a href="javascript:void(0);" onclick="getList(\''+list[i].addr+'\')">거래목록보기</a></div>' + 
 					    '            </div>' + 
 					    '        </div>' + 
 					    '    </div>' +    
@@ -158,61 +158,41 @@
 						//오버레이 닫기
 						function closeOverlay(){
 		          			overlay.setmap(null);
-		          		}
+		          		};
 						//마커 표시
 						marker.setMap(map);
 						//클러스터러에 마커 추가
 						clusterer.addMarker(marker);
 				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				        map.setCenter(coords);
-				    } 
+				    } //////////////////////
 				});
 			}
 			else if((markers.includes(list[i].addr))){
 				cntMarker["list[i].addr"]+= 1;
 			}
 		}
-	}
-
+	};
 	getDB();
 	
-
-	function fold(){
+	//목록 받아오기
+	function getList(e){
 		board.style.display = 'block';
-		let tbaddr =document.getElementById("tbaddr").value;
-		console.log(tbaddr);//@@
+		console.log("getlist의 e: "+e);
 		$.ajax({
 			type : 'get',
-			url:"<c:url value="/share/list.do"/>",
-			data:{"start":1,"end":10,"tbaddr":tbaddr,"tbno":8},
-			dataType:'json',
-			success:function(data){successAjax(data,'list');},
+			url:'<c:url value="/share/shareAjaxList.do?mAddr='+e+'"/>',
+			data:{},
+			success:function(data){
+				$('#list').html(data);
+				},
 			error:function(req,status,error){
-				console.log('응답코드:%s,에러 메시지:%s,error:%s,status:%s',
-						req.status,
-						req.responseText,
-						error,status);//@@
+				console.log("getList Failed");
 			}
-		});
-	}
-	//Ajax - response 후 List Build fn
-	var successAjax = function(data,id){
-	    var tableString="<table class='table table-bordered' style='width: 50%'>";
-	    tableString+="<tr>";
-	    tableString+="<th>번호</th><th>제목</th><th>작성자</th><th>지역</th><th>작성일</th>";
-	    tableString+="</tr>";
-	    $.each(data,function(index,item){//@@index 불필요
-	    	var date = new Date(item["tbPostDate"]);
-	    	var postDate=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-	    	tableString+="<tr>";
-	    	tableString+='<td>'+(data.length-index)+'</td><td><a href="javascript:void(0)" id="'+item["tbNo"]+'" onclick="view()">'+item["tbTitle"]+'</a></td><td>'+item["id"]+'</td><td>'+item["addr"]+'</td><td>'+postDate+'</td>';
-	    	tableString+="</tr>"
-	    });
-	    tableString+="</table>";
-	    tableString+='<a href="<c:url value="/share/shareWrite.do"/>" class="btn btn-info">신규 공유 등록</a>';
-	    $('#'+id).html(tableString);
+		})
 	};
 	
+	//모달관련
 	$('.download-gml').click(function() {
 	    event.preventDefault(); //태그의 기본 동작 차단
 
@@ -221,57 +201,47 @@
 	        console.info('download modal');
 	    });
 	});
-	
-	function view(){
-		var zIndex = 9999;
+
+	function getView(e){
+		var zIndex = 9999; //상단 locating용
 	    var modal = document.getElementById("my_modal");
-		//var tbno= 7; // 인수 받고 e.target?
-		//console.log(tbno);
+		console.log("getView의 e "+e);
 	    $.ajax({
 			type : 'get',
-			url:"<c:url value="/share/view.do"/>",
-			data:"tbno=1", //{"":''}json형식 아닌가? 이리하면 왜 안되냐
-			//contentType : "application/json;charset=UTF-8",
-			dataType:'json',
-			processData: false,
-			success:function(viewData){modalAjax(viewData,'my_modal');},
+			url:'<c:url value="/share/view.do?tbno='+e+'"/>',
+			data:{},
+			success:function(viewData){
+				$('#my_modal').html(viewData);
+				},
 			error:function(req,status,error){
-				//console.log("Ajax Failed");
 				console.log('응답코드:%s,에러 메시지:%s,error:%s,status:%s',
 						req.status,
 						req.responseText,
 						error,status);
+				console.log('viewAjax Failed');
 			}
-		});
-	    
+		});	    
 	    // 모달 div 뒤에 희끄무레한 레이어
 	    var bg = document.createElement('div');
         bg.setStyle({
-            position: 'fixed',
-            zIndex: zIndex,
-            left: '0px',
-            top: '0px',
-            width: '100%',
-            height: '100%',
-            overflow: 'auto',
-            // 레이어 색갈은 여기서 바꾸면 됨
-            backgroundColor: 'rgba(0,0,0,0.4)'
+            position: 'fixed', zIndex: zIndex,
+            left: '0px', top: '0px', width: '100%',
+            height: '100%', overflow: 'auto',
+            backgroundColor: 'rgba(0,0,0,0.4)' // 레이어 색갈은 여기서 바꾸면 됨
         });
         document.body.append(bg);
-
+        
         modal.querySelector('.modal_close_btn').addEventListener('click', function() {
             bg.remove();
             modal.style.display = 'none';
         });
 
         modal.setStyle({
-            position: 'fixed',
-            display: 'block',
+            position: 'fixed', display: 'block',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
 
             // 시꺼먼 레이어 보다 한칸 위에 보이기
             zIndex: zIndex + 1,
-
             // div center 정렬
             top: '50%',
             left: '50%',
@@ -279,37 +249,9 @@
             msTransform: 'translate(-50%, -50%)',
             webkitTransform: 'translate(-50%, -50%)'
         });
-	}////view
+	};////view
 
-	//Ajax - response 후 View Build fn
-	var modalAjax = function(data,id){
-		var date = new Date(data.tbPostDate);
-    	var postDate=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-	    var tableString='<article class="contents"><header class="top"><div class="user_container"><div class="profile_img"><img src="imgs/thumb.jpeg" alt="프로필이미지">'+
-			'</div><div class="user_name"><div class="nick_name m_text">'+data.id+'</div><div class="country s_text">'+data.addr+'</div></div>'+
-			'</div><div class="sprite_more_icon" data-name="more"><ul class="toggle_box"><li><input type="submit" class="follow" value="팔로우" data-name="follow"></li><li>수정</li><li>삭제</li></ul></div></header>'+
-			'<div class="img_section"><div class="trans_inner"><div>이이이미이이이지이이<br>이미지이이이<imgsrc=""alt="visual01">'+
-			'</div></div></div><div class="bottom_icons"><div class="left_icons"><div class="heart_btn"><div class="sprite_heart_icon_outline" name="39"data-name="heartbeat"></div></div>'+
-			'<div class="sprite_bubble_icon"></div><div class="sprite_share_icon" data-name="share"></div></div><div class="right_icon"><div class="sprite_bookmark_outline" data-name="bookmark"></div>'+
-			'</div></div><h3 class="product-title">'+data.tbTitle+'</h3>'+
-			'<ul class="list-product-information" style="border-top: 1px solid rgba(142, 113, 152, 0.79); border-bottom: 1px solid rgba(142, 113, 152, 0.79);"><li class="list-item user_id">판매자: <span>'+data.id+'</span></li>'+
-			'<li class="list-item date"><span>게시일: '+postDate+'</span></li><li class="list-item numProduct">상품 수량 <span>2조각</span></li>'+
-			'<li class="list-item location">지역: <span>'+data.addr+'</span></li><a href="<c:url value="/message_send_trade.do?no='+data.tbNo+'"/>" class="btn btn-info">채팅</a></ul><div class="description">';
-			/*console.log(typeof((String)${sessionScope.id}));
-			if(data.id == "${sessionScope.id}"){
-				console.log("동일임");
-			}
-			else if(data.id != "${sessionScope.id}"){
-				console.log("달라");
-			}*/
-			tableString += data.tbContent+
-			'</div><div class="likes m_text">조회 수 '+data.tbVisitCount+' 회<span id="like-count-39"></span></div>'+
-			'<div class="comment_container"><div class="comment" id="comment-list-ajax-post37"><div class="comment-detail"><div class="nick_name m_text">dongdong2</div>'+
-			'<div>쿨거래 네고 가능한가요?</div></div><div class="timer">1시간 전</div></div><div class="small_heart"><div class="sprite_small_heart_icon_outline"></div></div></div>'+
-			'<div class="comment_field" id="add-comment-post37"><input type="text" placeholder="댓글달기..."><div class="upload_btn m_text" data-name="comment">게시</div></div></article>';    
-	    $('#'+id).html(tableString);
-	};
-	
+	//@모달 css관련
 	Element.prototype.setStyle = function(styles) {
         for (var k in styles) this.style[k] = styles[k];
         return this;
@@ -320,17 +262,24 @@
 	});
 	
 	//db 연동 마커 표시 -ajax 뷰 따리빼기 귀찮으니 이렇게 하자...
-	/*
-		function showMarker(){
+/* 쓰레ㄱ기더미지만 나중에 쓸모가 있겠지
+	const GetDB function(){
 			$.ajax({
 		        method: 'get',
-		        url: "/share/shareMap",
-		        data: "",
-		        processData : true,
-		        contentType : "application/json; charset=utf-8",
-		        success: function (success) {
-					console.log("들어옴");
-		            positions.length = 0;
+		        url: "<c:url value="/share/shareAjaxList.do"/>",
+		        method:"GET",
+				data:{},
+				dataType : "text",
+		        success: function (data) {
+		        	$.each(data,function(index,item){
+		        		
+		    	    	var date = new Date(item["tbPostDate"]);
+		    	    	var postDate=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+		    	    	tableString+="<tr>";
+		    	    	tableString+='<td>'+(data.length-index)+'</td><td><a href="javascript:void(0)" id="'+item["tbNo"]+'" onclick="view()">'+item["tbTitle"]+'</a></td><td>'+item["id"]+'</td><td>'+item["addr"]+'</td><td>'+postDate+'</td>';
+		    	    	tableString+="</tr>"
+		    	    });
+		           
 		            for (let i = 0; i < success.data.length; i++) {
 		                //positions.push({title: success.data[i].title, latlng: new kakao.maps.LatLng(success.data[i].myLat, success.data[i].myLng), id: success.data[i].id, category : success.data[i].categoryName});
 		            }
@@ -351,31 +300,94 @@
 		        }
 		    });
 		}
-		showMarker();*/
-	
-	/* session -> member.addr 사용 시 x
-	//초기 현재 위치 기반 테스트용 지도&마커
-	//geolocation 사용 가능 여부
-	if (navigator.geolocation) {
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	    	var curLat = position.coords.latitude, // 위도
-	    		curLon = position.coords.longitude; // 경도
-			var curPosition = new kakao.maps.LatLng(curLat, curLon);//현재 위치 카카오 LatLng 객체에 담기
-			map.setCenter(curPosition);//현재 위치로 지도 중심 변경
-			
-			//테스트용 마커 생성
-			var tmpMarker = new kakao.maps.Marker({
-			position: curPosition
+		showMarker();
+		
+		$(document).ready(function(){
+			// 메세지 리스트 리로드
+			GetDB();
+		});	
+		
+		function fold(){
+			board.style.display = 'block';
+			let tbaddr =document.getElementById("tbaddr").value; //@@ 왜 let으로 했었지?
+			console.log(tbaddr);//@@
+			$.ajax({
+				type : 'get',
+				url:'<c:url value="/share/list.do"/>',
+				data:{"start":1,"end":10,"tbaddr":tbaddr,"tbno":8},
+				dataType:'json',
+				success:function(data){successAjax(data,'list');},
+				error:function(req,status,error){
+					console.log('응답코드:%s,에러 메시지:%s,error:%s,status:%s',
+							req.status,
+							req.responseText,
+							error,status);//@@
+				}
 			});
-			console.log("테스트 마커 생성");
-			//테스트용 마커 지도 위 세팅
-			tmpMarker.setMap(map);
-	      });
-	}
-	else {	
-		alert("위치를 찾을 수 없습니다.");		
-	}
-	*/
-	
+		};
+		//Ajax - response 후 List Build fn
+		var successAjax = function(data,id){
+		    var tableString="<table class='table table-bordered' style='width: 50%'>";
+		    tableString+="<tr>";
+		    tableString+="<th>번호</th><th>제목</th><th>작성자</th><th>지역</th><th>작성일</th>";
+		    tableString+="</tr>";
+		    $.each(data,function(index,item){//@@index 불필요
+		    	var date = new Date(item["tbPostDate"]);
+		    	var postDate=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+		    	tableString+="<tr>";
+		    	tableString+='<td>'+(data.length-index)+'</td><td><a href="javascript:void(0);" id="'+item["tbNo"]+'" onclick="view()">'+item["tbTitle"]+'</a></td><td>'+item["id"]+'</td><td>'+item["addr"]+'</td><td>'+postDate+'</td>';
+		    	tableString+="</tr>";
+		    });
+		    tableString+="</table>";
+		    tableString+='<a href="<c:url value="/share/shareWrite.do"/>" class="btn btn-info">신규 공유 등록</a>';
+		    $('#'+id).html(tableString);
+		};
+		*/
+		//Ajax - response 후 View Build fn
+		/*
+		var modalAjax = function(data,id){
+			var ctId = '';
+			var date = new Date(data.tbPostDate);
+	    	var postDate=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+		    var tableString='<article class="contents"><header class="top"><div class="user_container"><div class="profile_img"><img src="imgs/thumb.jpeg" alt="프로필이미지">'+
+				'</div><div class="user_name"><div class="nick_name m_text">'+data.id+'</div><div class="country s_text">'+data.addr+'</div></div>'+
+				'</div><div class="sprite_more_icon" data-name="more"><ul class="toggle_box"><li><input type="submit" class="follow" value="팔로우" data-name="follow"></li><li>수정</li><li>삭제</li></ul></div></header>'+
+				'<div class="img_section"><div class="trans_inner"><div>이이이미이이이지이이<br>이미지이이이<imgsrc=""alt="visual01">'+
+				'</div></div></div><div class="bottom_icons"><div class="left_icons"><div class="heart_btn"><div class="sprite_heart_icon_outline" name="39"data-name="heartbeat"></div></div>'+
+				'<div class="sprite_bubble_icon"></div><div class="sprite_share_icon" data-name="share"></div></div><div class="right_icon"><div class="sprite_bookmark_outline" data-name="bookmark"></div>'+
+				'</div></div><h3 class="product-title">'+data.tbTitle+'</h3>'+
+				'<ul class="list-product-information" style="border-top: 1px solid rgba(142, 113, 152, 0.79); border-bottom: 1px solid rgba(142, 113, 152, 0.79);"><li class="list-item user_id">판매자: <span>'+data.id+'</span></li>'+
+				'<li class="list-item date"><span>게시일: '+postDate+'</span></li><li class="list-item numProduct">상품 수량 <span>2조각</span></li>'+
+				'<li class="list-item location">지역: <span>'+data.addr+'</span></li>';
+			    if(data.id != ctId){
+					console.log('ctId:'+ctId+'data.id'+data.id);										
+					tableString += '<a href="<c:url value="/message_send_trade.do?no='+data.tbNo+'"/>" class="btn btn-info">채팅</a></ul><div class="description">';
+				}
+				if(data.id == ctId){
+					console.log('ctId:'+ctId+'data.id'+data.id);
+					console.log("동일임");					//거래완료 url@@
+					tableString += '<a href="<c:url value="/message_send_trade.do?no='+data.tbNo+'"/>" class="btn btn-info">거래완료</a>';
+				}
+				tableString += data.tbContent+
+				'</div><div class="likes m_text">조회 수 '+data.tbVisitCount+' 회<span id="like-count-39"></span>';
+				if(data.id == ctId){
+					console.log("동일임");					//수정 및 삭제 url@@
+					tableString += '<a href="<c:url value="/shareEdit.do?no='+data.tbNo+'"/>" class="btn btn-info">수정</a>'+
+								   '<a href="<c:url value="/message_send_trade.do?no='+data.tbNo+'"/>" class="btn btn-info">삭제</a>';
+				}
+				tableString +='</div></article>';    
+		    $('#'+id).html(tableString);
+		};
+		window.onload = function(){
+			console.log("온로드 ㅇㅇ");
+			const listcs = document.querySelectorAll('.listc');
+			console.log(listcs);
+			listcs.forEach((aItem) => {
+				aItem.addEventListener('click',function(e){
+					console.log("부착");
+				});
+			});
+		};
+		*/
 </script>
 </html>
