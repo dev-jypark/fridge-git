@@ -133,9 +133,6 @@
 					    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
 					    '        </div>' + 
 					    '        <div class="body">' + 
-					    '            <div class="img">' +
-					    '                <img src="" width="73" height="70" alt="이미지임">' +
-					    '           </div>' + 
 					    '            <div class="desc">' + 
 					    '                <div class="ellipsis">희망 거래 '+cntMarker["list[i].addr"]+'개</div>' + 
 					    '                <div><a href="javascript:void(0);" onclick="getList(\''+list[i].addr+'\')">거래목록보기</a></div>' + 
