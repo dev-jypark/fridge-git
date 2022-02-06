@@ -3,7 +3,8 @@
 
 <script src="https://kit.fontawesome.com/979888c264.js" crossorigin="anonymous"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link href="/resources/css/community/communityList.css" rel="stylesheet">
+<link href="<c:url value="/resources/css/community/communityList.css"/>" rel="stylesheet">
+
   	
 <input type="hidden" name="nick" value="${nick }">
 
@@ -16,8 +17,8 @@
 		</div>
 	</div>
 </div>
-   
-  
+	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="/resources/js/community/communityList.js"></script>
+
+<script src="<c:url value="/resources/js/community/communityList.js"/>"></script>

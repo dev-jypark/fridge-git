@@ -62,7 +62,7 @@
 		SELECT * 
 		FROM ingrediant
 		<!-- 유통기한 3일 이상 남은 식품만 가져온다 -->
-		WHERE id=#{id} AND TO_CHAR(i_enddate,'YY/MM/dd') >= TO_CHAR(SYSDATE-3,'YY/MM/dd')
+		WHERE id=#{id} AND TO_CHAR(i_enddate,'YY/MM/dd') >= TO_CHAR(SYSDATE+3,'YY/MM/dd')
 		ORDER BY i_postdate DESC
 	</select>
 	

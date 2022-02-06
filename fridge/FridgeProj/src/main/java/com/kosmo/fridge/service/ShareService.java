@@ -1,4 +1,4 @@
-package com.kosmo.fridge.service;
+	package com.kosmo.fridge.service;
 
 import java.util.Map;
 

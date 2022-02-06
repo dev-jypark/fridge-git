@@ -1,5 +1,6 @@
 package com.kosmo.fridge.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +26,12 @@ public class IngrediantServiceImpl implements IngrediantService{
 	}
 	//입력
 	@Override
-	public void fridgeWrite(IngrediantDTO ingrediantDTO) {
-		ingrediantDAO.fridgeWrite(ingrediantDTO);	
+	public void fridgeWrite(Map map) {
+		System.out.println("(serviceimpl) map안의 f_name:"+map.get("f_name"));
+		System.out.println("(serviceimpl) map안의 f_count:"+map.get("f_count"));
+		System.out.println("(serviceimpl) map안의 f_enddate:"+map.get("f_enddate"));
+		ingrediantDAO.fridgeWrite(map);
+		
 	}
 	//상세보기
 	@Override

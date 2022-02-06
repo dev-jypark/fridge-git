@@ -10,9 +10,9 @@
 			SELECT * FROM ingrediant <!-- WHERE id=#{id} --> ORDER BY i_postdate desc
 		</select>	
 		<!-- 입력 -->
-		<insert id="fridgeWrite">
+		<insert id="fridgeWrite" parameterType="Map">
 			INSERT INTO ingrediant (i_no,id,i_name,i_cnt,i_enddate,i_postdate)
-			VALUES(SEQ_ingrediant_i_no.NEXTVAL,#{id},#{i_name},#{i_cnt},#{i_enddate},SYSDATE)
+			VALUES(SEQ_ingrediant_i_no.NEXTVAL,#{id},#{f_name},#{f_count},#{f_enddate},SYSDATE)
 		</insert>
 		<!-- 상세보기 -->
 		<select id="detail" resultType="IngrediantDTO">

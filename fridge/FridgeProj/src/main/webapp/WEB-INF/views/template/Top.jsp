@@ -66,11 +66,10 @@
                     </button>
                     <!-- /responsive nav button -->
                     
-                    <!-- logo -->
+                   <!-- logo -->
                     <div class="navbar-brand">
-                    
-                        <a href="<c:url value="/"/>"> 
-                        	찍먹냉장고                                
+                        <a href="/app" >
+                            <img src="<c:url value="/resources/images/template/logo.png"/>" alt="">
                         </a>
                     </div>
                    	<!-- /logo -->
