@@ -58,32 +58,32 @@ DROP SEQUENCE SEQ_t_like_tl_no;
 
 /* Create Sequences */
 
-CREATE SEQUENCE SEQ_a_com_a_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_chat_chat_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_chat_c_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_c_bbs_c_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_c_com_cc_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_c_like_cl_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_fb_imgsrc_fi_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_bbs_fb_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_bbs_f_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_com_fc_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_com_tc_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_imgsrc_fi_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_f_like_fl_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_history_h_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_ingrediant_i_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_management_history_m_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_notice_n_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_n_imgsrc_ni_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_q_bbs_q_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_q_imgsrc_qi_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_trade_t_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_bbs_tb_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_bbs_t_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_com_tc_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_imgsrc_ti_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_t_like_tl_no INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE SEQ_a_com_a_no nocache nocycle;
+CREATE SEQUENCE SEQ_chat_chat_no nocache nocycle;
+CREATE SEQUENCE SEQ_chat_c_no nocache nocycle;
+CREATE SEQUENCE SEQ_c_bbs_c_no nocache nocycle;
+CREATE SEQUENCE SEQ_c_com_cc_no nocache nocycle;
+CREATE SEQUENCE SEQ_c_like_cl_no nocache nocycle;
+CREATE SEQUENCE SEQ_fb_imgsrc_fi_no nocache nocycle;
+CREATE SEQUENCE SEQ_f_bbs_fb_no nocache nocycle;
+CREATE SEQUENCE SEQ_f_bbs_f_no nocache nocycle;
+CREATE SEQUENCE SEQ_f_com_fc_no nocache nocycle;
+CREATE SEQUENCE SEQ_f_com_tc_no nocache nocycle;
+CREATE SEQUENCE SEQ_f_imgsrc_fi_no nocache nocycle;
+CREATE SEQUENCE SEQ_f_like_fl_no nocache nocycle;
+CREATE SEQUENCE SEQ_history_h_no nocache nocycle;
+CREATE SEQUENCE SEQ_ingrediant_i_no nocache nocycle;
+CREATE SEQUENCE SEQ_management_history_m_no nocache nocycle;
+CREATE SEQUENCE SEQ_notice_n_no nocache nocycle;
+CREATE SEQUENCE SEQ_n_imgsrc_ni_no nocache nocycle;
+CREATE SEQUENCE SEQ_q_bbs_q_no nocache nocycle;
+CREATE SEQUENCE SEQ_q_imgsrc_qi_no nocache nocycle;
+CREATE SEQUENCE SEQ_trade_t_no nocache nocycle;
+CREATE SEQUENCE SEQ_t_bbs_tb_no nocache nocycle;
+CREATE SEQUENCE SEQ_t_bbs_t_no nocache nocycle;
+CREATE SEQUENCE SEQ_t_com_tc_no nocache nocycle;
+CREATE SEQUENCE SEQ_t_imgsrc_ti_no nocache nocycle;
+CREATE SEQUENCE SEQ_t_like_tl_no nocache nocycle;
 
 
 
@@ -116,7 +116,8 @@ CREATE TABLE chat
 	send_time date NOT NULL,
 	read_time date DEFAULT sysdate NOT NULL,
 	content varchar2(1000) NOT NULL,
-	read_chk  NOT NULL,
+	read_chk number NOT NULL,
+	room number NOT NULL,
 	PRIMARY KEY (c_no)
 );
 
@@ -185,7 +186,7 @@ CREATE TABLE ingrediant
 (
 	i_no number NOT NULL,
 	id varchar2(24) NOT NULL,
-	i_name nvarchar2(20) NOT NULL,
+	i_name nvarchar2(100) NOT NULL,
 	i_cnt number NOT NULL,
 	i_enddate date NOT NULL,
 	i_postdate date NOT NULL,
@@ -333,20 +334,26 @@ ALTER TABLE f_like
 
 
 ALTER TABLE trade
-	ADD FOREIGN KEY (i_no)
+	ADD CONSTRAINT CASCADE
+	FOREIGN KEY (i_no)
 	REFERENCES ingrediant (i_no)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE chat
-	ADD FOREIGN KEY (send_id)
+	ADD CONSTRAINT CASCADE
+	FOREIGN KEY (recv_id)
 	REFERENCES member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE chat
-	ADD FOREIGN KEY (recv_id)
+	ADD CONSTRAINT CASCADE
+	FOREIGN KEY (send_id)
 	REFERENCES member (id)
+	ON DELETE CASCADE
 ;
 
 
@@ -387,8 +394,10 @@ ALTER TABLE history
 
 
 ALTER TABLE ingrediant
-	ADD FOREIGN KEY (id)
+	ADD CONSTRAINT CASCADE
+	FOREIGN KEY (id)
 	REFERENCES member (id)
+	ON DELETE CASCADE
 ;
 
 
@@ -405,14 +414,18 @@ ALTER TABLE q_bbs
 
 
 ALTER TABLE t_bbs
-	ADD FOREIGN KEY (id)
+	ADD CONSTRAINT CASCADE
+	FOREIGN KEY (id)
 	REFERENCES member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_like
-	ADD FOREIGN KEY (id)
+	ADD CONSTRAINT CASCADE
+	FOREIGN KEY (id)
 	REFERENCES member (id)
+	ON DELETE CASCADE
 ;
 
 
@@ -435,21 +448,24 @@ ALTER TABLE q_imgsrc
 
 
 ALTER TABLE trade
-	ADD FOREIGN KEY (tb_no)
+	ADD CONSTRAINT CASCADE
+	FOREIGN KEY (tb_no)
 	REFERENCES t_bbs (tb_no)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_imgsrc
-	ADD FOREIGN KEY (tb_no)
+	ADD CONSTRAINT CASCADE
+	FOREIGN KEY (tb_no)
 	REFERENCES t_bbs (tb_no)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_like
-	ADD FOREIGN KEY (tb_no)
+	ADD CONSTRAINT CASCADE
+	FOREIGN KEY (tb_no)
 	REFERENCES t_bbs (tb_no)
+	ON DELETE CASCADE
 ;
-
-
-
