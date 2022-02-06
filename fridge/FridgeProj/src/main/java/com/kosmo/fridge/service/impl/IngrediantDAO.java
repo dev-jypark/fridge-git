@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -46,9 +47,9 @@ public class IngrediantDAO {
 		return session.selectList("fridgeList");
 	}
 	//입력
-	public void fridgeWrite(IngrediantDTO ingrediantDTO) {
+	public void fridgeWrite(Map map) {
 		SqlSession session= sqlMapper.openSession();
-		session.insert("fridgeWrite", ingrediantDTO);
+		session.insert("fridgeWrite", map);
 		session.commit();
 	}
 	//상세보기

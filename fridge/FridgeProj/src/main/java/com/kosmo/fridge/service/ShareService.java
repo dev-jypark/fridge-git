@@ -1,4 +1,4 @@
-package com.kosmo.fridge.service;
+	package com.kosmo.fridge.service;
 
 import java.util.Map;
 
@@ -15,6 +15,7 @@ public interface ShareService {
 	ListPagingData<ShareDTO> selectList(Map map,HttpServletRequest req,int nowPage);
 	//상세보기용]
 	ShareDTO selectOne(Map map);
+	ShareDTO viewSelectOne(Map map);
 	//입력/수정/삭제용]	
 	boolean insert(MultipartHttpServletRequest multipartRequest);
 	int delete(Map map);

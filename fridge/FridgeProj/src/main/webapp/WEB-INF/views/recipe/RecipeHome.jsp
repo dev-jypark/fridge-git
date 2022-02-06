@@ -96,7 +96,7 @@
         $(".image-demo4").upSlideStyle("rgba(0, 0, 0, 0.5)", "더보기");
         
         $.ajax({
-        	url :"http://localhost:7070/app/recipe.do",
+        	url :"http://localhost:8080/app/recipe.do",
         	method:"GET",
         	dataType:"json",
         	success : function(data){

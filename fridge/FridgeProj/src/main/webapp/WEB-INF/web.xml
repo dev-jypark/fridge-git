@@ -3,12 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://Java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<resource-ref>
-		<description>JNDI Connection Pool</description>
-		<res-ref-name>fridge</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -29,8 +23,8 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-		</servlet>
-	
+	</servlet>
+		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
@@ -39,8 +33,7 @@
 	
 	<!-- 한글 깨짐 해결 -->
 	<filter>
-		<filter-name>CharacterEncoding</filter-name>
-		<!-- filter-name은 임의로 -->
+		<filter-name>CharacterEncoding</filter-name><!-- filter-name은 임의로 -->
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<!-- param-name과 param-value은 아래처럼 -->

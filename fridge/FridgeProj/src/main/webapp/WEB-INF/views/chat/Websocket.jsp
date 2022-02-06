@@ -17,7 +17,6 @@
 				<label for="nickname" class="col-sm-1">닉네임</label>
 				<div class="col-sm-4">
 					<input class="form-control " type="text" id="nickname">
-					<input class="form-control " type="hidden" id="target" value="kim">
 				</div>
 			</div>
 			<input class="btn btn-info" type="button" id="enterBtn" value="입장">
@@ -57,6 +56,8 @@
 	var wsocket;
 	//닉 네임 저장용
 	var nickname;
+	//타겟 아이디 저장용
+	var target;
 	//입장버튼 클릭시 ]-서버와 연결된 웹소켓 클라이언트 생성
 	$('#enterBtn').one(
 			'click',
@@ -76,7 +77,12 @@
 	
 	//퇴장버튼 클릭시]
 	$('#exitBtn').one('click', function() {
-		wsocket.send('msg:' + nickname + '가(이) 퇴장 했어요');
+		var msg = {
+				type : "out",
+				userid : nickname,
+				msg : 'msg:' + nickname + '가(이) 퇴장 했어요'
+		}
+		wsocket.send(JSON.stringify(msg));
 		wsocket.close();
 	});
 
@@ -93,15 +99,17 @@
 			sendMessage();
 
 		}
-
 	});
+	
 	//함수 정의]
 	//서버에 연결되었을때 호출되는 콜백함수
 	var open = function() {
 		//서버로 연결한 사람의 정보(닉네임) 전송
 		//msg:kim가(이) 입장했어요
 		//사용자가 입력한 닉네임 저장
-		nickname = $('#nickname').val();
+		//nickname = $('#nickname').val();
+		nickname = "<%=(String)session.getAttribute("id")%>";
+		target = $('#nickname').val();
 		register(nickname);
 		//wsocket.send('msg:' + nickname + "가(이) 입장했어요");
 		console.log('msg:' + nickname + "가(이) 입장했어요");
@@ -112,7 +120,8 @@
 	function register(nickname){
 		var msg = {
 				type : "register",
-				userid : nickname
+				userid : nickname,
+				targetid : target
 		};
 		wsocket.send(JSON.stringify(msg));
 	}
@@ -131,10 +140,11 @@
 	
 	//서버로 메시지 전송하는 함수]
 	function sendMessage() {
-		target = $('#target').val();
+		//target = $('#nickname').val();
 		//상대방 아이디를 포함한 메시지 형태
 		var msg = {
 				type : "chat",
+				userid : nickname,
 				target : target,
 				message : "msg:" + nickname + '>>' + $('#message').val() //msg:Superman:안녕
 		}
@@ -148,6 +158,3 @@
 		$('#message').focus();
 	}
 </script>
-
-
-

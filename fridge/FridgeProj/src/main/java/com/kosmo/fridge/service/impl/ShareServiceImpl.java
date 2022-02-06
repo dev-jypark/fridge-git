@@ -67,24 +67,13 @@ public class ShareServiceImpl implements ShareService{
 		
 		map.put("start", start);
 		map.put("end", end);
-		
 		//글 전체 목록 얻기
-		List listShare = dao.selectList(map);
+		List listsShare = dao.selectList(map);
 		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, 
 				pageSize, blockPage, nowPage,
 				req.getContextPath()+"/shareList.do?");
 		
-		ListPagingData<ShareDTO> listPagingData = new ListPagingData<>();
-		
-		listPagingData.setBlockPage(blockPage);
-		listPagingData.setLists(listShare);
-		listPagingData.setNowPage(nowPage);
-		listPagingData.setPageSize(pageSize);
-		listPagingData.setPagingString(pagingString);
-		listPagingData.setTotalRecordCount(totalRecordCount);
-		return listPagingData;
-		
-		//return ListPagingData.builder().lists(lists).nowPage(nowPage).pageSize(pageSize).pagingString(pagingString).totalRecordCount(totalRecordCount).build();
+		return ListPagingData.<ShareDTO>builder().lists(listsShare).nowPage(nowPage).pageSize(pageSize).pagingString(pagingString).totalRecordCount(totalRecordCount).build();
 	}
 
 	@Override
@@ -127,7 +116,7 @@ public class ShareServiceImpl implements ShareService{
 		}
 		//글 내용 업로드 마침
 		
-		System.out.println("글번호 : "+map.get("tb_no"));
+		System.out.println("글번호 : "+map.get("tb_no")); //@@
 		
 		//사진 업로드 시작
 		map.put("fileSrc", listImgFile);
@@ -140,16 +129,17 @@ public class ShareServiceImpl implements ShareService{
 			return false;
 		}
 
-		System.out.println(affected);
+		System.out.println(affected);//@@
 		if(affected != listImgFile.size()) { // 영향받은 갯수와, 이미지 리스트 사이즈를 비교해 파일 입력성공여부 판단
 			return false;
 		}
 		
 		//사진 저장
 		String path = multipartRequest.getServletContext().getRealPath("/upload/share");
+		System.out.println(path);
 		for(MultipartFile imgFile : listImgFile) {	// 각 파일 경로에 대해 폴더를 설정하고, 받아온 이미지 모두 입력
 			String imgsrc = path+File.separator+map.get("tb_no")+File.separator+ imgFile.getOriginalFilename();
-			System.out.println(imgsrc);
+			System.out.println(imgsrc);//@@
 			File dest = new File(imgsrc);
 			if(!dest.exists()) dest.mkdirs();
 			try {
@@ -168,7 +158,7 @@ public class ShareServiceImpl implements ShareService{
 			map.put("i_no", checkboxes[index]);
 			//거래 등록한 제품 수 빼고 재료 테이블 i_cnt 업데이트
 			map.put("i_cnt", Integer.parseInt(ingrediantcounts[index]) - Integer.parseInt(counts[index]));
-			System.out.println("cnt : "+counts[index]+", cbox : "+checkboxes[index]);
+			System.out.println("cnt : "+counts[index]+", cbox : "+checkboxes[index]); //@@
 			try {
 			dao.insertShareProduct(map);
 			dao.updateIngrediant(map);
@@ -203,9 +193,11 @@ public class ShareServiceImpl implements ShareService{
 		 * for(IngrediantDTO dto : listIngrediant) { System.out.println(dto); }
 		 */
 			
-		dao.rollbackIngrediant(listIngrediant);
+		int i = dao.rollbackIngrediant(listIngrediant);
+		System.out.println("i"+i);
 		//casecade 제약조건 붙어있어서 post만 삭제하면 관련된 것들 모두 삭제됨
 		affected = dao.deleteSharePost(map);
+		System.out.println("return 전 영향받은 행"+affected);
 		return affected;
 	}
 
@@ -225,6 +217,15 @@ public class ShareServiceImpl implements ShareService{
 		//System.out.println("서비스 아이디 : "+map.get("id"));
 		List<IngrediantDTO> listIngrediant = dao.selectIngrediantList(map);
 		return listIngrediant;
+	}
+
+	@Override
+	public ShareDTO viewSelectOne(Map map) {
+		return dao.viewSelectOne(map);
+	}
+
+	public void complete(Map map) {
+		dao.updateTradeResult(map);
 	}
 	
 }

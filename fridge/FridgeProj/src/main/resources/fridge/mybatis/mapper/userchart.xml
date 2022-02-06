@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="fridge.mybatis.mapper.userchart">
+  
+  
+  	<!-- 회원 로그인여부 확인 -->
+  	<select id="isLogin" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM admin WHERE adminid=#{adminid} AND adminpw=#{adminpw}			
+	</select>
+	
+	<!-- 게시글 수 -->
+	<select id="totalPostCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM f_bbs
+				
+	</select>
+	
+	<!-- 거래게시글 수 -->
+	<select id="totalTradePostCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM t_bbs
+		
+		
+	</select>
+	
+	<!-- 회원 수 -->
+	<select id="totalMemberCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM member 
+		
+	</select>
+	
+	<!-- 댓글 수 -->
+	<select id="totalCommentCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM f_com
+		
+	</select>
+	
+	<!-- 월별 회원 수 -->
+	<select id="memberCountpm"  resultType="userchartDTO">
+		SELECT TO_CHAR(regdate,'yyyy-mm') AS month, COUNT(*) AS count FROM member GROUP BY TO_CHAR(regdate,'yyyy-mm')
+		
+	</select>
+	
+	<!-- 거주지 -->
+	<select id="addrCount"  resultType="userchartDTO">
+		SELECT * FROM (SELECT addr ,COUNT(*) AS count FROM member GROUP BY addr ORDER BY count desc) <![CDATA[A WHERE ROWNUM <= 6]]>
+		
+	</select>
+	
+	<!-- 선호 식품 -->
+	<select id="favoriteFood"  resultType="userchartDTO">
+		SELECT i_name,COUNT(*),SUM(i_cnt) AS SUM FROM INGREDIANT GROUP BY i_name
+	</select>
+	
+  </mapper>

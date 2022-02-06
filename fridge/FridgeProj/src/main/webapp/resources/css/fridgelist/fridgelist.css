@@ -840,6 +840,19 @@ ul ul {
     height: 100px;
     vertical-align: middle;
 }
+.carted-product-image{
+	border-bottom: 1px solid #ededed;
+    position: relative;
+    vertical-align: middle;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+.imgpreview_size{
+	width: 300px;
+	height: auto;
+	margin-bottom: 40px;
+}
 @media (min-width: 768px)
 .carted-product__select {
     left: 20px;

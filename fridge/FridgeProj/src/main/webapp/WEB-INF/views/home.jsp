@@ -42,11 +42,11 @@ About Section Start
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="block wow fadeInLeft" data-wow-delay=".3s" data-wow-duration="500ms">
-                    <h2>
+                    <h2 style="color:#95E1D3;">
                     찍먹냉장고?
                     </h2>
                     <p>
-                       '찍먹냉장고'는 찍고 먹는 냉장고의 줄임말입니다.    구입한 재료들을 찍어서 냉장고 속 재료들을 버리지 않고 알뜰하게 사용해보세요!
+                       '찍고 먹는 냉장고' 의 줄임말입니다.  <br>  구입한 재료들을 찍어서 냉장고 속 재료들을 버리지 않고 <br> 알뜰하게 사용하도록 도와드립니다!
                     </p>
                     
                 </div>
@@ -54,7 +54,7 @@ About Section Start
             </div>
             <div class="col-md-6 col-sm-6">
                 <div class="block wow fadeInRight" data-wow-delay=".3s" data-wow-duration="500ms">
-                    <img src="images/about/about.jpg" alt="">
+                    <img src="resources/images/main/fresh02.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -69,16 +69,15 @@ Portfolio Section Start
 <section id="works" class="works">
     <div class="container">
         <div class="section-heading">
-            <h1 class="title wow fadeInDown" data-wow-delay=".3s">이렇게 사용해요!</h1>
+            <h1 class="title wow fadeInDown" data-wow-delay=".3s">찍먹냉장고로 관리하기!</h1>
             <p class="wow fadeInDown" data-wow-delay=".5s">
-                 <br> 쉽고 간편하게 관리할 수 있어요.
-            </p>
+               <br>
         </div>
         <div class="row">
             <div class="col-sm-4 col-xs-12">
                 <figure class="wow fadeInLeft animated portfolio-item" data-wow-duration="500ms" data-wow-delay="0ms">
                     <div class="img-wrapper">
-                        <img src="images/portfolio/item-1.jpg" class="img-responsive" alt="this is a title" >
+                        <img src="resources/images/main/receipt01.png" style="width:400px; height:400px;" class="img-responsive" alt="this is a title" >
                         <div class="overlay">
                             <div class="buttons">
                                 <a rel="gallery" class="fancybox" href="images/portfolio/item-1.jpg">Demo</a>
@@ -89,11 +88,11 @@ Portfolio Section Start
                     <figcaption>
                     <h4>
                     <a href="#">
-                        영수증 사진
+                        하나
                     </a>
                     </h4>
                     <p>
-                        구매하신 내역이 적힌 영수증을
+                        영수증을
                     </p>
                     </figcaption>
                 </figure>
@@ -101,7 +100,7 @@ Portfolio Section Start
             <div class="col-sm-4 col-xs-12">
                 <figure class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms">
                     <div class="img-wrapper">
-                        <img src="images/portfolio/item-2.jpg" class="img-responsive" alt="this is a title" >
+                        <img src="resources/images/main/cam01.png" style="width:400px; height:400px;" class="img-responsive" alt="this is a title" >
                         <div class="overlay">
                             <div class="buttons">
                                 <a rel="gallery" class="fancybox" href="images/portfolio/item-2.jpg">Demo</a>
@@ -112,7 +111,7 @@ Portfolio Section Start
                     <figcaption>
                     <h4>
                     <a href="#">
-                        찍는 사진
+                        둘
                     </a>
                     </h4>
                     <p>
@@ -121,11 +120,10 @@ Portfolio Section Start
                     </figcaption>
                 </figure>
             </div>
-           
             <div class="col-sm-4 col-xs-12">
                 <figure class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms">
                     <div class="img-wrapper">
-                        <img src="images/portfolio/item-2.jpg" class="img-responsive" alt="this is a title" >
+                        <img src="images/portfolio/item-2.jpg" style="width:400px; height:400px;" class="img-responsive" alt="this is a title" >
                         <div class="overlay">
                             <div class="buttons">
                                 <a rel="gallery" class="fancybox" href="images/portfolio/item-2.jpg">Demo</a>
@@ -136,7 +134,7 @@ Portfolio Section Start
                     <figcaption>
                     <h4>
                     <a href="#">
-                       게시판 사진
+                        셋
                     </a>
                     </h4>
                     <p>
@@ -145,6 +143,8 @@ Portfolio Section Start
                     </figcaption>
                 </figure>
             </div>
+            
+                   
 </section> <!-- #works -->
 <!--
 ==================================================
@@ -153,9 +153,9 @@ Portfolio Section Start
 <section id="feature">
     <div class="container">
         <div class="section-heading">
-            <h1 class="title wow fadeInDown" data-wow-delay=".3s">이런 기능들을 사용해보세요!</h1>
+            <h1 class="title wow fadeInDown" data-wow-delay=".3s">이런 기능도 있어요!</h1>
             <p class="wow fadeInDown" data-wow-delay=".5s">
-                <br>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed,<br> quasi dolores numquam dolor vero ex, tempora commodi repellendus quod laborum.
             </p>
         </div>
         <div class="row">
@@ -167,7 +167,7 @@ Portfolio Section Start
                         </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">기능1</h4>
+                        <h4 class="media-heading">첫번째</h4>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
                     </div>
                 </div>
@@ -180,7 +180,7 @@ Portfolio Section Start
                         </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">기능2</h4>
+                        <h4 class="media-heading">두번째</h4>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
                     </div>
                 </div>
@@ -193,7 +193,7 @@ Portfolio Section Start
                         </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">기능3</h4>
+                        <h4 class="media-heading">세번째</h4>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
                     </div>
                 </div>
@@ -247,13 +247,13 @@ Portfolio Section Start
             Call To Action Section Start
             ================================================== -->
             <section id="call-to-action">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="block">
-                                <h2 class="title wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">Capture! Eat! Fridge!</h1>
-                                <p class="wow fadeInDown" data-wow-delay=".5s" data-wow-duration="500ms">찍먹냉장고를 사용해보세요!</p>
-                                <a href="<c:url value="/member/SignUp.do"/>" class="btn btn-default btn-contact wow fadeInDown" data-wow-delay=".7s" data-wow-duration="500ms">Sign up</a>
+                <div class="container" >
+                    <div class="row" >
+                        <div class="col-md-12" >
+                            <div class="block" >
+                                <h2 class="title wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">시작해보세요!</h1>
+                                <p class="wow fadeInDown" data-wow-delay=".5s" data-wow-duration="500ms"><br>Capture ! Eat ! Fridge !</p>
+                                <a href="<c:url value="/member/SignUp.do"/>"  class="btn btn-default btn-contact wow fadeInDown" data-wow-delay=".7s" data-wow-duration="500ms">Sign up</a>
                             </div>
                         </div>
                         

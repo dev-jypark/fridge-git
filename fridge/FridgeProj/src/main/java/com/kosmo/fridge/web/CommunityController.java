@@ -16,7 +16,7 @@ public class CommunityController {
 	@Autowired
 	CommunityServiceImpl service;
 
-	@RequestMapping("/community/main")
+	@RequestMapping("/community/main.do")
 	public String toCoummunityMain(Map map) {
 		return "community/CommunityList.tiles";
 	}
