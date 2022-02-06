@@ -11,6 +11,7 @@
 		<typeAlias type="com.kosmo.fridge.service.TradeDTO" alias="tradeDTO"/>
 		<typeAlias type="com.kosmo.fridge.service.IngrediantDTO" alias="ingrediantDTO"/>
 		<typeAlias type="com.kosmo.fridge.service.ImageDTO" alias="imageDTO"/>	
+		<typeAlias type="com.kosmo.fridge.service.MessageTO" alias="messageDTO"/>	
 		<typeAlias type="com.kosmo.fridge.service.MemberDTO" alias="memberDTO"/>	
 		<typeAlias alias="CommentDTO" type="com.kosmo.fridge.service.CommentDTO"/>
 		<typeAlias alias="FeedDTO" type="com.kosmo.fridge.service.FeedDTO"/>
@@ -23,6 +24,7 @@
 		<mapper resource="fridge/mybatis/mapper/trade.xml" />
 		<mapper resource="fridge/mybatis/mapper/ingrediant.xml" />	
 		<mapper resource="fridge/mybatis/mapper/image.xml" />
+		<mapper resource="fridge/mybatis/mapper/chat.xml" />	
 		<mapper resource="fridge/mybatis/mapper/memberMapping.xml" />	
 		<mapper resource="fridge/mybatis/recipe.xml" />	
       	<mapper resource="fridge/mybatis/mapper/fridgeMapping.xml" />

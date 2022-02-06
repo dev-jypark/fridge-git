@@ -7,14 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>찍먹냉장고 | 냉장고 속 남은 재료 나눠먹기</title>
 	
-	<!-- 지금은 우리 파비콘 없는데 나중에 필요하니까 참고하려고 남겨둠 -->
-	<!-- favicon -->
-<!-- <link rel="shortcut icon" href="images/ico/favicon.jpg">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
-	<!-- js -->
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="resources/js/sharelist/select.min.js"></script>
 	
@@ -92,7 +84,7 @@
 								<!-- 찜 개수 -->
 								<a href="#"><i class="mdi mdi-heart-outline nino-icon"></i> ${item.likeCount }</a>
 								<!-- 채팅수 -->
-								<a href="#"><i class="mdi mdi-comment-multiple-outline nino-icon"></i>??</a>
+								<a href="<c:url value="/message_send_trade.do?no=${item.tbNo }"/>"><i class="mdi mdi-comment-multiple-outline nino-icon"></i>??</a>
 							</div>
 						</article>
 					</div>
