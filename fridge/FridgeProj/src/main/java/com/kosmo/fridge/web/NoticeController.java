@@ -1,6 +1,7 @@
 package com.kosmo.fridge.web;
 
 import java.util.Collection;
+
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -39,7 +40,8 @@ public class NoticeController {
 			           
 			) {
 		//서비스 호출]
-		ListPagingData<NoticeDTO> listPagingData= noticeService.selectList(map, req, nowPage);		
+		ListPagingData<NoticeDTO> listPagingData= noticeService.selectList(map, req, nowPage);
+			
 		//데이타 저장]
 		model.addAttribute("listPagingData", listPagingData);
 		//뷰정보 반환]
@@ -109,7 +111,7 @@ public class NoticeController {
 		//서비스 호출
 		noticeService.update(map);
 		//뷰로 포워드
-		return "forward:/admin/notice/View";
+		return "forward:/admin_notice/View.do";
 	}
 	//삭제처리]
 	@RequestMapping("Delete.do")
@@ -119,7 +121,7 @@ public class NoticeController {
 		//서비스 호출
 		noticeService.delete(map);
 		//뷰로 포워드
-		return "forward:/admin/notice/List";
+		return "forward:/admin_notice/List.do";
 		
 	}
 

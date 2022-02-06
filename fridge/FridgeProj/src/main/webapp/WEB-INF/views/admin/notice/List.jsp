@@ -17,6 +17,9 @@
 
     <title>사용자 통계 - Dashboard</title>
 
+	<!-- 처음 CDN 코드 작성하는 곳 -->
+    <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
+
     <!-- Custom fonts for this template-->
     <link href="<c:url value="/resources/vendor/frigochart/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
     <link
@@ -65,11 +68,11 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href=# id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자님 환영합니다.</span>
                                 <img class="img-profile rounded-circle"
-                                    src="resources/img/frigochart/undraw_profile.svg">
+                                    src="../resources/img/frigochart/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -116,27 +119,29 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
-                                            <th>제목</th>
-                                            <th>조회수</th>
-                                            <th>등록일</th>
+                                            <th class="text-center">번호</th>
+                                            <th class="text-center">제목</th>
+                                            <th class="text-center">조회수</th>
+                                            <th class="text-center">등록일</th>
+                                          
                                          
                                         </tr>
                                     </thead>
             
-                        <c:if test="${empty list }" var="isEmpty">
+                        <c:if test="${empty listPagingData.lists}" var="isEmpty">
                             <tr class="text-center">
                                 <td colspan="6">등록된 게시물이 없습니다</td>
                             </tr>
                         </c:if>
                         <c:if test="${not isEmpty}">
-                            <c:forEach var="record" items="${list }" varStatus="loop">
+                            <c:forEach var="item" items="${listPagingData.lists}" varStatus="loop">
                                 <tr>
-                                    <td class="text-center col-md-1">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
+                                    <td class="text-center col-md-1">${listPagingData.totalRecordCount - (((listPagingData.nowPage - 1) * listPagingData.pageSize) + loop.index)}</td>
                                     
-                                    <td class="text-left"><a href="<c:url value="/admin_notice/View.do?n_no=${list.n_no}&nowPage="/><c:out value="${list.nowPage }" default="1"/>">${list.n_title}</a></td>
-                                    <td class="text-center col-md-1">${list.n_hit}</td>                                 
-                                    <td class="text-center col-md-5">${list.n_postdate}</td>
+                                    <td class="text-left"><a href="<c:url value="/admin_notice/View.do?n_no=${item.n_no}&nowPage="/><c:out value="${param.nowPage }" default="1"/>">${item.n_title}</a></td>
+                                    <td class="text-center col-md-1">${item.n_hit}</td>                                 
+                                    <td class="text-center col-md-5">${item.n_postDate}</td>
+                                   
                                 </tr>
                             </c:forEach>
                         </c:if>

@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- 실제 내용 시작 -->
+<!-- 상단메뉴 시작 -->	
+<jsp:include page="/WEB-INF/views/template/Side.jsp"/>
+<!-- 상단메뉴 끝 -->
 
 <!-- side -->
 <head>
@@ -15,14 +17,17 @@
 
     <title>사용자 통계 - Dashboard</title>
 
+	<!-- 처음 CDN 코드 작성하는 곳 -->
+    <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
+
     <!-- Custom fonts for this template-->
-    <link href="resources/vendor/frigochart/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/vendor/frigochart/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="<c:url value="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="resources/css/frigochart/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/frigochart/sb-admin-2.min.css"/>" rel="stylesheet">
 
 </head>
 <!-- side 끝 -->
@@ -32,7 +37,7 @@
 <div class="container">
 	
 	<div class="page-header">
-		<h1>관리자 <small>공지사항 게시판</small></h1>
+		<h1>관리자 <small>Q&A 작성</small></h1>
 	</div>
 	<body id="page-top">
 
@@ -68,7 +73,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자님 환영합니다.</span>
                                 <img class="img-profile rounded-circle"
-                                    src="resources/img/frigochart/undraw_profile.svg">
+                                    src="../resources/img/frigochart/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -104,14 +109,8 @@
 	
 	<div>
 		<form id="myform" class="form-horizontal" method="post"	enctype="multipart/form-data"
-			action="<c:url value="admin/notice/Write.do"/>">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">작성자</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" name="name"
-						placeholder="이름을 입력하세요?">
-				</div>
-			</div>
+			action="<c:url value="/question/Write.do"/>">
+			
 			<div class="form-group">
 				<label class="col-sm-2 control-label">제 목</label>
 				<div class="col-sm-4">
@@ -119,20 +118,7 @@
 						placeholder="제목을 입력하세요?">
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">파일 업로드</label>
-				<div class="col-sm-8">
-					<input type="file" name="attachfile">
-					<p class="help-block">파일을 첨부하세요</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">비밀번호</label>
-				<div class="col-sm-4">
-					<input type="password" class="form-control" name="password"
-						placeholder="비밀번호를 입력하세요">
-				</div>
-			</div>
+			
 
 			<div class="form-group">
 				<label class="col-sm-2 control-label">내 용</label>
@@ -217,24 +203,14 @@
 			var form = $(this).get(0);//자바스크립트 form객체
 			var file=$(this).get(0).attachfile;//자바스크립트 input type="file"객체
 			
-			if(form.name.value==""){
-				$('#warningMessage').html('이름을 입력하세요');
-				$('#small-modal').modal('show');
-				focusObject = form.name;
-				return false;
-			}
+			
 			if(form.title.value==""){
 				$('#warningMessage').html('제목을 입력하세요');
 				$('#small-modal').modal('show');
 				focusObject = form.title;
 				return false;
 			}
-			if(form.attachfile.value==""){
-				$('#warningMessage').html('파일을 첨부하세요');
-				$('#small-modal').modal('show');
-				focusObject = form.attachfile;
-				return false;
-			}
+		
 			/*
 			else{//파일을 첨부한 경우:파일 업로드 최대 용량 체크
 				console.log('파일 크기:',file.files[0].size);

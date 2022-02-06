@@ -6,6 +6,8 @@
 <!-- 상단메뉴 끝 -->
 
 <!-- 실제 내용 시작 -->
+<!DOCTYPE html>
+<html lang="en">
 <!-- side -->
 <head>
 
@@ -17,14 +19,17 @@
 
     <title>사용자 통계 - Dashboard</title>
 
+	<!-- 처음 CDN 코드 작성하는 곳 -->
+    <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
+
     <!-- Custom fonts for this template-->
-    <link href="resources/vendor/frigochart/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/vendor/frigochart/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="<c:url value="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="resources/css/frigochart/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/frigochart/sb-admin-2.min.css"/>" rel="stylesheet">
 
 </head>
 <!-- side 끝 -->
@@ -70,7 +75,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자님 환영합니다.</span>
                                 <img class="img-profile rounded-circle"
-                                    src="resources/img/frigochart/undraw_profile.svg">
+                                    src="../resources/img/frigochart/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -187,11 +192,12 @@
                 <div class="modal-body">로그아웃을 원하시면 아래 Logout 버튼을 눌러 주세요.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<c:url value="/admin/adminLogin.do"/>">Logout</a>
+                    <a class="btn btn-primary" href="<c:url value="../admin/adminLogin.do"/>">Logout</a>
                 </div>
             </div>
         </div>
     </div>
+
 
 <!-- 실제 내용 끝-->
 

@@ -10,6 +10,37 @@
 	.modal-sm{width:325px}
 </style>
 
+<!-- 상단메뉴 시작 -->	
+<jsp:include page="/WEB-INF/views/template/Side.jsp"/>
+<!-- 상단메뉴 끝 -->
+
+
+<!-- side -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>사용자 통계 - Dashboard</title>
+
+	<!-- 처음 CDN 코드 작성하는 곳 -->
+    <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
+
+    <!-- Custom fonts for this template-->
+    <link href="<c:url value="/resources/vendor/frigochart/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
+    <link
+        href="<c:url value="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<c:url value="/resources/css/frigochart/sb-admin-2.min.css"/>" rel="stylesheet">
+
+</head>
+<!-- side 끝 -->
+
 
 <!-- 실제 내용 시작 -->
 <div class="container">

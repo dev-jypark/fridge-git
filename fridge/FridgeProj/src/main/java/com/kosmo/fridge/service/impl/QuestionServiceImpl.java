@@ -50,7 +50,7 @@ public class QuestionServiceImpl implements QuestionService {
 		List lists= dao.selectList(map);
 		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, 
 				pageSize, blockPage, nowPage,
-				req.getContextPath()+"/fridge/question/List.do?");
+				req.getContextPath()+"/question/List.do?");
 		ListPagingData<QuestionDTO> listPagingData = new ListPagingData<>();
 		listPagingData.setBlockPage(blockPage);
 		listPagingData.setLists(lists);

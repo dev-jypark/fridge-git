@@ -20,13 +20,14 @@
 		<result column="groupOrd" property="groupOrd"/>
 	</resultMap>
   
+  
   	<!-- 회원 로그인여부 확인 -->
   	<select id="isLogin" parameterType="Map" resultType="int">
 		SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}		
 	</select>
 
 	<select id="questionSelectList" parameterType="Map" resultType="questionDTO">
-		SELECT * FROM q_bbs ORDER BY orginNo DESC <!--,groupOrd ASC */ -->
+		SELECT * FROM q_bbs ORDER BY originNo DESC <!--,groupOrd ASC */ -->
 	</select>
 	
 	<select id="questionTotalRowCount" parameterType="Map" resultType="int">
@@ -35,7 +36,9 @@
 	
 	<insert id="questionInsert" parameterType="Map" >
 		INSERT INTO q_bbs(q_no,id,q_title,q_content,originNo,groupOrd)
-		VALUES(SEQ_Q_BBS.NEXTVAL,#{id},#{q_title},#{q_content},SEQ_Q_BBS.CURRVAL,0)
+		VALUES(SEQ_Q_BBS.NEXTVAL,#{id},#{q_title},#{q_content},SEQ_Q_BBS.CURRVAL,0 )
+		
+
 	</insert>
 	
 	<select id="questionSelectOne" parameterType="Map" resultMap="questionDTOResult">

@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class NoticeDTO {
 	private String n_no;
 	private String adminid;
@@ -20,7 +22,7 @@ public class NoticeDTO {
 	public String getN_no() {
 		return n_no;
 	}
-	public void setN_no(String n_no) {
+	public void setN_no(String n_no) { 
 		this.n_no = n_no;
 	}
 	public String getAdminid() {

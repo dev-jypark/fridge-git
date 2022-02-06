@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-/*
+
 public class ListPagingData<T> {
 	//레코드 목록
 	private List<T> lists;
@@ -23,8 +23,8 @@ public class ListPagingData<T> {
 	private int blockPage;
 	private int nowPage;
 	private String pagingString;
-}*/
-
+}
+/*
 //Lombok미 사용시
 public class ListPagingData<T> {
 	//레코드 목록
@@ -73,4 +73,4 @@ public class ListPagingData<T> {
 	public void setPagingString(String pagingString) {
 		this.pagingString = pagingString;
 	}	
-}
+}*/

@@ -32,7 +32,7 @@
 	
 	<insert id="noticeInsert" parameterType="Map" >
 		INSERT INTO notice(n_no,adminid,n_title,n_content)
-		VALUES(SEQ_NOTICE.NEXTVAL,#{adminid},#{n_title},#{n_content})
+		VALUES(SEQ_NOTICE_N_NO.NEXTVAL,#{adminid},#{n_title},#{n_content})
 	</insert>
 	
 	<select id="noticeSelectOne" parameterType="Map" resultMap="noticeDTOResult">
