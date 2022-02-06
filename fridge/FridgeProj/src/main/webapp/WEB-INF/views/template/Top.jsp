@@ -92,7 +92,7 @@
 	                                <div class="dropdown-menu">
 	                                    <ul>
 	                                        <li><a href="<c:url value="/share/shareList.do"/>">주변나눔확인</a></li>
-	                                        <li><a href="/message_list.do">채팅하기</a></li>
+	                                        <li><a href="<c:url value="/message_list.do"/>">채팅하기</a></li>
 	                                    </ul>
 	                                </div>
 	                            </li>
