@@ -5,7 +5,10 @@
 	==================================================
 	Slider Section Start
 	================================================== -->
-	<section id="hero-area" >
+	<!-- template main css file -->	
+	
+	
+	<section id="hero-area" style="background-image: url('https://cdn.pixabay.com/photo/2021/01/11/06/52/vegetables-5907330_960_720.jpg');">
 	<div class="container">
 	    <div class="row">
 	        <div class="col-md-12 text-center">
@@ -80,8 +83,7 @@ Portfolio Section Start
                         <img src="resources/images/main/receipt01.png" style="width:400px; height:400px;" class="img-responsive" alt="this is a title" >
                         <div class="overlay">
                             <div class="buttons">
-                                <a rel="gallery" class="fancybox" href="images/portfolio/item-1.jpg">Demo</a>
-                                <a target="_blank" href="single-portfolio.html">Details</a>
+                               
                             </div>
                         </div>
                     </div>
@@ -103,8 +105,7 @@ Portfolio Section Start
                         <img src="resources/images/main/cam01.png" style="width:400px; height:400px;" class="img-responsive" alt="this is a title" >
                         <div class="overlay">
                             <div class="buttons">
-                                <a rel="gallery" class="fancybox" href="images/portfolio/item-2.jpg">Demo</a>
-                                <a target="_blank" href="single-portfolio.html">Details</a>
+                              
                             </div>
                         </div>
                     </div>
@@ -123,11 +124,10 @@ Portfolio Section Start
             <div class="col-sm-4 col-xs-12">
                 <figure class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="300ms">
                     <div class="img-wrapper">
-                        <img src="images/portfolio/item-2.jpg" style="width:400px; height:400px;" class="img-responsive" alt="this is a title" >
+                        <img src="resources/images/main/chart01.png" style="width:400px; height:400px;" class="img-responsive" alt="this is a title" >
                         <div class="overlay">
                             <div class="buttons">
-                                <a rel="gallery" class="fancybox" href="images/portfolio/item-2.jpg">Demo</a>
-                                <a target="_blank" href="single-portfolio.html">Details</a>
+                              
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@ Portfolio Section Start
         <div class="section-heading">
             <h1 class="title wow fadeInDown" data-wow-delay=".3s">이런 기능도 있어요!</h1>
             <p class="wow fadeInDown" data-wow-delay=".5s">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed,<br> quasi dolores numquam dolor vero ex, tempora commodi repellendus quod laborum.
+                찍먹냉장고를 사용할 때, <br> 이용하실 수 있는 다른 기능들입니다!
             </p>
         </div>
         <div class="row">
@@ -167,8 +167,8 @@ Portfolio Section Start
                         </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">첫번째</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
+                        <h4 class="media-heading">맞춤 레시피 추천</h4>
+                        <p>사용자가 선호하는 재료들을 통해 <br>맞춤 레시피를 추천해드려요!</p>
                     </div>
                 </div>
             </div>
@@ -180,8 +180,8 @@ Portfolio Section Start
                         </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">두번째</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
+                        <h4 class="media-heading">커뮤니티</h4>
+                        <p>커뮤니티 기능을 통해 <br>다른 사용자와의 <br>소통과 관리 노하우를 들어보세요!</p>
                     </div>
                 </div>
             </div>
@@ -193,50 +193,12 @@ Portfolio Section Start
                         </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">세번째</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
+                        <h4 class="media-heading">나눔게시판</h4>
+                        <p>생각보다 재료가 더 남았다면 <br> 나눔을 통해 나눠보시는건 어떨까요?</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4 col-xs-12">
-                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="1200ms">
-                    <div class="media-left">
-                        <div class="icon">
-                            <i class="ion-ios-americanfootball-outline"></i>
-                        </div>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Free updates</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-4 col-xs-12">
-                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="1500ms">
-                    <div class="media-left">
-                        <div class="icon">
-                            <i class="ion-ios-keypad-outline"></i>
-                        </div>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Solid Support</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-4 col-xs-12">
-                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="1800ms">
-                    <div class="media-left">
-                        <div class="icon">
-                            <i class="ion-ios-barcode-outline"></i>
-                        </div>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Simple Installation</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, sint.</p>
-                    </div>
-                </div>
-            </div>
+          
         </div>
     </div>
 </section> <!-- /#feature -->
