@@ -55,19 +55,17 @@ public class LoginController {
 		int flag = memberService.isSocialLogin(map);
 		String loginType = map.get("loginType").toString();
 		String socialId = map.get("socialId").toString();
-		String nick = map.get("nick").toString();
-		String email = map.get("email").toString();	
-		//모델에 값 추가
+		String socialNick = map.get("socialNick").toString();
+		String socialEmail = map.get("socialEmail").toString();	
+
 		model.addAttribute("loginType", loginType);
 		model.addAttribute("socialId", socialId);
-		model.addAttribute("nick",nick);
-		model.addAttribute("email", email);
+		model.addAttribute("socialNick",socialNick);
+		model.addAttribute("socialEmail", socialEmail);
 		//세션에 카카오나 구글로부터 받은 아이디와 별명, 이메일 저장
 		session.setAttribute("socialId", socialId);
-		session.setAttribute("nick", nick);
-		session.setAttribute("email", email);
-		System.out.println("닉:"+nick);
-		System.out.println("이멜:"+email);
+		session.setAttribute("socialNick", socialNick);
+		session.setAttribute("socialEmail", socialEmail);
 		//로그인시 loginType에 kakao나 google이 저장되므로 비었다면 로그인 실패		
 		if(loginType.isEmpty()) {		
 			status.setComplete();
@@ -77,12 +75,9 @@ public class LoginController {
 		if(flag == 0) {
 			return "member/SocialSignUp";
 		}
-//		String imgsrc = memberService.socialMemberProfile(map);
-//		session.setAttribute("profileImg", imgsrc);
-		return "home.tiles";
-		
-		
+		return "home.tiles";	
 	}
+	
 	/*
 	//관리자페이지 로그인용
 		session.setAttribute("id", idList.get(0));

@@ -73,19 +73,19 @@ body {
 				
 				<div class="mb-3"> 
 					<!--  <label class="lable" for="id">아이디</label>-->
-					<input type="hidden" class="form-control" id="socialId" name="socialId" value="${sessionScope.socialId}" readonly="readonly" required/> 		
+					<input type="hidden" class="form-control" id="socialId" name="socialId" value="${param.socialId}" readonly="readonly" required/> 		
 				</div> 
 				 
 				<!-- 이메일 -->				
 				<div class="mb-3">
 					<label class="lable" for="email">이메일</label>
-					<input type="email" class="form-control" id="email" name="email" value="${sessionScope.email}" readonly="readonly" required/>				
+					<input type="email" class="form-control" id="socialEmail" name="socialEmail" value="${param.socialEmail}" readonly="readonly" required/>				
 				</div>
 				<!-- 닉네임 -->
 				<div class="mb-3"> 
 					<label class="lable" for="nickname">별명</label>
 					<div class="description">한글 2~8자</div>
-					<input type="text" pattern="^[가-힣]{2,8}$" class="form-control" id="nick" name="nick" value="${sessionScope.nick}" placeholder="사용하실 별명을 입력해주세요." required/> 
+					<input type="text" pattern="^[가-힣]{2,8}$" class="form-control" id="socialNick" name="socialNick" value="${param.socialNick}" placeholder="사용하실 별명을 입력해주세요." required/> 
 					<div class="invalid-feedback"> 올바른 별명 양식이 아닙니다. 다시 확인해주세요. </div>					
 					<button class="btn btn-lg btn-block" id="nicknameCheck" type="button" onclick="nicknameDuplCheck();" value="N" 
 					style="border-color: #95E1D3; color: #95E1D3; margin-top:10px" 
