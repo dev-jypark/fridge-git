@@ -2,7 +2,6 @@ package com.kosmo.fridge.service.impl;
 
 import java.util.List;
 
-
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,16 +12,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.kosmo.fridge.service.ListPagingData;
-import com.kosmo.fridge.service.NoticeDTO;
-import com.kosmo.fridge.service.NoticeService;
+import com.kosmo.fridge.service.AdminNoticeDTO;
+import com.kosmo.fridge.service.AdminNoticeService;
 import com.kosmo.fridge.service.PagingUtil;
 
 @Service("noticeService")
-public class NoticeServiceImpl implements NoticeService {
+public class AdminNoticeServiceImpl implements AdminNoticeService {
 	
 	
-	@Resource(name="noticeDAO")
-	private NoticeDAO dao;
+	@Resource(name="adminNoticeDAO")
+	private AdminNoticeDAO dao;
 	
 	@Value("${PAGE_SIZE}")
 	private int pageSize;
@@ -34,8 +33,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public boolean isAdmin(Map map) {
 		return dao.isAdmin(map);
 	}
+ 
 	@Override
-	public ListPagingData<NoticeDTO> selectList(
+	public ListPagingData<AdminNoticeDTO> selectList(
 			Map map, HttpServletRequest req, int nowPage) {
 		//페이징을 위한 로직 시작]
 		//전체 레코드수	
@@ -54,7 +54,7 @@ public class NoticeServiceImpl implements NoticeService {
 		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, 
 				pageSize, blockPage, nowPage,
 				req.getContextPath()+"/admin_notice/List.do?");
-		ListPagingData<NoticeDTO> listPagingData = new ListPagingData<>();
+		ListPagingData<AdminNoticeDTO> listPagingData = new ListPagingData<>();
 		listPagingData.setBlockPage(blockPage);
 		listPagingData.setLists(lists);
 		listPagingData.setNowPage(nowPage);
@@ -77,7 +77,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public NoticeDTO selectOne(Map map) {
+	public AdminNoticeDTO selectOne(Map map) {
 		return dao.selectOne(map);
 	}
 

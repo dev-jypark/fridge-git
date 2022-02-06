@@ -16,7 +16,7 @@
 		<typeAlias alias="CommentDTO" type="com.kosmo.fridge.service.CommentDTO"/>
 		<typeAlias alias="FeedDTO" type="com.kosmo.fridge.service.FeedDTO"/>
 		<typeAlias alias="MemberProfileDTO" type="com.kosmo.fridge.service.MemberProfileDTO"/>
-		<typeAlias type="com.kosmo.fridge.service.NoticeDTO" alias="noticeDTO"/>
+		<typeAlias type="com.kosmo.fridge.service.AdminNoticeDTO" alias="adminNoticeDTO"/>
 		<typeAlias type="com.kosmo.fridge.service.UserchartDTO" alias="userchartDTO"/>
 		
 	</typeAliases>	
@@ -33,7 +33,7 @@
       	<mapper resource="fridge/mybatis/mapper/fridgeMapping.xml" />
 		<mapper resource="fridge/mybatis/mapper/community.xml"/>
 		<mapper resource="fridge/mybatis/mapper/communityRestAPI.xml"/>
-		<mapper resource="fridge/mybatis/mapper/notice.xml" />	
+		<mapper resource="fridge/mybatis/mapper/adminNotice.xml" />	
 		<mapper resource="fridge/mybatis/mapper/userchart.xml" />	
 	</mappers>
 </configuration>

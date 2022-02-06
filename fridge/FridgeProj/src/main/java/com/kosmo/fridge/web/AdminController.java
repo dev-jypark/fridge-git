@@ -2,8 +2,6 @@ package com.kosmo.fridge.web;
 
 import java.util.Map;
 
-
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,8 +13,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.kosmo.fridge.service.ListPagingData;
-import com.kosmo.fridge.service.NoticeDTO;
-import com.kosmo.fridge.service.impl.NoticeServiceImpl;
+import com.kosmo.fridge.service.AdminNoticeDTO;
+import com.kosmo.fridge.service.impl.AdminNoticeServiceImpl;
 
 @SessionAttributes({"adminid"})
 @Controller
@@ -24,7 +22,7 @@ import com.kosmo.fridge.service.impl.NoticeServiceImpl;
 public class AdminController {
 	//서비스 주입
 	@Resource(name="noticeService")
-	private NoticeServiceImpl noticeService;
+	private AdminNoticeServiceImpl noticeService;
 	
 	//로그인 폼으로 이동	
 	@RequestMapping("adminLogin.do")
@@ -50,7 +48,7 @@ public class AdminController {
 		}
 
 		//서비스 호출]
-		ListPagingData<NoticeDTO> listPagingData= noticeService.selectList(map, req, nowPage);
+		ListPagingData<AdminNoticeDTO> listPagingData= noticeService.selectList(map, req, nowPage);
 					
 		//데이타 저장]
 		model.addAttribute("listPagingData", listPagingData);

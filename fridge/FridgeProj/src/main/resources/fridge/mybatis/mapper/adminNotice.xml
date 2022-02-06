@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="fridge.mybatis.mapper.notice">
+  <mapper namespace="fridge.mybatis.mapper.adminNotice">
   
-  	<resultMap type="noticeDTO" id="noticeDTOResult">
+  	<resultMap type="adminNoticeDTO" id="adminNoticeDTOResult">
 		<!-- 
 		property:자바빈(OneMemoDTO)의 속성명
 		column:테이블의 컬럼(조회(SELECT)결과의 컬럼명들 의미)
@@ -22,33 +22,33 @@
 		SELECT COUNT(*) FROM admin WHERE adminid=#{adminid} AND adminpw=#{adminpw}		
 	</select>
 
-	<select id="noticeSelectList" parameterType="Map" resultType="noticeDTO">
+	<select id="adminNoticeSelectList" parameterType="Map" resultType="adminNoticeDTO">
 		SELECT * FROM notice ORDER BY n_no DESC
 	</select>
 	
-	<select id="noticeTotalRowCount" parameterType="Map" resultType="int">
+	<select id="adminNoticeTotalRowCount" parameterType="Map" resultType="int">
 		SELECT COUNT(*) FROM notice
 	</select>
 	
-	<insert id="noticeInsert" parameterType="Map" >
+	<insert id="adminNoticeInsert" parameterType="Map" >
 		INSERT INTO notice(n_no,adminid,n_title,n_content)
 		VALUES(SEQ_NOTICE_N_NO.NEXTVAL,#{adminid},#{n_title},#{n_content})
 	</insert>
 	
-	<select id="noticeSelectOne" parameterType="Map" resultMap="noticeDTOResult">
+	<select id="adminNoticeSelectOne" parameterType="Map" resultMap="adminNoticeDTOResult">
 		SELECT * FROM notice WHERE n_no=#{n_no}	
 	</select>
 	
-	<update id="noticeUpdate" parameterType="Map">
+	<update id="adminNoticeUpdate" parameterType="Map">
 		UPDATE notice SET n_title=#{n_title},n_content=#{n_content} WHERE n_no=#{n_no}
 	</update>
 	
-	<delete id="noticeDelete" parameterType="Map">
+	<delete id="adminNoticeDelete" parameterType="Map">
 		DELETE notice WHERE n_no=#{n_no}
 	</delete>
 	
 	<!-- 조회수 증가처리 -->
-	<update id = "increaseHit" parameterType="String">
+	<update id = "adminIncreaseHit" parameterType="String">
 	<!-- 글번호에 해당하는 조회수를 +1하는 쿼리문 -->
 		update notice set n_hit=n_hit+1 where n_no=#{n_no}
 	</update>
