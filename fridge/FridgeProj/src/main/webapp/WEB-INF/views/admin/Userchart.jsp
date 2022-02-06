@@ -275,27 +275,7 @@
                                         <canvas id="myPieChart"></canvas>
                                     </div>
                                     
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> 영등포구
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> 은평구
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> 구로구
-                                        </span>
-                                          <span class="mr-2">
-                                            <i class="fas fa-circle text-warning"></i> 종로구
-                                        </span>
-                                        <br>
-                                          <span class="mr-2">
-                                            <i class="fas fa-circle text-danger"></i> 강남구
-                                        </span>
-                                          <span class="mr-2">
-                                            <i class="fas fa-circle text-secondary"></i> 기타지역
-                                        </span>
-                                    </div> 
+                                   
                                     
                                 </div>
                             </div>
@@ -483,12 +463,12 @@
               drawBorder: false
             },
             ticks: {
-              maxTicksLimit: 7
+              maxTicksLimit: 12
             }
           }],
           yAxes: [{
             ticks: {
-              maxTicksLimit: 5,
+              maxTicksLimit: 15,
               padding: 10,
               // Include a dollar sign in the ticks
               callback: function(value, index, values) {
