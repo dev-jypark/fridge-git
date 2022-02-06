@@ -23,6 +23,12 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
 	</head>
 <body>
+<script>
+    function showPopup(){
+        window.open("http://192.168.0.16:5000/","챗봇시작","width=700, height=600, top=50%, left=50%");
+    }
+    
+</script>
 
 	<form class="css-1hs06u0-LayoutContainer">
 		<!-- 상단구역 시작 -->
@@ -47,7 +53,7 @@
 				<!-- 체크박스~유통기한순~선택삭제 부분 div 시작 -->
 				
 				<div class="commerce-cart__content">	
-					<a href="#"><img style="width:100px; position:fixed; right:450px; top:590px" src="<c:url value="/resources/images/chatbot/chatbot.png"/>"/></a>
+					<img onclick="showPopup();" style="width:100px; position:fixed; right:45px; top:590px" src="<c:url value="/resources/images/chatbot/chatbot.png"/>"/>
 				<div data-sticky-enabled="false" data-sticky-disabled="false"
 					data-sticky-always="false" data-sticky-ignore="false"
 					data-direction="top" data-offset="0"
