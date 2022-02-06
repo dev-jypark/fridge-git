@@ -78,7 +78,7 @@
                 <nav class="collapse navbar-collapse navbar-right" role="navigation">
                     <div class="main-menu">
                         <ul class="nav navbar-nav navbar-right">
-                        	<c:if test="${empty sessionScope.id }" var="isLogin">
+                        	<c:if test="${empty sessionScope.id && empty sessionScope.socialId}" var="isLogin">
                         	<li><a href="<c:url value="/member/SignUp.do"/>">회원가입</a></li>
                         	<li><a href="<c:url value="/member/login.do"/>">로그인</a></li>                        	
 							</c:if>
@@ -101,7 +101,7 @@
                                 <div class="dropdown-menu">
                                     <ul>
                                         <li><a href="#">프로필</a></li>
-                                        <li><a href="#">설정</a></li>
+                                        <li><a href="#">회원정보 수정</a></li>
                                         <li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>
                                     </ul>
                                 </div>

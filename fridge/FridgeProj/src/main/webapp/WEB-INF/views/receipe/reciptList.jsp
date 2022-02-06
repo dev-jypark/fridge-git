@@ -41,7 +41,87 @@
 
 } */
 </script>
-	<form name="insertForm" method="POST" action="insert.do">
+<script>
+	
+	function sendData() {
+		
+		/* if($('input[name=i_name]').val() == ''){
+			alert('재료명을 입력해주세요');
+			return false;
+		}
+		if($('input[name=i_cnt]').val() == ''){
+			alert('수량을 입력해주세요');
+			return false;
+		}
+		else if($('input[name=i_enddate]').val() == ''){
+			alert('유통기한을 입력해주세요');
+			return false;
+		} */
+		var formData = new FormData(document.getElementById('insertReceipt'));
+		console.log('너 form이냐??',formData);
+		
+		var foodNameCounts = [];
+		$("input[name='i_name']").each(function(){
+			foodNameCounts.push($(this).val());
+			console.log("음식 이름의 배열 몇이냐?"+$(this).val());
+		});
+		console.log("foodNameCounts",foodNameCounts);
+		
+		var foodCntCounts = [];
+		$("input[name='i_cnt']").each(function(){
+			foodCntCounts.push($(this).val());
+			console.log("음식 수량의 배열 몇이냐?"+$(this).val());
+		});
+		console.log("foodCntCounts",foodCntCounts);
+		
+		var foodEnddateCounts = [];
+		$("input[name='i_enddate']").each(function(){
+			foodEnddateCounts.push($(this).val());
+			console.log("음식 유통기한의 배열 몇이냐?"+$(this).val());
+		});
+		
+		console.log("foodEnddateCounts",foodEnddateCounts);
+		
+		console.log("들어있냐?",new FormData($("form")[0]));
+		console.log("이거 뭔데?",formData);
+		console.log("진짜 뭔데?",$("form"));
+		console.log("뭐냐고0?",$("form")[0]);
+		console.log("뭐냐고1?",$("form")[1]);
+		console.log("뭐냐고2?",$("form")[2]);
+		
+		
+		formData.append("foodNameCounts",foodNameCounts);
+		formData.append("foodCntCounts",foodCntCounts);
+		formData.append("foodEnddateCounts",foodEnddateCounts);
+		
+		//console.log('');
+		
+		console.log("%O",foodNameCounts);
+		$.ajax({
+			url : "/app/fridge/insert.do",
+			type : 'post',
+			dataType : 'text',
+			data : formData,
+			cache : false,
+			contentType: false,
+			processData: false,
+			error : function(jqWHR, textStatus, errorThrown){
+				alert(jqWHR.statusText);
+				/* console.log("에러는????",error);
+				console.log("에러는????",jqWHR.statusText); */
+			},
+			success : function(data, jqWHR, textStatus){
+				console.log("성공!");
+				if(data){
+					console.log("data는???",data)
+					alert("재료가 등록되었습니다!");
+					location.href="/app/fridge/fridgeList.do";
+				}
+			}
+		});
+	}
+	</script>
+	<form id="insertReceipt" action="<c:url value='/fridge/insert.do'/>" method="post">
 		<!-- 상단구역 시작 -->
 		<section class="sectionedit"></section>
 		<!-- 상단구역 끝 -->
@@ -84,8 +164,8 @@
 														<section class="carted-product-copy" style="margin-bottom: 20px;display: flex;">												
 															<!-- id -->
 															<input type="text" class="form-control" placeholder="작성자" name="id" value="${sessionScope.id}" style="display: none;">
-															<!-- 재료명 -->
 															
+															<!-- 재료명 -->
 																<div class="form-group"
 																	style="margin-right: 30px; width: 350px;">
 																	<label for="recipient-name" class="control-label">재료명</label>
@@ -120,15 +200,13 @@
 										</section> 
 									</li>
 									<!-- 취소 & 확인 --> 
-									<footer class="commerce-cart__delivery-group__footer">
-											<div class="okCancle" style="text-align: right;">
-												<button type="button" class="btn btn-default">
-													<a href="/app/fridge/fridgeList.do">취소</a>
-												</button>
-												<input type="submit" class="btn btn-default" id="submit"
-													style="background-color: #c3eee6; color: white;" value="확인"/>
-											</div>
-										</footer>
+									<div class="commerce-cart__delivery-group__footer">
+										<div class="okCancle" style="text-align: right;">
+										<button type="button" class="btn btn-default" onclick="location.href ='/app/fridge/fridgeList.do';">취소</button>
+											<input type="button" class="btn btn-default" id="submit" 
+												style="background-color: #c3eee6; color: white;" value="확인" onclick="sendData();"/>
+										</div>
+									</div>
 								</ul>
 							</article>
 						</li>
@@ -178,16 +256,16 @@
 		div.remove();
 	}
 	/* 동적 추가한 태그의 값전달 */
-	$('#submit').click (function(){
+	/* $('#submit').click (function(){
 	$('form[name="insertForm"]').serialize();
 	$('form[name="insertForm"]').attr('method','POST');
 	$('form[name="insertForm"]').attr('action','insert.do');
 	
 	$('form[name="insertForm"]').submit();	
-	});
+	}); */
 	/* 유효성검증 */
 	$('#submit').click (function(){
-		var form=document.insertForm;
+		//var form=document.insertForm;
 		if($('input[name=i_name]').val() == ''){
 			alert('재료명을 입력해주세요');
 			return false;
@@ -201,8 +279,8 @@
 			return false;
 		}
 	});
-	
 	</script>
+	
 </body>
 </html>
 <jsp:include page="/WEB-INF/views/template/Footer.jsp" />

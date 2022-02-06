@@ -1,5 +1,7 @@
 package com.kosmo.fridge.web;
 
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,15 +40,106 @@ public class FridgeListController {
 		return "fridge/FridgeList";
 	}
 	//입력 get
-	@RequestMapping("/fridgeWrite")
+	@RequestMapping("/fridgeWrite.do")
 	public String writeGet() {
 		return "fridge/FridgeWrite";
 	}
+	//에엥 get
+	@RequestMapping(value="insert.do", method=RequestMethod.GET)
+	public void writeGeet() {
+		
+	}
 	//입력 post
 	@RequestMapping(value="insert.do", method=RequestMethod.POST)
-	public String writePost(IngrediantDTO ingrediantDTO,HttpSession session) {
-		ingrediantService.fridgeWrite(ingrediantDTO);
-		return "redirect:fridgeList.do";
+	@ResponseBody
+	public String writePost(HttpServletRequest req) throws Exception,NullPointerException {
+		//req.setCharacterEncoding("UTF-8");
+		
+		//아이디저장
+		String id=(String)req.getSession().getAttribute("id");
+		Map map = new HashMap<>();	
+		map.put("id", id);
+		System.out.println("저장된 아이디:"+map.get("id"));
+		
+		//받아오자
+		String[] foodNameCounts=req.getParameterValues("foodNameCounts");
+		String[] foodCntCounts=req.getParameterValues("foodCntCounts");
+		String[] foodEnddateCounts=req.getParameterValues("foodEnddateCounts");
+		
+		//출력해보자
+		
+		try {
+		System.out.println("foodNameCounts[0]번째 방:"+foodNameCounts[0]);
+		System.out.println("foodCntCounts[0]번째 방:"+foodCntCounts[0]);
+		System.out.println("foodEnddateCounts[0]번째 방:"+foodEnddateCounts[0]+"=============================");
+		}catch(NullPointerException e) {
+			System.out.println("널이다!!!!!!!!!!!");
+		}
+		
+		//잘라서 담자
+		String[] foodName = foodNameCounts[0].split(",");
+		String[] foodCnt = foodCntCounts[0].split(",");
+		String[] foodEnddate = foodEnddateCounts[0].split(",");
+		
+		//출력해보자
+		for(String s:foodName) {
+			 System.out.println("foodName은?:"+s);
+		}
+		for(String m:foodCnt) {
+			
+			 System.out.println("foodCnt은?:"+m);
+		}
+		for(String k:foodEnddate) {
+			 System.out.println("foodEnddate은?:"+k+"=============================");
+		}
+		
+		//System.out.println("재료이름1:"+foodNameCounts[1]+",재료수량1:"+foodCntCounts[1]+",재료유통기한1:"+foodEnddateCounts[1]);
+		
+		//for문으로 돌려보자
+		
+		 for(int i=0; i<foodName.length; i++) {
+			 System.out.println("길이가 몇인데? foodName.length:"+foodName.length);
+			 System.out.println("foodName[i]번째 방:"+foodName[i]);
+			 System.out.println("foodCnt[i]번째 방:"+foodCnt[i]);
+			 System.out.println("foodEnddate[i]번째 방:"+foodEnddate[i]);
+			 
+			 System.out.println("재료이름:"+foodName[i]+",재료수량:"+foodCnt[i]+",재료유통기한:"+foodEnddate[i]);  	 
+		 	 
+			 map.put("f_name",foodName[i]); 
+			 map.put("f_count",foodCnt[i]);
+			 map.put("f_enddate", foodEnddate[i]);
+			 ingrediantService.fridgeWrite(map);
+			 
+			 System.out.println("map안의 f_name:"+map.get("f_name"));
+			 System.out.println("map안의 f_count:"+map.get("f_count"));
+			 System.out.println("map안의 f_enddate:"+map.get("f_enddate"));	
+		 }
+		
+		/*
+		//while문으로 돌려보자
+		int i=0;
+		while(i<foodName.length) {
+
+			System.out.println("길이가 몇인데? foodName.length:"+foodName.length);
+			System.out.println("foodName[i]번째 방:"+foodName[i]);
+			System.out.println("foodCnt[i]번째 방:"+foodCnt[i]);
+			System.out.println("foodEnddate[i]번째 방:"+foodEnddate[i]+"=============================");
+			
+			map.put("f_name",foodName[i]); 
+			map.put("f_count",foodCnt[i]);
+			map.put("f_enddate", foodEnddate[i]);
+			
+			System.out.println("재료이름:"+foodName[i]+",재료수량:"+foodCnt[i]+",재료유통기한:"+foodEnddate[i]); 
+			
+			ingrediantService.fridgeWrite(map);
+			System.out.println("map안의 f_name:"+map.get("f_name"));
+			System.out.println("map안의 f_count:"+map.get("f_count"));
+			System.out.println("map안의 f_enddate:"+map.get("f_enddate"));
+			
+			i++;
+		}
+		*/
+		return "foward:fridgeList.do";
 	}
 	//상세보기
 	@RequestMapping(value="detail.do", method=RequestMethod.GET)

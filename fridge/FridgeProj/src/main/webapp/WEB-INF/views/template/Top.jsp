@@ -66,11 +66,10 @@
                     </button>
                     <!-- /responsive nav button -->
                     
-                    <!-- logo -->
+                   <!-- logo -->
                     <div class="navbar-brand">
-                    
-                        <a href="<c:url value="/"/>"> 
-                        	찍먹냉장고                                
+                        <a href="/app" >
+                            <img src="<c:url value="/resources/images/template/logo.png"/>" alt="">
                         </a>
                     </div>
                    	<!-- /logo -->
@@ -85,7 +84,7 @@
                         	<li><a href="<c:url value="/member/login.do"/>">로그인</a></li>                        	
 							</c:if>
                             <c:if test="${not isLogin }">
-                            <li><a href="#" >커뮤니티</a></li>
+                            <li><a href="community/main.do" >커뮤니티</a></li>
                             <li><a href="about.html">나눔</a></li>
                             <li><a href="service.html">레시피</a></li>
                             <li class="dropdown">
@@ -103,7 +102,7 @@
                                 <div class="dropdown-menu">
                                     <ul>
                                         <li><a href="#">프로필</a></li>
-                                        <li><a href="<c:url value="/mypageEdit.do"/>">회원정보 수정</a></li>
+                                        <li><a href="#">회원정보 수정</a></li>
                                         <li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>
                                     </ul>
                                 </div>

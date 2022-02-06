@@ -1,5 +1,5 @@
 var nick = $("input[name=nick]").val(); // 히든박스에 닉네임저장 
-nick = nick.length == 0 ? "Kil_dong" : nick;  // 임시로 아이디가 없으면 김길동으로 테스트 하기위한 코드
+nick = nick.length == 0 ? "관리자" : nick;  // 임시로 아이디가 없으면 김길동으로 테스트 하기위한 코드
 console.log(nick);
 
 var feeds = Array(); // 에이작스로 가져온 모든 데이터(피드글)를 관리할 전역변수

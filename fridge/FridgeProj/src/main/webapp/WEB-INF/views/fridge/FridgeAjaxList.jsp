@@ -137,22 +137,22 @@ $(function(){
 		}
 	}
 	if(valueArr.length==0){
-		alert("선택된 글이 없는디용");
+		alert("선택된 글이 없습니다.");
 	}
 	else{
-		var chk=confirm("정말 삭제할고양?");
+		var chk=confirm("정말 삭제하시겠습니까?");
 		$.ajax({
 			url: url,
 			type: 'POST',
 			traditional: true,
-			data: {valueArr : valueArr},
-			success: function(jdata){
-				if(jdata=1){
-					alert("선택한 재료가 삭제되었습니다.");
+			data: {valueArr},
+			success: function(data){
+				if(data=1){
+					alert("선택하신 게시물이 삭제되었습니다.");
 					location.replace("fridgeList.do");
 				}
 				else{
-					alert("삭제실패");
+					alert("취소되었습니다.");
 				}
 			}
 		});

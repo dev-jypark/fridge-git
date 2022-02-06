@@ -64,7 +64,7 @@
 				</div>
 				<!-- 모달 취소&확인 버튼 -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default"><a href="/app/fridge/fridgeList.do">취소</a></button>
+					<button type="button" class="btn btn-default" onclick="location.href ='/app/fridge/fridgeList.do';">취소</button>
 					<button type="button" class="btn btn-default" style="background-color: #c3eee6; color: white;">
 					<a href="/app/fridge/fridgeEdit.do?i_no=${data.i_no}">수정</a></button>
 				</div>

@@ -62,9 +62,7 @@
 				</div>
 				<!-- 모달 취소&확인 버튼 -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default">
-						<a href="/app/fridge/fridgeView.do">취소</a>
-					</button>
+					<button type="button" class="btn btn-default" onclick="location.href ='/app/fridge/fridgeView.do';">취소</button>
 					<button class="btn btn-default" type="submit" style="background-color: #c3eee6; color: white;">확인</button>
 				</div>
 			</div>
