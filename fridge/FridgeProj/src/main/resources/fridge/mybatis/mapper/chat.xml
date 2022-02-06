@@ -24,17 +24,17 @@
 	    select imgsrc from member
 	    <choose>
 	        <when test="send_nick == nick">
-	            where nick = #{recv_nick}
+	            where id = #{recv_nick}
 	        </when>
 	        <otherwise>
-	            where nick = #{send_nick}
+	            where id = #{send_nick}
 	        </otherwise>
 	    </choose>
 	</select>
 	
 	<!-- 메세지 내용 가져오기 -->
 	<select id="room_content_list" parameterType="messageDTO" resultType="messageDTO">
-	    SELECT c.c_no, c.room, c.send_id AS send_nick, c.recv_id AS recv_nick, TO_CHAR(send_time, 'MM-DD HH24:MI') send_time, c.read_time, c.content, c.read_chk, m.imgsrc
+	    SELECT c.c_no, c.room, c.send_id AS send_nick, c.recv_id AS recv_nick, TO_CHAR(send_time, 'MM-DD HH24:MI') send_time, c.read_time, c.content, c.read_chk, m.imgsrc AS profile
 	    FROM chat c left outer join member m
 	    on c.send_id = m.id
 	    <choose>

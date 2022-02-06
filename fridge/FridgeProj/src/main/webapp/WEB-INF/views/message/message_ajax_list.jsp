@@ -10,7 +10,13 @@
 				<div class="chat_img" >
 					<a href="other_profile.do?other_nick=${tmp.other_nick }">
 						<%-- <img src="./upload/profile/${tmp.profile}" alt="sunil" > --%>
-						<img id="sendProfile" src="<c:url value="/resources/images/chat/none_profile.png"/>" alt="sunil" >
+						<%-- <img id="sendProfile" src="<c:url value="/resources/images/chat/none_profile.png"/>" alt="sunil" > --%>
+						<c:if test="${empty tmp.profile }" var="isProfile">
+							<img id="sendProfile" src="<c:url value="/resources/images/chat/none_profile.png"/>" alt="보낸사람 프로필">
+						</c:if>
+						<c:if test="${not isProfile }">
+							<img id="sendProfile" src="${tmp.profile} " alt="보낸사람 프로필">
+						</c:if>
 					</a>
 				</div>
 				<div class="chat_ib">

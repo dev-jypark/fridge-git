@@ -176,7 +176,7 @@
 					});
 					
 					// 메세지 내용을 불러오는 함수 호출
-					MessageContentList(room);
+					MessageContentList(room,other_nick);
 					
 				});	
 			}
@@ -242,7 +242,7 @@
 					});
 					
 					// 메세지 내용을 불러오는 함수 호출
-					MessageContentList(room);
+					MessageContentList(room,other_nick);
 					
 				});
 				
@@ -261,12 +261,13 @@
 	
 	// 메세지 내용을 가져온다.
 	// 읽지 않은 메세지들을 읽음으로 바꾼다.
-	const MessageContentList = function(room) {
+	const MessageContentList = function(room,other_nick) {
 		$.ajax({
 			url:"message_content_list.do",
 			method:"GET",
 			data:{
-				room : room
+				room : room,
+				other_nick : other_nick
 			},
 			error : function(jqWHR, textStatus, errorThrown){
 				console.log(jqWHR.statusText);

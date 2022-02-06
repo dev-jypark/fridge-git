@@ -31,6 +31,7 @@ public class MessageDAO {
 			if(profile != null) {
 				// 사용자 프로필 이름에 경로 붙여주기
 				profile = "/user/profile/"+profile;
+				System.out.println("profile DAOOOOOOOOOO : "+profile);
 			}
 			// 안읽은 메세지 갯수를 mto에 set한다.
 			mto.setUnread(unread);

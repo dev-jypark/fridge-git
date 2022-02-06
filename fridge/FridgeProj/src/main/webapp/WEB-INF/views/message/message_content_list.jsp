@@ -23,11 +23,11 @@
 				<a href="other_profile.do?other_nick=${tmp.send_nick }">
 					<%--보낸사람 프로필 생기면 이거 넣기 --%>
 					<%-- <img src="./upload/profile/${tmp.profile }" alt="보낸사람 프로필"> --%>
-					<c:if test="${not tmp.profile }" var="isProfile">
+					<c:if test="${empty tmp.profile }" var="isProfile">
 						<img id="sendProfile" src="<c:url value="/resources/images/chat/none_profile.png"/>" alt="보낸사람 프로필">
 					</c:if>
 					<c:if test="${not isProfile }">
-						<img id="sendProfile" src="${temp.profile} " alt="보낸사람 프로필">
+						<img id="sendProfile" src="/user/profile/${tmp.profile} " alt="보낸사람 프로필">
 					</c:if>
 				</a>
 			</div>

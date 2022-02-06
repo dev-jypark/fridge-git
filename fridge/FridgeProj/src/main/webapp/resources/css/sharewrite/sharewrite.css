@@ -161,10 +161,12 @@ input[type="checkbox"]:checked + label:before {
 }
 /* step2 사진 등록하기 스타일(2번 이미지 컨트롤 테스트용)  */
 #att_zone {
-  width: 660px;
+  width: 100%;
   min-height: 150px;
   padding: 10px;
-  border: 1px dotted #00f;
+  border: 5px dotted #95e1d3;
+  margin-top : 30px;
+  margin-bottom : 40px;
 }
 
 #att_zone:empty:before {
