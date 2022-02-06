@@ -9,8 +9,8 @@
 	
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="resources/js/sharelist/select.min.js"></script>
-	<!-- 지도 키, 발급 후 src_appkey 부분 변경 -->
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script><!-- @@둘 중 하나 날리자 버전 상관 없으면 위에거 남기는걸로 -->
+	<!-- 지도 키, 발급 후 src_appkey 부분 변경 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d555d6661391d7bcc7566ec232018705&libraries=services,clusterer"></script>
 	
 	<!-- 페이징 -->
@@ -48,7 +48,7 @@
 </style>
 </head>
 <body>
-	<div id="my_modal">
+	<div id="my_modal" class="mmod">
     <a class="modal_close_btn">닫기</a>
     
 	</div>
@@ -230,16 +230,15 @@
             backgroundColor: 'rgba(0,0,0,0.4)' // 레이어 색갈은 여기서 바꾸면 됨
         });
         document.body.append(bg);
-        
+        /*
         modal.querySelector('.modal_close_btn').addEventListener('click', function() {
             bg.remove();
             modal.style.display = 'none';
-        });
+        });*/
 
         modal.setStyle({
             position: 'fixed', display: 'block',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-
             // 시꺼먼 레이어 보다 한칸 위에 보이기
             zIndex: zIndex + 1,
             // div center 정렬
@@ -256,12 +255,32 @@
         for (var k in styles) this.style[k] = styles[k];
         return this;
     };
+    /*
 	$('#popup_open_btn').on('click', function() {
 	    // 모달창 띄우기
 	    modal('my_modal');
-	});
-	function closeView(){
-		$('#my_modal').modal("hide");
-	}
+	});*/
+	/*
+	 $(document).ready(function( $ ){  console.log("시작");
+		    $("#popup_open_btn").on("click", function(event) {  //팝업오픈 버튼 누르면
+		    $("#my_modal").show();   //팝업 오픈
+		   
+		    $(".btn btn-warning").on("click", function(event) { 		        
+		        console.log("onㅇㅇㅇ");
+		    	$("#my_modal").hide(); //close버튼 이거나 뒷배경 클릭시 팝업 삭제
+		      });
+		 
+		  });
+	 });
+	/*
+	function closeModView(){
+		close.addEventListener("click",function(){
+			console.log("리스너부착");
+			modal.classList.add("hidden");
+		})
+		console.log("들어는 왔다...");
+		bg.remove();
+		//$('.mmod').display("none"); //@@레이아웃도 같이 처리해줘야함. 까먹을뻔 ㅋ
+	}*/
 </script>
 </html>
