@@ -20,17 +20,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kosmo.fridge.service.ListPagingData;
-import com.kosmo.fridge.service.NoticeDTO;
-import com.kosmo.fridge.service.impl.NoticeServiceImpl;
+import com.kosmo.fridge.service.AdminNoticeDTO;
+import com.kosmo.fridge.service.impl.AdminNoticeServiceImpl;
 
-
-@RequestMapping("/notice/")
+@SessionAttributes("adminid")
+@RequestMapping("/admin_notice/")
 @Controller
-public class NoticeController {
+public class AdminNoticeController {
 	
 	//서비스 주입
 	@Resource(name="noticeService")
-	private NoticeServiceImpl noticeService;
+	private AdminNoticeServiceImpl noticeService;
 	//목록 처리
 	@RequestMapping("List.do")
 	public String list(	   
@@ -41,12 +41,12 @@ public class NoticeController {
 			           
 			) {
 		//서비스 호출]
-		ListPagingData<NoticeDTO> listPagingData= noticeService.selectList(map, req, nowPage);
+		ListPagingData<AdminNoticeDTO> listPagingData= noticeService.selectList(map, req, nowPage);
 			
 		//데이타 저장]
 		model.addAttribute("listPagingData", listPagingData);
 		//뷰정보 반환]
-		return "notice/List.tiles";
+		return "/admin/notice/List";
 	}
 	//입력폼으로 이동]
 	@RequestMapping(value="/Write.do",method = RequestMethod.GET)
@@ -78,11 +78,12 @@ public class NoticeController {
 	//상세보기]
 	@RequestMapping("View.do")
 	public String view(
+			@ModelAttribute("adminid") String adminid,
 			@ModelAttribute("n_no") String n_no,
 			@RequestParam Map map,Model model) {
 		//서비스 호출]
 		
-		NoticeDTO record= noticeService.selectOne(map);
+		AdminNoticeDTO record= noticeService.selectOne(map);
 		int hits = noticeService.increaseHit(n_no);
 		//데이타 저장]
 		//줄바꿈 처리
@@ -91,7 +92,7 @@ public class NoticeController {
 		model.addAttribute("hits", hits);
 		/////////////////////////////////////////////
 		//뷰정보 반환]
-		return "notice/List.tiles";
+		return "/admin/notice/View";
 	}
 	//수정폼으로 이동 및 수정처리]
 	@RequestMapping("Edit.do")
@@ -101,7 +102,7 @@ public class NoticeController {
 			HttpServletRequest req) {
 		if(req.getMethod().equals("GET")) {
 			//서비스 호출]
-			NoticeDTO record= noticeService.selectOne(map);
+			AdminNoticeDTO record= noticeService.selectOne(map);
 			//데이타 저장]
 			req.setAttribute("record", record);
 			//수정 폼으로 이동]

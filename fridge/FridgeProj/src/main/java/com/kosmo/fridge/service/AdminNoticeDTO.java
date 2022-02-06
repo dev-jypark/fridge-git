@@ -1,6 +1,7 @@
 package com.kosmo.fridge.service;
 
 import lombok.AllArgsConstructor;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class NoticeDTO {
+public class AdminNoticeDTO {
 	private String n_no;
 	private String adminid;
 	private String n_title;
