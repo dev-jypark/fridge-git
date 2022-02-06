@@ -23,6 +23,7 @@ public class ListPagingData<T> {
 	private int blockPage;
 	private int nowPage;
 	private String pagingString;
+
 }
 /*
 //Lombok미 사용시

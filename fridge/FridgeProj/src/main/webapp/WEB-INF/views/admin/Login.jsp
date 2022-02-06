@@ -28,11 +28,14 @@
   	}
   </style>
   <body>
-  	<div class>
-  		찍먹냉장고(로고가 들어갈 자리입니다)
+  	<div class="row" style="display: flex;
+    justify-content: center; margin-top: 80px;">
+  		 <img style="width:30%; border-radius:25% "
+                                    src="../resources/img/frigochart/logo_full.png" >
   	</div>
 	
-    <div class="container">  
+    <div class="container" style="justify-content: center display: flex;
+    justify-content: center; margin-bottom: 40px;">  
 	    
     	<!-- 아이디가 일치하면 -->
 		<div class="alert_login">
@@ -52,6 +55,9 @@
 		</c:if>
 		<form name="form1" method="post" action="<c:url value='/admin/LoginProcess.do'/>" onsubmit="return Login();">
 	    <c:if test="${not isAdmin}">
+	    	<h3 style="display: flex;
+    justify-content: center;
+    margin-bottom: 40px;">관리자 로그인</h3>
 	      <input type="text" class="input_login" name="adminid" id="adminid" placeholder="아이디">
 	      <input type="password" class="input_login" name="adminpw" id="adminpw" placeholder="비밀번호">
 	     <button type="submit" id="btn_login">로그인</button>
