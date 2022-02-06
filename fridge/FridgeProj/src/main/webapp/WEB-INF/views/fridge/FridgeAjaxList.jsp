@@ -86,7 +86,7 @@ $(function(){
 		//console.log("widthbar 여기다",$(".progress").width());
 
 		//console.log("$('.progress-bar'+i)",$('.progress-bar'+i));
-		progressBar[i].style.width=(Math.floor(distance / (1000 * 60 * 60 * 24)+1)) * (widthbar / 31)+'px';
+		progressBar[i].style.width=(Math.floor(distance / (1000 * 60 * 60 * 24)+1)) * (widthbar / 100)+'px';
 		//console.log("궁금하다 디스턴스",(Math.floor(distance / (1000 * 60 * 60 * 24)+1)));
 		//console.log("widthbar",progressBar[i].style.width);
 

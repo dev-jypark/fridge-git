@@ -224,5 +224,9 @@ public class ShareServiceImpl implements ShareService{
 	public ShareDTO viewSelectOne(Map map) {
 		return dao.viewSelectOne(map);
 	}
+
+	public void complete(Map map) {
+		dao.updateTradeResult(map);
+	}
 	
 }

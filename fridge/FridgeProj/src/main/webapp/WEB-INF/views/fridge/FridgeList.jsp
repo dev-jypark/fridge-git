@@ -23,6 +23,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
 	</head>
 <body>
+
 	<form class="css-1hs06u0-LayoutContainer">
 		<!-- 상단구역 시작 -->
 		<section class="sectionedit">
@@ -35,13 +36,19 @@
 			</div> -->
 			<!-- 검색창 끝 -->
 		</section>
+				<!-- 내용 끝 -->
+		<!-- <div class="chatbot_icon" style="display:flex; JUSTIFY-CONTENT:flex-end;"> -->
+		
+		<!-- </div> -->
 		<!-- 상단구역 끝 -->
 		<!-- 내용 시작 -->
 		<div class="commerce-cart-wrap">
 			<div class="commerce-cart row">
 				<!-- 체크박스~유통기한순~선택삭제 부분 div 시작 -->
+				
 				<div class="commerce-cart__content">	
-					<div data-sticky-enabled="false" data-sticky-disabled="false"
+					<a href="#"><img style="width:100px; position:fixed; right:450px; top:590px" src="<c:url value="/resources/images/chatbot/chatbot.png"/>"/></a>
+				<div data-sticky-enabled="false" data-sticky-disabled="false"
 					data-sticky-always="false" data-sticky-ignore="false"
 					data-direction="top" data-offset="0"
 					class="sticky-container commerce-cart__header-wrap"
@@ -197,8 +204,6 @@
 			</div>
 		</div>
 	</form>
-	<!-- 내용 끝 -->
-	
 	
 	<script>
 	<!-- 등록일 순 조회하기 -->

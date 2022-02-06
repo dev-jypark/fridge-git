@@ -1,4 +1,3 @@
-
 /* Drop Tables */
 
 DROP TABLE a_com CASCADE CONSTRAINTS;
@@ -110,7 +109,7 @@ CREATE TABLE a_com
 
 CREATE TABLE chat
 (
-	c_no number NOT NULL UNIQUE,
+	c_no number,
 	send_id varchar2(24) NOT NULL,
 	recv_id varchar2(24) NOT NULL,
 	send_time date NOT NULL,
@@ -342,7 +341,7 @@ ALTER TABLE trade
 
 
 ALTER TABLE chat
-	ADD CONSTRAINT CASCADE
+	ADD CONSTRAINT fk_chat_recv_id
 	FOREIGN KEY (recv_id)
 	REFERENCES member (id)
 	ON DELETE CASCADE
@@ -350,7 +349,7 @@ ALTER TABLE chat
 
 
 ALTER TABLE chat
-	ADD CONSTRAINT CASCADE
+	ADD CONSTRAINT fk_chat_send_id
 	FOREIGN KEY (send_id)
 	REFERENCES member (id)
 	ON DELETE CASCADE
@@ -394,7 +393,7 @@ ALTER TABLE history
 
 
 ALTER TABLE ingrediant
-	ADD CONSTRAINT CASCADE
+	ADD CONSTRAINT fk_ingrediant_id
 	FOREIGN KEY (id)
 	REFERENCES member (id)
 	ON DELETE CASCADE
@@ -414,7 +413,7 @@ ALTER TABLE q_bbs
 
 
 ALTER TABLE t_bbs
-	ADD CONSTRAINT CASCADE
+	ADD CONSTRAINT fk_t_bbs_id
 	FOREIGN KEY (id)
 	REFERENCES member (id)
 	ON DELETE CASCADE
@@ -422,7 +421,7 @@ ALTER TABLE t_bbs
 
 
 ALTER TABLE t_like
-	ADD CONSTRAINT CASCADE
+	ADD CONSTRAINT fk_t_like_id
 	FOREIGN KEY (id)
 	REFERENCES member (id)
 	ON DELETE CASCADE
@@ -448,7 +447,7 @@ ALTER TABLE q_imgsrc
 
 
 ALTER TABLE trade
-	ADD CONSTRAINT CASCADE
+	ADD CONSTRAINT fk_trade_tb_no
 	FOREIGN KEY (tb_no)
 	REFERENCES t_bbs (tb_no)
 	ON DELETE CASCADE
@@ -456,7 +455,7 @@ ALTER TABLE trade
 
 
 ALTER TABLE t_imgsrc
-	ADD CONSTRAINT CASCADE
+	ADD CONSTRAINT fk_t_imgsrc_tb_no
 	FOREIGN KEY (tb_no)
 	REFERENCES t_bbs (tb_no)
 	ON DELETE CASCADE
@@ -464,7 +463,7 @@ ALTER TABLE t_imgsrc
 
 
 ALTER TABLE t_like
-	ADD CONSTRAINT CASCADE
+	ADD CONSTRAINT fk_t_like_tb_no
 	FOREIGN KEY (tb_no)
 	REFERENCES t_bbs (tb_no)
 	ON DELETE CASCADE

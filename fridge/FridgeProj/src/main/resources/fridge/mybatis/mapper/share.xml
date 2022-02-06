@@ -141,4 +141,7 @@
 		DELETE FROM t_bbs WHERE tb_no=#{tb_no}
 	</delete>
 	
+	<update id="tradeResultUpdate" parameterType="Map">
+		UPDATE trade SET t_result = 'T' where tb_no=#{tb_no}
+	</update>
 </mapper>

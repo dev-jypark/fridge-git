@@ -152,6 +152,10 @@ public class ShareController {
 		return "share/ShareList.tiles";
 	}
 	
-	//@RequestMapping(value="/shareLike.do")
+	@RequestMapping(value="/shareComplte.do")
+	public String complete(@RequestParam Map map) {
+			shareService.complete(map);
+		return "";
+	}
 	
 }

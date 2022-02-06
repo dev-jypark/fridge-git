@@ -78,5 +78,9 @@ public class ShareDAO {
 		
 		return listIngrediant;
 	}
+
+	public void updateTradeResult(Map map) {
+		template.update("tradeResultUpdate",map);
+	}
 	
 }
