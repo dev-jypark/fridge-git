@@ -49,26 +49,37 @@
 	</select>
 
 	<select id="shareSelectList" parameterType="Map" resultMap="shareDTOResult">
-		SELECT * FROM
-			(SELECT t.*,ROWNUM R FROM
-				(SELECT t.*,m.nick,m.addr
-				 FROM t_bbs t JOIN member m ON m.id=t.id
-				 <if test="mAddr !=null">
-					WHERE m.addr LIKE '%' || #{mAddr} || '%'
-				</if> 				
-					ORDER BY tb_no DESC) T)
-			<!-- WHERE R BETWEEN #{start} AND #{end} -->
-		<!-- 기존 쿼리문  
-		SELECT * FROM
-			(SELECT D.*,ROWNUM R FROM
-				(SELECT t.*,m.addr as addr,(SELECT COUNT(*) FROM t_like WHERE tb_no=t.tb_no) as likeCount FROM 
-					t_bbs t JOIN member m ON m.id=t.id 
-				<if test="searchWord !=null">
-					WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
-				</if>				
-				ORDER BY tb_no DESC) D)
-				-->
-	</select>
+      SELECT * FROM
+      (SELECT t.*,ROWNUM R FROM
+      (SELECT t.*,m.nick,m.addr
+       FROM t_bbs t JOIN member m ON m.id=t.id
+          <if test="mAddr !=null">
+             WHERE m.addr LIKE '%' || #{mAddr} || '%'
+          </if> 
+          ORDER BY tb_no DESC) T) U JOIN trade r ON u.tb_no=r.tb_no
+          where t_result='F'
+      <!-- SELECT * FROM
+         (SELECT t.*,ROWNUM R FROM
+            (SELECT t.*,m.nick,m.addr
+             FROM t_bbs t JOIN member m ON m.id=t.id
+             <if test="mAddr !=null">
+               WHERE m.addr LIKE '%' || #{mAddr} || '%'
+            </if>             
+               ORDER BY tb_no DESC) T) -->
+               
+               
+         <!-- WHERE R BETWEEN #{start} AND #{end} -->
+      <!-- 기존 쿼리문  
+      SELECT * FROM
+         (SELECT D.*,ROWNUM R FROM
+            (SELECT t.*,m.addr as addr,(SELECT COUNT(*) FROM t_like WHERE tb_no=t.tb_no) as likeCount FROM 
+               t_bbs t JOIN member m ON m.id=t.id 
+            <if test="searchWord !=null">
+               WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+            </if>            
+            ORDER BY tb_no DESC) D)
+            -->
+   </select>
 	
 	<select id="shareSelectIngrediantList" parameterType="Map" resultMap="ingrediantDTOResult">
 		SELECT * 

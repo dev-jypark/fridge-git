@@ -20,4 +20,4 @@
 	    </tr>
 	 </c:forEach>
 </table>
-<a href="<c:url value="/share/shareWrite.do"/>" class="btn btn-info">신규 공유 등록</a>'
+<a href="<c:url value="/share/shareWrite.do"/>" class="btn btn-info">신규 나눔 등록</a>'
