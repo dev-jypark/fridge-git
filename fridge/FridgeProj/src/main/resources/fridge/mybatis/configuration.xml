@@ -17,7 +17,10 @@
 		<typeAlias alias="FeedDTO" type="com.kosmo.fridge.service.FeedDTO"/>
 		<typeAlias alias="MemberProfileDTO" type="com.kosmo.fridge.service.MemberProfileDTO"/>
 		<typeAlias type="com.kosmo.fridge.service.NoticeDTO" alias="noticeDTO"/>
-	</typeAliases>
+		<typeAlias type="com.kosmo.fridge.service.UserchartDTO" alias="userchartDTO"/>
+		
+	</typeAliases>	
+	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
 	<mappers>					
 		<mapper resource="fridge/mybatis/mapper/share.xml" />	
@@ -31,5 +34,6 @@
 		<mapper resource="fridge/mybatis/mapper/community.xml"/>
 		<mapper resource="fridge/mybatis/mapper/communityRestAPI.xml"/>
 		<mapper resource="fridge/mybatis/mapper/notice.xml" />	
+		<mapper resource="fridge/mybatis/mapper/userchart.xml" />	
 	</mappers>
 </configuration>

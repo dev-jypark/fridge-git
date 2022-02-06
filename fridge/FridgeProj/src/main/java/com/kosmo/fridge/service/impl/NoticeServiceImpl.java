@@ -1,6 +1,8 @@
 package com.kosmo.fridge.service.impl;
 
 import java.util.List;
+
+
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -37,6 +39,7 @@ public class NoticeServiceImpl implements NoticeService {
 			Map map, HttpServletRequest req, int nowPage) {
 		//페이징을 위한 로직 시작]
 		//전체 레코드수	
+		
 		int totalRecordCount = dao.getTotalRowCount(map);		
 		//전체 페이지수
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);		
@@ -50,7 +53,7 @@ public class NoticeServiceImpl implements NoticeService {
 		List lists= dao.selectList(map);
 		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, 
 				pageSize, blockPage, nowPage,
-				req.getContextPath()+"/fridge/notice/List.do?");
+				req.getContextPath()+"/admin_notice/List.do?");
 		ListPagingData<NoticeDTO> listPagingData = new ListPagingData<>();
 		listPagingData.setBlockPage(blockPage);
 		listPagingData.setLists(lists);
@@ -58,6 +61,11 @@ public class NoticeServiceImpl implements NoticeService {
 		listPagingData.setPageSize(pageSize);
 		listPagingData.setPagingString(pagingString);
 		listPagingData.setTotalRecordCount(totalRecordCount);
+		
+		System.out.println("찍어보기");
+		for(NoticeDTO dto: listPagingData.getLists()) {
+			System.out.println(dto);
+		}
 		return listPagingData;
 	}
 	
