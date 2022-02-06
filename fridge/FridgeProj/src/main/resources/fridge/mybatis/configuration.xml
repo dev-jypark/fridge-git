@@ -9,7 +9,6 @@
 	<typeAliases>
 		<!-- <typeAlias type="com.kosmo.fridge.service.ExampleDTO" alias="exampleDTO"/>	 -->	
 		<typeAlias type="com.kosmo.fridge.service.NoticeDTO" alias="noticeDTO"/>
-		<typeAlias type="com.kosmo.fridge.service.QuestionDTO" alias="questionDTO"/>
 		<typeAlias type="com.kosmo.fridge.service.UserchartDTO" alias="userchartDTO"/>
 		
 	</typeAliases>	
@@ -18,7 +17,6 @@
 	<mappers>		
 		<!-- <mapper resource="fridge/mybatis/mapper/example.xml" />	 -->	
 		<mapper resource="fridge/mybatis/mapper/notice.xml" />
-		<mapper resource="fridge/mybatis/mapper/question.xml" />	
 		<mapper resource="fridge/mybatis/mapper/userchart.xml" />	
 		
 	</mappers>
