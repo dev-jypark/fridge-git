@@ -26,6 +26,7 @@ public class MemberServiceImpl implements MemberService{
 	//소셜로그인
 	@Override
 	public int isSocialLogin(Map map) {
+		System.out.println("서비스의 map: "+map);
 		return memberDAO.isSocialLogin(map);
 		}
 	//소셜프로필사진

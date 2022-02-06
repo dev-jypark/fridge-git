@@ -37,8 +37,8 @@
 			</div>
 			<input type="hidden" name="loginType" id="loginType">
 	      	<input type="hidden" name="socialId" id="socialId">
-	      	<input type="hidden" name="socialEmail" id="socialEmail">
-			<input type="hidden" name="socialNickname" id="socialNickname">
+	      	<input type="hidden" name="email" id="email">
+			<input type="hidden" name="nick" id="nick">
 			</form>			
 			<hr/>
 			<form method="post" action="SignUp.do" class="validation-form" novalidate="novalidate" name="login_frm">
@@ -58,25 +58,7 @@
 				<!-- 이메일 -->				
 				<div class="mb-3">
 					<label class="lable" for="email">이메일</label>
-					<!-- 셀렉트로 이메일 주소 선택하기
-					<div class="input-group email-input">
-						<span class="email-input__local">
-						<input type="email" class="form-control" placeholder="이메일"></span>
-						<span class="email-input__separator">@</span>
-						<select class="form-control">
-							<option value="">선택해주세요</option>
-							<option value="naver.com">naver.com</option>
-							<option value="hanmail.net">hanmail.net</option>
-							<option value="daum.net">daum.net</option>
-							<option value="gmail.com">gmail.com</option>
-							<option value="nate.com">nate.com</option>
-							<option value="hotmail.com">hotmail.com</option>
-							<option value="outlook.com">outlook.com</option>
-							<option value="icloud.com">icloud.com</option>
-							<option value="_manual">직접 입력</option>
-						</select>
-					</div> 
-					-->
+
 					<input type="email" pattern="^[A-Za-z0-9_\.\-]+@[a-z\-]+\.[a-z\-]+" class="form-control" id="email" name="email" placeholder="you@example.com" required/>
 					<div class="invalid-feedback"> 올바른 이메일 양식이 아닙니다. 다시 확인해주세요. </div>
 					

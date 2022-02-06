@@ -52,6 +52,9 @@ public class ShareDAO {
 	public ShareDTO selectOne(Map map) {
 		return template.selectOne("shareSelectOne",map);
 	}
+	public ShareDTO viewSelectOne(Map map) {
+		return template.selectOne("viewSelectOne", map);
+	}
 
 	public void updateIngrediant(Map map) {
 		template.update("ingrediantCountUpdate", map);

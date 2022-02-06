@@ -114,7 +114,7 @@
 			alert('내용을 입력해주세요');
 			return false;
 		}
-		var url = "/app/shareWrite.do";
+		var url = "/app/share/shareWrite.do";
 		var formData = new FormData($("form")[0]);
 		var checkboxes = [];
 		var counts = [];
@@ -155,7 +155,7 @@
 				console.log("Success!");
 				if(data){
 					alert("등록을 완료했습니다!");
-					location.href="/app/shareList.do";
+					location.href="/app/share/shareList.do";
 				}
 			} 
 		});	
@@ -166,6 +166,9 @@
 <div class="container" style="margin-top : 100px;">
 	<div class="row">
 		<div class="mb-5 p-4 bg-white shadow-sm col-lg-12">
+		<a href="javascript:history.back();">
+		<img src="<c:url value="/resources/images/share-write/cross.png"/>" alt="X" style="width: 30px; height: 30px; float: right;">
+		</a>
 			<div class="bs-stepper linear col-lg-12">
 				<div class="bs-stepper-header" role="tablist" style="margin-top : 50px;">
 				  <div class="step" data-target="#step-1">

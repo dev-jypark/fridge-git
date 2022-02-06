@@ -82,8 +82,8 @@
 	      </div>	
 	      	<input type="hidden" name="loginType" id="loginType">
 	      	<input type="hidden" name="socialId" id="socialId">
-	      	<input type="hidden" name="socialEmail" id="socialEmail">
-			<input type="hidden" name="socialNickname" id="socialNickname">
+	      	<input type="hidden" name="email" id="email">
+			<input type="hidden" name="nick" id="nick">
 
 		</form>	 
 	      	<!-- 회원가입 -->

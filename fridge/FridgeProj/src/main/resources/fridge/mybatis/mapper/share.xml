@@ -50,6 +50,16 @@
 
 	<select id="shareSelectList" parameterType="Map" resultMap="shareDTOResult">
 		SELECT * FROM
+			(SELECT t.*,ROWNUM R FROM
+				(SELECT t.*,m.nick,m.addr
+				 FROM t_bbs t JOIN member m ON m.id=t.id
+				 <if test="tbaddr !=null">
+					WHERE m.addr LIKE '%' || #{tbaddr} || '%'
+				</if> 				
+					ORDER BY tb_no DESC) T)
+			<!-- WHERE R BETWEEN #{start} AND #{end} -->
+		<!-- 기존 쿼리문  
+		SELECT * FROM
 			(SELECT D.*,ROWNUM R FROM
 				(SELECT t.*,m.addr as addr,(SELECT COUNT(*) FROM t_like WHERE tb_no=t.tb_no) as likeCount FROM 
 					t_bbs t JOIN member m ON m.id=t.id 
@@ -57,6 +67,7 @@
 					WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 				</if>				
 				ORDER BY tb_no DESC) D)
+				-->
 	</select>
 	
 	<select id="shareSelectIngrediantList" parameterType="Map" resultMap="ingrediantDTOResult">
@@ -101,6 +112,12 @@
 		FROM t_bbs b INNER JOIN t_imgsrc i
 		ON (b.tb_no = i.tb_no)
 		WHERE b.tb_no=#{tb_no} AND ROWNUM=1
+	</select>
+	<!-- shareSelectOne -->
+	<select id="viewSelectOne" parameterType="Map" resultMap="shareDTOResult">
+		SELECT *
+			FROM t_bbs t JOIN member m on m.id=t.id
+		WHERE t.tb_no=#{tbno}
 	</select>
 	
 	<!-- ingredianCountUpdate -->

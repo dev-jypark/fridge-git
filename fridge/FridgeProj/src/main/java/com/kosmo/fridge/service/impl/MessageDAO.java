@@ -65,21 +65,20 @@ public class MessageDAO {
 	}
 	
 	// 메세지 list에서 메세지를 보낸다.
-	public int messageSendInlist(MessageTO to) {
-		// 메세지리스트에서 보낸건지 프로필에서 보낸건지 구분하기 위함
-		if(to.getRoom() == 0) {	// room이 0이라면 프로필에서 보낸거다
-			int exist_chat = sqlSession.selectOne("exist_chat", to);
-			// 프로필에서 보낸것중 메세지 내역이없어서 첫메세지가 될경우를 구분하기 위함
-			if(exist_chat == 0) {	// 메세지 내역이 없어서 0이면 message 테이블의 room 최댓값을 구해서 to에 set 한다.
-				int max_room = sqlSession.selectOne("max_room", to);
-				to.setRoom(max_room+1);
-			}else {		// 메세지 내역이 있다면 해당 room 번호를 가져온다.
-				int room = Integer.parseInt((String)sqlSession.selectOne("select_room", to) );
-				to.setRoom(room);
-			}
-		}
-		
-		int flag = sqlSession.insert("messageSendInlist",to);
-		return flag;
-	}
+    public int messageSendInlist(MessageTO to) {
+        // 메세지리스트에서 보낸건지 프로필에서 보낸건지 구분하기 위함
+        if(to.getRoom() == 0) { // room이 0이라면 프로필에서 보낸거다
+            int exist_chat = sqlSession.selectOne("exist_chat", to);
+            // 프로필에서 보낸것중 메세지 내역이없어서 첫메세지가 될경우를 구분하기 위함
+            if(exist_chat == 0) {   // 메세지 내역이 없어서 0이면 message 테이블의 room 최댓값을 구해서 to에 set 한다.
+                int max_room = sqlSession.selectOne("max_room", to);
+                to.setRoom(max_room+1);
+            }else {     // 메세지 내역이 있다면 해당 room 번호를 가져온다.
+                int room = Integer.parseInt((String)sqlSession.selectOne("select_room", to) );
+                to.setRoom(room);
+            }
+        }
+        int flag = sqlSession.insert("messageSendInlist",to);
+        return flag;
+    }
 }

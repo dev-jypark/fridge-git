@@ -1,8 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
 @import url(http://fonts.googleapis.com/css?family=Glegoo);
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Jua', sans-serif;
 }
   #profileImg{
   /*글쓴이의 프로필 사진을 둥글게*/
