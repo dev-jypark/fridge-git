@@ -74,7 +74,7 @@
 	var wsocket;
 	let room, other_nick;
 	
-	wsocket = new WebSocket("ws://127.0.0.1:8080<c:url value="/chat-ws.do"/>");	
+	wsocket = new WebSocket("ws:/192.168.0.40:8080<c:url value="/chat-ws.do"/>");	
 	console.log(wsocket);
 	//웹 소켓이 열렸을 때
 	wsocket.onopen = function(){
