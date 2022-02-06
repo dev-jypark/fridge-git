@@ -80,6 +80,7 @@ public class MessageController {
 		to.setRoom(room);
 		to.setNick((String) request.getSession().getAttribute("id"));
 		to.setRecv_nick(request.getParameter(""));
+		System.out.println("to.Receve_nick"+to.getRecv_nick());
 		// 메세지 내용을 가져온다.
 		ArrayList<MessageTO> clist = messageDao.roomContentList(to);
 

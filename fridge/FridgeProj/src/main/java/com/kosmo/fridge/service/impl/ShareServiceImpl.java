@@ -219,5 +219,10 @@ public class ShareServiceImpl implements ShareService{
 		List<IngrediantDTO> listIngrediant = dao.selectIngrediantList(map);
 		return listIngrediant;
 	}
+
+	@Override
+	public ShareDTO viewSelectOne(Map map) {
+		return dao.viewSelectOne(map);
+	}
 	
 }

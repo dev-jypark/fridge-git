@@ -113,6 +113,12 @@
 		ON (b.tb_no = i.tb_no)
 		WHERE b.tb_no=#{tb_no} AND ROWNUM=1
 	</select>
+	<!-- shareSelectOne -->
+	<select id="viewSelectOne" parameterType="Map" resultMap="shareDTOResult">
+		SELECT *
+			FROM t_bbs t JOIN member m on m.id=t.id
+		WHERE t.tb_no=#{tbno}
+	</select>
 	
 	<!-- ingredianCountUpdate -->
 	<update id="ingrediantCountUpdate" parameterType="Map">

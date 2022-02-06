@@ -86,10 +86,11 @@ public class ShareController {
 	@RequestMapping(value="/view",produces = "application/json; charset=UTF-8")
 	public @ResponseBody String view(
 		@RequestParam Map map,HttpServletRequest req) throws JsonProcessingException {
-		req.setAttribute("tbno", 8);//@@
+		req.setAttribute("tbno", 2);//@@
 		System.out.println("tbno "+req.getParameter("tbno"));//@@tbaddr
 		ObjectMapper mapper = new ObjectMapper();
-		ShareDTO record= shareService.selectOne(map);
+		ShareDTO record= shareService.viewSelectOne(map);
+		System.out.println(record);
 		record.setTbContent(record.getTbContent().replace("\r\n","<br/>"));
 		
 		System.out.println(mapper.writeValueAsString(record));//@@
@@ -128,6 +129,7 @@ public class ShareController {
 	@RequestMapping(value = "/shareEdit.do", method = RequestMethod.GET)
 	public String edit(@RequestParam Map map ,HttpServletRequest req) {
 		//수정 페이지로 이동
+		//req.setAttribute("", );쿼리 스트링 값 ㅇㅇㅇㅇㅇ추가@@;
 		if(req.getMethod().equals("GET")) {
 			ShareDTO record = shareService.selectOne(map);
 			req.setAttribute("record", record);
