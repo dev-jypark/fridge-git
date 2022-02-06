@@ -1,14 +1,14 @@
 package com.kosmo.fridge.service.impl;
 
+
 import java.util.Map;
-
 import javax.annotation.Resource;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kosmo.fridge.service.MemberDTO;
 
@@ -38,7 +38,7 @@ public class MemberDAO {
 	private SqlSessionFactory sqlMapper;
 	@Resource(name="template")
 	private SqlSessionTemplate template;
-
+	
 	//로그인
 	public boolean isLogin(Map map){
 		SqlSession session= sqlMapper.openSession();
@@ -46,16 +46,43 @@ public class MemberDAO {
 		session.close();
 		return count==1 ? true : false;
 	}
+	//프로필사진
+	public String memberProfile(Map map) {
+		return template.selectOne("memberProfile",map);
+	}
+	//소셜로그인
+	public int isSocialLogin(Map map){
+		SqlSession session= sqlMapper.openSession();
+		 int result=session.selectOne("memberSocialLogin",map);
+		 System.out.println("dao의 map: "+map);
+		return result;		 
+		}
+	//소셜프로필사진
+//	public String socialMemberProfile(Map map) {
+//		return template.selectOne("socialMemberProfile",map);
+//	}
 	//회원가입
 	public void signUp(MemberDTO memberDTO) {
 		SqlSession session= sqlMapper.openSession();
 		session.insert("memberInsert", memberDTO);
 		session.commit();
 	}
+	//소셜회원가입
+	public void SocialSignUp(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		session.insert("memberSocialSignUp", memberDTO);
+		session.commit();
+		}
 	//약관동의
 	public void agreeOK(MemberDTO memberDTO) {
 		SqlSession session= sqlMapper.openSession();
 		session.insert("agreeInsert", memberDTO);
+		session.commit();
+	}
+	//소셜약관동의
+	public void socialAgreeOK(MemberDTO memberDTO) {
+		SqlSession session= sqlMapper.openSession();
+		session.insert("socialAgreeInsert", memberDTO);
 		session.commit();
 	}
 	//아이디중복확인
@@ -70,11 +97,6 @@ public class MemberDAO {
 		int result=session.selectOne("memberNickCheck",memberDTO);
 		return result;//존재:1 미존재:0
 	}
-	//비밀번호변경
-	public void changePwd(MemberDTO memberDTO) {
-		SqlSession session= sqlMapper.openSession();
-		session.update("pwdUpdate",memberDTO);
-	}
 	//아이디찾기
 	public MemberDTO searchId(MemberDTO memberDTO) {
 		SqlSession session= sqlMapper.openSession();
@@ -85,14 +107,28 @@ public class MemberDAO {
 		SqlSession session= sqlMapper.openSession();
 		return session.selectOne("findPwd",memberDTO);
 	}
-	//회원정보조회
+	//회원정보보기
 	public MemberDTO readMember(String id) {
 		SqlSession session= sqlMapper.openSession();
-		return session.selectOne("viewMember",id);	
+		return session.selectOne("viewMember",id);
 	}
 	//회원정보수정
-	public void memberEdit(MemberDTO memberDTO) {
+	public void memberEdit(MemberDTO memberDTO, MultipartFile imgsrc) {
 		SqlSession session= sqlMapper.openSession();
-		session.update("memberUpdate", memberDTO);	
+		session.update("memberUpdate", memberDTO);
+		//session.update("imgUpdate", imgsrc.getOriginalFilename());	
+		session.commit();
+		session.close();
 	}
+	//비밀번호변경
+	public void pwdEdit(MemberDTO memberDTO) {		
+		memberDTO.setId(memberDTO.getId().replace("/", ""));
+		//id 뒤에 / 붙어서 들어가는 문제가 있어서 임시로 조치 by 고호 최
+		SqlSession session= sqlMapper.openSession();
+		session.update("pwdUpdate", memberDTO);
+		session.commit();		
+		session.close();
+	}
+
+
 }

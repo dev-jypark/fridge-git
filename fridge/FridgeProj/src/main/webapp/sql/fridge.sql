@@ -172,9 +172,8 @@ CREATE TABLE history
 	h_name nvarchar2(20) NOT NULL,
 	h_cnt number NOT NULL,
 	h_controltype nvarchar2(10) NOT NULL,
-	id varchar2(24) NOT NULL,
+	id varchar2(40) NOT NULL,
 	h_kind nvarchar2(10) NOT NULL,
-	h_postdate date NOT NULL,
 	PRIMARY KEY (h_no)
 );
 
@@ -193,13 +192,12 @@ CREATE TABLE ingrediant
 
 CREATE TABLE member
 (
-	id varchar2(24) NOT NULL,
-	pwd varchar2(20) NOT NULL,
-	email varchar2(50) NOT NULL,
-	nick nvarchar2(24) NOT NULL UNIQUE,
-	addr nvarchar2(50) NOT NULL,
-	self nvarchar2(200),
+	id varchar2(40) NOT NULL,
+	pwd varchar2(15) NOT NULL,
+	nick nvarchar2(10) NOT NULL UNIQUE,
+	addr nvarchar2(10) NOT NULL,
 	imgsrc nvarchar2(100),
+	self nvarchar2(200),
 	regdate date DEFAULT sysdate,
 	PRIMARY KEY (id)
 );

@@ -31,6 +31,7 @@
 			<version>${org.springframework-version}</version>
 			<exclusions>
 			
+			
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -104,8 +105,8 @@
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -149,7 +150,7 @@
 		</dependency> 
 		<!-- 오라클 연결 -->
 		<!-- https://mvnrepository.com/artifact/oracle/ojdbc6 -->
-		<dependency>
+	 	<dependency>
 		    <groupId>oracle</groupId>
 		    <artifactId>ojdbc6</artifactId>
 		    <version>11.2.0.3</version>
@@ -192,7 +193,11 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.5</version>
+		</dependency>
 		<!-- AOP용 외부 라이브러리 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -216,7 +221,16 @@
 			<artifactId>spring-websocket</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20210307</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-messaging</artifactId>
+		    <version>5.3.14</version>
+		</dependency>
 		<!-- 타일즈 관련 라이브러리 -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -233,6 +247,8 @@
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.2</version>
 		</dependency>
+		
+		
 		
 		<!-- 스프링 Security관련 라이브러리 -->
 		<dependency>
@@ -255,7 +271,11 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>4.2.20.RELEASE</version>
 		</dependency>
-		
+		<dependency>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20210307</version>
+     	 </dependency>
 		<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
 		<dependency>
 		    <groupId>javax.annotation</groupId>
@@ -275,6 +295,19 @@
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context-support</artifactId>
 		    <version>4.3.30.RELEASE</version>
+		</dependency>
+		<!-- 구글 클라우드api 사용 -->
+		<dependency>
+		      <groupId>org.springframework.cloud</groupId>
+		      <artifactId>spring-cloud-gcp-dependencies</artifactId>
+		      <version>1.2.8.RELEASE</version>
+		      <type>pom</type>
+		      <scope>import</scope>
+	    </dependency>
+	    <dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-vision</artifactId>
+			<version>1.75.0</version>
 		</dependency>
 	</dependencies>
 	

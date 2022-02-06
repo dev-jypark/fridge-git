@@ -4,7 +4,14 @@
 body {
   font-family: "Roboto", sans-serif;
 }
-
+  #profileImg{
+  /*글쓴이의 프로필 사진을 둥글게*/
+  width: 40px !important;
+  height: 40px !important;
+  border: 0px !important;
+  /*border: 1px solid #CECECE;*/
+  border-radius: 50% !important;
+	}
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto Condensed", sans-serif;
 }
@@ -1422,6 +1429,7 @@ px      68    160    252    */
     color: #333;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
+
 }
 
 /*		Wide Mobile Layout: 480px.

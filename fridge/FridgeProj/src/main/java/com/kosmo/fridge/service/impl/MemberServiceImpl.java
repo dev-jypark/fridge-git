@@ -1,10 +1,10 @@
 package com.kosmo.fridge.service.impl;
 
+import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.kosmo.fridge.service.MemberDTO;
 import com.kosmo.fridge.service.MemberService;
@@ -19,15 +19,39 @@ public class MemberServiceImpl implements MemberService{
 	public boolean isLogin(Map map) {
 		return memberDAO.isLogin(map);
 	}
+	//프로필사진
+	public String memberProfile(Map map) {
+		return memberDAO.memberProfile(map);
+	}	
+	//소셜로그인
+	@Override
+	public int isSocialLogin(Map map) {
+		System.out.println("서비스의 map: "+map);
+		return memberDAO.isSocialLogin(map);
+		}
+	//소셜프로필사진
+//	public String socialMemberProfile(Map map) {
+//		return memberDAO.socialMemberProfile(map);
+//	}
 	//회원가입
 	@Override
 	public void signUp(MemberDTO memberDTO) {
 		memberDAO.signUp(memberDTO);	
 	}
+	//소셜회원가입
+	@Override
+	public void SocialSignUp(MemberDTO memberDTO) {
+		memberDAO.SocialSignUp(memberDTO);
+	}
 	//약관동의
 	@Override
 	public void agreeOK(MemberDTO memberDTO) {
 		memberDAO.agreeOK(memberDTO);	
+	}
+	//소셜약관동의
+	@Override
+	public void socialAgreeOK(MemberDTO memberDTO) {
+		memberDAO.socialAgreeOK(memberDTO);			
 	}	
 	//아이디중복확인
 	@Override
@@ -39,11 +63,6 @@ public class MemberServiceImpl implements MemberService{
 	public int checkNick(MemberDTO memberDTO) {
 		return memberDAO.checkNick(memberDTO);
 	}
-	//비밀번호변경
-	@Override
-	public void changePwd(MemberDTO memberDTO) {
-		memberDAO.changePwd(memberDTO);
-	}
 	//아이디찾기
 	@Override
 	public MemberDTO searchId(MemberDTO memberDTO) {
@@ -54,14 +73,11 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDTO searchPwd(MemberDTO memberDTO) {
 		return memberDAO.searchPwd(memberDTO);
 	}
-	//회원정보보기
+	//비밀번호수정
 	@Override
-	public MemberDTO readMember(String id) {
-		return memberDAO.readMember(id);
+	public void pwdEdit(MemberDTO memberDTO) {
+		memberDAO.pwdEdit(memberDTO);
 	}
-	//회원정보수정
-	@Override
-	public void memberEdit(MemberDTO memberDTO) {
-		memberDAO.memberEdit(memberDTO);
-	}	
+
+
 }

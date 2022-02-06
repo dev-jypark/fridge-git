@@ -28,29 +28,25 @@ p, span {
 
 .alert_login {
 	margin-top: 10px;
-	margin-bottom: 10px;
-	
+	margin-bottom: 10px;	
 	text-align: center;
-	font-size: 14px;
+	font-size: 12px !important;
 	color: #8e8e8e;
 }
 .alert-warning {
 	margin-top: 10px;
-	margin-bottom: 10px;
-	
+	margin-bottom: 10px;	
 	text-align: center;
-	font-size: 14px;
+	font-size: 12px !important;
 	color: #8e8e8e; 
 }
 .alert-success {
 	margin-top: 10px;
-	margin-bottom: 10px;
-	
+	margin-bottom: 10px;	
 	text-align: center;	
-	font-size: 14px;
+	font-size: 12px !important;
 	color: #8e8e8e; 
 }
-
 img.logo {
     align-self: center;
     width: 175px;
@@ -79,7 +75,7 @@ img.logo {
     width: 268px;
     height: 35px;
     margin: 13px 39px auto;
-    background-color: #0095f6;
+    background-color: #95E1D3;
     border: none;
     border-radius: 3px;
     color: white;
@@ -112,15 +108,24 @@ a {
 .button_forgot:hover {
     cursor: pointer;
 }
+
 #socialLogin{
 	display:inline-block;
 	margin: 10px 39px 50px;
 }
+.css-1balhvh-SNSItem{
+	display:inline-block;
+}
+#socialLogin{
+	display:inline-block;
+}
 #google{
+	display:inline-block;
 	width: 134px;
 	height: 35px;
 }
 #kakao{
+	display:inline-block;
 	width: 132px;
 	height: 32px;
 }

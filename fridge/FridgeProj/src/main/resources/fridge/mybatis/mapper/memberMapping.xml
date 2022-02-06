@@ -8,15 +8,33 @@
 		<select id="memberLogin" parameterType="Map" resultType="int">
 			SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}
 		</select>
+		<!-- 프로필사진 -->
+		<select id="memberProfile" parameterType="Map" resultType="String">
+			SELECT imgsrc FROM member WHERE id=#{id}
+		</select>
+		<!-- 소셜로그인 -->
+		<select id="memberSocialLogin" parameterType="Map" resultType="int">
+			SELECT COUNT(*) FROM member WHERE id=#{socialId} AND pwd='20220214'
+		</select>
 		<!-- 회원가입 -->
 		<insert id="memberInsert" parameterType="MemberDTO" >	
 			INSERT INTO member
 			VALUES(#{id},#{pwd},#{email},#{nick},#{addr},null,null,SYSDATE)
 		</insert>
+		<!-- 소셜회원가입 -->
+		<insert id="memberSocialSignUp" parameterType="MemberDTO" >	
+			INSERT INTO member
+			VALUES(#{socialId},'20220214',#{email},#{nick},#{addr},null,null,SYSDATE)
+		</insert>
 		<!-- 약관동의 -->
 		<insert id="agreeInsert" parameterType="MemberDTO" >
 			INSERT INTO m_agree
 			VALUES(#{id},#{agree})
+		</insert>
+		<!-- 소셜약관동의 -->
+		<insert id="socialAgreeInsert" parameterType="MemberDTO" >
+			INSERT INTO m_agree
+			VALUES(#{socialId},#{agree})
 		</insert>
 		<!-- 아이디중복확인 -->
 		<select id="memberIdCheck" parameterType="String" resultType="int">
@@ -26,10 +44,6 @@
 		<select id="memberNickCheck" parameterType="String" resultType="int">
   			SELECT COUNT(*) FROM member WHERE nick=#{nick}
   		</select>
-  		<!-- 비밀번호변경 -->
-  		<update id="pwdUpdate">
-  			UPDATE member SET pwd=#{pwd} WHERE id=#{id}
-  		</update>
   		<!-- 아이디찾기 -->
   		<select id="findId" resultType="MemberDTO">
   			SELECT COUNT(*) FROM member WHERE nick=#{nick} AND email=#{email}
@@ -38,14 +52,21 @@
   		<select id="findPwd" resultType="MemberDTO">
   			SELECT COUNT(*) FROM member WHERE id=#{id} AND email=#{email}
   		</select>
-  		<!-- 회원정보조회 -->
+  		<!-- 회원정보보기 -->
   		<select id="viewMember" resultType="MemberDTO">
-  			SELECT COUNT(*) FROM member WHERE id=#{id}
+  			SELECT * FROM member WHERE id=#{id}
   		</select>
   		<!-- 회원정보수정 -->
   		<update id="memberUpdate">
-			UPDATE member SET
-			email=#{email},nick=#{nick},addr=#{addr}
-			WHERE id=#{id}
+			UPDATE member SET email=#{email}, nick=#{nick}, addr=#{addr}, imgsrc=#{imgsrc}, self=#{self} WHERE id=#{id}
 		</update>
+		<!-- 프로필이미지
+  		 <update id="imgUpdate" >
+			UPDATE member SET imgsrc=#{imgsrc} WHERE id=#{id}
+		</update>
+		 -->
+		<!-- 비밀번호변경 -->
+  		<update id="pwdUpdate">
+  			UPDATE member SET pwd=#{pwd} WHERE id=#{id}
+  		</update>
   </mapper>

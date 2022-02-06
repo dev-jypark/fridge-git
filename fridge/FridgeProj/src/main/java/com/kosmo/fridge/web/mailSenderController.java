@@ -21,7 +21,7 @@ public class mailSenderController {
 	
 	@RequestMapping(value="/sendMail")
 	@ResponseBody
-	public int sendMail(String email)  throws ClassNotFoundException {
+	public int sendMail(String email) throws ClassNotFoundException {
 		//인증용 랜덤숫자 발생
 		int randomNumber = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
 		
