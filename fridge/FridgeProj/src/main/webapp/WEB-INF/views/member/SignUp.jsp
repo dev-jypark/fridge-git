@@ -37,8 +37,8 @@
 			</div>
 			<input type="hidden" name="loginType" id="loginType">
 	      	<input type="hidden" name="socialId" id="socialId">
-	      	<input type="hidden" name="email" id="email">
-			<input type="hidden" name="nick" id="nick">
+	      	<input type="hidden" name="socialEmail" id="socialEmail">
+			<input type="hidden" name="socialNick" id="socialNick">
 			</form>			
 			<hr/>
 			<form method="post" action="SignUp.do" class="validation-form" novalidate="novalidate" name="login_frm">
