@@ -7,7 +7,8 @@ var feeds = Array();
 
 
 $.ajax({
-	url: "/community/" + $("input[name=id]").val(),
+	url: "/community.do,",
+	data: { id: $("input[name=id]").val()},
 	dataType: 'json'
 }).done(function(data) {
 	
@@ -18,7 +19,8 @@ $.ajax({
 	console.log(userid);
 	console.log(usernick);
 	$.ajax({
-		url: "/profile/feeds/" + $("input[name=target]").val(),
+		url: "/profile/feeds.do",
+		data: { id: $("input[name=id]").val()},
 		dataType: 'json'
 	}).done(function(data) {
 		printFeed(data);
@@ -81,17 +83,17 @@ function showModal(index) {
 			modalHtml += "<div class='carouselGallery-modal-text'>";
 
 			modalHtml += "<div class='header'>";
-			modalHtml += "<a href='/memberProfile/" + feed["nick"] + "'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'><span>" + feed["nick"] + "</a></div>";
+			modalHtml += "<a href='/memberProfile/" + feed["nick"] + ".do'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'><span>" + feed["nick"] + "</a></div>";
 
 			modalHtml += "<div class='body'>";
-			modalHtml += "<div class='content'><a href='/memberProfile/" + feed["nick"] + "'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'>";
+			modalHtml += "<div class='content'><a href='/memberProfile/" + feed["nick"] + ".do'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'>";
 			modalHtml += "<p>" + feed["nick"] + "</a>" + feed["fb_content"] + "</p></div>";
 
 			
 			// 댓글 출력 파트 
 			modalHtml += "<div class='comments'>";
 			$.each(feed["list_f_comment"], function(i, comment) {
-				modalHtml += "<div class='content'><a href='/memberProfile/" + comment["nick"] + "'><img alt='" + comment["nick"] + "' src='/upload/profile/" + comment["imgsrc"] + "' class='img-circle pull-left'>";
+				modalHtml += "<div class='content'><a href='/memberProfile/" + comment["nick"] + ".do'><img alt='" + comment["nick"] + "' src='/upload/profile/" + comment["imgsrc"] + "' class='img-circle pull-left'>";
 				modalHtml += "<p>" + comment["nick"] + "</a>" + comment["fc_content"] + "</p>";
 				modalHtml += "</div>";
 			});		
@@ -138,7 +140,7 @@ function insertComment() {
 	var fb_content = e.prev().val().trim();
 	
 	$.ajax({
-		url: "/community/comment/",
+		url: "/community/comment.do",
 		data: {"fb_no":e.next().val(), "fc_content":e.prev().val(), "id":userid},
 		type:'post',
 	}).done(function(data) {
@@ -152,7 +154,7 @@ function insertComment() {
 	
 	var commentString="";
 	
-	commentString += "<div class='content'><a href='/memberProfile/" + usernick + "'><img alt='"+usernick+"' src='/upload/profile/" + user["imgsrc"] + "' class='img-circle pull-left'>";
+	commentString += "<div class='content'><a href='/memberProfile/" + usernick + ".do'><img alt='"+usernick+"' src='/upload/profile/" + user["imgsrc"] + "' class='img-circle pull-left'>";
 	commentString += "<p>" + usernick + "</a>" +  e.prev().val() + "</p>";
 	commentString += "</div>";
 	
@@ -190,7 +192,7 @@ function likeProcess(index) {
 	console.log(list_f_likeMember);
 	
 	$.ajax({
-		url: "/community/like/",
+		url: "/community/like.do",
 		data: { fb_no: feeds[index]['fb_no'], "id": userid, "flag":param },
 		type: 'post',
 	}).done(function(data) {

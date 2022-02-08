@@ -21,7 +21,7 @@ public class CommunityController {
 		return "community/CommunityList.tiles";
 	}
 	
-	@RequestMapping("/memberProfile/{nick}")
+	@RequestMapping("/memberProfile/{nick}.do")
 	public String toMemberProfile(@PathVariable String nick, Map map) {
 		map.put("memberProfile", service.selectOneMemberProfile(nick));		
 		return "mypage/profile/MemberProfile.tiles";

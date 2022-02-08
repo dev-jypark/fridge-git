@@ -5,6 +5,8 @@ var nick;
 
 var feeds = Array();
 
+console.log($("input[name=id]").val());
+
 $.ajax({
 	url: "/community/member.do",
 	data: { id: $("input[name=id]").val()},
@@ -18,7 +20,8 @@ $.ajax({
 	console.log(nick);
 	$.ajax({
 		url: "/community/feeds.do",
-		data: $("input[name=id]").val()
+		data: { id: $("input[name=id]").val()},
+		dataType: 'json'
 	}).done(function(data) {
 		printFeed(data);
 		console.log(feeds);
@@ -46,7 +49,7 @@ function printFeed(data) {
 		feedString = "";
 		feedString += '<section class="feedify-item">';
 		feedString += '<header class="feedify-item-header clearfix">';
-		feedString += '<h1 class="pull-left"><a href="/memberProfile/' + feed["nick"] + '">';
+		feedString += '<h1 class="pull-left"><a href="/memberProfile/' + feed["nick"] + '.do">';
 		feedString += '<img alt="' + feed["nick"] + '" src="/upload/profile/' + feed["imgsrc"] + '" class="img-circle pull-left">' + feed["nick"] + '</a></h1>';
 		feedString += '<h2 class="pull-right hidden-xs">' + feed["fb_postdate"] + '</h2>';
 		feedString += '</header>';
@@ -83,7 +86,7 @@ function printFeed(data) {
 			if (i > 2)
 				return;
 
-			feedString += '<li><h4 class="pull-left"><a href="/memberProfile/' + comment["nick"] + '">' + comment["nick"] + '</a></h4>';
+			feedString += '<li><h4 class="pull-left"><a href="/memberProfile/' + comment["nick"] + '.do">' + comment["nick"] + '</a></h4>';
 			feedString += '<p>'+comment["fc_content"]+'</p>';
 			feedString += '</li>';
 
@@ -112,7 +115,7 @@ function insertComment(flag) {
 	console.log(flag);
 	
 	$.ajax({
-		url: "/community/comment/",
+		url: "/community/comment.do",
 		data: { fb_no: e.next().val(), fc_content: e.prev().val(), "id": userid },
 		type: 'post',
 	}).done(function(data) {
@@ -123,7 +126,7 @@ function insertComment(flag) {
 
 	var commentString = "";
 	
-	commentString += '<li><h4 class="pull-left"><a href="/memberProfile/' + nick + '">' + nick + '</a></h4><p>';
+	commentString += '<li><h4 class="pull-left"><a href="/memberProfile/' + nick + '.do">' + nick + '</a></h4><p>';
 	commentString += fb_content;
 	commentString += '</li>';
 	
@@ -137,7 +140,7 @@ function insertComment(flag) {
 		
 		commentString = "";
 		commentString += "<div class='content'><img alt='"+nick+"' src='/upload/profile/" + user["imgsrc"] + "' class='img-circle pull-left'>";
-		commentString += "<p><a href='/memberProfile/" + nick + "'>" + nick + "</a>" + fb_content + "</p>";
+		commentString += "<p><a href='/memberProfile/" + nick + ".do'>" + nick + "</a>" + fb_content + "</p>";
 		commentString += "</div>";
 
 		$('div.comments').prepend(commentString);		
@@ -193,7 +196,7 @@ function likeProcess(flag) {
 	console.log(list_likeMember);
 	
 	$.ajax({
-		url: "/community/like/",
+		url: "/community/like.do",
 		data: { fb_no: feeds[index]['fb_no'], "id": userid, "flag":param },
 		type: 'post',
 	}).done(function(data) {
@@ -233,16 +236,16 @@ function showModal(index) {
 			modalHtml += "<div class='carouselGallery-modal-text'>";
 
 			modalHtml += "<div class='header'>";
-			modalHtml += "<a href='/memberProfile/" + feed["nick"] + "'><img alt='"+feed["nick"]+"' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'><span>" + feed["nick"] + "</a></div>";
+			modalHtml += "<a href='/memberProfile/" + feed["nick"] + ".do'><img alt='"+feed["nick"]+"' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'><span>" + feed["nick"] + "</a></div>";
 
 			modalHtml += "<div class='body'>";
-			modalHtml += "<div class='content'><a href='/memberProfile/" + feed["nick"] + "'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'>";
+			modalHtml += "<div class='content'><a href='/memberProfile/" + feed["nick"] + ".do'><img alt='" + feed["nick"] + "' src='/upload/profile/" + feed["imgsrc"] + "' class='img-circle pull-left'>";
 			modalHtml += "<p>" + feed["nick"] +"</a>"+ feed["fb_content"] + "</p></div>";
 
 			// 모달 댓글 출력 파트
 			modalHtml += "<div class='comments'>";
 			$.each(feed["list_f_comment"], function(i, comment) {
-				modalHtml += "<div class='content'><a href='/memberProfile/" + comment["nick"] + "'><img alt='"+comment+"' src='/upload/profile/" + comment["imgsrc"] + "' class='img-circle pull-left'>";
+				modalHtml += "<div class='content'><a href='/memberProfile/" + comment["nick"] + ".do'><img alt='"+comment+"' src='/upload/profile/" + comment["imgsrc"] + "' class='img-circle pull-left'>";
 				modalHtml += "<p>" + comment["nick"] + "</a>" + comment["fc_content"] + "</p>";
 				modalHtml += "</div>";
 			});
