@@ -6,7 +6,8 @@ var nick;
 var feeds = Array();
 
 $.ajax({
-	url: "/community/" + $("input[name=id]").val(),
+	url: "/community/member.do",
+	data: { id: $("input[name=id]").val()},
 	dataType: 'json'
 }).done(function(data) {
 	user=data;
@@ -16,8 +17,8 @@ $.ajax({
 	console.log(userid);
 	console.log(nick);
 	$.ajax({
-		url: "/community/feeds/" + userid,
-		dataType: 'json'
+		url: "/community/feeds.do",
+		data: $("input[name=id]").val()
 	}).done(function(data) {
 		printFeed(data);
 		console.log(feeds);

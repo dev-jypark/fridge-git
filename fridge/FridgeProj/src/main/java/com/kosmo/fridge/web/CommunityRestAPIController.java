@@ -24,8 +24,9 @@ public class CommunityRestAPIController {
 	@Autowired
 	CommunityRestAPIService service;
 	
-	@GetMapping("/community/feeds/{id}")
+	@GetMapping("/community/feeds.do")
 	public List<FeedDTO> selectListFeedInCoummunityMain(@PathVariable String id){
+		System.out.println(id);
 		return service.selectListFeedInCommunityMain(id);
 	}
 	
@@ -34,8 +35,10 @@ public class CommunityRestAPIController {
 		return service.selectListFeedInProfile(id);		
 	}
 	
-	@GetMapping("/community/{id}")
-	public MemberProfileDTO selectOneUser(@PathVariable String id){
+	@GetMapping("/community/member.do")
+	public MemberProfileDTO selectOneUser(@PathVariable Map map){
+		String id = map.get("id").toString();
+		System.out.println(id);
 		return service.selectOneUser(id);
 	}
 	
