@@ -64,7 +64,7 @@ public class AdminNoticeController {
 		map.put("adminid", adminid);
 		noticeService.insert(map);
 		//뷰정보 반환]목록으로 이동
-		return "/admin/notice/List";
+		return "forward:/admin_notice/List.do";
 	}
 	//컨트롤러 메소드 작성 규칙]
 	/*
