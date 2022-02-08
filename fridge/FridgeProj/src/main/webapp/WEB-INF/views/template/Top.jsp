@@ -86,7 +86,7 @@
                         	<li><a href="<c:url value="/member/login.do"/>"><img src="<c:url value="/resources/images/top/top7.png"/>" alt="로그인" style="width:80%; height:80%;"/></a></li>                        	
 							</c:if>
                             <c:if test="${not beforeLogin }">                         
-	                            <li><a style="padding-right: 0px;" href="<c:url value=""/>" ><img src="<c:url value="/resources/images/top/top1.png"/>" alt="커뮤니티" style="width:70%; height:70%;"/></a></li>
+	                            <li><a style="padding-right: 0px;" href="<c:url value="/community/main.do"/>" ><img src="<c:url value="/resources/images/top/top1.png"/>" alt="커뮤니티" style="width:70%; height:70%;"/></a></li>
 	                            <li class="dropdown">
 	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<c:url value="/resources/images/top/top2.png"/>" alt="나눔" style="width:60%; height:60%;"/><span class="caret"></span></a>
 	                                <div class="dropdown-menu">
@@ -119,7 +119,7 @@
 		                                        <c:if test="${empty sessionScope.id}" var="isSocialLogin"></c:if>
 		                                        <c:if test="${not isSocialLogin }"> 
 		                                        <!-- 세션 저장값으로 소셜로그인 여부 판별. 소셜로그인인 경우 마이페이지 카테고리 숨김 -->	  
-		                                        <li><a href="<c:url value="/mypage/memberinfo/Profile.do"/>">프로필</a></li>
+		                                        <li><a href="<c:url value="/memberProfile/${sessionScope.id}.do"/>">프로필</a></li>
 		                                        <li><a href="<c:url value="/mypage/memberinfo/Edit.do"/>">회원상세정보</a></li>  
 		                                        <li><a href="<c:url value="/mypage/memberinfo/Password.do"/>">비밀번호변경</a></li>
 		                                        </c:if>
@@ -140,7 +140,7 @@
 		                                         <!-- 세션 저장값으로 소셜로그인 여부 판별. 소셜로그인인 경우 마이페이지 카테고리 숨김 -->	   
 		                                        <c:if test="${empty sessionScope.id}" var="isSocialLogin"></c:if>
 		                                        <c:if test="${not isSocialLogin }"> 
-		                                        <li><a href="<c:url value="/mypage/memberinfo/Profile.do"/>">프로필</a></li>
+		                                        <li><a href="<c:url value="/memberProfile/${sessionScope.id}.do"/>">프로필</a></li>
 		                                        <li><a href="<c:url value="/mypage/memberinfo/Edit.do"/>">회원상세정보</a></li>
 		                                        <li><a href="<c:url value="/mypage/memberinfo/Password.do"/>">비밀번호변경</a></li>
 		                                        </c:if>

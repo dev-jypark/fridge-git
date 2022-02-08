@@ -38,6 +38,10 @@
 		select id, nick, self, imgsrc, (select count(*) from f_bbs where id=(select id from member where nick=#{nick})) feedcount from member where nick=#{nick}
 	</select>
 	
+	<select id="memberSelectOneWithId" parameterType="String" resultMap="MemberProfileResult">
+		select id, nick, self, imgsrc, (select count(*) from f_bbs where id=#{id}) feedcount from member where id=#{id}
+	</select>
+	
 	<select id="followerSelectList" parameterType="String" resultType="String">
 		select nick from follow join member on f_src=id where f_dest=(select id from member where nick=#{nick})
 	</select>

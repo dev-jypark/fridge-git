@@ -109,10 +109,18 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Override
 	public MemberProfileDTO selectOneMemberProfile(String nick) {
-		MemberProfileDTO dto = dao.selectOneMemberProfile(nick);
+		char ch = nick.charAt(0);
+		System.out.println(nick);
+		System.out.println(ch);
+		MemberProfileDTO dto = null;
+		if(ch >= 'a' && ch <= 'z' || ch >= 'A'&& ch <= 'Z')
+			dto = dao.selectOneMemberProfileWithId(nick);
+		else
+			dto = dao.selectOneMemberProfile(nick);
 		if(dto.getSelf() == null)
 			dto.setSelf("");
 		return dto;
 	}
 
 }
+;

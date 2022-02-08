@@ -31,4 +31,8 @@ public class CommunityDAO {
 	public MemberProfileDTO selectOneMemberProfile(String nick) {
 		return template.selectOne("memberSelectOne", nick);
 	}
+
+	public MemberProfileDTO selectOneMemberProfileWithId(String id) {
+		return template.selectOne("memberSelectOneWithId", id);
+	}
 }
