@@ -5,11 +5,11 @@
   
 <mapper namespace="fridge.mybatis.mapper.community">
 	<update id="imgsrcUpdate" parameterType="Map">
-		update member set imgsrc=#{imgsrc} where nick=#{nick}
+		update member set imgsrc=#{imgsrc} where id=#{id}
 	</update>  
 	
 	<insert id="feedInsert" parameterType="Map">
-		insert into f_bbs(fb_no,id,fb_content,fb_postdate) values(seq_f_bbs.nextval,(select id from member where nick=#{nick}),#{fb_content},sysdate)
+		insert into f_bbs(fb_no,id,fb_content,fb_postdate) values(seq_f_bbs.nextval,#{id},#{fb_content},sysdate)
 		<selectKey keyProperty="fb_no" resultType="int" order="AFTER">
 			SELECT seq_f_bbs.currval FROM DUAL
 		</selectKey>
@@ -29,12 +29,13 @@
 		<result column="nick" property="nick"/>
 		<result column="self" property="self"/>
 		<result column="feedcount" property="feedcount"/>
+		<result column="imgsrc" property="imgsrc"/>
 		<collection property="followers" column="nick" select="followerSelectList" javaType="List" ofType="String"/>
 		<collection property="follows" column="nick" select="followSelectList" javaType="List" ofType="String"/> 
 	</resultMap>
 	
 	<select id="memberSelectOne" parameterType="String" resultMap="MemberProfileResult">
-		select id, nick, self, (select count(*) from f_bbs where id=(select id from member where nick=#{nick})) feedcount from member where nick=#{nick}
+		select id, nick, self, imgsrc, (select count(*) from f_bbs where id=(select id from member where nick=#{nick})) feedcount from member where nick=#{nick}
 	</select>
 	
 	<select id="followerSelectList" parameterType="String" resultType="String">

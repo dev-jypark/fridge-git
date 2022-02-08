@@ -8,10 +8,6 @@
 		<select id="memberLogin" parameterType="Map" resultType="int">
 			SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}
 		</select>
-		<!-- 프로필사진 -->
-		<select id="memberProfile" parameterType="Map" resultType="String">
-			SELECT imgsrc FROM member WHERE id=#{id}
-		</select>
 		<!-- 소셜로그인 -->
 		<select id="memberSocialLogin" parameterType="Map" resultType="int">
 			SELECT COUNT(*) FROM member WHERE id=#{socialId} AND pwd='20220214'

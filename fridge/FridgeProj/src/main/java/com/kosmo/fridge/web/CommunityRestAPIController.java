@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kosmo.fridge.service.CommunityRestAPIService;
 import com.kosmo.fridge.service.FeedDTO;
+import com.kosmo.fridge.service.MemberProfileDTO;
 
 @RestController
 public class CommunityRestAPIController {
@@ -23,14 +24,19 @@ public class CommunityRestAPIController {
 	@Autowired
 	CommunityRestAPIService service;
 	
-	@GetMapping("/community/feeds/{nick}")
-	public List<FeedDTO> selectListFeedInCoummunityMain(@PathVariable String nick){
-		return service.selectListFeedInCommunityMain(nick);
+	@GetMapping("/community/feeds/{id}")
+	public List<FeedDTO> selectListFeedInCoummunityMain(@PathVariable String id){
+		return service.selectListFeedInCommunityMain(id);
 	}
 	
-	@GetMapping("/profile/feeds/{nick}")
-	public List<FeedDTO> selectListFeedInProfile(@PathVariable String nick){
-		return service.selectListFeedInProfile(nick.trim());		
+	@GetMapping("/profile/feeds/{id}")
+	public List<FeedDTO> selectListFeedInProfile(@PathVariable String id){
+		return service.selectListFeedInProfile(id);		
+	}
+	
+	@GetMapping("/community/{id}")
+	public MemberProfileDTO selectOneUser(@PathVariable String id){
+		return service.selectOneUser(id);
 	}
 	
 	@PostMapping("/community/comment/")

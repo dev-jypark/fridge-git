@@ -26,18 +26,18 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public boolean insertFeed(MultipartHttpServletRequest mhsr) {
 		
-		String nick = mhsr.getParameter("nick"); // 파라미터로 sql에서 검색할 키 값 받아오기 : 저는 닉네임으로 id를 검색해서 db에 넣습니다.
+		String id = mhsr.getParameter("id"); // 파라미터로 sql에서 검색할 키 값 받아오기 : 저는 닉네임으로 id를 검색해서 db에 넣습니다.
 		String fb_content = mhsr.getParameter("fb_content"); // 파라미터로 sql에 저장할 본문 텍스트 가져오기
 		
 		
 		List<MultipartFile> listImgFile= mhsr.getFiles("fl_src"); // 파라미터로 저장할 이미지 경로 리스트를 받아오기
 		
-		System.out.println(nick);	
+		System.out.println(id);	
 		System.out.println(fb_content);
 		
 		// DAO에서 활용할 map 데이터 생성
 		Map map = new HashMap<>();
-		map.put("nick", nick);
+		map.put("id", id);
 		map.put("fb_content", fb_content);		
 		
 		// Map을 통해 먼저 글을 입력
@@ -84,19 +84,19 @@ public class CommunityServiceImpl implements CommunityService{
 	public boolean updateMemberImg(MultipartHttpServletRequest mhsr) {
 		
 		//TODO 아직 미완 -> member테이블에서 이미지 소스를 아예 없애는 방법을 구상중
-		String nick = mhsr.getParameter("nick");
+		String id = mhsr.getParameter("id");
 		String path = mhsr.getServletContext().getRealPath("/upload/profile");
 		MultipartFile upload= mhsr.getFile("imgsrc");
 		String name = upload.getOriginalFilename();
 		String type = name.substring(name.lastIndexOf("."));
-		String imgsrc = path+File.separator+nick+type;
+		String imgsrc = path+File.separator+id+type;
 		System.out.println(imgsrc);
 		
 		File dest = new File(imgsrc);
 		Map map = new HashMap<>();
-		map.put("nick", nick);
-		map.put("imgsrc", nick+type);
-		System.out.println(nick + type);
+		map.put("id", id);
+		map.put("imgsrc", id+type);
+		System.out.println(id + type);
 		try {
 			upload.transferTo(dest);
 			

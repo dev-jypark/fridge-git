@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kosmo.fridge.service.CommentDTO;
 import com.kosmo.fridge.service.CommunityRestAPIService;
 import com.kosmo.fridge.service.FeedDTO;
+import com.kosmo.fridge.service.MemberProfileDTO;
 
 @Service
 public class CommunityRestAPIServiceImpl implements CommunityRestAPIService {
@@ -17,13 +18,13 @@ public class CommunityRestAPIServiceImpl implements CommunityRestAPIService {
 	CommunityRestAPIDAO dao;
 
 	@Override
-	public List<FeedDTO> selectListFeedInProfile(String nick) {
-		return dao.selectListFeedInProfile(nick);
+	public List<FeedDTO> selectListFeedInProfile(String id) {
+		return dao.selectListFeedInProfile(id);
 	}
 
 	@Override
-	public List<FeedDTO> selectListFeedInCommunityMain(String nick) {
-		return dao.selectListFeedInCommunityMain(nick);
+	public List<FeedDTO> selectListFeedInCommunityMain(String id) {
+		return dao.selectListFeedInCommunityMain(id);
 	}
 
 	@Override
@@ -42,6 +43,11 @@ public class CommunityRestAPIServiceImpl implements CommunityRestAPIService {
 		else
 			dao.deleteLikeMember(map);
 
+	}
+
+	@Override
+	public MemberProfileDTO selectOneUser(String id) {		
+		return dao.selectOneUser(id);
 	}
 
 }
