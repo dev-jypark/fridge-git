@@ -94,14 +94,14 @@ jQuery.fn.upSlideStyle = function(backcolor,buttonText){
 
 // 함수로 주소를 지정하여서 위에 append 부분에 넣으면 이동이됩니다.
 function recipe1(){
-    location.href="http://localhost:7070/app/recipedetail1.do";
+    location.href="http://localhost:9080/recipedetailOne.do";
 }
 function recipe2(){
-    location.href="http://localhost:7070/app/recipedetail2.do";
+    location.href="http://localhost:9080/recipedetailTwo.do";
 }
 function recipe3(){
-    location.href="http://localhost:7070/app/recipedetail3.do";
+    location.href="http://localhost:9080/recipedetailThr.do";
 }
 function recipe4(){
-    location.href="http://localhost:7070/app/recipedetail4.do";
+    location.href="http://localhost:9080/recipedetailFou.do";
 }

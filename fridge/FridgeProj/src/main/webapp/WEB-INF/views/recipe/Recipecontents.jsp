@@ -87,7 +87,7 @@
 <script>
 
 	$.ajax({
-		url :"http://localhost:7070/app/recipedetail1.do",
+		url :"http://localhost:9080/recipedetail1.do",
 		method:"GET",
 		dataType:"json",
 		success : function(data){

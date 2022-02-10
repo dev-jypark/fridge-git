@@ -92,7 +92,7 @@
 	                                    </ul>
 	                                </div>
 	                            </li>
-	                            <li><a href="<c:url value='/recipe.do'/>"><img src="<c:url value="/resources/images/top/top3.png"/>" alt="레시피" style="width:70%; height:70%;"/></a></li>                          
+	                            <li><a href="<c:url value='/recipemy.do'/>"><img src="<c:url value="/resources/images/top/top3.png"/>" alt="레시피" style="width:70%; height:70%;"/></a></li>                          
 	                            <li class="dropdown">
 	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<c:url value="/resources/images/top/top4.png"/>" alt="냉장고" style="width:62%; height:62%;"/><span class="caret"></span></a>
 	                                <div class="dropdown-menu">
