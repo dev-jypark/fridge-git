@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. --> 
+<mapper namespace="fridge.mybatis.mapper.share">
+	<resultMap type="shareDTO" id="shareDTOResult">
+		<!-- 
+		property:자바빈(OneMemoDTO)의 속성명
+		column:테이블의 컬럼(조회(SELECT)결과의 컬럼명들 의미)
+		 -->
+		<result property="tbNo" column="tb_no"/>
+		<result property="id" column="id"/>
+		<result property="tbTitle" column="tb_title"/>
+		<result property="tbContent" column="tb_content"/>
+		<result property="tbVisitCount" column="tb_visitcount"/>
+		<result property="tbPostDate" column="tb_postdate"/>
+		<result property="likeCount" column="likeCount"/>
+		<result property="addr" column="addr"/>	
+		<result property="thumbnail" column="thumbnail"/>	
+		<result property="img" column="ti_src"/>	
+		<!-- 
+		1:N관계 매핑용
+		column: 조인조건의 컬럼명 (ON onememo.no = linecomments.no)
+		select: select태그의 id 속성값(쿼리문은 조인문)
+		javaType : OneMemoDTO의 자식레코드를 담을 컬렉션 타입
+		ofType : 자식의 DTO타입
+		 -->
+		<collection property="listImage" column="image" select="fridge.mybatis.mapper.image.imageSelectList" javaType="List" ofType="imageDTO"/>
+		<collection property="listShareProduct" column="shareproduct" select="fridge.mybatis.mapper.trade.tradeSelectList" javaType="List" ofType="tradeDTO"/>
+	</resultMap>
+	
+	<resultMap type="ingrediantDTO" id="ingrediantDTOResult">
+		<result property="i_no" column="i_no"/>
+		<result property="id" column="id"/>
+		<result property="i_name" column="i_name"/>
+		<result property="i_cnt" column="i_cnt"/>
+		<result property="i_enddate" column="i_enddate"/>
+		<result property="i_postdate" column="i_postdate"/>
+	</resultMap>
+	
+	<select id="shareTotalRowCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM t_bbs t JOIN member m ON m.id=t.id
+		<if test="searchWord !=null">
+			WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+		</if>
+	</select>
+
+	<select id="shareSelectList" parameterType="Map" resultMap="shareDTOResult">
+      SELECT * FROM
+      (SELECT t.*,ROWNUM R FROM
+      (SELECT t.*,m.nick,m.addr
+       FROM t_bbs t JOIN member m ON m.id=t.id
+          <if test="mAddr !=null">
+             WHERE m.addr LIKE '%' || #{mAddr} || '%'
+          </if> 
+          ORDER BY tb_no DESC) T) U JOIN trade r ON u.tb_no=r.tb_no
+          where t_result='F'
+      <!-- SELECT * FROM
+         (SELECT t.*,ROWNUM R FROM
+            (SELECT t.*,m.nick,m.addr
+             FROM t_bbs t JOIN member m ON m.id=t.id
+             <if test="mAddr !=null">
+               WHERE m.addr LIKE '%' || #{mAddr} || '%'
+            </if>             
+               ORDER BY tb_no DESC) T) -->
+               
+               
+         <!-- WHERE R BETWEEN #{start} AND #{end} -->
+      <!-- 기존 쿼리문  
+      SELECT * FROM
+         (SELECT D.*,ROWNUM R FROM
+            (SELECT t.*,m.addr as addr,(SELECT COUNT(*) FROM t_like WHERE tb_no=t.tb_no) as likeCount FROM 
+               t_bbs t JOIN member m ON m.id=t.id 
+            <if test="searchWord !=null">
+               WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+            </if>            
+            ORDER BY tb_no DESC) D)
+            -->
+   </select>
+	
+	<select id="shareSelectIngrediantList" parameterType="Map" resultMap="ingrediantDTOResult">
+		SELECT * 
+		FROM ingrediant
+		<!-- 유통기한 3일 이상 남은 식품만 가져온다 -->
+		WHERE id=#{id} AND TO_CHAR(i_enddate,'YY/MM/dd') >= TO_CHAR(SYSDATE+3,'YY/MM/dd')
+		ORDER BY i_postdate DESC
+	</select>
+	
+	<insert id="sharePostInsert" parameterType="Map">
+		INSERT INTO t_bbs VALUES (SEQ_t_bbs_tb_no.NEXTVAL, #{id}, #{title}, #{content}, DEFAULT, SYSDATE)
+		<selectKey keyProperty="tb_no" resultType="int" order="AFTER">
+			SELECT SEQ_t_bbs_tb_no.currval FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="sharePostImgInsert" parameterType="Map">
+		INSERT INTO t_imgsrc(ti_no,tb_no,ti_src)
+	 	SELECT SEQ_t_imgsrc_ti_no.nextval, A.* FROM(
+		<foreach item="item" collection="fileSrc" separator="UNION ALL">
+			SELECT #{tb_no} AS tb_no, #{item.originalFilename} AS ti_src FROM DUAL
+       </foreach>) A
+	</insert>
+	
+	<!-- <insert id="imgsrcInsert" parameterType="Map">
+	 insert into t_imgsrc(ti_no,tb_no,ti_src)
+	 select SEQ_t_imgsrc_ti_no.nextval, A.* from(
+		<foreach item="item" collection="fi_src" separator="UNION ALL ">
+			select #{tb_no} as tb_no, #{item.originalFilename} as ti_src from dual
+       </foreach>) A
+	</insert> -->
+	
+	<insert id="shareProductInsert" parameterType="Map">
+		INSERT INTO trade VALUES
+		(SEQ_trade_t_no.NEXTVAL, #{i_no}, #{tb_no}, (SELECT i_enddate FROM ingrediant WHERE i_no=#{i_no}), #{count}, DEFAULT)
+	</insert>
+	
+	<!-- shareSelectOne -->
+	<select id="shareSelectOne" parameterType="Map" resultMap="shareDTOResult">
+		SELECT *
+		FROM t_bbs b INNER JOIN t_imgsrc i
+		ON (b.tb_no = i.tb_no)
+		WHERE b.tb_no=#{tb_no} AND ROWNUM=1
+	</select>
+	<!-- shareSelectOne -->
+	<select id="viewSelectOne" parameterType="Map" resultMap="shareDTOResult">
+		SELECT *
+			FROM t_bbs t JOIN member m on m.id=t.id
+		WHERE t.tb_no=#{tb_no}
+	</select>
+	
+	<!-- ingredianCountUpdate -->
+	<update id="ingrediantCountUpdate" parameterType="Map">
+		UPDATE ingrediant SET i_cnt=#{i_cnt} WHERE i_no=#{i_no}
+	</update>
+	
+	<select id="shareSelectRollbackIngre" parameterType="Map" resultMap="ingrediantDTOResult">
+		SELECT t_cnt, i_no
+		FROM trade
+		WHERE tb_no=#{tb_no}
+	</select>
+	
+	<update id="ingrediantRollback" parameterType="List">
+		<foreach collection="list" item="item" separator=",">
+			UPDATE ingrediant SET i_cnt = i_cnt + #{item.t_cnt} WHERE i_no=#{item.i_no}
+		</foreach>
+	</update>
+	
+	<delete id="sharePostDelete" parameterType="Map">
+		DELETE FROM t_bbs WHERE tb_no=#{tb_no}
+	</delete>
+	
+	<update id="tradeResultUpdate" parameterType="Map">
+		UPDATE trade SET t_result = 'T' where tb_no=#{tb_no}
+	</update>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+	<!-- 클래스 별칭 설정 -->
+	<typeAliases>
+		<typeAlias type="com.kosmo.fridge.service.ShareDTO" alias="shareDTO"/>
+		<typeAlias type="com.kosmo.fridge.service.TradeDTO" alias="tradeDTO"/>
+		<typeAlias type="com.kosmo.fridge.service.IngrediantDTO" alias="ingrediantDTO"/>
+		<typeAlias type="com.kosmo.fridge.service.ImageDTO" alias="imageDTO"/>	
+		<typeAlias type="com.kosmo.fridge.service.MessageTO" alias="messageDTO"/>	
+		<typeAlias type="com.kosmo.fridge.service.MemberDTO" alias="memberDTO"/>	
+		<typeAlias type="com.kosmo.fridge.service.CommentDTO" alias="CommentDTO"/>
+		<typeAlias type="com.kosmo.fridge.service.FeedDTO" alias="FeedDTO"/>
+		<typeAlias type="com.kosmo.fridge.service.MemberProfileDTO" alias="MemberProfileDTO"/>
+		<typeAlias type="com.kosmo.fridge.service.AdminNoticeDTO" alias="adminNoticeDTO"/>
+		<typeAlias type="com.kosmo.fridge.service.UserchartDTO" alias="userchartDTO"/>
+		
+	</typeAliases>	
+	
+	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
+	<mappers>					
+		<mapper resource="fridge/mybatis/mapper/share.xml" />
+		<mapper resource="fridge/mybatis/mapper/trade.xml" />
+		<mapper resource="fridge/mybatis/mapper/ingrediant.xml" />	
+		<mapper resource="fridge/mybatis/mapper/image.xml" />
+		<mapper resource="fridge/mybatis/mapper/chat.xml" />	
+		<mapper resource="fridge/mybatis/mapper/memberMapping.xml" />	
+		<mapper resource="fridge/mybatis/recipe.xml" />	
+      	<mapper resource="fridge/mybatis/mapper/fridgeMapping.xml" />
+		<mapper resource="fridge/mybatis/mapper/community.xml"/>
+		<mapper resource="fridge/mybatis/mapper/communityRestAPI.xml"/>
+		<mapper resource="fridge/mybatis/mapper/adminNotice.xml" />	
+		<mapper resource="fridge/mybatis/mapper/userchart.xml" />	
+	</mappers>
+</configuration>

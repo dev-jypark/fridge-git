@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+    font-family: 'helvetica neue', 'Apple SD Gothic Neo', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #fafafa;
+    padding: 0;
+    margin: 0;
+}
+p, span {
+    font-size: 14px;
+}
+
+.login_container {
+    width: 350px;
+    height: 380px;
+    margin: 150px auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    background-color: #fff;
+    border: 1px solid #DBDBDB;
+}
+.alert{
+	padding: 0px;
+}
+.alert_login {
+	/*margin-top: 10px;
+	margin-bottom: 10px;*/	
+	text-align: center;
+	font-size: 10px !important;
+	color: #8e8e8e;
+}
+.alert-warning {
+	/*margin-top: 10px;
+	margin-bottom: 10px;*/	
+	text-align: center;
+	font-size: 12px !important;
+	color: #8e8e8e; 
+	margin:0px;
+	background-color: #ffff;
+	border-color: #ffff;
+}
+.alert-success {
+	margin-top: 10px;
+	margin-bottom: 10px;	
+	text-align: center;	
+	font-size: 12px !important;
+	color: #8e8e8e; 
+}
+img.logo {
+    align-self: center;
+    width: 175px;
+    margin: 35px 0;
+}
+.input_login {
+    width: 270px;
+    height: 40px;
+    margin: 3px auto;
+    padding: 0 10px;
+    display: block;
+    background-color: #fafafa;
+    border: 1px solid #DBDBDB;
+    border-radius: 3px;
+    font-size: 14px;
+}
+.input_login::placeholder {
+    font-size: 12px;
+    color: #8e8e8e;    
+}
+.input_login:focus {
+    border: 1px solid #8a8a8a;
+    outline: none;
+}
+#btn_login {
+    width: 268px;
+    height: 35px;
+    margin: 5px 40px auto;
+    background-color: #95E1D3;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    
+}
+#btn_login:disabled {
+    background-color: #B9DFFC;
+}
+#btn_login:disabled:hover {
+    cursor: default;
+}
+#btn_login:enabled:hover {
+    cursor: pointer;
+}
+#btn_login:focus {
+    outline: none;
+}
+a {
+    cursor: default;
+}
+.button_forgot {
+    color : #8a8a8a;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+}
+.button_forgot:hover {
+    cursor: pointer;
+}
+
+#socialLogin{
+	display:inline-block;
+	margin: 5px 39px 5px;
+}
+.css-1balhvh-SNSItem{
+	display:inline-block;
+}
+#socialLogin{
+	display:inline-block;
+}
+#google{
+	display:inline-block;
+	width: 134px;
+	height: 35px;
+}
+#kakao{
+	display:inline-block;
+	width: 130px;
+	height: 32px;
+}
